@@ -361,7 +361,7 @@ img {vertical-align: middle;}
   <div id="info1" style="padding-top: 50%">
 	   </br></br>
                 <span style="margin-top: 250px">Twitter</span>
-                <div id="cont-footer-twitter" style="padding 30px; float:left; margin-left:17%">
+                <div id="cont-footer-twitter" style="padding: 30px; float:left; margin-left:17%">
                     <div class="twitter-widget" style="text-align: center;">
                         <a class="twitter-timeline" style="text-align: center"; data-height="300" data-width="800" data-theme="white" data-link-color="#ef3488" data-border-color="#ef3488" data-chrome="noheader nofooter noborders transparent" href="https://twitter.com/aokidaisuke91">ツイートの青木大介</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                     </div>

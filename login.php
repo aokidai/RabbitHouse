@@ -264,8 +264,8 @@ img {vertical-align: middle;}
        if(mysqli_num_rows($rs2)>0){
         $_SESSION["username"]	= $row2["username"];
         $_SESSION["idStaff"] = $row2["idStaff"];
-        if($password == "Demo@123") echo "<script>window.location.href='./nhanvien/change-password.php'</script>";
-        else echo "<script>window.location.href='./nhanvien/index.php'</script>";
+        if($password == "Demo@123") echo "<script>window.location.href='./NhanVien/change-password.php'</script>";
+        else echo "<script>window.location.href='./NhanVien/index.php'</script>";
        } else echo "<script>alert('Tài khoản hoặc mật khẩu không tồn tại')</script>";
      }  
 	 }

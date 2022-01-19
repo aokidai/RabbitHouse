@@ -231,7 +231,7 @@ if(isset($_SESSION["username"]))
 <body>
   <header>
     <div>
-      <div id="logo"><a href="../index.php"><img src="../img/logo.png"></a></div>
+      <div id="logo"><img src="../img/logo.png"></div>
     </div>
   </header>
   <?php $user = $username?>
@@ -296,7 +296,7 @@ if(isset($_SESSION["username"]))
           $sql    =  "update tblstaff set  tblstaff.password= '$password' where username='$user'";
           $rs    =  mysqli_query($conn, $sql);
           if ($rs) {
-            echo "<script>window.location.href='blank.php'</script>";
+            echo "<script>window.location.href='index.php'</script>";
           }
         } else
           echo "<script>alert('Mật khẩu không trùng')</script>";
