@@ -96,7 +96,8 @@ else
                     $pass = "Demo@123";
                     $hoTen = $_POST["txtHoTen"];
                     $soDT = $_POST["txtSoDT"];
-                    $sql            =    "insert into tblStaff(hoTen, soDT, username, password) values('$hoTen', '$soDT', '$user', '$pass')";
+                    $diaChi = "Rabbit House";
+                    $sql            =    "insert into tblStaff(diachi, hoTen, soDT, username, password) values('$diaChi', '$hoTen', '$soDT', '$user', '$pass')";
                     $rs             =    mysqli_query($conn, $sql);
                     if ($rs)
                         echo "<script>window.location.href='list_user.php'</script>";

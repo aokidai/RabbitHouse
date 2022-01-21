@@ -212,7 +212,7 @@ else
 <script>
     // Replace the <textarea id="editor1"> with a CKEditor
     // instance, using default configuration.
-    CKEDITOR.replace( 'txtdes' );
+    CKEDITOR.replace( 'txtMoTa' );
 </script>
         </div>
         <!-- /#wrapper -->

@@ -298,7 +298,7 @@ if (isset($_SESSION["username"])) {
                         $row0 = mysqli_fetch_array($rs0);
                         $hoTen = $row0["hoTen"];
                         echo $hoTen;
-                    ?></a></li>
+                    ?></abs></li>
                 </ul>
             </div>
             <div> <br /><br /><br />
@@ -388,35 +388,43 @@ if (isset($_SESSION["username"])) {
                 }
             </script>
         </div>
-        <article>
 	  </br>  
-	 <aside>
-	  <div id="menu" align="center">
-		  <span id="ttLoai">Loại món </span>
-			<ul style="margin-right: 22%; padding-top: 5px">
-				<?php
-					include "../include/left.php";	
-				?>
-			</ul>
-		</div>
-	</aside>
-	<section id="info" align="center" style="padding-top: 5%;">
-		<span>Món mới</span>
-		<div style="margin-left: 7%;">
-			<?php
-				include "../include/connect.inc";
-				$sql		=	"select * from tblmon where conHang = 'Còn' limit 0, 12";
-				$rs 		=	mysqli_query($conn, $sql);												   
-				while($row=mysqli_fetch_array($rs)){	
-			?>
-			<div id="mon">
-				<p id="tenMon"><a href="#"><?=$row["tenMon"]?></a></p>
-				<img id="hinhAnh" src="../uploads/<?=$row["hinhAnh"]?>">
-				<p id="donGia">Đơn giá: <span><?=$row["gia"]?>VND</span></p>
-				<a href='hauGioHang.php?id=<?=$row["idMon"]?>'><img id="nutmuahang" src="../img/Chonmua.png"></a>
-			</div>
-		<?php }?>
-	  </section>  
+      <article>
+        </br>
+        <aside>
+            <div id="menu" align="center">
+                <span id="ttLoai">Loại món </span>
+                <ul style="margin-right: 22%; padding-top: 5px">
+                    <?php
+                    include "../include/left.php";
+                    ?>
+                </ul>
+            </div>
+        </aside>
+        <section id="info" align="center" style="padding-top: 5%;">
+            <span>Món theo loại</span>
+            <?php
+            include "../include/connect.inc";
+            $idLoai    =    $_GET["idLoai"];
+            $sql        =    "select * from tblmon where idLoai=$idLoai and conHang = 'Còn'";
+            $rs         =    mysqli_query($conn, $sql);
+            $count        =    mysqli_num_rows($rs);
+            if ($count > 0)
+                while ($row = mysqli_fetch_array($rs)) {
+            ?>
+                <div id="mon">
+                    <p id="tenMon"><a href="#"><?= $row["tenMon"] ?></a></p>
+                    <img id="hinhAnh" src="../uploads/<?= $row["hinhAnh"] ?>">
+                    <p id="donGia">Đơn giá: <span><?= $row["gia"] ?>VND</span></p>
+                    <a href='hauGioHang.php?id=<?= $row["idMon"] ?>'><img id="nutmuahang" src="../img/Chonmua.png"></a>
+                </div>
+            <?php }
+            else
+                echo "<center><span style='margin-top:30px; font-size:30px; color:red'>Hiện tại không có món nào!</span></center>";
+            ?>
+            </br></br>
+        </section>
+    </article> 
         <div style="padding-top: 70%;">
             <footer>
                 <p style="text-align: center;">掲載されているすべてのコンテンツ(記事、画像、音声データ、映像データ等)の無断転載を禁じます。<br />🄫 2021 Power by Dragon Inc</p>
