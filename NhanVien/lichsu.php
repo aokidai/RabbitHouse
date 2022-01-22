@@ -2,6 +2,7 @@
 session_start();
 if (isset($_SESSION["username"])) {
     $username    =    $_SESSION["username"];
+    $idStaff = $_SESSION["idStaff"];
 } else
     header("location:login.php");
 ?>
@@ -243,18 +244,36 @@ if (isset($_SESSION["username"])) {
             font-size: 11px
         }
     }
-    #ttLoai{
-	display: block;
-	text-align: center;
-	font-family: 'Times New Roman', Times, serif;
-	font-size: 40px;
-	font-weight: bold;
-	margin-left: 18%;
-}
+
+    #ttLoai {
+        display: block;
+        text-align: center;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 40px;
+        font-weight: bold;
+        margin-left: 18%;
+    }
 </style>
+<script type="text/javascript">
+    const reloadtButton = document.querySelector("#reload");
+    // Reload everything:
+    function reload() {
+        reload = location.reload();
+    }
+    // Event listeners for reload
+    reloadButton.addEventListener("click", reload, false);
+</script>
 
 <body>
-    <?php $user = $username ?>
+    <?php
+    $user = $username;
+    include "../include/connect.inc";
+    $sql0000 = "select idStaff from tblstaff where username = '$user'";
+    $rs0000 = mysqli_query($conn, $sql0000);
+    $row0000 = mysqli_fetch_array($rs0000);
+    $idStaff = $row0000["idStaff"];
+    ?>
+
     <!-- Messenger Plugin chat Code -->
     <div id="fb-root"></div>
 
@@ -288,17 +307,17 @@ if (isset($_SESSION["username"])) {
             <div id="logo"><a href="./index.php"><img src="../img/logo.png"></a></div>
             <div id="menu">
                 <ul>
-                    <li><a href="./donhang.php">Đơn hàng</a></li>
-                    <li><a href="./doanhthu.php">Doanh thu</a></li>
-                    <li><a href="./giohang.php">Giỏ hàng</a></li>
-                    <li><a href="./information.php">Thông tin</a></li>
-                    <li style="width: 157px;"><a href="../index.php">Chào: <?php include "../include/connect.inc";
-                        $sql0 = "select * from tblstaff where username = '$user'";
-                        $rs0 = mysqli_query($conn, $sql0);
-                        $row0 = mysqli_fetch_array($rs0);
-                        $hoTen = $row0["hoTen"];
-                        echo $hoTen;
-                    ?></a></li>
+                    <li><a href="./report.php" title="Gửi thông báo đến quản trị viên để giải quyết các vấn đề.">Thông báo</a></li>
+                    <li><a href="./lichsu.php" title="Xem lịch sử bán hàng.">Lịch sử</a></li>
+                    <li><a href="./xuatkho.php" title="Nếu nguyên liệu trong kho cần dùng hết nhanh hơn dự kiến của hệ thống, nhân viên cần phải báo xuất kho.">Xuất kho</a></li>
+                    <li><a href="./information.php" title="Thông tin tài khoản.">Thông tin</a></li>
+                    <li style="width: 157px;"><a href="../index.php" title="Đăng xuất.">Chào: <?php include "../include/connect.inc";
+                                                                            $sql0 = "select * from tblstaff where username = '$user'";
+                                                                            $rs0 = mysqli_query($conn, $sql0);
+                                                                            $row0 = mysqli_fetch_array($rs0);
+                                                                            $hoTen = $row0["hoTen"];
+                                                                            echo $hoTen;
+                                                                            ?></a></li>
                 </ul>
             </div>
             <div> <br /><br /><br />
@@ -317,7 +336,6 @@ if (isset($_SESSION["username"])) {
                 </script>
                 <br />
                 <?php
-                include "../include/connect.inc";
                 if (isset($_GET["txtsearchMon"])) {
                     $searchMon = $_GET["txtsearchMon"];
                     $sql = "select idMon, tenMon from tblmon where tenMon like '%$searchMon%' and conHang = 'Còn'";
@@ -336,92 +354,80 @@ if (isset($_SESSION["username"])) {
 
             </div>
     </header>
-    <div id="body">
-        <div id="photo">
-            <div class="slideshow-container">
-
-                <div class="mySlides fade">
-                    <img src="../img/bg-photo-1.jpg" style="width:100%">
-                </div>
-
-                <div class="mySlides fade">
-                    <img src="../img/bg-photo-2.jpg" style="width:100%">
-                </div>
-
-                <div class="mySlides fade">
-                    <img src="../img/bg-photo-3.jpg" style="width:100%">
-                </div>
-
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-            </div>
-            <br>
-
-            <div style="text-align:center">
-                <span class="dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
-            </div>
-
-            <script>
-                var slideIndex = 0;
-                showSlides();
-
-                function showSlides() {
-                    var i;
-                    var slides = document.getElementsByClassName("mySlides");
-                    var dots = document.getElementsByClassName("dot");
-                    for (i = 0; i < slides.length; i++) {
-                        slides[i].style.display = "none";
-                    }
-                    slideIndex++;
-                    if (slideIndex > slides.length) {
-                        slideIndex = 1
-                    }
-                    for (i = 0; i < dots.length; i++) {
-                        dots[i].className = dots[i].className.replace(" active", "");
-                    }
-                    slides[slideIndex - 1].style.display = "block";
-                    dots[slideIndex - 1].className += " active";
-                    setTimeout(showSlides, 5000);
-                }
-            </script>
-        </div>
-        <article>
-	  </br>  
-	 <aside>
-	  <div id="menu" align="center">
-		  <span id="ttLoai">Loại món </span>
-			<ul style="margin-right: 22%; padding-top: 5px">
-				<?php
-					include "../include/left.php";	
-				?>
-			</ul>
-		</div>
-	</aside>
-	<section id="info" align="center" style="padding-top: 5%;">
-		<span>Món mới</span>
-		<div style="margin-left: 7%;">
-			<?php
-				include "../include/connect.inc";
-				$sql		=	"select * from tblmon where conHang = 'Còn' limit 0, 12";
-				$rs 		=	mysqli_query($conn, $sql);												   
-				while($row=mysqli_fetch_array($rs)){	
-			?>
-			<div id="mon">
-				<p id="tenMon"><a href="#"><?=$row["tenMon"]?></a></p>
-				<img id="hinhAnh" src="../uploads/<?=$row["hinhAnh"]?>">
-				<p id="donGia">Đơn giá: <span><?=$row["gia"]?>VND</span></p>
-				<a href='hauGioHang.php?id=<?=$row["idMon"]?>'><img id="nutmuahang" src="../img/Chonmua.png"></a>
+    <section id="info" align="center">
+	  <span>Lịch sử bán hàng</span>
+	  <div><span style="font-size: 20px; color: red">Trạng thái gia hàng được biểu diển bởi kí tự X và O. X là chưa giao hàng còn O là đã giao hàng.</span></div>
+	  <form method="post" action="lichsu.php">
+		 <div class="table-responsive table-bordered">
+				<table class="table" align="center">
+					<thead>
+						<tr>
+							<th><input type="checkbox" name="checkbox" class="chk_box"></th>
+							<th>STT</th>
+							<th>Tên món</th>
+							<th>Số lượng</th>
+							<th>Thành tiền</th>
+							<th>Thời gian</th>
+							<th>Trạng thái</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php 
+							$tinhtien=0;
+							include("../include/connect.inc"); 
+							$sql		=	"select * from tbllichsu where idStaff = '$idStaff'";
+							$rs 		=	mysqli_query($conn, $sql);
+							$i			=	1;							
+						  while($row=mysqli_fetch_array($rs)){	
+							  $sql2	= 	"select * from tblmon where idMon = ".$row["idMon"]."";
+									$rs2 		=	mysqli_query($conn, $sql2);
+									$row2=mysqli_fetch_array($rs2);
+							  $sql9 = "select * from tblchitiethd where idStaff = '$idStaff'";
+							  $rs9 = mysqli_query($conn, $sql9);
+							  $row9 = mysqli_fetch_array($rs9);
+							echo" <tr>
+								<td><input type='checkbox' class='chk_box1' name='check_list[]' value='".$row["idlichSu"]."'></td>
+								<td>$i</td>
+								<td>".$row2["tenMon"]."</td>
+								<td>".$row["soluong"]."</td>
+								<td>".$tinhtien=$row["soluong"]*$row2["gia"]."</td>
+								<td>".$row["thoigian"]."</td>
+								<td>".$row9["daGH"]."</td>
+								</tr>";	
+						   $i++;
+						  }
+						?>
+						   <tr align="center">
+								<?php
+									if(isset($_POST["xoahang"])){
+										foreach($_POST['check_list'] as $check) {
+												$sql9 = "delete from tbllichSu where idlichSu = '$check'";
+												$rs = mysqli_query($conn, $sql9);
+										}
+										 echo"<script>window.location.href='lichsu.php'</script>";
+									}
+								?>
+								<th colspan="7" align="center">
+									<input type="submit" class="btn btn-success" name="xoahang" value="Xóa lịch sử">
+								</th>
+					</tr>
+					</tbody>
+				</table>
 			</div>
-		<?php }?>
-	  </section>  
-        <div style="padding-top: 70%;">
-            <footer>
-                <p style="text-align: center;">掲載されているすべてのコンテンツ(記事、画像、音声データ、映像データ等)の無断転載を禁じます。<br />🄫 2021 Power by Dragon Inc</p>
-            </footer>
-        </div>
+			</form>
+	 		 <script type="text/javascript">
+				$(function() {
+					$('.chk_box').click(function() {
+						$('.chk_box1').prop('checked', this.checked);
+					});
+				});
+			</script> 
+	  </section> 
+    <div style="padding-top: 5%">
+        <footer>
+            <p style="text-align: center;">掲載されているすべてのコンテンツ(記事、画像、音声データ、映像データ等)の無断転載を禁じます。<br />🄫 2021 Power by Dragon Inc</p>
+        </footer>
+    </div>
 </body>
 
 </html>

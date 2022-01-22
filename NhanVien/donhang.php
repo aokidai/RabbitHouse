@@ -348,7 +348,7 @@ if (isset($_SESSION["username"])) {
     </header>
     <section id="info" align="center">
         <form method="post" action="donhang.php">
-        <span>Đơn Hàng</span><br /><br />
+        <span>Đơn Hàng</span><br />
         <button type="submit" class="btn btn-success" name="giaohang" style="margin-bottom: 20px; float: left; margin-left: 2%;">Giao hàng</button>
         <button type="submit" class="btn btn-success" name="xoahang" style="margin-bottom: 20px; background-color: red; float: left; margin-left: 10px">Xóa hàng</button>
         <button onClick="window.location.reload();" class="btn btn-success" style="margin-bottom: 20px; float: right; margin-right: 2%; background-color: aqua; color: black">Tải lại dữ liệu</button>
@@ -427,7 +427,7 @@ if (isset($_SESSION["username"])) {
                                         $rs9 = mysqli_query($conn, $sql9);
                                         date_default_timezone_set('Asia/Ho_Chi_Minh');
                                         $time_act = date('Y-m-d');
-                                        $sql15 = "insert into tbldoanhthu (idChiTiet, ngay, thanhTien, tongSL) values ( '$idChiTiet', '$time_act', '$thanhTien', '$soLuong')";
+                                        $sql15 = "insert into tbldoanhthu (idChiTiet, ngay, thanhTien, tongSL) values ( '$check', '$time_act', '$thanhTien', '$soLuong')";
                                         $rs15 = mysqli_query($conn, $sql15);
                                     }
                                     echo "<script>window.location.href='donhang.php'</script>";

@@ -1,7 +1,7 @@
 <?php
 session_start();
-if(isset($_SESSION["username"]))
-	$username	=	$_SESSION["username"];
+if (isset($_SESSION["username"]))
+  $username  =  $_SESSION["username"];
 ?>
 <!doctype html>
 <html>
@@ -234,7 +234,7 @@ if(isset($_SESSION["username"]))
       <div id="logo"><img src="../img/logo.png"></div>
     </div>
   </header>
-  <?php $user = $username?>
+  <?php $user = $username ?>
   <div id="body">
     <div id="photo" style="padding-top: 5%">
       <div class="slideshow-container">
@@ -286,7 +286,7 @@ if(isset($_SESSION["username"]))
           setTimeout(showSlides, 5000);
         }
       </script>
-      
+
       <?php
       include "../include/connect.inc";
       if (isset($_POST["txtpassword"])) {
@@ -305,20 +305,23 @@ if(isset($_SESSION["username"]))
       <center>
         <form id="form1" name="frmLogin" method="post" action="change-password.php">
           <table width="401" style="margin-top: 20px">
-              <tr align="center">
-                <td>Mật khẩu mới:</td>
-                <td><input type="password" name="txtpassword" id="textfield2"></td>
-              </tr>
-              <tr align="center">
-                <td>Nhập lại mật khẩu:</td>
-                <td><input type="password" name="txtrepass" id="textfield3"></td>
-              </tr>
-              <tr align="center">
-                <td colspan="2"><input onClick="checkLogin()" style="margin-top: 10px; width: 400px; border-radius: 10px;" type="submit" name="button" id="button" value="Đổi">
-                </td>
-              </tr>
+            <tr align="center">
+              <th colspan="2"><span style="font-weight: bold; text-align: center; margin-left: 29px">Vui lòng đổi mật khẩu trước khi vào hệ thống</span></th>
+            </tr>
+            <tr align="center">
+              <td>Mật khẩu mới:</td>
+              <td><input type="password" name="txtpassword" id="textfield2"></td>
+            </tr>
+            <tr align="center">
+              <td>Nhập lại mật khẩu:</td>
+              <td><input type="password" name="txtrepass" id="textfield3"></td>
+            </tr>
+            <tr align="center">
+              <td colspan="2"><input onClick="checkLogin()" style="margin-top: 10px; width: 400px; border-radius: 10px;" type="submit" name="button" id="button" value="Đổi">
+              </td>
+            </tr>
           </table>
-          <br/>
+          <br />
       </center>
       </form>
       <footer>

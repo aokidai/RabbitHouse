@@ -2,6 +2,7 @@
 session_start();
 if (isset($_SESSION["username"])) {
     $username    =    $_SESSION["username"];
+    $idKhachhang = $_SESSION["idStaff"];
 } else
     header("location:login.php");
 ?>
@@ -243,16 +244,25 @@ if (isset($_SESSION["username"])) {
             font-size: 11px
         }
     }
-    #ttLoai{
-	display: block;
-	text-align: center;
-	font-family: 'Times New Roman', Times, serif;
-	font-size: 40px;
-	font-weight: bold;
-	margin-left: 18%;
-}
-</style>
 
+    #ttLoai {
+        display: block;
+        text-align: center;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 40px;
+        font-weight: bold;
+        margin-left: 18%;
+    }
+</style>
+<script type="text/javascript">
+		const reloadtButton = document.querySelector("#reload");
+		// Reload everything:
+		function reload() {
+			reload = location.reload();
+		}
+		// Event listeners for reload
+		reloadButton.addEventListener("click", reload, false);
+	</script>
 <body>
     <?php $user = $username ?>
     <!-- Messenger Plugin chat Code -->
@@ -293,18 +303,26 @@ if (isset($_SESSION["username"])) {
                     <li><a href="./giohang.php">Giỏ hàng</a></li>
                     <li><a href="./information.php">Thông tin</a></li>
                     <li style="width: 157px;"><a href="../index.php">Chào: <?php include "../include/connect.inc";
-                        $sql0 = "select * from tblstaff where username = '$user'";
-                        $rs0 = mysqli_query($conn, $sql0);
-                        $row0 = mysqli_fetch_array($rs0);
-                        $hoTen = $row0["hoTen"];
-                        echo $hoTen;
-                    ?></a></li>
+                                                                            $sql0 = "select * from tblstaff where username = '$user'";
+                                                                            $rs0 = mysqli_query($conn, $sql0);
+                                                                            $row0 = mysqli_fetch_array($rs0);
+                                                                            $hoTen = $row0["hoTen"];
+                                                                            echo $hoTen;
+                                                                            ?></a></li>
                 </ul>
             </div>
             <div> <br /><br /><br />
                 <div align="center">
+                <?php
+                    include "../include/connect.inc";
+                    $idMon = $_GET["id"];
+                    $sql = "select tenMon from tblmon where idMon = $idMon";
+                    $rs = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_array($rs);
+                    $tenMon = $row["tenMon"];
+                ?>
                     <form action="index.php" method="GET">
-                        <input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
+                        <input id="searchbar" name="txtsearchMon" type="text" placeholder="<?=$tenMon?>">
                         <input type="submit" name="timKiem" value="🔍">
                     </form>
                 </div>
@@ -331,97 +349,46 @@ if (isset($_SESSION["username"])) {
                         echo ("<span style=\"text-align:center; color:red; font-size: 30px\"><center>Không có sản phẩm đó!</center></span>");
                     }
                 }
-
                 ?>
-
             </div>
     </header>
-    <div id="body">
-        <div id="photo">
-            <div class="slideshow-container">
-
-                <div class="mySlides fade">
-                    <img src="../img/bg-photo-1.jpg" style="width:100%">
-                </div>
-
-                <div class="mySlides fade">
-                    <img src="../img/bg-photo-2.jpg" style="width:100%">
-                </div>
-
-                <div class="mySlides fade">
-                    <img src="../img/bg-photo-3.jpg" style="width:100%">
-                </div>
-
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-            </div>
-            <br>
-
-            <div style="text-align:center">
-                <span class="dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
-            </div>
-
-            <script>
-                var slideIndex = 0;
-                showSlides();
-
-                function showSlides() {
-                    var i;
-                    var slides = document.getElementsByClassName("mySlides");
-                    var dots = document.getElementsByClassName("dot");
-                    for (i = 0; i < slides.length; i++) {
-                        slides[i].style.display = "none";
-                    }
-                    slideIndex++;
-                    if (slideIndex > slides.length) {
-                        slideIndex = 1
-                    }
-                    for (i = 0; i < dots.length; i++) {
-                        dots[i].className = dots[i].className.replace(" active", "");
-                    }
-                    slides[slideIndex - 1].style.display = "block";
-                    dots[slideIndex - 1].className += " active";
-                    setTimeout(showSlides, 5000);
-                }
-            </script>
-        </div>
-        <article>
-	  </br>  
-	 <aside>
-	  <div id="menu" align="center">
-		  <span id="ttLoai">Loại món </span>
-			<ul style="margin-right: 22%; padding-top: 5px">
-				<?php
-					include "../include/left.php";	
-				?>
-			</ul>
-		</div>
-	</aside>
-	<section id="info" align="center" style="padding-top: 5%;">
-		<span>Món mới</span>
-		<div style="margin-left: 7%;">
+  <article>
+	  <input  type="hidden" class="form-control" name="txtid" value="<?=$_GET["id"]?>">
+  <section id="info" align="center" style="margin-bottom: 20%">
+		<span>Món tìm kiếm</span>
 			<?php
-				include "../include/connect.inc";
-				$sql		=	"select * from tblmon where conHang = 'Còn' limit 0, 12";
+				$sql		=	"select * from tblmon where idMon = $idMon and conHang = 'Còn' limit 0, 12";
 				$rs 		=	mysqli_query($conn, $sql);												   
 				while($row=mysqli_fetch_array($rs)){	
 			?>
-			<div id="mon">
+			<div id="mon" style="margin-left: 40%">
 				<p id="tenMon"><a href="#"><?=$row["tenMon"]?></a></p>
 				<img id="hinhAnh" src="../uploads/<?=$row["hinhAnh"]?>">
 				<p id="donGia">Đơn giá: <span><?=$row["gia"]?>VND</span></p>
 				<a href='hauGioHang.php?id=<?=$row["idMon"]?>'><img id="nutmuahang" src="../img/Chonmua.png"></a>
 			</div>
 		<?php }?>
-	  </section>  
-        <div style="padding-top: 70%;">
-            <footer>
-                <p style="text-align: center;">掲載されているすべてのコンテンツ(記事、画像、音声データ、映像データ等)の無断転載を禁じます。<br />🄫 2021 Power by Dragon Inc</p>
-            </footer>
-        </div>
+	   </br></br> 
+	</section>  
+	  </br></br>
+  <div id="info1" style="margin-top: 15px">
+	   </br></br>
+                <span style="margin-top: 200px">Twitter</span>
+                <div id="cont-footer-twitter" style="padding: 30px; float:left; margin-left:17%">
+                    <div class="twitter-widget" style="text-align: center;">
+                        <a class="twitter-timeline" style="text-align: center"; data-height="300" data-width="800" data-theme="white" data-link-color="#ef3488" data-border-color="#ef3488" data-chrome="noheader nofooter noborders transparent" href="https://twitter.com/aokidaisuke91">ツイートの青木大介</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </div>
+                </div>
+                <ul>
+                    <li><a href="https://twitter.com/intent/tweet?text=%E9%9D%92%E6%9C%A8%E5%A4%A7%E4%BB%8B%E3%81%AE%E5%85%AC%E5%BC%8F%E3%82%B5%E3%82%A4%E3%83%88%E3%81%A7%E3%81%99%E3%80%82%0D%0A&%E3%81%BF%E3%82%93%E3%81%AA%E3%81%95%E3%82%93%E3%82%88%E3%82%8D%E3%81%97%E3%81%8F%EF%BD%9E&hashtags=&related=" title="Twitter"><img src="./img/twitter.png"></a></li>
+                    <li><a href="https://social-plugins.line.me/lineit/share?text=%E9%9D%92%E6%9C%A8%E5%A4%A7%E4%BB%8B%E3%81%AE%E5%85%AC%E5%BC%8F%E3%82%B5%E3%82%A4%E3%83%88%E3%81%A7%E3%81%99%E3%80%82" title="Line"><img src="./img/line.png"></a></li>
+                    <li><a href="#" title="Facebook"><img src="./img/facebook.png"></a></li>
+                </ul>
+            </div>
+        </article>
+        <footer>
+            <p style="text-align: center;">掲載されているすべてのコンテンツ(記事、画像、音声データ、映像データ等)の無断転載を禁じます。<br/>🄫 2021 Power by Dragon Inc</p>
+        </footer>
+        
 </body>
-
 </html>
