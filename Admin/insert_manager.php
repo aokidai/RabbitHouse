@@ -92,7 +92,7 @@ else
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">THÊM NHÂN VIÊN</h1>
+                        <h1 class="page-header">THÊM QUẢN LÝ</h1>
                     </div>
 
                     <!-- /.col-lg-12 -->
@@ -105,10 +105,10 @@ else
                     $hoTen = $_POST["txtHoTen"];
                     $soDT = $_POST["txtSoDT"];
                     $diaChi = "Rabbit House";
-                    $sql            =    "insert into tblStaff(diachi, hoTen, soDT, username, password) values('$diaChi', '$hoTen', '$soDT', '$user', '$pass')";
+                    $sql            =    "insert into tblusers(diachi, hoTen, soDT, username, password) values('$diaChi', '$hoTen', '$soDT', '$user', '$pass')";
                     $rs             =    mysqli_query($conn, $sql);
                     if ($rs)
-                        echo "<script>window.location.href='list_user.php'</script>";
+                        echo "<script>window.location.href='list_manager.php'</script>";
                 }
                 ?>
                 <form method="post">

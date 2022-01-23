@@ -50,7 +50,7 @@ else
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="navbar-header">
-                <a class="navbar-brand" href="blank.php">Rabbit House</a>
+                <a class="navbar-brand" href="#">Rabbit House</a>
             </div>
 
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -83,51 +83,45 @@ else
                 </li>
             </ul>
             <!-- /.navbar-top-links -->
-
-            <?php
-            include "./left_admin.php";
-            ?>
         </nav>
-        <div id="page-wrapper">
+        <div style="margin-top: 100px;">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">THÊM NHÂN VIÊN</h1>
+                        <h1 class="page-header" style="text-align: center;">ĐỔI MẬT KHẨU</h1>
                     </div>
 
                     <!-- /.col-lg-12 -->
                 </div>
                 <?php
-                if (isset($_POST["txtUser"])) {
-                    include "../include/connect.inc";
-                    $user    =    $_POST["txtUser"];
-                    $pass = "Demo@123";
-                    $hoTen = $_POST["txtHoTen"];
-                    $soDT = $_POST["txtSoDT"];
-                    $diaChi = "Rabbit House";
-                    $sql            =    "insert into tblStaff(diachi, hoTen, soDT, username, password) values('$diaChi', '$hoTen', '$soDT', '$user', '$pass')";
-                    $rs             =    mysqli_query($conn, $sql);
-                    if ($rs)
-                        echo "<script>window.location.href='list_user.php'</script>";
+                $user = $username;
+                include "../include/connect.inc";
+                if (isset($_POST["txtpassword"])) {
+                  $password  =  $_POST["txtpassword"];
+                  $repass  =  $_POST["txtrepass"];
+                  if ($password == $repass) {
+                    $sql    =  "update tblusers set tblusers.password= '$password' where username='$user'";
+                    $rs    =  mysqli_query($conn, $sql);
+                    if ($rs) {
+                      echo "<script>window.location.href='blank.php'</script>";
+                    }
+                  } else
+                    echo "<script>alert('Mật khẩu không trùng')</script>";
                 }
                 ?>
                 <form method="post">
                     <table class="table table-striped table-bordered table-hover" style="width:50%" align="center">
                         <tbody>
                             <tr>
-                                <td>Họ tên<span style="color: red">(*)</span>:</td>
-                                <td><input type="text" class="form-control" name="txtHoTen"></td>
+                                <td>Mật khẩu mới<span style="color: red">(*)</span>:</td>
+                                <td><input type="password" class="form-control" name="txtpassword"></td>
                             </tr>
                             <tr>
-                                <td>Số điện thoại<span style="color: red">(*)</span>:</td>
-                                <td><input type="number" class="form-control" name="txtSoDT"></td>
-                            </tr>
-                            <tr>
-                                <td>Username<span style="color: red">(*)</span>:</td>
-                                <td><input class="form-control" name="txtUser"></td>
+                                <td>Nhập lại mật khẩu<span style="color: red">(*)</span>:</td>
+                                <td><input type="password" class="form-control" name="txtrepass"></td>
                             </tr>
                             <tr align="center">
-                                <td colspan="2"><button type="submit" class="btn btn-primary">Thêm</button><button type="reset" class="btn btn-warning" style="margin-left: 10px">Làm lại</button></td>
+                                <td colspan="2"><button type="submit" name="update" class="btn btn-primary">Cập nhật</button><button type="reset" class="btn btn-warning" style="margin-left: 10px">Làm lại</button></td>
                             </tr>
 
                     </table>

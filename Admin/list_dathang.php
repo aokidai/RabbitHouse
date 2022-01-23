@@ -68,8 +68,16 @@
                 </button>
                 <ul class="nav navbar-right navbar-top-links">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i><?=$username?></$username?><b class="caret"></b>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="account.php">
+                            <?php
+                            $user00tmp = $username;
+                            include "../include/connect.inc";
+                            $sql0000 = "select hoTen from tblusers where username = '$user00tmp'";
+                            $rs0000 = mysqli_query($conn, $sql0000);
+                            $row0000 = mysqli_fetch_array($rs0000);
+                            $hoTenNVtmp = $row0000["hoTen"];
+                            ?>
+                            <i class="fa fa-user fa-fw"></i><?=$hoTenNVtmp?><b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
 							<li><a href="#"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a>
@@ -134,13 +142,19 @@
 														$check = "none";
 													}
 													else $check= "true";
-													$idKH = $row["idKhachhang"];
-													$sql1 = "select * from tblkhachhang where idKhachhang = $idKH";
-													$rs1 = mysqli_query($conn, $sql1);
-													while($row1 = mysqli_fetch_array($rs1)){
-														$tenKH = $row1["tenKH"];
-														$sdtKH = $row1["SDT"];
-														
+													$idKH = $row["idKhachhang"]; 
+													$idStaff = $row["idStaff"];
+													if($idKH != null && $idStaff == null) {
+														$sql1 = "select * from tblkhachhang where idKhachhang = $idKH";
+														$rs1 = mysqli_query($conn, $sql1);
+														while ($row1 = mysqli_fetch_array($rs1)) {
+															$tenKH = $row1["tenKH"];
+															$sdtKH = $row1["SDT"];
+														}
+													}
+													else {
+														$tenKH = "Nhân viên";
+														$sdtKH = "";
 													}
 													 $sql7 = "select * from tblmon where idMon = $idMon";
 													 $rs7 = mysqli_query($conn, $sql7);

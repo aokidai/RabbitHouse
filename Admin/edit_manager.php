@@ -92,42 +92,66 @@ else
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">THÊM NHÂN VIÊN</h1>
+                        <h1 class="page-header">SỬA QUẢN LÝ</h1>
                     </div>
 
                     <!-- /.col-lg-12 -->
                 </div>
                 <?php
-                if (isset($_POST["txtUser"])) {
-                    include "../include/connect.inc";
-                    $user    =    $_POST["txtUser"];
-                    $pass = "Demo@123";
+                include "../include/connect.inc";
+                if (isset($_POST["update"])) {
+                    $id  = $_POST["txtid"];
+                    $user = $_POST["txtUser"];
+                    $SoDT = $_POST["txtSoDT"];
                     $hoTen = $_POST["txtHoTen"];
-                    $soDT = $_POST["txtSoDT"];
-                    $diaChi = "Rabbit House";
-                    $sql            =    "insert into tblStaff(diachi, hoTen, soDT, username, password) values('$diaChi', '$hoTen', '$soDT', '$user', '$pass')";
-                    $rs             =    mysqli_query($conn, $sql);
+                    $sql = "update tblusers set hoTen = '$hoTen', soDT = '$SoDT', username= '$user' where id_user=$id";
+                    $rs = mysqli_query($conn, $sql);
                     if ($rs)
-                        echo "<script>window.location.href='list_user.php'</script>";
+                        echo "<script>window.location.href='list_manager.php'</script>";
+                } else if(isset($_POST['reset'])){
+                    $id = $_POST["txtid"];
+                    $user =  $_POST["txtUser"];
+                    $pass = "Demo@123";
+                    $SoDT = $_POST["txtSoDT"];
+                    $hoTen = $_POST["txtHoTen"];
+                    $sql = "update tblusers set hoTen = '$hoTen', soDT = '$SoDT', username= '$user', password='$pass' where id_user=$id";
+                    $rs =  mysqli_query($conn, $sql);
+                    if ($rs)
+                        echo "<script>alert('Đã reset mật khẩu!')</script>";
+                    echo "<script>window.location.href='list_manager.php'</script>";
+                }  else {
+                    $id = $_GET["id"];
+                    $sql = "select * from tblusers where id_user=$id";
+                    $rs = mysqli_query($conn, $sql);
+                    $row = $row = mysqli_fetch_array($rs);
+                    $user = $row["username"];
+                    $hoTen = $row["hoTen"];
+                    $SoDT = $row["soDT"];
                 }
+
                 ?>
                 <form method="post">
                     <table class="table table-striped table-bordered table-hover" style="width:50%" align="center">
                         <tbody>
                             <tr>
                                 <td>Họ tên<span style="color: red">(*)</span>:</td>
-                                <td><input type="text" class="form-control" name="txtHoTen"></td>
+                                <td><input type="text" class="form-control" name="txtHoTen" value="<?= $hoTen ?>"></td>
                             </tr>
                             <tr>
                                 <td>Số điện thoại<span style="color: red">(*)</span>:</td>
-                                <td><input type="number" class="form-control" name="txtSoDT"></td>
+                                <td><input type="number" class="form-control" name="txtSoDT" value="<?= $SoDT ?>"></td>
                             </tr>
                             <tr>
                                 <td>Username<span style="color: red">(*)</span>:</td>
-                                <td><input class="form-control" name="txtUser"></td>
+                                <td><input class="form-control" name="txtUser" value="<?= $user ?>"></td>
+                                <input type="hidden" class="form-control" name="txtid" value="<?= $id ?>">
+                            </tr>
+                            <tr>
+                                <td>Mật khẩu:</td>
+                                <td><button type="submit" name="reset" class="btn btn-primary" style="background-color: red;">Reset mật khẩu</button></td>
                             </tr>
                             <tr align="center">
-                                <td colspan="2"><button type="submit" class="btn btn-primary">Thêm</button><button type="reset" class="btn btn-warning" style="margin-left: 10px">Làm lại</button></td>
+                                <td colspan="2"><button type="submit" name="update" class="btn btn-primary">Cập nhật</button><button type="reset" class="btn btn-warning" style="margin-left: 10px">Làm lại</button></td>
                             </tr>
 
                     </table>

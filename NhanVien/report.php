@@ -4,7 +4,7 @@ if (isset($_SESSION["username"])) {
     $username    =    $_SESSION["username"];
     $idStaff = $_SESSION["idStaff"];
 } else
-    header("location:login.php");
+    header("location:../login.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">

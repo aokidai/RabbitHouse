@@ -1,9 +1,9 @@
 <?php 
-	session_start();
-	if(isset($_SESSION["username"]))
-		$username	=	$_SESSION["username"];
-	else
-		header("location:login.php");
+session_start();
+if(isset($_SESSION["username"]))
+	$username	=	$_SESSION["username"];
+else
+	header("location:login.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,10 +71,11 @@
                             <i class="fa fa-user fa-fw"></i><?=$hoTenNVtmp?><b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-							<li><a href="#"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a>
+                            <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a>
                             </li>
                             <li class="divider"></li>
-                            <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a>
+                            <li>
+								<a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a>
                             </li>
                         </ul>
                     </li>
@@ -85,32 +86,13 @@
 					include"./left_admin.php";
 				?>
             </nav>
-	
-            <div id="page-wrapper">
+		<form action="list_user.php" method="post">
+			<div id="page-wrapper">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-							
-                            <h1 class="page-header">DANH SÁCH DOANH THU</h1>
-							
-							<form action="list_doanhthu.php" method="post">
-							<label for="Manufacturer">Chọn thời gian: </label>
-							<select id="cmbThoiGian" name="ThoiGian">
-								<?php
-									include("../include/connect.inc"); 
-									$sql		=	"select DISTINCT ngay from tbldoanhthu";
-									$rs 		=	mysqli_query($conn, $sql);
-								  	while($row=mysqli_fetch_array($rs)){
-										$ngay = $row["ngay"];
-										echo" 
-											<option value=".$row["ngay"].">".$row["ngay"]."</option>
-										";	
-									}								
-								?>
-							</select>
-							
-							<input type="submit" name="xemDS" value="Xem danh sách"/>
-							</form>
+                            <h1 class="page-header">DANH SÁCH PHẢN HỒI</h1>
+							<button type="submit" class="btn btn-success" style="margin-bottom: 20px" >Xóa phản hồi</button>
                         </div>
 						
                         <!-- /.col-lg-12 -->
@@ -120,44 +102,64 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
+													<th><input type="checkbox" name="checkbox" class="chk_box" onClick="toggle(this)"></th>
                                                     <th>STT</th>
-                                                    <th>Ngày tháng</th>
-													<th>Số lượng</th>
-                                                    <th>Thành tiền</th>
+                                                    <th>Phản hồi số</th>
+                                                    <th>Họ tên</th>
+                                                    <th>Thời gian</th>
+                                                    <th>Xem</th>
                                                 </tr>
                                             </thead>
+											<script>
+											 function del_confirm(strlink){
+												 ok	=	confirm("Bạn có muốn xóa không?");
+												 if(ok!=0)
+													 window.location.href=strlink;
+											 }
+											</script>
                                             <tbody>
 												<?php 
-												error_reporting(E_ERROR | E_PARSE);
-												   if(isset($_POST['xemDS']))
-													{
-													   $tmp = $_POST['ThoiGian'];
-													    $TongTien = 0;
-													   $sql2		=	"select * from tbldoanhthu where ngay = '$tmp'";
-														$rs2		=	mysqli_query($conn, $sql2);
-														$i			=	1;
-													  while($row2=mysqli_fetch_array($rs2)){
-														 
-														  $TongTien = $TongTien + ($row2["thanhTien"]);
-														echo" <tr>
-															<td>$i</td>
-															<td>".$row2["ngay"]."</td>
-															<td>".$row2["tongSL"]."</td>
-															<td>".$row2["thanhTien"]."</td>
-															</tr>";	
-													   $i++;
-													  }
-												   }
+													include("../include/connect.inc"); 
+													$sql		=	"select * from tblreport";
+												   	$rs 		=	mysqli_query($conn, $sql);
+												    $count		=	mysqli_num_rows($rs);
+												    // Hiển thị
+												    $pageSize = 5;
+												   	$pos 		=	(!isset($_GET["page"]))?0:($_GET["page"] -1)*$pageSize;	
+												    $sql		=	"select * from tblreport limit $pos, $pageSize";
+												   	$rs 		=	mysqli_query($conn, $sql);
+												   	$i			=	1;
+												  while($row=mysqli_fetch_array($rs)){											  
+													echo" <tr>
+														<td><input type='checkbox' class='chk_box1' name='check_list[]' value='".$row["idReport"]."'></td>
+														<td>$i</td>
+                                                        <td>".$row["idReport"]."</td>
+														<td>".$row["hoTenNV"]."</td>
+                                                        <td>".$row["thoiGian"]."</td>
+														<td><a href='edit_report.php?id=".$row["idReport"]."'>Xem</a></td>
+														</tr>";	
+												   $i++;
+												  }
 												?>
-                                            </tbody>
+                                               <?php
+													if(!empty($_POST['check_list'])) {
+														foreach($_POST['check_list'] as $check) {
+																$sql9 = "delete from tblreport where idReport = '$check'";
+																$rs = mysqli_query($conn, $sql9);
+																
+														}
+														echo"<script>window.location.href='list_report.php'</script>";
+													}
+												?>
+                                             </tbody>  
                                                 <tr>
-                                                    <th colspan="3">Tổng doanh thu:</th>
-                                                    <th>
-														<?php
-															
-															echo $TongTien;
-														?>
-													</th>
+                                                    <th colspan="4">
+													 <?php 
+													  
+														for($i=1; $i<=ceil($count/$pageSize);$i++)
+															echo "<a href='list_report.php?page=$i'>".$i."</a>&nbsp&nbsp";
+													?>
+											        </th>
                                                 </tr>
                                         </table>
                                     </div>
@@ -165,10 +167,19 @@
                 </div>
                 <!-- /.container-fluid -->
             </div>
-
+            <!-- /#page-wrapper -->
+		</form>
+			
         </div>
         <!-- /#wrapper -->
-
+		<script language="JavaScript">
+			function toggle(source) {
+			  checkboxes = document.getElementsByName('check_list[]');
+			  for(var i=0, n=checkboxes.length;i<n;i++) {
+				checkboxes[i].checked = source.checked;
+			  }
+			}
+		</script>
         <!-- jQuery -->
         <script src="../js/jquery.min.js"></script>
 

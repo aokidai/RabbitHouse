@@ -59,11 +59,19 @@ else
                 </button>
                 <ul class="nav navbar-right navbar-top-links">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i><?=$username?></$username?><b class="caret"></b>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="account.php">
+                            <?php
+                            $user00tmp = $username;
+                            include "../include/connect.inc";
+                            $sql0000 = "select hoTen from tblusers where username = '$user00tmp'";
+                            $rs0000 = mysqli_query($conn, $sql0000);
+                            $row0000 = mysqli_fetch_array($rs0000);
+                            $hoTenNVtmp = $row0000["hoTen"];
+                            ?>
+                            <i class="fa fa-user fa-fw"></i><?=$hoTenNVtmp?><b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a>
+                            <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a>
                             </li>
                             <li class="divider"></li>
                             <li>

@@ -92,44 +92,42 @@ else
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">THÊM NHÂN VIÊN</h1>
+                        <?php $id = $_GET["id"]; ?>
+                        <h1 class="page-header">XEM PHẢN HỒI SỐ <?=$id?></h1>
                     </div>
 
                     <!-- /.col-lg-12 -->
                 </div>
                 <?php
-                if (isset($_POST["txtUser"])) {
-                    include "../include/connect.inc";
-                    $user    =    $_POST["txtUser"];
-                    $pass = "Demo@123";
-                    $hoTen = $_POST["txtHoTen"];
-                    $soDT = $_POST["txtSoDT"];
-                    $diaChi = "Rabbit House";
-                    $sql            =    "insert into tblStaff(diachi, hoTen, soDT, username, password) values('$diaChi', '$hoTen', '$soDT', '$user', '$pass')";
-                    $rs             =    mysqli_query($conn, $sql);
-                    if ($rs)
-                        echo "<script>window.location.href='list_user.php'</script>";
-                }
+                include "../include/connect.inc";
+                $sql = "select * from tblreport where idReport=$id";
+                $rs = mysqli_query($conn, $sql);
+                $row = $row = mysqli_fetch_array($rs);
+                $thoiGian = $row["thoiGian"];
+                $noiDung = $row["vanDe"];
+                $hoTenNV = $row["hoTenNV"];
+                if(isset($_POST["update"]))
+                    echo "<script>window.location.href='list_report.php'</script>";
                 ?>
                 <form method="post">
-                    <table class="table table-striped table-bordered table-hover" style="width:50%" align="center">
+                    <table class="table table-striped table-bordered table-hover" style="width:80%" align="center">
                         <tbody>
                             <tr>
-                                <td>Họ tên<span style="color: red">(*)</span>:</td>
-                                <td><input type="text" class="form-control" name="txtHoTen"></td>
+                                <td style="width: 30%;">Họ tên người phản hồi:</td>
+                                <td><?= $hoTenNV ?></td>
                             </tr>
                             <tr>
-                                <td>Số điện thoại<span style="color: red">(*)</span>:</td>
-                                <td><input type="number" class="form-control" name="txtSoDT"></td>
+                                <td>Thời gian phản hồi:</td>
+                                <td><?= $thoiGian ?></td>
                             </tr>
                             <tr>
-                                <td>Username<span style="color: red">(*)</span>:</td>
-                                <td><input class="form-control" name="txtUser"></td>
+                                <td>Vấn đề phản hồi</td>
+                                <td><?= $noiDung ?></td>
+                                <input type="hidden" class="form-control" name="txtid" value="<?= $id ?>">
                             </tr>
                             <tr align="center">
-                                <td colspan="2"><button type="submit" class="btn btn-primary">Thêm</button><button type="reset" class="btn btn-warning" style="margin-left: 10px">Làm lại</button></td>
+                                <td colspan="2"><button type="submit" name="update" class="btn btn-primary">Xong</button></td>
                             </tr>
-
                     </table>
                 </form>
                 <!-- /.row -->

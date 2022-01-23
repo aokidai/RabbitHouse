@@ -59,11 +59,19 @@ else
                 </button>
                 <ul class="nav navbar-right navbar-top-links">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i><?=$username?></$username?><b class="caret"></b>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="account.php">
+                            <?php
+                            $user00tmp = $username;
+                            include "../include/connect.inc";
+                            $sql0000 = "select hoTen from tblusers where username = '$user00tmp'";
+                            $rs0000 = mysqli_query($conn, $sql0000);
+                            $row0000 = mysqli_fetch_array($rs0000);
+                            $hoTenNVtmp = $row0000["hoTen"];
+                            ?>
+                            <i class="fa fa-user fa-fw"></i><?=$hoTenNVtmp?><b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a>
+                            <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a>
                             </li>
                             <li class="divider"></li>
                             <li>
@@ -97,8 +105,8 @@ else
                                                 <tr>
 													<th><input type="checkbox" name="checkbox" class="chk_box" onClick="toggle(this)"></th>
                                                     <th>STT</th>
-                                                    <th>Username</th>
                                                     <th>Họ tên</th>
+                                                    <th>Username</th>
                                                     <th>Sửa</th>
                                                     <th>Xóa </th>
                                                 </tr>
@@ -126,8 +134,8 @@ else
 													echo" <tr>
 														<td><input type='checkbox' class='chk_box1' name='check_list[]' value='".$row["idStaff"]."'></td>
 														<td>$i</td>
-														<td>".$row["username"]."</td>
                                                         <td>".$row["hoTen"]."</td>
+														<td>".$row["username"]."</td>
 														<td><a href='edit_user.php?id=".$row["idStaff"]."'>Sửa</a></td>
 														<td><a href='javascript:del_confirm(\"del_user.php?id=".$row["idStaff"]."\")'>Xóa</a></td>
 														</tr>";	
