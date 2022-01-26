@@ -127,7 +127,7 @@ else
                                                 <tr>
                                                     
                                                     <td></td>
-                                                    <td><button type="submit" class="btn btn-primary">Cập nhật</button><button type="reset" class="btn btn-warning" style="margin-left: 10px">Làm lại</button></td>
+                                                    <td><button type="submit" class="btn btn-primary">Cập nhật</button> </td>
                                                 </tr>
                                                
                                         </table>

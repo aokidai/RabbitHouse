@@ -109,8 +109,7 @@ else
                     $noiDung         =   $_POST["txtdes"];
                     $name_tmp        =    $_FILES["txtHinh"]["tmp_name"];
                     $goiY            =     $_POST["txtGoiY"];
-                    $sql                =    "insert into tblmon(idLoai, tenMon, gia,  hinhAnh, goiY, conHang, moTa)";
-                    $sql                .=    " values($idLoai, '$tenMon', $gia, '$image', '$goiY', '$trangThai', '$noiDung')";
+                    $sql                =    "insert into tblmon(idLoai, tenMon, gia,  hinhAnh, goiY, conHang, moTa) values($idLoai, '$tenMon', $gia, '$image', '$goiY', '$trangThai', '$noiDung')";
                     $rs                 =    mysqli_query($conn, $sql);
                     if ($rs) {
                         move_uploaded_file($name_tmp, "../uploads/" . $image);
@@ -159,7 +158,7 @@ else
                                 </td>
                             </tr>
                             <tr align="center">
-                                <td colspan="2"><button type="submit" class="btn btn-primary">Thêm</button><button type="reset" class="btn btn-warning" style="margin-left: 10px">Làm lại</button></td>
+                                <td colspan="2"><button type="submit" class="btn btn-primary">Thêm</button> </td>
                             </tr>
                         </tbody>
                     </table>

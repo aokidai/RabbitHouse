@@ -254,15 +254,6 @@ if (isset($_SESSION["username"])) {
         margin-left: 18%;
     }
 </style>
-<script type="text/javascript">
-    const reloadtButton = document.querySelector("#reload");
-    // Reload everything:
-    function reload() {
-        reload = location.reload();
-    }
-    // Event listeners for reload
-    reloadButton.addEventListener("click", reload, false);
-</script>
 
 <body>
     <?php $user = $username ?>
@@ -299,7 +290,7 @@ if (isset($_SESSION["username"])) {
             <div id="logo"><a href="./index.php"><img src="../img/logo.png"></a></div>
             <div id="menu">
                 <ul>
-                    <li><a href="./donhang.php">Đơn hàng</a></li>
+                    <li><a href="./xuatkho.php">Đơn hàng</a></li>
                     <li><a href="./doanhthu.php">Doanh thu</a></li>
                     <li><a href="./giohang.php">Giỏ hàng</a></li>
                     <li><a href="./information.php">Thông tin</a></li>
@@ -348,98 +339,70 @@ if (isset($_SESSION["username"])) {
             </div>
     </header>
     <section id="info" align="center">
-        <form method="post" action="donhang.php">
-            <span>Đơn Hàng</span><br />
-            <button type="submit" class="btn btn-success" name="giaohang" style="margin-bottom: 20px; float: left; margin-left: 2%;">Giao hàng</button>
-            <button type="submit" class="btn btn-success" name="xoahang" style="margin-bottom: 20px; background-color: red; float: left; margin-left: 10px">Xóa hàng</button>
-            <button onClick="window.location.reload();" class="btn btn-success" style="margin-bottom: 20px; float: right; margin-right: 2%; background-color: aqua; color: black">Tải lại dữ liệu</button>
+        <form method="post" action="xuatkho.php">
+            <span>Xuất Kho Hàng Hóa</span><br />
+            <button type="submit" class="btn btn-success" name="xuatkho" style="margin-bottom: 20px; float: left; margin-left: 2%;">Xuất kho</button>
+            <label style="margin-bottom: 20px; font-size: 15px; font-weight: bold; float: right; margin-right: 2%; color: red" title="Mỗi lần xuất kho là 1Kg. Số lượng ban đầu và số lượng còn lại cũng được tính theo đơn vị Kg. Khi nhân viên nhận thấy hết nguyên liệu, nhân viên phải vào đây để cập nhật khi lấy hàng mới.">(?)</label>
             <div class="table-responsive table-bordered">
                 <table class="table" align="center">
                     <thead>
                         <tr>
                             <th><input type="checkbox" name="checkbox" class="chk_box" onClick="toggle(this)"></th>
                             <th>STT</th>
-                            <th>Mã đặt hàng</th>
-                            <th>Món</th>
-                            <th>Số lượng</th>
-                            <th>Tên khách hàng</th>
-                            <th>Số điện thoại</th>
-                            <th>Địa chỉ</th>
-                            <th>Thời gian</th>
-                            <th>Tổng tiền</th>
-                            <th>Trạng thái GH</th>
-                            <th>Chi tiết</th>
+                            <th>Tên hàng</th>
+                            <th>S.Lượng ban đầu</th>
+                            <th>S.Lượng còn lại</th>
+                            <th>Thời gian nhập kho</th>
+                            <th>T.Gian xuất kho <br />(mới nhất)</th>
+                            <th>Quản lí</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         include("../include/connect.inc");
-                        $sql        =    "select * from tblchitiethd";
+                        $sql        =    "select * from tblkho";
                         $rs         =    mysqli_query($conn, $sql);
                         $i            =    1;
                         while ($row = mysqli_fetch_array($rs)) {
-                            $idChiTiet = $row["idChiTiet"];
-                            $idMon = $row["idMon"];
-                            $status = $row["daGH"];
-                            $thanhTien = $row["tongTien"];
-                            $soLuong = $row["tongSL"];
-                            if ($status == "O") {
-                                $check = "none";
-                            } else $check = "true";
-                            $idKH = $row["idKhachhang"];
-                            $idStaff = $row["idStaff"];
-                            if ($idKH != null && $idStaff == null) {
-                                $sql1 = "select * from tblkhachhang where idKhachhang = $idKH";
-                                $rs1 = mysqli_query($conn, $sql1);
-                                while ($row1 = mysqli_fetch_array($rs1)) {
-                                    $tenKH = $row1["tenKH"];
-                                    $sdtKH = $row1["SDT"];
-                                }
-                            } else {
-                                $tenKH = "Nhân viên";
-                                $sdtKH = "";
-                            }
-                            $sql7 = "select * from tblmon where idMon = $idMon";
-                            $rs7 = mysqli_query($conn, $sql7);
-                            while ($row7 = mysqli_fetch_array($rs7)) {
-                                $mon = $row7["tenMon"];
-                            }
+                            $idNV = $row["id_user"];
+                            $tgXK = $row["thoiGianXK"];
+                            $tgXKtmp = "";
+                            if ($tgXK == "0000-00-00 00:00:00") {
+                                $tgXKtmp = "";
+                            } else $tgXKtmp = $row["thoiGianXK"];
+                            $sql99 = "select hoTen from tblusers where id_user = $idNV";
+                            $rs99 = mysqli_query($conn, $sql99);
+                            $row99 = mysqli_fetch_array($rs99);
+                            $hoTenNV = $row99["hoTen"];
+                            $SLBD = $row["soLuongBD"];
+                            $SLCL = $row["soLuongCL"];
                             echo " <tr>
-                                        <td><input type='checkbox' class='chk_box1' style=\"display: $check\" name='check_list[]' value='" . $row["idChiTiet"] . "'></td>
-                                        <td>$i</td>
-                                        <td>" . $idChiTiet . "</td>
-                                        <td>" . $mon . "</td>
-                                        <td>" . $soLuong . "</td>
-                                        <td>" . $tenKH . "</td>
-                                        <td>" . $sdtKH . "</td>
-                                        <td>" . $row["diaChiGH"] . "</td>
-                                        <td>" . $row["ngayThang"] . "</td>
-                                        <td>" . $row["tongTien"] . "</td>
-                                        <td>" . $status . "</td>
-                                        <td><a href='chitietdonhang.php?id=" . $idChiTiet . "'>Xem</a></td>
-                                      </tr>";
+                                    <td><input type='checkbox' class='chk_box1' name='check_list[]' value='" . $row["idKho"] . "'></td>
+                                    <td>$i</td>
+                                    <td>" . $row["tenHang"] . "</td>
+                                    <td>$SLBD</td>
+                                    <td>$SLCL</td>
+                                    <td>" . $row["thoiGianNK"] . "</td>
+                                    <td>$tgXKtmp</td>
+                                    <td>$hoTenNV</td>
+                                    </tr>";
                             $i++;
                         }
-                        if (isset($_POST["giaohang"])) {
+                        if (isset($_POST["xuatkho"])) {
                             if (!empty($_POST['check_list'])) {
                                 foreach ($_POST['check_list'] as $check) {
-                                    $sql9 = "update tblchitiethd set daGH = 'O' where idChiTiet = $check";
-                                    $rs9 = mysqli_query($conn, $sql9);
+                                    $sql00 = "select soLuongCL from tblKho where idKho = $check";
+                                    $rs00 = mysqli_query($conn, $sql00);
+                                    $row00 = mysqli_fetch_array($rs00);
+                                    $SLCLtmp = $row00["soLuongCL"];
                                     date_default_timezone_set('Asia/Ho_Chi_Minh');
-                                    $time_act = date('Y-m-d');
-                                    $sql15 = "insert into tbldoanhthu (idChiTiet, ngay, thanhTien, tongSL) values ( '$check', '$time_act', '$thanhTien', '$soLuong')";
-                                    $rs15 = mysqli_query($conn, $sql15);
+					                $tgXK = date('Y-m-d H:i:s');
+                                    $SLCLtmp--;
+                                    $sql9 = "update tblkho set thoiGianXK = '$tgXK', soLuongCL = '$SLCLtmp' where idKho = $check";
+                                    $rs9 = mysqli_query($conn, $sql9);
                                 }
-                                echo "<script>window.location.href='donhang.php'</script>";
+                                echo "<script>window.location.href='xuatkho.php'</script>";
                             }
-                        } else if (isset($_POST["xoahang"])) {
-                            $sql20 = "delete from tblchitiethd where daGH = 'O'";
-                            $rs20 = mysqli_query($conn, $sql20);
-                            foreach ($_POST['check_list'] as $check) {
-                                $sql19 = "delete from tblchitiethd where idChiTiet = '$check'";
-                                $rs19 = mysqli_query($conn, $sql19);
-                            }
-                            echo "<script>window.location.href='donhang.php'</script>";
                         }
                         ?>
                     </tbody>
@@ -456,7 +419,7 @@ if (isset($_SESSION["username"])) {
         </script>
     </section>
     </section>
-    <div style="padding-top: 70%;">
+    <div style="padding-top: 1%;">
         <footer>
             <p style="text-align: center;">掲載されているすべてのコンテンツ(記事、画像、音声データ、映像データ等)の無断転載を禁じます。<br />🄫 2021 Power by Dragon Inc</p>
         </footer>

@@ -63,17 +63,18 @@ else
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="account.php">
                         <?php
-                            $user00tmp = $username;
-                            include "../include/connect.inc";
-                            $sql0000 = "select hoTen from tblusers where username = '$user00tmp'";
-                            $rs0000 = mysqli_query($conn, $sql0000);
-                            $row0000 = mysqli_fetch_array($rs0000);
-                            $hoTenNVtmp = $row0000["hoTen"];
-                            ?>
-                            <i class="fa fa-user fa-fw"></i><?=$hoTenNVtmp?><b class="caret"></b>
+                        $user00tmp = $username;
+                        include "../include/connect.inc";
+                        $sql0000 = "select id_user, hoTen from tblusers where username = '$user00tmp'";
+                        $rs0000 = mysqli_query($conn, $sql0000);
+                        $row0000 = mysqli_fetch_array($rs0000);
+                        $hoTenNVtmp = $row0000["hoTen"];
+                        $idNV = $row0000["id_user"];
+                        ?>
+                        <i class="fa fa-user fa-fw"></i><?= $hoTenNVtmp ?><b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a>
+                        <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -92,39 +93,37 @@ else
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">THÊM NHÂN VIÊN</h1>
+                        <h1 class="page-header">THÊM HÀNG</h1>
                     </div>
 
                     <!-- /.col-lg-12 -->
                 </div>
                 <?php
-                if (isset($_POST["txtUser"])) {
-                    include "../include/connect.inc";
-                    $user    =    $_POST["txtUser"];
-                    $pass = "Demo@123";
-                    $hoTen = $_POST["txtHoTen"];
-                    $soDT = $_POST["txtSoDT"];
-                    $diaChi = "Rabbit House";
-                    $sql            =    "insert into tblStaff(diachi, hoTen, soDT, username, password) values('$diaChi', '$hoTen', '$soDT', '$user', '$pass')";
+                if (isset($_POST["txtTenHang"])) {
+                    $tenHang    =    $_POST["txtTenHang"];
+                    $soLuongNK = $_POST["txtSoLuong"];
+                    date_default_timezone_set('Asia/Ho_Chi_Minh');
+					$tgNK = date('Y-m-d H:i:s'); 
+                    $tgXK = "";
+                    $sql            =    "insert into tblkho(tenHang, soLuongBD, soLuongCL, thoiGianNK, thoiGianXK, id_user) 
+                    values('$tenHang', '$soLuongNK', '$soLuongNK', '$tgNK', '$tgXK', '$idNV')";
                     $rs             =    mysqli_query($conn, $sql);
                     if ($rs)
-                        echo "<script>window.location.href='list_user.php'</script>";
+                        echo "<script>window.location.href='list_kho.php'</script>";
+                    else echo "<script>alert('Error!')</script>";
                 }
                 ?>
                 <form method="post">
                     <table class="table table-striped table-bordered table-hover" style="width:50%" align="center">
+
                         <tbody>
                             <tr>
-                                <td>Họ tên<span style="color: red">(*)</span>:</td>
-                                <td><input type="text" class="form-control" name="txtHoTen"></td>
+                                <td>Tên hàng<span style="color: red">(*)</span>:</td>
+                                <td><input class="form-control" name="txtTenHang"></td>
                             </tr>
                             <tr>
-                                <td>Số điện thoại<span style="color: red">(*)</span>:</td>
-                                <td><input type="number" class="form-control" name="txtSoDT"></td>
-                            </tr>
-                            <tr>
-                                <td>Username<span style="color: red">(*)</span>:</td>
-                                <td><input class="form-control" name="txtUser"></td>
+                                <td>Số lượng / Kg<span style="color: red">(*)</span>:</td>
+                                <td><input type="number" class="form-control" name="txtSoLuong"></td>
                             </tr>
                             <tr align="center">
                                 <td colspan="2"><button type="submit" class="btn btn-primary">Thêm</button> </td>
