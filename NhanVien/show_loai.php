@@ -305,7 +305,7 @@ if (isset($_SESSION["username"])) {
                 <div align="center">
                     <form action="index2.php" method="GET">
                         <input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
-                        <input type="submit" name="timKiem" value="🔍">
+                        <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
                     </form>
                 </div>
                 <script type="text/javascript">
@@ -416,7 +416,7 @@ if (isset($_SESSION["username"])) {
                     <p id="tenMon"><a href="#"><?= $row["tenMon"] ?></a></p>
                     <img id="hinhAnh" src="../uploads/<?= $row["hinhAnh"] ?>">
                     <p id="donGia">Đơn giá: <span><?= $row["gia"] ?>VND</span></p>
-                    <a href='hauGioHang.php?id=<?= $row["idMon"] ?>'><img id="nutmuahang" src="../img/Chonmua.png"></a>
+                    <a href='hauGioHang.php?id=<?= $row["idMon"] ?>' title="Thêm vào giỏ hàng"><img id="nutmuahang" src="../img/Chonmua.png"></a>
                 </div>
             <?php }
             else

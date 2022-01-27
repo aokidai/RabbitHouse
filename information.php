@@ -30,7 +30,7 @@ if (isset($_SESSION["username"])) {
 
 	<!-- Custom Fonts -->
 	<link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" type="text/css" href="./css/style.css?" />
+	<link rel="stylesheet" type="text/css" href="./css/style2.css?" />
 	<!-- jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -139,7 +139,6 @@ if (isset($_SESSION["username"])) {
 		var chatbox = document.getElementById('fb-customer-chat');
 		chatbox.setAttribute("page_id", "784897768537480");
 		chatbox.setAttribute("attribution", "biz_inbox");
-
 		window.fbAsyncInit = function() {
 			FB.init({
 				xfbml: true,
@@ -158,25 +157,29 @@ if (isset($_SESSION["username"])) {
 	</script>
 	<header>
 		<div>
-			<div id="logo"><a href="./index2.php"><img src="./img/logo.png"></a></div>
+			<div id="logo"><a href="./index2.php" title="Trang chủ"><img src="./img/logo.png"></a></div>
 			<div id="menu">
 				<ul>
-					<li><span>Chào: <?= $username ?></span></li>
-					<li><a href="./giohang.php">Giỏ hàng</a></li>
-					<li><a href="./index.php">Đăng xuất</a></li>
+					<li><a href="./giohang.php" title="Giỏ hàng những món đã chọn">Giỏ hàng</a></li>
+					<li><a href="./produce.php" title="Xem các sản phẩm theo loại">Sản phẩm</a></li>
+					<li><a href="./information.php" title="Thông tin tài khoản">Thông tin</a></li>
+					<li style="width: 200px;"><a href="./index.php" title="Đăng xuất">Chào:
+							<?php include "./include/connect.inc";
+							$sql090 = "select tenKH from tblkhachhang where idKhachhang = '$idKhachhang'";
+							$rs090 = mysqli_query($conn, $sql090);
+							$row090 = mysqli_fetch_array($rs090);
+							$hoTen = $row090["tenKH"];
+							echo $hoTen;
+							?>
+						</a>
+					</li>
 				</ul>
 			</div>
-			<div id="menu" style="margin-left: 50%">
-				<ul>
-					<li><a href="./produce.php">Sản phẩm</a></li>
-					<li><a href="./information.php">Thông tin</a></li>
-				</ul>
-			</div>
-			<div> <br /><br /><br /><br /><br /><br />
+			<div> <br /><br /><br />
 				<div align="center">
 					<form action="information.php" method="GET">
 						<input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
-						<input type="submit" name="timKiem" value="🔍">
+						<input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
 					</form>
 				</div>
 				<script type="text/javascript">
@@ -234,37 +237,38 @@ if (isset($_SESSION["username"])) {
 		?>
 		<center>
 			<form id="form" name="frmLogin" method="post" action="information.php">
-				<table width="401" border="1" style="margin-top: 20px">
+				<table class="table table-striped table-bordered table-hover" style="width:50%; margin-top: 20px">
 					<tbody>
 						<tr>
-							<td colspan="2" align="center">Thông tin tài khoản</td>
+							<td colspan="2" align="center"><span style="font-weight: bold; font-size:20px; font-family: 'Times New Roman', Times, serif;">Thông tin tài khoản</span></td>
 						</tr>
 						<tr align="center">
-							<td width="136">Họ tên<span style="color: red">(*)</span>:</td>
-							<td width="249"><input type="text" name="txtName" id="textfield4" value="<?= $tenKH ?>"></td>
+							<td>Họ tên<span style="color: red">(*)</span>:</td>
+							<td><input type="text" class="form-control" name="txtName" id="textfield4" value="<?= $tenKH ?>"></td>
 						</tr>
 						<tr align="center">
 							<td>Số ĐT<span style="color: red">(*)</span>:</td>
-							<td><input type="number" name="txtSDT" id="textfield5" value="<?= $soDT ?>"></td>
+							<td><input type="number" class="form-control" name="txtSDT" id="textfield5" value="<?= $soDT ?>"></td>
 						</tr>
 						<tr align="center">
 							<td>Địa chỉ<span style="color: red">(*)</span>:</td>
-							<td><input type="text" name="txtDiaChi" id="textfield5" value="<?= $diaChi ?>"></td>
+							<td><input type="text" class="form-control" name="txtDiaChi" id="textfield5" value="<?= $diaChi ?>"></td>
 						</tr>
 						<tr align="center">
-							<td width="136">Tài khoản<span style="color: red">(*)</span>:</td>
-							<td width="249"><input type="text" name="txtusername" id="textfield" value="<?= $username ?>"></td>
+							<td>Tài khoản<span style="color: red">(*)</span>:</td>
+							<td><input type="text" class="form-control" name="txtusername" id="textfield" value="<?= $username ?>"></td>
 						</tr>
 						<tr align="center">
-							<td colspan="2"><input type="button" name="button" id="button" value="Lưu" onClick="checkLogin()">
+							<td colspan="2"><input type="button" class="btn btn-primary" name="button" id="button" value="Lưu thông tin" title="Lưu cập nhật thông tin" onClick="checkLogin()">
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2"><a href="./forgot.php"><span style="float: right; color: red"><i>Đổi mật khẩu?</i></span></a></td>
+							<td colspan="2"><a href="./forgot.php" title="Đổi mật khẩu?"><span style="float: right; color: red"><i>Đổi mật khẩu?</i></span></a></td>
 						</tr>
 					</tbody>
 				</table>
-				<a href="./lichsumuahang.php">Lịch sử mua hàng</a>
+				<a href="./lichsumuahang.php" title="Lịch sử mua hàng của khách hàng">Lịch sử mua hàng</a><br/>
+				<a href="./report.php" title="Phản hồi đến quản trị viên">Phản hồi</a>
 		</center>
 		</form>
 		<br /><br /><br />

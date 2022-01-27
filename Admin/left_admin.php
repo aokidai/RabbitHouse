@@ -8,7 +8,7 @@
 						<a href="../Admin/list_loai.php">Danh mục loại món</a>
 					</li>
 					<li><a href="../Admin/list_mon.php">Danh mục món</a></li>
-					<li><a href="../Admin/list_kho.php">Quản lý kho</a></li>
+					<li><a href="../Admin/list_kho.php">Danh mục kho</a></li>
 				</ul>
 				<!-- /.nav-second-level -->
 			</li>
@@ -44,6 +44,9 @@
 				<ul class="nav nav-second-level">
 					<li>
 						<a href="../Admin/BanHang/BanHang.php">Bán hàng</a>
+					</li>
+					<li>
+						<a href="../Admin/list_khuyenmai.php">Khuyến mãi</a>
 					</li>
 					<li>
 						<a href="../Admin/list_report.php">Phản hồi</a>

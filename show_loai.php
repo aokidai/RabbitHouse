@@ -13,7 +13,7 @@ if (isset($_SESSION["username"])) {
     <meta charset="UTF-8">
     <title>Rabbit House</title>
     <link rel="icon" type="image/png" sizes="32x16" href="./img/rabbithouse.png">
-    <link rel="stylesheet" type="text/css" href="./css/style.css?" />
+    <link rel="stylesheet" type="text/css" href="./css/style2.css?" />
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -77,12 +77,11 @@ if (isset($_SESSION["username"])) {
 
     #ttLoai {
         display: block;
-        margin-left: auto;
-        margin-right: auto;
+        padding-left: 18%;
+        text-align: center;
         font-family: 'Times New Roman', Times, serif;
         font-size: 40px;
         font-weight: bold;
-        margin-left: 50%;
     }
 
     #info1 {
@@ -159,25 +158,29 @@ if (isset($_SESSION["username"])) {
     </script>
     <header>
         <div>
-            <div id="logo"><a href="./index2.php"><img src="./img/logo.png"></a></div>
+            <div id="logo"><a href="./index2.php" title="Trang chủ"><img src="./img/logo.png"></a></div>
             <div id="menu">
                 <ul>
-                    <li><span>Chào: <?= $username ?></span></li>
-                    <li><a href="./giohang.php">Giỏ hàng</a></li>
-                    <li><a href="./index.php">Đăng xuất</a></li>
+                    <li><a href="./giohang.php" title="Giỏ hàng những món đã chọn">Giỏ hàng</a></li>
+                    <li><a href="./produce.php" title="Xem các sản phẩm theo loại">Sản phẩm</a></li>
+                    <li><a href="./information.php" title="Thông tin tài khoản">Thông tin</a></li>
+                    <li style="width: 200px;"><a href="./index.php" title="Đăng xuất">Chào:
+                            <?php include "./include/connect.inc";
+                            $sql090 = "select tenKH from tblkhachhang where idKhachhang = '$idKhachhang'";
+                            $rs090 = mysqli_query($conn, $sql090);
+                            $row090 = mysqli_fetch_array($rs090);
+                            $hoTen = $row090["tenKH"];
+                            echo $hoTen;
+                            ?>
+                        </a>
+                    </li>
                 </ul>
             </div>
-            <div id="menu" style="margin-left: 50%">
-                <ul>
-                    <li><a href="./produce.php">Sản phẩm</a></li>
-                    <li><a href="./information.php">Thông tin</a></li>
-                </ul>
-            </div>
-            <div> <br /><br /><br /><br /><br /><br />
+            <div> <br /><br /><br />
                 <div align="center">
                     <form action="produce.php" method="GET">
                         <input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
-                        <input type="submit" name="timKiem" value="🔍">
+                        <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
                     </form>
                 </div>
                 <script type="text/javascript">
@@ -213,16 +216,15 @@ if (isset($_SESSION["username"])) {
         </br>
         <aside>
             <div id="menu" align="center">
-                <span id="ttLoai">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loại món </span>
-                <ul style="margin-right: 20%; margin-left:40%">
+                <span id="ttLoai">Loại món </span>
+                <ul style="margin-right: 22%; padding-top: 5px">
                     <?php
                     include "include/left.php";
                     ?>
                 </ul>
             </div>
         </aside>
-        <section id="info" align="center" style="margin-left: 7%;">
+        <section id="info" align="center" style="padding-top: 5%;">
             <span>Món theo loại</span>
             <?php
             include "include/connect.inc";
@@ -233,12 +235,19 @@ if (isset($_SESSION["username"])) {
             if ($count > 0)
                 while ($row = mysqli_fetch_array($rs)) {
             ?>
-                <div id="mon">
-                    <p id="tenMon"><a href="#"><?= $row["tenMon"] ?></a></p>
-                    <img id="hinhAnh" src="uploads/<?= $row["hinhAnh"] ?>">
-                    <p id="donGia">Đơn giá: <span><?= $row["gia"] ?>VND</span></p>
-                    <a href='hauGioHang.php?id=<?= $row["idMon"] ?>'><img id="nutmuahang" src="./img/Chonmua.png"></a>
-                </div>
+                <table align="center">
+                    <tr>
+                        <td>
+                            <div id="mon" style="margin-top: 20px">
+                                <p id="tenMon"><a href="#"><?= $row["tenMon"] ?></a></p>
+                                <img id="hinhAnh" src="uploads/<?= $row["hinhAnh"] ?>">
+                                <p id="donGia">Đơn giá: <span><?= $row["gia"] ?>VND</span></p>
+                                <a href='hauGioHang.php?id=<?= $row["idMon"] ?>' title="Thêm vào giỏ hàng"><img id="nutmuahang" src="./img/Chonmua.png"></a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
             <?php }
             else
                 echo "<center><span style='margin-top:30px; font-size:30px; color:red'>Hiện tại không có món nào!</span></center>";
@@ -246,10 +255,8 @@ if (isset($_SESSION["username"])) {
             </br></br>
         </section>
     </article>
-    </br></br></br></br></br></br>
     <div id="info1" style="margin-top: 15px">
-        </br></br>
-        <span style="margin-top: 250px">Twitter</span>
+        <span>Twitter</span>
         <div id="cont-footer-twitter" style="padding: 30px; float:left; margin-left:17%">
             <div class="twitter-widget" style="text-align: center;">
                 <a class="twitter-timeline" style="text-align: center" ; data-height="300" data-width="800" data-theme="white" data-link-color="#ef3488" data-border-color="#ef3488" data-chrome="noheader nofooter noborders transparent" href="https://twitter.com/aokidaisuke91">ツイートの青木大介</a>

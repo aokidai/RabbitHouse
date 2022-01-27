@@ -219,13 +219,13 @@ img {vertical-align: middle;}
     </script>
   <header>
     <div>
-    <div id="logo"><a href="./index.php"><img src="./img/logo.png"></a></div>
+    <div id="logo"><a href="./index.php" title="Trang chủ"><img src="./img/logo.png"></a></div>
     <div id="menu">
       <ul>
-        <li><a href="./index.php">Trang chủ</a></li>
-        <li><a href="./login.php">Sản phẩm</a></li>
-        <li><a href="./login.php">Thông tin</a></li>
-        <li><a href="./login.php">Đăng nhập</a></li>
+        <li><a href="./index.php" title="Trang chủ">Trang chủ</a></li>
+        <li><a href="./login.php" title="Vui lòng đăng nhập trước khi dùng tính năng này">Sản phẩm</a></li>
+        <li><a href="./login.php" title="Vui lòng đăng nhập trước khi dùng tính năng này">Thông tin</a></li>
+        <li><a href="./login.php" title="Đăng nhập">Đăng nhập</a></li>
       </ul>
     </div>
   </div>
@@ -305,7 +305,7 @@ img {vertical-align: middle;}
 						while($row=mysqli_fetch_array($rs)){					
 			?>
 			<div id="mon">
-				<p id="tenMon"><a href="#"><?=$row["tenMon"]?></a></p>
+				<p id="tenMon"><a href="#" values="<?=$row["tenMon"]?>"><?=$row["tenMon"]?></a></p>
 				<img id="hinhAnh" src="uploads/<?=$row["hinhAnh"]?>">
 				<p id="donGia">Đơn giá: <span><?=$row["gia"]?>VND</span></p>
 				<a href="./login.php"><img id="nutmuahang" src="./img/Chonmua.png"></a>
@@ -317,10 +317,10 @@ img {vertical-align: middle;}
 				while($row=mysqli_fetch_array($rs)){	
 		?>
 			<div id="mon">
-				<p id="tenMon"><a href="#"><?=$row["tenMon"]?></a></p>
+				<p id="tenMon"><a href="#" values="<?=$row["tenMon"]?>"><?=$row["tenMon"]?></a></p>
 				<img id="hinhAnh" src="uploads/<?=$row["hinhAnh"]?>">
 				<p id="donGia">Đơn giá: <span><?=$row["gia"]?>VND</span></p>
-				<a href="./login.php"><img id="nutmuahang" src="./img/Chonmua.png"></a>
+				<a href="./login.php" title="Vui lòng đăng nhập trước khi dùng tính năng này"><img id="nutmuahang" src="./img/Chonmua.png"></a>
 			</div>
 		  <?php }}
 			else if($nhietDo > 28){
@@ -329,10 +329,10 @@ img {vertical-align: middle;}
 				while($row=mysqli_fetch_array($rs)){	
 		?>
 			<div id="mon">
-				<p id="tenMon"><a href="#"><?=$row["tenMon"]?></a></p>
+				<p id="tenMon"><a href="#" values="<?=$row["tenMon"]?>"><?=$row["tenMon"]?></a></p>
 				<img id="hinhAnh" src="uploads/<?=$row["hinhAnh"]?>">
 				<p id="donGia">Đơn giá: <span><?=$row["gia"]?>VND</span></p>
-				<a href="./login.php"><img id="nutmuahang" src="./img/Chonmua.png"></a>
+				<a href="./login.php" title="Vui lòng đăng nhập trước khi dùng tính năng này"><img id="nutmuahang" src="./img/Chonmua.png"></a>
 			</div>
 		 <?php
 			}		
@@ -349,10 +349,10 @@ img {vertical-align: middle;}
 				while($row=mysqli_fetch_array($rs)){	
 			?>
 			<div id="mon">
-				<p id="tenMon"><a href="#"><?=$row["tenMon"]?></a></p>
+				<p id="tenMon"><a href="#" values="<?=$row["tenMon"]?>"><?=$row["tenMon"]?></a></p>
 				<img id="hinhAnh" src="uploads/<?=$row["hinhAnh"]?>">
 				<p id="donGia">Đơn giá: <span><?=$row["gia"]?>VND</span></p>
-				<a href="./login.php"><img id="nutmuahang" src="./img/Chonmua.png"></a>
+				<a href="./login.php" title="Vui lòng đăng nhập trước khi dùng tính năng này"><img id="nutmuahang" src="./img/Chonmua.png"></a>
 			</div>
 		<?php }?>
 			</div>

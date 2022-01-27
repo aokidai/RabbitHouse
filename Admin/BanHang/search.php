@@ -127,7 +127,7 @@ else
 		?>
 		 <form action="BanHang.php" method="GET">
 			<input id="searchbar" name="txtsearchMon" type="text" placeholder="<?=$tenMon?>">
-			<input type="submit" name="timKiem" value="🔍">
+			<input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
 		</form>	</div><br/>
 		<script type="text/javascript">
 		  $(function() {
@@ -164,7 +164,7 @@ else
 				while($row=mysqli_fetch_array($rs)){	
 			?>
 			<div id="mon" style="margin-left: 40%">
-				<p id="tenMon"><a href="#"><?=$row["tenMon"]?></a></p>
+				<p id="tenMon"><a href="#" values="<?=$row["tenMon"]?>"><?=$row["tenMon"]?></a></p>
 				<img id="hinhAnh" src="../../uploads/<?=$row["hinhAnh"]?>">
 				<p id="donGia">Đơn giá: <span><?=$row["gia"]?>VND</span></p>
 				<a href='hauGioHang.php?id=<?=$row["idMon"]?>'><img id="nutmuahang" src="../../img/Chonmua.png"></a>

@@ -307,7 +307,7 @@ if (isset($_SESSION["username"])) {
                 <div align="center">
                     <form action="index2.php" method="GET">
                         <input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
-                        <input type="submit" name="timKiem" value="🔍">
+                        <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
                     </form>
                 </div>
                 <script type="text/javascript">
