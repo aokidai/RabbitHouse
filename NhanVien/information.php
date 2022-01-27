@@ -267,11 +267,8 @@ if (isset($_SESSION["username"])) {
 <body>
     <?php
     $user = $username;
+    $idStaffs = $idStaff;
     include "../include/connect.inc";
-    $sql0000 = "select idStaff from tblstaff where username = '$user'";
-    $rs0000 = mysqli_query($conn, $sql0000);
-    $row0000 = mysqli_fetch_array($rs0000);
-    $idStaff = $row0000["idStaff"];
     ?>
 
     <!-- Messenger Plugin chat Code -->
@@ -311,7 +308,7 @@ if (isset($_SESSION["username"])) {
                     <li><a href="./lichsu.php" title="Xem lịch sử bán hàng.">Lịch sử</a></li>
                     <li><a href="./xuatkho.php" title="Nếu nguyên liệu trong kho cần dùng hết nhanh hơn dự kiến của hệ thống, nhân viên cần phải báo xuất kho.">Xuất kho</a></li>
                     <li><a href="./information.php" title="Thông tin tài khoản.">Thông tin</a></li>
-                    <li style="width: 157px;"><a href="../index.php" title="Đăng xuất.">Chào: <?php include "../include/connect.inc";
+                    <li style="width: 200px;"><a href="../index.php" title="Đăng xuất.">Chào: <?php include "../include/connect.inc";
                                                                                                 $sql0 = "select * from tblstaff where username = '$user'";
                                                                                                 $rs0 = mysqli_query($conn, $sql0);
                                                                                                 $row0 = mysqli_fetch_array($rs0);
@@ -358,17 +355,17 @@ if (isset($_SESSION["username"])) {
         <form method="post" action="information.php">
             <div id="body">
                 <?php
-                if (isset($_POST["txtusername"])) {
+                if (isset($_POST["txtName"])) {
                     $tenNV    = $_POST["txtName"];
                     $soDT = $_POST["txtSDT"];
                     $username    =    $_POST["txtusername"];
-                    $sql            =    "update tblstaff set  tenNV= '$tenNV', SDT='$soDT', username='$username' where idStaff='$idStaff'";
+                    $sql            =    "update tblstaff set hoTen= '$tenNV', soDT='$soDT', username='$username' where idStaff='$idStaffs'";
                     $rs             =    mysqli_query($conn, $sql);
                     if ($rs)
                         echo "<script>alert('Lưu thành công!')</script>";
                     echo "<script>window.location.href='information.php'</script>";
                 } else {
-                    $sql        =    "select * from tblstaff where idStaff='$idStaff'";
+                    $sql        =    "select * from tblstaff where idStaff='$idStaffs'";
                     $rs         =    mysqli_query($conn, $sql);
                     $row        =    mysqli_fetch_array($rs);
                     $tenNV    =    $row["hoTen"];
@@ -397,7 +394,7 @@ if (isset($_SESSION["username"])) {
                                     <td><input type="text" name="txtusername" class="form-control" id="textfield" value="<?= $username ?>"></td>
                                 </tr>
                                 <tr align="center">
-                                    <td colspan="2"><input type="button" name="button" class="btn btn-primary" id="button" value="Lưu" onClick="checkLogin()">
+                                    <td colspan="2"><input type="submit" name="button" class="btn btn-primary" id="button" value="Lưu" onClick="checkLogin()">
                                     </td>
                                 </tr>
                                 <tr>
