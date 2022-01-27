@@ -296,25 +296,25 @@ if (isset($_SESSION["username"])) {
     </script>
     <header>
         <div>
-            <div id="logo"><a href="./index.php"><img src="../img/logo.png"></a></div>
+            <div id="logo"><a href="./index.php" title="Trang chủ"><img src="../img/logo.png"></a></div>
             <div id="menu">
                 <ul>
-                    <li><a href="./donhang.php">Đơn hàng</a></li>
-                    <li><a href="./doanhthu.php">Doanh thu</a></li>
-                    <li><a href="./giohang.php">Giỏ hàng</a></li>
-                    <li><a href="./information.php">Thông tin</a></li>
-                    <li style="width: 157px;"><a href="../index.php">Chào: <?php include "../include/connect.inc";
-                                                                            $sql0 = "select * from tblstaff where username = '$user'";
-                                                                            $rs0 = mysqli_query($conn, $sql0);
-                                                                            $row0 = mysqli_fetch_array($rs0);
-                                                                            $hoTen = $row0["hoTen"];
-                                                                            echo $hoTen;
-                                                                            ?></a></li>
+                    <li><a href="./donhang.php" title="Đơn hàng">Đơn hàng</a></li>
+                    <li><a href="./doanhthu.php" title="Doanh thu của nhân viên">Doanh thu</a></li>
+                    <li><a href="./giohang.php" title="Giỏ hàng bán hàng cho nhân viên">Giỏ hàng</a></li>
+                    <li><a href="./information.php" title="Thông tin nhân viên">Thông tin</a></li>
+                    <li style="width: 157px;"><a href="../index.php" title="Đăng xuất">Chào: <?php include "../include/connect.inc";
+                                                                                                $sql0 = "select * from tblstaff where username = '$user'";
+                                                                                                $rs0 = mysqli_query($conn, $sql0);
+                                                                                                $row0 = mysqli_fetch_array($rs0);
+                                                                                                $hoTen = $row0["hoTen"];
+                                                                                                echo $hoTen;
+                                                                                                ?></a></li>
                 </ul>
             </div>
             <div> <br /><br /><br />
                 <div align="center">
-                    <form action="index2.php" method="GET">
+                    <form action="index.php" method="GET">
                         <input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
                         <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
                     </form>
@@ -425,6 +425,8 @@ if (isset($_SESSION["username"])) {
                                 foreach ($_POST['check_list'] as $check) {
                                     $sql9 = "update tblchitiethd set daGH = 'O' where idChiTiet = $check";
                                     $rs9 = mysqli_query($conn, $sql9);
+                                    $sql10 = "update tbllichsu set daGH = 'O' where idChitiet = '$check'";
+                                    $rs10 = mysqli_query($conn, $sql10);
                                     date_default_timezone_set('Asia/Ho_Chi_Minh');
                                     $time_act = date('Y-m-d');
                                     $sql15 = "insert into tbldoanhthu (idChiTiet, ngay, thanhTien, tongSL) values ( '$check', '$time_act', '$thanhTien', '$soLuong')";
@@ -456,7 +458,7 @@ if (isset($_SESSION["username"])) {
         </script>
     </section>
     </section>
-    <div style="padding-top: 70%;">
+    <div style="padding-top: 15%;">
         <footer>
             <p style="text-align: center;">掲載されているすべてのコンテンツ(記事、画像、音声データ、映像データ等)の無断転載を禁じます。<br />🄫 2021 Power by Dragon Inc</p>
         </footer>

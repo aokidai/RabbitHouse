@@ -167,7 +167,7 @@ else
 				<p id="tenMon"><a href="#" values="<?=$row["tenMon"]?>"><?=$row["tenMon"]?></a></p>
 				<img id="hinhAnh" src="../../uploads/<?=$row["hinhAnh"]?>">
 				<p id="donGia">Đơn giá: <span><?=$row["gia"]?>VND</span></p>
-				<a href='hauGioHang.php?id=<?=$row["idMon"]?>'><img id="nutmuahang" src="../../img/Chonmua.png"></a>
+				<a href='hauGioHang.php?id=<?=$row["idMon"]?>' title="Thêm vào giỏ hàng"><img id="nutmuahang" src="../../img/Chonmua.png"></a>
 			</div>
 		<?php }?>
 	   </br></br> 

@@ -243,14 +243,15 @@ if (isset($_SESSION["username"])) {
             font-size: 11px
         }
     }
-    #ttLoai{
-	display: block;
-	text-align: center;
-	font-family: 'Times New Roman', Times, serif;
-	font-size: 40px;
-	font-weight: bold;
-	margin-left: 18%;
-}
+
+    #ttLoai {
+        display: block;
+        text-align: center;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 40px;
+        font-weight: bold;
+        margin-left: 18%;
+    }
 </style>
 
 <body>
@@ -285,25 +286,25 @@ if (isset($_SESSION["username"])) {
     </script>
     <header>
         <div>
-            <div id="logo"><a href="./index.php"><img src="../img/logo.png"></a></div>
+            <div id="logo"><a href="./index.php" title="Trang chủ"><img src="../img/logo.png"></a></div>
             <div id="menu">
-                <ul>
-                    <li><a href="./donhang.php">Đơn hàng</a></li>
-                    <li><a href="./doanhthu.php">Doanh thu</a></li>
-                    <li><a href="./giohang.php">Giỏ hàng</a></li>
-                    <li><a href="./information.php">Thông tin</a></li>
-                    <li style="width: 157px;"><a href="../index.php">Chào: <?php include "../include/connect.inc";
-                        $sql0 = "select * from tblstaff where username = '$user'";
-                        $rs0 = mysqli_query($conn, $sql0);
-                        $row0 = mysqli_fetch_array($rs0);
-                        $hoTen = $row0["hoTen"];
-                        echo $hoTen;
-                    ?></abs></li>
+            <ul>
+                    <li><a href="./donhang.php" title="Đơn hàng">Đơn hàng</a></li>
+                    <li><a href="./doanhthu.php" title="Doanh thu của nhân viên">Doanh thu</a></li>
+                    <li><a href="./giohang.php" title="Giỏ hàng bán hàng cho nhân viên">Giỏ hàng</a></li>
+                    <li><a href="./information.php" title="Thông tin nhân viên">Thông tin</a></li>
+                    <li style="width: 157px;"><a href="../index.php" title="Đăng xuất">Chào: <?php include "../include/connect.inc";
+                                                                                                $sql0 = "select * from tblstaff where username = '$user'";
+                                                                                                $rs0 = mysqli_query($conn, $sql0);
+                                                                                                $row0 = mysqli_fetch_array($rs0);
+                                                                                                $hoTen = $row0["hoTen"];
+                                                                                                echo $hoTen;
+                                                                                                ?></a></li>
                 </ul>
             </div>
             <div> <br /><br /><br />
                 <div align="center">
-                    <form action="index2.php" method="GET">
+                    <form action="index.php" method="GET">
                         <input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
                         <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
                     </form>
@@ -388,44 +389,50 @@ if (isset($_SESSION["username"])) {
                 }
             </script>
         </div>
-	  </br>  
-      <article>
         </br>
-        <aside>
-            <div id="menu" align="center">
-                <span id="ttLoai">Loại món </span>
-                <ul style="margin-right: 22%; padding-top: 5px">
-                    <?php
-                    include "../include/left.php";
-                    ?>
-                </ul>
-            </div>
-        </aside>
-        <section id="info" align="center" style="padding-top: 5%;">
-            <span>Món theo loại</span>
-            <?php
-            include "../include/connect.inc";
-            $idLoai    =    $_GET["idLoai"];
-            $sql        =    "select * from tblmon where idLoai=$idLoai and conHang = 'Còn'";
-            $rs         =    mysqli_query($conn, $sql);
-            $count        =    mysqli_num_rows($rs);
-            if ($count > 0)
-                while ($row = mysqli_fetch_array($rs)) {
-            ?>
-                <div id="mon">
-                    <p id="tenMon"><a href="#"><?= $row["tenMon"] ?></a></p>
-                    <img id="hinhAnh" src="../uploads/<?= $row["hinhAnh"] ?>">
-                    <p id="donGia">Đơn giá: <span><?= $row["gia"] ?>VND</span></p>
-                    <a href='hauGioHang.php?id=<?= $row["idMon"] ?>' title="Thêm vào giỏ hàng"><img id="nutmuahang" src="../img/Chonmua.png"></a>
+        <article>
+            </br>
+            <aside>
+                <div id="menu" align="center">
+                    <span id="ttLoai">Loại món </span>
+                    <ul style="margin-right: 22%; padding-top: 5px">
+                        <?php
+                        include "../include/left.php";
+                        ?>
+                    </ul>
                 </div>
-            <?php }
-            else
-                echo "<center><span style='margin-top:30px; font-size:30px; color:red'>Hiện tại không có món nào!</span></center>";
-            ?>
-            </br></br>
-        </section>
-    </article> 
-        <div style="padding-top: 70%;">
+            </aside>
+            <section id="info" align="center" style="padding-top: 5%;">
+                <span>Món theo loại</span>
+                <?php
+                include "../include/connect.inc";
+                $idLoai    =    $_GET["idLoai"];
+                $sql        =    "select * from tblmon where idLoai=$idLoai and conHang = 'Còn'";
+                $rs         =    mysqli_query($conn, $sql);
+                $count        =    mysqli_num_rows($rs);
+                if ($count > 0)
+                    while ($row = mysqli_fetch_array($rs)) {
+                ?>
+                    <table align="center">
+                        <tr>
+                            <td>
+                                <div id="mon" style="margin-top: 20px">
+                                    <p id="tenMon"><a href="#"><?= $row["tenMon"] ?></a></p>
+                                    <img id="hinhAnh" src="../uploads/<?= $row["hinhAnh"] ?>">
+                                    <p id="donGia">Đơn giá: <span><?= $row["gia"] ?>VND</span></p>
+                                    <a href='hauGioHang.php?id=<?= $row["idMon"] ?>' title="Thêm vào giỏ hàng"><img id="nutmuahang" src="../img/Chonmua.png"></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                <?php }
+                else
+                    echo "<center><span style='margin-top:30px; font-size:30px; color:red'>Hiện tại không có món nào!</span></center>";
+                ?>
+                </br></br>
+            </section>
+        </article>
+        <div style="padding-top: 15%;">
             <footer>
                 <p style="text-align: center;">掲載されているすべてのコンテンツ(記事、画像、音声データ、映像データ等)の無断転載を禁じます。<br />🄫 2021 Power by Dragon Inc</p>
             </footer>

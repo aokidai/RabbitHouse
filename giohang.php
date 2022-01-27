@@ -314,12 +314,17 @@ if (isset($_SESSION["username"])) {
 											$sql5 = "insert into tblchitiethd(idKhachhang, tongSL, tongTien, ngayThang, diaChiGH, daGH, idMon) values ('$idKhachhang2', '$tongSL', '$thanhTien1', '$time_act', '$diaChi', '$giaoHang', '$idMon1')";
 											$rs5 = mysqli_query($conn, $sql5);
 											if ($rs5) {
+												$sql44 = "select max(idChiTiet) as idCTHD from tblchitiethd";
+												$rs44 = mysqli_query($conn, $sql44);
+												$row44 = mysqli_fetch_array($rs44);
+												$idCTHD = $row44["idCTHD"];
 												$sql20 = "select * from tblhoadon where idKhachhang = '$idKhachhang'";
 												$rs20 = mysqli_query($conn, $sql20);
 												while ($row20 = mysqli_fetch_array($rs20)) {
 													$thanhTien4 = $row20["ThanhTien"];
 													$idMon4 = $row20["idMon"];
-													$sql8 = "insert into tbllichsu(idKhachhang, idMon, soluong, gia, thoigian) values ('$idKhachhang2', '$idMon4', '$tongSL', '$thanhTien4', '$time_act')";
+													$trangThaiGHtmp = "X";
+													$sql8 = "insert into tbllichsu(idKhachhang, idMon, soluong, gia, thoigian, daGH, idChitiet) values ('$idKhachhang2', '$idMon4', '$tongSL', '$thanhTien4', '$time_act', '$trangThaiGHtmp', '$idCTHD')";
 													$rs8 = mysqli_query($conn, $sql8);
 													if ($rs8) {
 														$sql6 = "delete from tblhoadon where idKhachhang = '$idKhachhang'";

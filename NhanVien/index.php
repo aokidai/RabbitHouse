@@ -285,14 +285,14 @@ if (isset($_SESSION["username"])) {
     </script>
     <header>
         <div>
-            <div id="logo"><a href="./index.php"><img src="../img/logo.png"></a></div>
+            <div id="logo"><a href="./index.php" title="Trang chủ"><img src="../img/logo.png"></a></div>
             <div id="menu">
                 <ul>
-                    <li><a href="./donhang.php">Đơn hàng</a></li>
-                    <li><a href="./doanhthu.php">Doanh thu</a></li>
-                    <li><a href="./giohang.php">Giỏ hàng</a></li>
-                    <li><a href="./information.php">Thông tin</a></li>
-                    <li style="width: 157px;"><a href="../index.php">Chào: <?php include "../include/connect.inc";
+                    <li><a href="./donhang.php" title="Đơn hàng">Đơn hàng</a></li>
+                    <li><a href="./doanhthu.php" title="Doanh thu của nhân viên">Doanh thu</a></li>
+                    <li><a href="./giohang.php" title="Giỏ hàng bán hàng cho nhân viên">Giỏ hàng</a></li>
+                    <li><a href="./information.php" title="Thông tin nhân viên">Thông tin</a></li>
+                    <li style="width: 157px;"><a href="../index.php" title="Đăng xuất">Chào: <?php include "../include/connect.inc";
                         $sql0 = "select * from tblstaff where username = '$user'";
                         $rs0 = mysqli_query($conn, $sql0);
                         $row0 = mysqli_fetch_array($rs0);
@@ -413,7 +413,7 @@ if (isset($_SESSION["username"])) {
 				<p id="tenMon"><a href="#" values="<?=$row["tenMon"]?>"><?=$row["tenMon"]?></a></p>
 				<img id="hinhAnh" src="../uploads/<?=$row["hinhAnh"]?>">
 				<p id="donGia">Đơn giá: <span><?=$row["gia"]?>VND</span></p>
-				<a href='hauGioHang.php?id=<?=$row["idMon"]?>'><img id="nutmuahang" src="../img/Chonmua.png"></a>
+				<a href='hauGioHang.php?id=<?=$row["idMon"]?>' title="Thêm vào giỏ hàng"><img id="nutmuahang" src="../img/Chonmua.png"></a>
 			</div>
 		<?php }?>
 	  </section>  

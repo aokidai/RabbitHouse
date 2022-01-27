@@ -3,7 +3,7 @@ session_start();
 if (isset($_SESSION["username"]))
   $username  =  $_SESSION["username"];
 else
-    header("location:../login.php");
+  header("location:../login.php");
 ?>
 <!doctype html>
 <html>
@@ -306,20 +306,25 @@ else
       ?>
       <center>
         <form id="form1" name="frmLogin" method="post" action="change-password.php">
-          <table width="401" style="margin-top: 20px">
+          <table class="table table-striped table-bordered table-hover" style="width:50%; margin-top: 20px">
             <tr align="center">
-              <th colspan="2"><span style="font-weight: bold; text-align: center; margin-left: 29px">Vui lòng đổi mật khẩu trước khi vào hệ thống</span></th>
+              <th colspan="2">
+                <center>
+                  <span style="font-weight: bold; font-size:20px; font-family: 'Times New Roman', Times, serif;">Vui lòng đổi mật khẩu trước khi vào hệ thống
+                </center>
+                </span>
+              </th>
             </tr>
             <tr align="center">
-              <td>Mật khẩu mới:</td>
-              <td><input type="password" name="txtpassword" id="textfield2"></td>
+              <td>Mật khẩu mới<span style="color: red">(*)</span>:</td>
+              <td><input type="password" class="form-control" name="txtpassword" id="textfield2"></td>
             </tr>
             <tr align="center">
-              <td>Nhập lại mật khẩu:</td>
-              <td><input type="password" name="txtrepass" id="textfield3"></td>
+              <td>Nhập lại mật khẩu<span style="color: red">(*)</span>:</td>
+              <td><input type="password" class="form-control" name="txtrepass" id="textfield3"></td>
             </tr>
             <tr align="center">
-              <td colspan="2"><input onClick="checkLogin()" style="margin-top: 10px; width: 400px; border-radius: 10px;" type="submit" name="button" id="button" value="Đổi">
+              <td colspan="2"><input onClick="checkLogin()" class="btn btn-primary" style="margin-top: 10px; width: 400px; border-radius: 10px;" type="submit" name="button" id="button" value="Đổi">
               </td>
             </tr>
           </table>

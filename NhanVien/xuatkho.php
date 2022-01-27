@@ -287,25 +287,25 @@ if (isset($_SESSION["username"])) {
     </script>
     <header>
         <div>
-            <div id="logo"><a href="./index.php"><img src="../img/logo.png"></a></div>
+            <div id="logo"><a href="./index.php" title="Trang chủ"><img src="../img/logo.png"></a></div>
             <div id="menu">
                 <ul>
-                    <li><a href="./xuatkho.php">Đơn hàng</a></li>
-                    <li><a href="./doanhthu.php">Doanh thu</a></li>
-                    <li><a href="./giohang.php">Giỏ hàng</a></li>
-                    <li><a href="./information.php">Thông tin</a></li>
-                    <li style="width: 157px;"><a href="../index.php">Chào: <?php include "../include/connect.inc";
-                                                                            $sql0 = "select * from tblstaff where username = '$user'";
-                                                                            $rs0 = mysqli_query($conn, $sql0);
-                                                                            $row0 = mysqli_fetch_array($rs0);
-                                                                            $hoTen = $row0["hoTen"];
-                                                                            echo $hoTen;
-                                                                            ?></a></li>
+                    <li><a href="./donhang.php" title="Đơn hàng">Đơn hàng</a></li>
+                    <li><a href="./doanhthu.php" title="Doanh thu của nhân viên">Doanh thu</a></li>
+                    <li><a href="./giohang.php" title="Giỏ hàng bán hàng cho nhân viên">Giỏ hàng</a></li>
+                    <li><a href="./information.php" title="Thông tin nhân viên">Thông tin</a></li>
+                    <li style="width: 157px;"><a href="../index.php" title="Đăng xuất">Chào: <?php include "../include/connect.inc";
+                                                                                                $sql0 = "select * from tblstaff where username = '$user'";
+                                                                                                $rs0 = mysqli_query($conn, $sql0);
+                                                                                                $row0 = mysqli_fetch_array($rs0);
+                                                                                                $hoTen = $row0["hoTen"];
+                                                                                                echo $hoTen;
+                                                                                                ?></a></li>
                 </ul>
             </div>
             <div> <br /><br /><br />
                 <div align="center">
-                    <form action="index2.php" method="GET">
+                    <form action="index.php" method="GET">
                         <input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
                         <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
                     </form>
@@ -333,15 +333,13 @@ if (isset($_SESSION["username"])) {
                         echo ("<span style=\"text-align:center; color:red; font-size: 30px\"><center>Không có sản phẩm đó!</center></span>");
                     }
                 }
-
                 ?>
-
             </div>
     </header>
     <section id="info" align="center">
         <form method="post" action="xuatkho.php">
             <span>Xuất Kho Hàng Hóa</span><br />
-            <button type="submit" class="btn btn-success" name="xuatkho" style="margin-bottom: 20px; float: left; margin-left: 2%;">Xuất kho</button>
+            <button type="submit" class="btn btn-success" name="xuatkho" style="margin-bottom: 20px; float: left; margin-left: 2%;" title="Nếu nguyên liệu dùng để làm món cho khách hàng bị hết, nhân viên hãy chọn vào nguyên liệu đó và nhấn Xuất kho trước ngay khi lấy hàng ra khổi kho">Xuất kho</button>
             <label style="margin-bottom: 20px; font-size: 15px; font-weight: bold; float: right; margin-right: 2%; color: red" title="Mỗi lần xuất kho là 1Kg. Số lượng ban đầu và số lượng còn lại cũng được tính theo đơn vị Kg. Khi nhân viên nhận thấy hết nguyên liệu, nhân viên phải vào đây để cập nhật khi lấy hàng mới.">(?)</label>
             <div class="table-responsive table-bordered">
                 <table class="table" align="center">
@@ -396,7 +394,7 @@ if (isset($_SESSION["username"])) {
                                     $row00 = mysqli_fetch_array($rs00);
                                     $SLCLtmp = $row00["soLuongCL"];
                                     date_default_timezone_set('Asia/Ho_Chi_Minh');
-					                $tgXK = date('Y-m-d H:i:s');
+                                    $tgXK = date('Y-m-d H:i:s');
                                     $SLCLtmp--;
                                     $sql9 = "update tblkho set thoiGianXK = '$tgXK', soLuongCL = '$SLCLtmp' where idKho = $check";
                                     $rs9 = mysqli_query($conn, $sql9);

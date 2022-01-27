@@ -232,9 +232,6 @@ if (isset($_SESSION["username"])) {
 									$sql2	= 	"select * from tblmon where idMon = " . $row["idMon"] . "";
 									$rs2 		=	mysqli_query($conn, $sql2);
 									$row2 = mysqli_fetch_array($rs2);
-									$sql9 = "select * from tblchitiethd where idKhachhang = '$idKhachhang'";
-									$rs9 = mysqli_query($conn, $sql9);
-									$row9 = mysqli_fetch_array($rs9);
 									echo " <tr>
 								<td><input type='checkbox' class='chk_box1' name='check_list[]' value='" . $row["idlichSu"] . "'></td>
 								<td>$i</td>
@@ -242,7 +239,7 @@ if (isset($_SESSION["username"])) {
 								<td>" . $row["soluong"] . "</td>
 								<td>" . $tinhtien = $row["soluong"] * $row2["gia"] . "</td>
 								<td>" . $row["thoigian"] . "</td>
-								<td>" . $row9["daGH"] . "</td>
+								<td>" . $row["daGH"] . "</td>
 								</tr>";
 									$i++;
 								}

@@ -300,10 +300,10 @@ if (isset($_SESSION["username"])) {
     </script>
     <header>
         <div>
-            <div id="logo"><a href="./index.php"><img src="../img/logo.png"></a></div>
+            <div id="logo"><a href="./index.php" title="Trang chủ"><img src="../img/logo.png"></a></div>
             <div id="menu">
                 <ul>
-                    <li><a href="./report.php" title="Gửi thông báo đến quản trị viên để giải quyết các vấn đề.">Thông báo</a></li>
+                    <li><a href="./report.php" title="Gửi phản hồi đến quản trị viên để giải quyết các vấn đề.">Phản hồi</a></li>
                     <li><a href="./lichsu.php" title="Xem lịch sử bán hàng.">Lịch sử</a></li>
                     <li><a href="./xuatkho.php" title="Nếu nguyên liệu trong kho cần dùng hết nhanh hơn dự kiến của hệ thống, nhân viên cần phải báo xuất kho.">Xuất kho</a></li>
                     <li><a href="./information.php" title="Thông tin tài khoản.">Thông tin</a></li>
@@ -352,11 +352,7 @@ if (isset($_SESSION["username"])) {
             </div>
     </header>
     <form method="post" action="report.php">
-        <center>
-            <span style="font-size: 40px; font-weight: bold; text-align: center; font-family: 'Times New Roman', Times, serif;">Thông báo đến quản trị viên</span><br />
-        </center>
         <div id="body">
-            <br />
             <?php
             include "../include/connect.inc";
             if (isset($_POST["txtdes"])) {
@@ -372,20 +368,22 @@ if (isset($_SESSION["username"])) {
             }
             ?>
             <form id="form" name="frmLogin" method="post" action="report.php">
-                <table style="width:60%" align="center">
+                <table align="center" class="table table-striped table-bordered table-hover" style="width:80%; margin-top: 20px">
                     <tbody>
-                        <tr align="center">
-                            <td align="left">Họ tên</td>
-                            <td><input style="width: 100%;" type="text" name="txtName" id="textfield4"></td>
+                        <tr>
+                            <td colspan="2" align="center"><span style="font-weight: bold; font-size:20px; font-family: 'Times New Roman', Times, serif;">Phản hồi đến quản trị viên</span></td>
                         </tr>
                         <tr align="center">
-                            <td align="left">Vấn đề gập phải<label style="color: red">(*)</label>:</td>
-                            <td>
-                                <textarea name="txtdes" id="txtdes" rows="10" class="form-control"></textarea>
-                            </td>
+                            <td>Họ tên:</td>
+                            <td><input type="text" class="form-control" name="txtName" id="textfield4"></td>
                         </tr>
                         <tr align="center">
-                            <td colspan="2"><input type="submit" name="button" id="button" value="Gửi" onClick="checkLogin()">
+                            <td>Vấn đề gập phải<span style="color: red">(*)</span>:</td>
+                            <td><textarea name="txtdes" id="txtdes" rows="10" class="form-control"></textarea></td>
+                        </tr>
+                        <tr align="center">
+                            <td colspan="2">
+                                <input type="submit" name="button" id="button" value="Gửi" class="btn btn-primary" onClick="checkLogin()">
                             </td>
                         </tr>
                     </tbody>

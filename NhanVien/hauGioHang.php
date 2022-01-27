@@ -290,18 +290,17 @@ if (isset($_SESSION["username"])) {
 			<div id="logo"><a href="./index.php"><img src="../img/logo.png"></a></div>
 			<div id="menu">
 				<ul>
-					<li><a href="./donhang.php">Đơn hàng</a></li>
-					<li><a href="./doanhthu.php">Doanh thu</a></li>
-					<li><a href="./giohang.php">Giỏ hàng</a></li>
-					<li><a href="./information.php">Thông tin</a></li>
-					<li style="width: 157px;"><a href="../index.php">Chào: <?php include "../include/connect.inc";
-																			$sql0 = "select * from tblstaff where username = '$user'";
-																			$rs0 = mysqli_query($conn, $sql0);
-																			$row0 = mysqli_fetch_array($rs0);
-																			$hoTen = $row0["hoTen"];
-																			echo $hoTen;
-																			?></a>
-					</li>
+					<li><a href="./donhang.php" title="Đơn hàng">Đơn hàng</a></li>
+					<li><a href="./doanhthu.php" title="Doanh thu của nhân viên">Doanh thu</a></li>
+					<li><a href="./giohang.php" title="Giỏ hàng bán hàng cho nhân viên">Giỏ hàng</a></li>
+					<li><a href="./information.php" title="Thông tin nhân viên">Thông tin</a></li>
+					<li style="width: 157px;"><a href="../index.php" title="Đăng xuất">Chào: <?php include "../include/connect.inc";
+																								$sql0 = "select * from tblstaff where username = '$user'";
+																								$rs0 = mysqli_query($conn, $sql0);
+																								$row0 = mysqli_fetch_array($rs0);
+																								$hoTen = $row0["hoTen"];
+																								echo $hoTen;
+																								?></a></li>
 				</ul>
 			</div>
 			<div> <br /><br /><br />
@@ -391,12 +390,12 @@ if (isset($_SESSION["username"])) {
 								<td><input type="number" class="form-control" name="txtSoLuong" value="1"></td>
 							</tr>
 							<tr>
-								<td colspan="2"><button type="submit" class="btn btn-primary">Thêm</button><button type="reset" class="btn btn-warning" style="margin-left: 10px">Hũy</button></td>
+								<td colspan="2"><button type="submit" class="btn btn-primary" title="Thêm hàng vào giỏ hàng">Thêm vào giỏ hàng</button></td>
 							</tr>
 					</table>
 				</form>
 			</section>
-			<div >
+			<div>
 				<footer>
 					<p style="text-align: center;">掲載されているすべてのコンテンツ(記事、画像、音声データ、映像データ等)の無断転載を禁じます。<br />🄫 2021 Power by Dragon Inc</p>
 				</footer>

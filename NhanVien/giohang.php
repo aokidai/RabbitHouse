@@ -288,25 +288,25 @@ if (isset($_SESSION["username"])) {
     </script>
     <header>
         <div>
-            <div id="logo"><a href="./index.php"><img src="../img/logo.png"></a></div>
+            <div id="logo"><a href="./index.php" title="Trang chủ"><img src="../img/logo.png"></a></div>
             <div id="menu">
                 <ul>
-                    <li><a href="./donhang.php">Đơn hàng</a></li>
-                    <li><a href="./doanhthu.php">Doanh thu</a></li>
-                    <li><a href="./giohang.php">Giỏ hàng</a></li>
-                    <li><a href="./information.php">Thông tin</a></li>
-                    <li style="width: 157px;"><a href="../index.php">Chào: <?php include "../include/connect.inc";
-                                                                            $sql0 = "select * from tblstaff where username = '$user'";
-                                                                            $rs0 = mysqli_query($conn, $sql0);
-                                                                            $row0 = mysqli_fetch_array($rs0);
-                                                                            $hoTen = $row0["hoTen"];
-                                                                            echo $hoTen;
-                                                                            ?></a></li>
+                    <li><a href="./donhang.php" title="Đơn hàng">Đơn hàng</a></li>
+                    <li><a href="./doanhthu.php" title="Doanh thu của nhân viên">Doanh thu</a></li>
+                    <li><a href="./giohang.php" title="Giỏ hàng bán hàng cho nhân viên">Giỏ hàng</a></li>
+                    <li><a href="./information.php" title="Thông tin nhân viên">Thông tin</a></li>
+                    <li style="width: 157px;"><a href="../index.php" title="Đăng xuất">Chào: <?php include "../include/connect.inc";
+                        $sql0 = "select * from tblstaff where username = '$user'";
+                        $rs0 = mysqli_query($conn, $sql0);
+                        $row0 = mysqli_fetch_array($rs0);
+                        $hoTen = $row0["hoTen"];
+                        echo $hoTen;
+                    ?></a></li>
                 </ul>
             </div>
             <div> <br /><br /><br />
                 <div align="center">
-                    <form action="index2.php" method="GET">
+                    <form action="index.php" method="GET">
                         <input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
                         <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
                     </form>
@@ -447,12 +447,17 @@ if (isset($_SESSION["username"])) {
                                     $sql5 = "insert into tblchitiethd(idStaff, tongSL, tongTien, ngayThang, diaChiGH, daGH, idMon) values ('$idKhachhang2', '$tongSL', '$thanhTien1', '$time_act', '$diaChi', '$giaoHang', '$idMon1')";
                                     $rs5 = mysqli_query($conn, $sql5);
                                     if ($rs5) {
+                                        $sql44 = "select max(idChiTiet) as idCTHD from tblchitiethd";
+                                        $rs44 = mysqli_query($conn, $sql44);
+                                        $row44 = mysqli_fetch_array($rs44);
+                                        $idCTHD = $row44["idCTHD"];
                                         $sql20 = "select * from tblhoadon where idStaff = '$idKhachhang'";
                                         $rs20 = mysqli_query($conn, $sql20);
                                         while ($row20 = mysqli_fetch_array($rs20)) {
                                             $thanhTien4 = $row20["ThanhTien"];
                                             $idMon4 = $row20["idMon"];
-                                            $sql8 = "insert into tbllichsu(idStaff, idMon, soluong, gia, thoigian) values ('$idKhachhang2', '$idMon4', '$tongSL', '$thanhTien4', '$time_act')";
+                                            $trangThaiGHtmp = "X";
+                                            $sql8 = "insert into tbllichsu(idStaff, idMon, soluong, gia, thoigian, daGH, idChitiet) values ('$idKhachhang2', '$idMon4', '$tongSL', '$thanhTien4', '$time_act', '$trangThaiGHtmp', '$idCTHD')";
                                             $rs8 = mysqli_query($conn, $sql8);
                                             if ($rs8) {
                                                 $sql6 = "delete from tblhoadon where idStaff = '$idKhachhang'";
@@ -473,8 +478,8 @@ if (isset($_SESSION["username"])) {
 
                             ?>
                             <td colspan="6" align="center">
-                                <input type="submit" class="btn btn-success" style="background-color: red" name="muahang" value="Mua hàng">
-                                <input type="submit" class="btn btn-success" name="xoahang" value="Xóa hàng">
+                            <input type="submit" class="btn btn-success" style="background-color: red" name="muahang" title="Mua hàng và thanh toán" value="Mua hàng">
+										<input type="submit" class="btn btn-success" name="xoahang" value="Xóa hàng" title="Chọn vào những món muốn xóa và nhấn Xóa hàng">
                             </td>
                         </tr>
                     </tbody>
@@ -490,7 +495,7 @@ if (isset($_SESSION["username"])) {
         </script>
     </section>
     </section>
-    <div style="padding-top: 70%;">
+    <div style="padding-top: 15%;">
         <footer>
             <p style="text-align: center;">掲載されているすべてのコンテンツ(記事、画像、音声データ、映像データ等)の無断転載を禁じます。<br />🄫 2021 Power by Dragon Inc</p>
         </footer>

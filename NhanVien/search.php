@@ -255,14 +255,15 @@ if (isset($_SESSION["username"])) {
     }
 </style>
 <script type="text/javascript">
-		const reloadtButton = document.querySelector("#reload");
-		// Reload everything:
-		function reload() {
-			reload = location.reload();
-		}
-		// Event listeners for reload
-		reloadButton.addEventListener("click", reload, false);
-	</script>
+    const reloadtButton = document.querySelector("#reload");
+    // Reload everything:
+    function reload() {
+        reload = location.reload();
+    }
+    // Event listeners for reload
+    reloadButton.addEventListener("click", reload, false);
+</script>
+
 <body>
     <?php $user = $username ?>
     <!-- Messenger Plugin chat Code -->
@@ -295,34 +296,34 @@ if (isset($_SESSION["username"])) {
     </script>
     <header>
         <div>
-            <div id="logo"><a href="./index.php"><img src="../img/logo.png"></a></div>
+            <div id="logo"><a href="./index.php" title="Trang chủ"><img src="../img/logo.png"></a></div>
             <div id="menu">
                 <ul>
-                    <li><a href="./donhang.php">Đơn hàng</a></li>
-                    <li><a href="./doanhthu.php">Doanh thu</a></li>
-                    <li><a href="./giohang.php">Giỏ hàng</a></li>
-                    <li><a href="./information.php">Thông tin</a></li>
-                    <li style="width: 157px;"><a href="../index.php">Chào: <?php include "../include/connect.inc";
-                                                                            $sql0 = "select * from tblstaff where username = '$user'";
-                                                                            $rs0 = mysqli_query($conn, $sql0);
-                                                                            $row0 = mysqli_fetch_array($rs0);
-                                                                            $hoTen = $row0["hoTen"];
-                                                                            echo $hoTen;
-                                                                            ?></a></li>
+                    <li><a href="./donhang.php" title="Đơn hàng">Đơn hàng</a></li>
+                    <li><a href="./doanhthu.php" title="Doanh thu của nhân viên">Doanh thu</a></li>
+                    <li><a href="./giohang.php" title="Giỏ hàng bán hàng cho nhân viên">Giỏ hàng</a></li>
+                    <li><a href="./information.php" title="Thông tin nhân viên">Thông tin</a></li>
+                    <li style="width: 157px;"><a href="../index.php" title="Đăng xuất">Chào: <?php include "../include/connect.inc";
+                                                                                                $sql0 = "select * from tblstaff where username = '$user'";
+                                                                                                $rs0 = mysqli_query($conn, $sql0);
+                                                                                                $row0 = mysqli_fetch_array($rs0);
+                                                                                                $hoTen = $row0["hoTen"];
+                                                                                                echo $hoTen;
+                                                                                                ?></a></li>
                 </ul>
             </div>
             <div> <br /><br /><br />
                 <div align="center">
-                <?php
+                    <?php
                     include "../include/connect.inc";
                     $idMon = $_GET["id"];
                     $sql = "select tenMon from tblmon where idMon = $idMon";
                     $rs = mysqli_query($conn, $sql);
                     $row = mysqli_fetch_array($rs);
                     $tenMon = $row["tenMon"];
-                ?>
+                    ?>
                     <form action="index.php" method="GET">
-                        <input id="searchbar" name="txtsearchMon" type="text" placeholder="<?=$tenMon?>">
+                        <input id="searchbar" name="txtsearchMon" type="text" placeholder="<?= $tenMon ?>">
                         <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
                     </form>
                 </div>
@@ -352,43 +353,35 @@ if (isset($_SESSION["username"])) {
                 ?>
             </div>
     </header>
-  <article>
-	  <input  type="hidden" class="form-control" name="txtid" value="<?=$_GET["id"]?>">
-  <section id="info" align="center" style="margin-bottom: 20%">
-		<span>Món tìm kiếm</span>
-			<?php
-				$sql		=	"select * from tblmon where idMon = $idMon and conHang = 'Còn' limit 0, 12";
-				$rs 		=	mysqli_query($conn, $sql);												   
-				while($row=mysqli_fetch_array($rs)){	
-			?>
-			<div id="mon" style="margin-left: 40%">
-				<p id="tenMon"><a href="#" values="<?=$row["tenMon"]?>"><?=$row["tenMon"]?></a></p>
-				<img id="hinhAnh" src="../uploads/<?=$row["hinhAnh"]?>">
-				<p id="donGia">Đơn giá: <span><?=$row["gia"]?>VND</span></p>
-				<a href='hauGioHang.php?id=<?=$row["idMon"]?>'><img id="nutmuahang" src="../img/Chonmua.png"></a>
-			</div>
-		<?php }?>
-	   </br></br> 
-	</section>  
-	  </br></br>
-  <div id="info1" style="margin-top: 15px">
-	   </br></br>
-                <span style="margin-top: 200px">Twitter</span>
-                <div id="cont-footer-twitter" style="padding: 30px; float:left; margin-left:17%">
-                    <div class="twitter-widget" style="text-align: center;">
-                        <a class="twitter-timeline" style="text-align: center"; data-height="300" data-width="800" data-theme="white" data-link-color="#ef3488" data-border-color="#ef3488" data-chrome="noheader nofooter noborders transparent" href="https://twitter.com/aokidaisuke91">ツイートの青木大介</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                    </div>
-                </div>
-                <ul>
-                    <li><a href="https://twitter.com/intent/tweet?text=%E9%9D%92%E6%9C%A8%E5%A4%A7%E4%BB%8B%E3%81%AE%E5%85%AC%E5%BC%8F%E3%82%B5%E3%82%A4%E3%83%88%E3%81%A7%E3%81%99%E3%80%82%0D%0A&%E3%81%BF%E3%82%93%E3%81%AA%E3%81%95%E3%82%93%E3%82%88%E3%82%8D%E3%81%97%E3%81%8F%EF%BD%9E&hashtags=&related=" title="Twitter"><img src="./img/twitter.png"></a></li>
-                    <li><a href="https://social-plugins.line.me/lineit/share?text=%E9%9D%92%E6%9C%A8%E5%A4%A7%E4%BB%8B%E3%81%AE%E5%85%AC%E5%BC%8F%E3%82%B5%E3%82%A4%E3%83%88%E3%81%A7%E3%81%99%E3%80%82" title="Line"><img src="./img/line.png"></a></li>
-                    <li><a href="#" title="Facebook"><img src="./img/facebook.png"></a></li>
-                </ul>
-            </div>
-        </article>
+    <article>
+        <input type="hidden" class="form-control" name="txtid" value="<?= $_GET["id"] ?>">
+        <section id="info" align="center" style="margin-bottom: 20%">
+            <span>Món tìm kiếm</span>
+            <?php
+            $sql        =    "select * from tblmon where idMon = $idMon and conHang = 'Còn' limit 0, 12";
+            $rs         =    mysqli_query($conn, $sql);
+            while ($row = mysqli_fetch_array($rs)) {
+            ?>
+                <table align="center">
+                    <tr align="center">
+                        <td>
+                            <div id="mon" style="margin-top: 20px">
+                                <p id="tenMon"><a href="#" values="<?= $row["tenMon"] ?>"><?= $row["tenMon"] ?></a></p>
+                                <img id="hinhAnh" src="../uploads/<?= $row["hinhAnh"] ?>">
+                                <p id="donGia">Đơn giá: <span><?= $row["gia"] ?>VND</span></p>
+                                <a href='hauGioHang.php?id=<?= $row["idMon"] ?>' title="Thêm vào giỏ hàng"><img id="nutmuahang" src="../img/Chonmua.png"></a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            <?php } ?>
+        </section>
+    </article>
+    <div>
         <footer>
-            <p style="text-align: center;">掲載されているすべてのコンテンツ(記事、画像、音声データ、映像データ等)の無断転載を禁じます。<br/>🄫 2021 Power by Dragon Inc</p>
+            <p style="text-align: center;">掲載されているすべてのコンテンツ(記事、画像、音声データ、映像データ等)の無断転載を禁じます。<br />🄫 2021 Power by Dragon Inc</p>
         </footer>
-        
+    </div>
 </body>
+
 </html>

@@ -304,20 +304,20 @@ if (isset($_SESSION["username"])) {
     </script>
     <header>
         <div>
-            <div id="logo"><a href="./index.php"><img src="../img/logo.png"></a></div>
+            <div id="logo"><a href="./index.php" title="Trang chủ"><img src="../img/logo.png"></a></div>
             <div id="menu">
                 <ul>
-                    <li><a href="./report.php" title="Gửi thông báo đến quản trị viên để giải quyết các vấn đề.">Thông báo</a></li>
+                    <li><a href="./report.php" title="Gửi phản hồi đến quản trị viên để giải quyết các vấn đề.">Phản hồi</a></li>
                     <li><a href="./lichsu.php" title="Xem lịch sử bán hàng.">Lịch sử</a></li>
                     <li><a href="./xuatkho.php" title="Nếu nguyên liệu trong kho cần dùng hết nhanh hơn dự kiến của hệ thống, nhân viên cần phải báo xuất kho.">Xuất kho</a></li>
                     <li><a href="./information.php" title="Thông tin tài khoản.">Thông tin</a></li>
                     <li style="width: 157px;"><a href="../index.php" title="Đăng xuất.">Chào: <?php include "../include/connect.inc";
-                                                                            $sql0 = "select * from tblstaff where username = '$user'";
-                                                                            $rs0 = mysqli_query($conn, $sql0);
-                                                                            $row0 = mysqli_fetch_array($rs0);
-                                                                            $hoTen = $row0["hoTen"];
-                                                                            echo $hoTen;
-                                                                            ?></a></li>
+                                                                                                $sql0 = "select * from tblstaff where username = '$user'";
+                                                                                                $rs0 = mysqli_query($conn, $sql0);
+                                                                                                $row0 = mysqli_fetch_array($rs0);
+                                                                                                $hoTen = $row0["hoTen"];
+                                                                                                echo $hoTen;
+                                                                                                ?></a></li>
                 </ul>
             </div>
             <div> <br /><br /><br />
@@ -356,56 +356,57 @@ if (isset($_SESSION["username"])) {
     </header>
     <section id="info" align="center">
         <form method="post" action="information.php">
-            <span>Thông tin tài khoản của <?= $hoTen ?></span><br />
             <div id="body">
-		<br />
-		<?php
-		if (isset($_POST["txtusername"])) {
-			$tenNV	= $_POST["txtName"];
-			$soDT = $_POST["txtSDT"];
-			$username	=	$_POST["txtusername"];
-			$sql			=	"update tblstaff set  tenNV= '$tenNV', SDT='$soDT', username='$username' where idStaff='$idStaff'";
-			$rs 			=	mysqli_query($conn, $sql);
-			if ($rs)
-				echo "<script>alert('Lưu thành công!')</script>";
-			echo "<script>window.location.href='information.php'</script>";
-		} else {
-			$sql		=	"select * from tblstaff where idStaff='$idStaff'";
-			$rs 		=	mysqli_query($conn, $sql);
-			$row		=	mysqli_fetch_array($rs);
-			$tenNV	=	$row["hoTen"];
-			$soDT = $row["soDT"];
-			$username = $row["username"];
-			$diaChi = $row["diachi"];
-		}
-		?>
-		<center>
-			<form id="form" name="frmLogin" method="post" action="information.php">
-				<table width="401">
-					<tbody>
-						<tr align="center">
-							<td width="136">Họ tên<label style="color: red">(*)</label>:</td>
-							<td width="249"><input type="text" name="txtName" id="textfield4" value="<?= $tenNV ?>"></td>
-						</tr>
-						<tr align="center">
-							<td>Số ĐT<label style="color: red">(*)</label>:</td>
-							<td><input type="number" name="txtSDT" id="textfield5" value="<?= $soDT ?>"></td>
-						</tr>
-						<tr align="center">
-							<td width="136">Tài khoản<label style="color: red">(*)</label>:</td>
-							<td width="249"><input type="text" name="txtusername" id="textfield" value="<?= $username ?>"></td>
-						</tr>
-						<tr align="center">
-							<td colspan="2"><input type="button" name="button" id="button" value="Lưu" onClick="checkLogin()">
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2"><a href="./change-password.php"><label style="float: right; color: red"><i>Đổi mật khẩu?</i></label></a></td>
-						</tr>
-					</tbody>
-				</table>
-		</center>
-		</form>
+                <?php
+                if (isset($_POST["txtusername"])) {
+                    $tenNV    = $_POST["txtName"];
+                    $soDT = $_POST["txtSDT"];
+                    $username    =    $_POST["txtusername"];
+                    $sql            =    "update tblstaff set  tenNV= '$tenNV', SDT='$soDT', username='$username' where idStaff='$idStaff'";
+                    $rs             =    mysqli_query($conn, $sql);
+                    if ($rs)
+                        echo "<script>alert('Lưu thành công!')</script>";
+                    echo "<script>window.location.href='information.php'</script>";
+                } else {
+                    $sql        =    "select * from tblstaff where idStaff='$idStaff'";
+                    $rs         =    mysqli_query($conn, $sql);
+                    $row        =    mysqli_fetch_array($rs);
+                    $tenNV    =    $row["hoTen"];
+                    $soDT = $row["soDT"];
+                    $username = $row["username"];
+                    $diaChi = $row["diachi"];
+                }
+                ?>
+                <center>
+                    <form id="form" name="frmLogin" method="post" action="information.php">
+                        <table class="table table-striped table-bordered table-hover" style="width:50%; margin-top: 20px">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" align="center"><span style="font-weight: bold; font-size:20px; font-family: 'Times New Roman', Times, serif;">Thông tin tài khoản của <?= $hoTen ?></span></td>
+                                </tr>
+                                <tr align="center">
+                                    <td>Họ tên<label style="color: red">(*)</label>:</td>
+                                    <td><input type="text" name="txtName" class="form-control" id="textfield4" value="<?= $tenNV ?>"></td>
+                                </tr>
+                                <tr align="center">
+                                    <td>Số ĐT<label style="color: red">(*)</label>:</td>
+                                    <td><input type="number" name="txtSDT" class="form-control" id="textfield5" value="<?= $soDT ?>"></td>
+                                </tr>
+                                <tr align="center">
+                                    <td>Tài khoản<label style="color: red">(*)</label>:</td>
+                                    <td><input type="text" name="txtusername" class="form-control" id="textfield" value="<?= $username ?>"></td>
+                                </tr>
+                                <tr align="center">
+                                    <td colspan="2"><input type="button" name="button" class="btn btn-primary" id="button" value="Lưu" onClick="checkLogin()">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><a href="./change-password.php"><label style="float: right; color: red"><i>Đổi mật khẩu?</i></label></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </center>
+        </form>
     </section>
     <div style="padding-top: 5%">
         <footer>

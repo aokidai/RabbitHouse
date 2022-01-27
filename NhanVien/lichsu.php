@@ -304,10 +304,10 @@ if (isset($_SESSION["username"])) {
     </script>
     <header>
         <div>
-            <div id="logo"><a href="./index.php"><img src="../img/logo.png"></a></div>
+            <div id="logo"><a href="./index.php" title="Trang chủ"><img src="../img/logo.png"></a></div>
             <div id="menu">
                 <ul>
-                    <li><a href="./report.php" title="Gửi thông báo đến quản trị viên để giải quyết các vấn đề.">Thông báo</a></li>
+                    <li><a href="./report.php" title="Gửi phản hồi đến quản trị viên để giải quyết các vấn đề.">Phản hồi</a></li>
                     <li><a href="./lichsu.php" title="Xem lịch sử bán hàng.">Lịch sử</a></li>
                     <li><a href="./xuatkho.php" title="Nếu nguyên liệu trong kho cần dùng hết nhanh hơn dự kiến của hệ thống, nhân viên cần phải báo xuất kho.">Xuất kho</a></li>
                     <li><a href="./information.php" title="Thông tin tài khoản.">Thông tin</a></li>
@@ -382,9 +382,6 @@ if (isset($_SESSION["username"])) {
 							  $sql2	= 	"select * from tblmon where idMon = ".$row["idMon"]."";
 									$rs2 		=	mysqli_query($conn, $sql2);
 									$row2=mysqli_fetch_array($rs2);
-							  $sql9 = "select * from tblchitiethd where idStaff = '$idStaff'";
-							  $rs9 = mysqli_query($conn, $sql9);
-							  $row9 = mysqli_fetch_array($rs9);
 							echo" <tr>
 								<td><input type='checkbox' class='chk_box1' name='check_list[]' value='".$row["idlichSu"]."'></td>
 								<td>$i</td>
@@ -392,7 +389,7 @@ if (isset($_SESSION["username"])) {
 								<td>".$row["soluong"]."</td>
 								<td>".$tinhtien=$row["soluong"]*$row2["gia"]."</td>
 								<td>".$row["thoigian"]."</td>
-								<td>".$row9["daGH"]."</td>
+								<td>".$row["daGH"]."</td>
 								</tr>";	
 						   $i++;
 						  }

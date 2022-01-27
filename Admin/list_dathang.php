@@ -99,7 +99,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1 class="page-header">DANH SÁCH ĐẠT HÀNG</h1>
+                            <h1 class="page-header">DANH SÁCH ĐẶT HÀNG</h1>
                         </div>
 						<button type="submit" class="btn btn-success" name="giaohang" style="margin-bottom: 20px" >Giao hàng</button>
 						<button type="submit" class="btn btn-success" name="xoahang" style="margin-bottom: 20px; background-color: red" >Xóa hàng</button>
@@ -182,6 +182,8 @@
 														foreach($_POST['check_list'] as $check) {
 																$sql9 = "update tblchitiethd set daGH = 'O' where idChiTiet = $check";
 																$rs9 = mysqli_query($conn, $sql9);
+																$sql10 = "update tbllichsu set daGH = 'O' where idChitiet = '$check'";
+																$rs10 = mysqli_query($conn, $sql10);
 																date_default_timezone_set('Asia/Ho_Chi_Minh');
 																$time_act = date('Y-m-d');
 																$sql15 = "insert into tbldoanhthu (idChiTiet, ngay, thanhTien, tongSL) values ( '$idChiTiet', '$time_act', '$thanhTien', '$soLuong')";
