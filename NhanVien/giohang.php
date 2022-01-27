@@ -296,12 +296,12 @@ if (isset($_SESSION["username"])) {
                     <li><a href="./giohang.php" title="Giỏ hàng bán hàng cho nhân viên">Giỏ hàng</a></li>
                     <li><a href="./information.php" title="Thông tin nhân viên">Thông tin</a></li>
                     <li style="width: 157px;"><a href="../index.php" title="Đăng xuất">Chào: <?php include "../include/connect.inc";
-                        $sql0 = "select * from tblstaff where username = '$user'";
-                        $rs0 = mysqli_query($conn, $sql0);
-                        $row0 = mysqli_fetch_array($rs0);
-                        $hoTen = $row0["hoTen"];
-                        echo $hoTen;
-                    ?></a></li>
+                                                                                                $sql0 = "select * from tblstaff where username = '$user'";
+                                                                                                $rs0 = mysqli_query($conn, $sql0);
+                                                                                                $row0 = mysqli_fetch_array($rs0);
+                                                                                                $hoTen = $row0["hoTen"];
+                                                                                                echo $hoTen;
+                                                                                                ?></a></li>
                 </ul>
             </div>
             <div> <br /><br /><br />
@@ -408,16 +408,15 @@ if (isset($_SESSION["username"])) {
                                     $thanhTien111 = $row11["ThanhTien"];
                                     $sql00 = "select * from tblkhuyenmai";
                                     $rs00 = mysqli_query($conn, $sql00);
-                                    while ($row00 = mysqli_fetch_array($rs00)) {
-                                        $TGBDtmp = $row00["thoiGianBD"];
-                                        $TGKTtmp = $row00["thoiGianKT"];
-                                        $khuyenMai = $row00["khuyenMai"];
-                                        date_default_timezone_set('Asia/Ho_Chi_Minh');
-                                        $time_act = date('Y-m-d H:i:s');
-                                        if ($TGBDtmp <= $time_act && $time_act <= $TGKTtmp) {
-                                            $thanhTien11 = $thanhTien11 + $thanhTien111 - ($khuyenMai * 100);
-                                        } else $thanhTien11 = $thanhTien11 + $thanhTien111;
-                                    }
+                                    $row00 = mysqli_fetch_array($rs00);
+                                    $TGBDtmp = $row00["thoiGianBD"];
+                                    $TGKTtmp = $row00["thoiGianKT"];
+                                    $khuyenMai = $row00["khuyenMai"];
+                                    date_default_timezone_set('Asia/Ho_Chi_Minh');
+                                    $time_act = date('Y-m-d H:i:s');
+                                    if ($TGBDtmp <= $time_act && $time_act <= $TGKTtmp) {
+                                        $thanhTien11 = $thanhTien11 + $thanhTien111 - ($khuyenMai * 100);
+                                    } else $thanhTien11 = $thanhTien11 + $thanhTien111;
                                 }
                                 echo $thanhTien11;
                                 ?>
@@ -478,8 +477,8 @@ if (isset($_SESSION["username"])) {
 
                             ?>
                             <td colspan="6" align="center">
-                            <input type="submit" class="btn btn-success" style="background-color: red" name="muahang" title="Mua hàng và thanh toán" value="Mua hàng">
-										<input type="submit" class="btn btn-success" name="xoahang" value="Xóa hàng" title="Chọn vào những món muốn xóa và nhấn Xóa hàng">
+                                <input type="submit" class="btn btn-success" style="background-color: red" name="muahang" title="Mua hàng và thanh toán" value="Mua hàng">
+                                <input type="submit" class="btn btn-success" name="xoahang" value="Xóa hàng" title="Chọn vào những món muốn xóa và nhấn Xóa hàng">
                             </td>
                         </tr>
                     </tbody>

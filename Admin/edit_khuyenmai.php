@@ -44,9 +44,23 @@ else
 </head>
 
 <body>
-
+    <?php
+    $user00tmp = $username;
+    $id = $_GET["id"];
+    include "../include/connect.inc";
+    date_default_timezone_set('Asia/Ho_Chi_Minh');
+    $time_act = date('Y-m-d H:i:s');
+    $sql0 = "select thoiGianBD, thoiGianKT from tblkhuyenmai where idKM = '$id'";
+    $rs0 = mysqli_query($conn, $sql0);
+    $row0 = mysqli_fetch_array($rs0);
+    $TGBDtmp = $row0["thoiGianBD"];
+    $TGKTtmp = $row0["thoiGianKT"];
+    if($TGBDtmp <= $time_act && $time_act <= $TGKTtmp || $TGKTtmp <= $time_act){
+        echo "<script>alert('Không thể sửa vì đang hoặc đã qua thời gian khuyến mãi')</script>";
+        echo "<script>window.location.href='list_khuyenmai.php'</script>";
+    }
+    ?>
     <div id="wrapper">
-
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="navbar-header">
@@ -63,8 +77,6 @@ else
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="account.php">
                         <?php
-                        $user00tmp = $username;
-                        include "../include/connect.inc";
                         $sql0000 = "select hoTen from tblusers where username = '$user00tmp'";
                         $rs0000 = mysqli_query($conn, $sql0000);
                         $row0000 = mysqli_fetch_array($rs0000);

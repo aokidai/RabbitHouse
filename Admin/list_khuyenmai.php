@@ -148,7 +148,6 @@ else
                                             foreach ($_POST['check_list'] as $check) {
                                                 date_default_timezone_set('Asia/Ho_Chi_Minh');
 										        $time_act = date('Y-m-d H:i:s');
-                                                echo "<script>alert('$time_act')</script>";
                                                 $sql0 = "select thoiGianBD, thoiGianKT from tblkhuyenmai where idKM = '$check'";
                                                 $rs0 = mysqli_query($conn, $sql0);
                                                 $row0 = mysqli_fetch_array($rs0);

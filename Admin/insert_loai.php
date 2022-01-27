@@ -109,19 +109,14 @@ else
                 ?>
                 <form method="post">
                     <table class="table table-striped table-bordered table-hover" style="width:50%" align="center">
-
                         <tbody>
                             <tr>
-
                                 <td>Loại món<span style="color: red">(*)</span>:</td>
                                 <td><input class="form-control" name="txtLoai"></td>
                             </tr>
-                            <tr>
-
-                                <td></td>
-                                <td><button type="submit" class="btn btn-primary">Thêm</button> </td>
+                            <tr align="center">
+                                <td colspan="2"><button type="submit" class="btn btn-primary">Thêm</button> </td>
                             </tr>
-
                     </table>
                 </form>
                 <!-- /.row -->

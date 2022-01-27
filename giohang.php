@@ -275,16 +275,15 @@ if (isset($_SESSION["username"])) {
 											$thanhTien111 = $row11["ThanhTien"];
 											$sql00 = "select * from tblkhuyenmai";
 											$rs00 = mysqli_query($conn, $sql00);
-											while ($row00 = mysqli_fetch_array($rs00)) {
-												$TGBDtmp = $row00["thoiGianBD"];
-												$TGKTtmp = $row00["thoiGianKT"];
-												$khuyenMai = $row00["khuyenMai"];
-												date_default_timezone_set('Asia/Ho_Chi_Minh');
-												$time_act = date('Y-m-d H:i:s');
-												if ($TGBDtmp <= $time_act && $time_act <= $TGKTtmp) {
-													$thanhTien11 = $thanhTien11 + $thanhTien111 - ($khuyenMai * 100);
-												} else $thanhTien11 = $thanhTien11 + $thanhTien111;
-											}
+											$row00 = mysqli_fetch_array($rs00);
+											$TGBDtmp = $row00["thoiGianBD"];
+											$TGKTtmp = $row00["thoiGianKT"];
+											$khuyenMai = $row00["khuyenMai"];
+											date_default_timezone_set('Asia/Ho_Chi_Minh');
+											$time_act = date('Y-m-d H:i:s');
+											if ($TGBDtmp <= $time_act && $time_act <= $TGKTtmp) {
+												$thanhTien11 = $thanhTien11 + $thanhTien111 - ($khuyenMai * 100);
+											} else $thanhTien11 = $thanhTien11 + $thanhTien111;
 										}
 										echo $thanhTien11;
 										?>
