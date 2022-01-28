@@ -258,7 +258,14 @@ if (isset($_SESSION["username"])) {
     </div>
   </article>
   <footer>
-    <p style="text-align: center;">掲載されているすべてのコンテンツ(記事、画像、音声データ、映像データ等)の無断転載を禁じます。<br />🄫 2021 Power by Dragon Inc</p>
+   <div style="text-align: center;">
+        <p>Liên hệ: Tập đoàn công nghệ Dragon Inc<br />
+          〒542-0081 3-1 Minamisenba, Chuo-ku, Osaka-shi, Osaka<br />
+          Tel/Fax: 03-6472-xxxx<br />
+          Mobile: 090-3176-4xxx<br />
+          E-mail: info@dragoninc.co.jp</p>
+        <p>🄫 2021 Power by Dragon Inc</p>
+      </div>
   </footer>
 
 </body>
