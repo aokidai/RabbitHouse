@@ -220,9 +220,10 @@ if (isset($_SESSION["username"])) {
 					}
 				}
 				?>
-				<br /><br />
 				<form method="post" action="giohang.php">
-
+					<div style="float: left; margin-bottom: 10px; margin-left: 10px;">
+						<input type="submit" class="btn btn-success" name="xoahang" value="Xóa hàng" title="Chọn vào những món muốn xóa và nhấn Xóa hàng">
+					</div>
 					<div class="table-responsive table-bordered">
 						<table class="table" align="center">
 							<thead>
@@ -344,8 +345,7 @@ if (isset($_SESSION["username"])) {
 
 									?>
 									<td colspan="6" align="center">
-										<input type="submit" class="btn btn-success" style="background-color: red" name="muahang" title="Mua hàng và thanh toán" value="Mua hàng">
-										<input type="submit" class="btn btn-success" name="xoahang" value="Xóa hàng" title="Chọn vào những món muốn xóa và nhấn Xóa hàng">
+										<input type="submit" class="btn btn-success" style="background-color: red" name="muahang" title="Mua hàng và thanh toán cho nhân viên giao hàng" value="Mua hàng">
 									</td>
 								</tr>
 							</tbody>
@@ -377,7 +377,7 @@ if (isset($_SESSION["username"])) {
 		</article>
 		<footer>
 			<div style="text-align: center;">
-        <p>Liên hệ: Tập đoàn công nghệ Dragon Inc<br />
+        <p>Liên hệ: Cafe Rabbit House X Dragon Inc<br />
           〒542-0081 3-1 Minamisenba, Chuo-ku, Osaka-shi, Osaka<br />
           Tel/Fax: 03-6472-xxxx<br />
           Mobile: 090-3176-4xxx<br />

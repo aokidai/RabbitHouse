@@ -44,7 +44,14 @@ else
 </head>
 
 <body>
-
+    <?php
+    $user00tmp = $username;
+    include "../include/connect.inc";
+    date_default_timezone_set('Asia/Ho_Chi_Minh');
+    $time_act = date('Y-m-d H:i:s');
+    $sql0 = "delete from tblkhuyenmai where thoiGianKT <= '$time_act'";
+    $rs0 = mysqli_query($conn, $sql0);
+    ?>
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -63,8 +70,6 @@ else
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="account.php">
                         <?php
-                        $user00tmp = $username;
-                        include "../include/connect.inc";
                         $sql0000 = "select hoTen from tblusers where username = '$user00tmp'";
                         $rs0000 = mysqli_query($conn, $sql0000);
                         $row0000 = mysqli_fetch_array($rs0000);

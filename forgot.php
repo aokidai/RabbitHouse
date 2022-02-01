@@ -332,7 +332,7 @@ session_start();
       </form>
       <footer>
        <div style="text-align: center;">
-        <p>Liên hệ: Tập đoàn công nghệ Dragon Inc<br />
+        <p>Liên hệ: Cafe Rabbit House X Dragon Inc<br />
           〒542-0081 3-1 Minamisenba, Chuo-ku, Osaka-shi, Osaka<br />
           Tel/Fax: 03-6472-xxxx<br />
           Mobile: 090-3176-4xxx<br />
