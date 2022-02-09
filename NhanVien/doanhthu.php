@@ -3,6 +3,7 @@ session_start();
 if (isset($_SESSION["username"])) {
     $username    =    $_SESSION["username"];
     $idKhachhang = $_SESSION["idStaff"];
+    unset($_SESSION["ThoiGian"]);
 } else
     header("location:../login.php");
 ?>
@@ -399,6 +400,7 @@ if (isset($_SESSION["username"])) {
                         include("../include/connect.inc");
                         if (isset($_POST['xemDS'])) {
                             $tmp = $_POST['ThoiGian'];
+                            $_SESSION["ThoiGian"] = $tmp;
                             $TongTien = 0;
                             $sql00 = "select idChiTiet from tblchitiethd where idStaff = '$idStaff'";
                             $rs00 = mysqli_query($conn, $sql00);
@@ -430,6 +432,11 @@ if (isset($_SESSION["username"])) {
                             error_reporting(E_ERROR | E_PARSE);
                             echo $TongTien;
                             ?>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="5">
+                            <label style="background-color: #f2f2f2; width: 150px; border-radius: 10px;"><a href="./export_doanhthu.php">🖨️ In doanh thu</a></label>
                         </th>
                     </tr>
                 </table>
