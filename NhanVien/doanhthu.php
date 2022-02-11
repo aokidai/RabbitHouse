@@ -436,7 +436,7 @@ if (isset($_SESSION["username"])) {
                     </tr>
                     <tr>
                         <th colspan="5">
-                            <label style="background-color: #f2f2f2; width: 150px; border-radius: 10px;"><a href="./export_doanhthu.php">🖨️ In doanh thu</a></label>
+                            <label style="background-color: #f2f2f2; width: 150px; border-radius: 10px;"><a href="./export_doanhthu.php">🖨️ Xuất Excel</a></label>
                         </th>
                     </tr>
                 </table>

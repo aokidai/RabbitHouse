@@ -9,8 +9,12 @@ if (isset($_SESSION["username"])) {
 $user = $username;
 include "../include/connect.inc";
 
+$sql5 = "select hoTen from tblstaff where username = '$user'";
+$rs5 = mysqli_query($conn, $sql5);
+$row5 = mysqli_fetch_array($rs5);
+$hoten = $row5["hoTen"];
 $columnHeader = '';  
-$columnHeader = "Date" . "\t" . "Quantily" . "\t" . "Turnover" . "\t";
+$columnHeader = "Doanh Thu Report" . "\n" . "$user" . "\t" . "$thoiGian" . "\n" . "Date" . "\t" . "Quantily" . "\t" . "Turnover" . "\t";
 $setData = ''; 
 
 $sql = "select idChiTiet from tblchitiethd where idStaff = '$idKhachhang'";
@@ -29,10 +33,10 @@ while($row = mysqli_fetch_array($rs)){
     }  
 }
 
-header("Content-type: application/octet-stream");  
+header("Content-type: application/octet-stream; charset=UTF-8");  
 header("Content-Disposition: attachment; filename=RabbitHouse_Report_DoanhThu.xls");  
 header("Pragma: no-cache");  
 header("Expires: 0");  
-  
+//echo "\xEF\xBB\xBF"; // UTF-8 BOM
 echo ucwords($columnHeader) . "\n" . $setData . "\n";  
 ?>

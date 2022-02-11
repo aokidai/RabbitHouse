@@ -14,7 +14,7 @@ else
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Quản trị Rabbit House</title>
     <link rel="icon" type="image/png" sizes="32x16" href="../img/rabbithouse.png">
     <!-- Bootstrap Core CSS -->
@@ -185,6 +185,11 @@ else
                                     </th>
                                 </tr>
                             </tbody>
+                            <tr align="center">
+                                <th colspan="9">
+                                    <center><label style="background-color: #f2f2f2; width: 150px; border-radius: 10px;"><a href="./export_kho.php">🖨️ Xuất Excel</a></label></center>
+                                </th>
+                            </tr>
                         </table>
                     </div>
                     <!-- /.row -->
