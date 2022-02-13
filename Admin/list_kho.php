@@ -102,8 +102,9 @@ else
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 class="page-header">DANH SÁCH HÀNG HÓA TRONG KHO</h1>
-                            <button type="button" class="btn btn-success" style="margin-bottom: 20px" onClick="javascript:window.location.href='insert_kho.php'">Thêm hàng</button>
-                            <button type="submit" class="btn btn-success" style="margin-bottom: 20px">Xóa hàng</button>
+                            <button type="button" class="btn btn-success" style="margin-bottom: 20px" onClick="javascript:window.location.href='insert_kho.php'" title="Nhập tay các hàng hóa, chỉ sử dụng để bổ sung ít hàng.">Thêm hàng</button>
+                            <button type="button" class="btn btn-success" style="margin-bottom: 20px" onClick="javascript:window.location.href='import_kho.php'" title="Nhập hàng hóa tự động bằng file text.">Thên hàng tự động</button>
+                            <button type="submit" class="btn btn-success" style="margin-bottom: 20px; background-color: red;">Xóa hàng</button>
                             <button onClick="window.location.reload();" class="btn btn-success" style="margin-bottom: 20px; float: right; margin-right: 2%; background-color: aqua; color: black">Tải lại dữ liệu</button>
                         </div>
 
