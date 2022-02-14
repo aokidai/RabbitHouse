@@ -349,7 +349,7 @@ if (isset($_SESSION["username"])) {
           while ($row2 = mysqli_fetch_array($rs2)) {
             $nhietDo = $row2["value1"];
             if ($nhietDo == 0) {
-              $sql    =  "select * from tblmon where goiY = 0 and conHang = 'Còn' limit 0, 12";
+              $sql    =  "select * from tblmon where goiY = 0 and conHang = 'O' limit 0, 12";
               $rs     =  mysqli_query($conn, $sql);
               while ($row = mysqli_fetch_array($rs)) {
           ?>
@@ -361,7 +361,7 @@ if (isset($_SESSION["username"])) {
                 </div>
               <?php }
             } else if ($nhietDo < 29) {
-              $sql    =  "select * from tblmon where goiY < 29 and conHang = 'Còn' limit 0, 12";
+              $sql    =  "select * from tblmon where goiY < 29 and conHang = 'O' limit 0, 12";
               $rs     =  mysqli_query($conn, $sql);
               while ($row = mysqli_fetch_array($rs)) {
               ?>
@@ -373,7 +373,7 @@ if (isset($_SESSION["username"])) {
                 </div>
               <?php }
             } else if ($nhietDo > 28) {
-              $sql    =  "select * from tblmon where goiY > 28 and conHang = 'Còn' limit 0, 12";
+              $sql    =  "select * from tblmon where goiY > 28 and conHang = 'O' limit 0, 12";
               $rs     =  mysqli_query($conn, $sql);
               while ($row = mysqli_fetch_array($rs)) {
               ?>
@@ -394,7 +394,7 @@ if (isset($_SESSION["username"])) {
         <span>Món mới</span>
         <div style="padding-left: 10%;">
           <?php
-          $sql    =  "select * from tblmon where conHang = 'Còn' limit 0, 12";
+          $sql    =  "select * from tblmon where conHang = 'O' limit 0, 12";
           $rs     =  mysqli_query($conn, $sql);
           while ($row = mysqli_fetch_array($rs)) {
           ?>

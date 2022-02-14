@@ -195,7 +195,7 @@ if (isset($_SESSION["username"])) {
         include "./include/connect.inc";
         if (isset($_GET["timKiem"])) {
           $searchMon = $_GET["txtsearchMon"];
-          $sql = "select idMon, tenMon from tblmon where tenMon like '%$searchMon%' and conHang = 'Còn'";
+          $sql = "select idMon, tenMon from tblmon where tenMon like '%$searchMon%' and conHang = 'O'";
           $rs = mysqli_query($conn, $sql);
           while ($row = mysqli_fetch_assoc($rs)) {
             //echo "<div id='link' onClick='addText(\"".$row['tenMon']."\");'>" . $row['tenMon'] . "</div>"; 
@@ -229,7 +229,7 @@ if (isset($_SESSION["username"])) {
       <div style="margin-left: 7%;">
         <?php
         include "include/connect.inc";
-        $sql    =  "select * from tblmon where conHang = 'Còn' limit 0, 12";
+        $sql    =  "select * from tblmon where conHang = 'O' limit 0, 12";
         $rs     =  mysqli_query($conn, $sql);
         while ($row = mysqli_fetch_array($rs)) {
         ?>

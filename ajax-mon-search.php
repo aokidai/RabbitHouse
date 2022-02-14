@@ -2,7 +2,7 @@
 require_once('include/connect.inc');
 
 function get_mon($conn , $term){	
-	$query = "SELECT * FROM tblmon WHERE tenMon LIKE '%".$term."%' and conHang = 'Còn' ORDER BY tenMon ASC";
+	$query = "SELECT * FROM tblmon WHERE tenMon LIKE '%".$term."%' and conHang = 'O' ORDER BY tenMon ASC";
 	$result = mysqli_query($conn, $query);	
 	$data = mysqli_fetch_all($result,MYSQLI_ASSOC);
 	return $data;	

@@ -132,14 +132,18 @@ else
 												    $sql		=	"select * from tblmon limit $pos, $pageSize";
 												   	$rs 		=	mysqli_query($conn, $sql);
 												   	$i			=	1;
-												  while($row=mysqli_fetch_array($rs)){											  
+												  while($row=mysqli_fetch_array($rs)){
+                                                      $trangThai = $row["conHang"];
+                                                    if($trangThai == "X"){
+                                                        $trangThai2 = "Hết";
+                                                      } else $trangThai2="Còn";									  
 													echo" <tr>
 														<td><input type='checkbox' class='chk_box1' name='check_list[]' value='".$row["idMon"]."'></td>
 														<td>$i</td>
 														<td>".$row["tenMon"]."</td>
 														<td>".$row["gia"]."</td>
 														<td><img src='../uploads/".$row["hinhAnh"]."' width=100 height=100></td>
-														<td>".$row["conHang"]."</td>
+														<td>$trangThai2</td>
 														<td><a href='edit_mon.php?id=".$row["idMon"]."&idLoai=".$row["idLoai"]."'>Sửa</a></td>
 														<td><a href='javascript:del_confirm(\"del_mon.php?id=".$row["idMon"]."\")'>Xóa</a></td>
 														</tr>";	
