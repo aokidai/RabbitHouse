@@ -305,8 +305,16 @@ if (isset($_SESSION["username"])) {
       if (mysqli_num_rows($rs2) > 0) {
         $_SESSION["username"]  = $row2["username"];
         $_SESSION["idStaff"] = $row2["idStaff"];
+        $idStafff = $row2["idStaff"];
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+	      $time_act = date('Y-m-d H:i:s');
         if ($password == "Demo@123") echo "<script>window.location.href='./NhanVien/change-password.php'</script>";
-        else echo "<script>window.location.href='./NhanVien/index.php'</script>";
+        else{
+          $sql3 = "insert into tblchamcong (idNhanVien, TGVao) values ('$idStafff', '$time_act')";
+          $rs3 = mysqli_query($conn, $sql3);
+          if($rs3) echo "<script>window.location.href='./NhanVien/index.php'</script>";
+          else echo "<script>alert('Error')</script>";
+        } 
       } else echo "<script>alert('Tài khoản hoặc mật khẩu không tồn tại')</script>";
     }
   }

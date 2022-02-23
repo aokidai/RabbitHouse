@@ -95,7 +95,9 @@ else
                         <div class="col-lg-12">
                             <h1 class="page-header">DANH SÁCH NHÂN VIÊN</h1>
                             <button type="button" class="btn btn-success" style="margin-bottom: 20px" onClick="javascript:window.location.href='insert_user.php'">Thêm nhân viên</button>
-                            <button type="submit" class="btn btn-success" style="margin-bottom: 20px">Xóa nhân viên</button>
+                            <button type="submit" name="xoa" class="btn btn-success" style="margin-bottom: 20px">Xóa nhân viên</button>
+                            <button type="button" onClick="javascript:window.location.href='insert_luong.php'" class="btn btn-success" style="margin-bottom: 20px; float: right; margin-right: 2%; background-color: aqua; color: black">Quản Lí Lương</button>
+                            <button type="submit" name="reset" class="btn btn-success" style="margin-bottom: 20px; float: right; margin-right: 10px; background-color: red; color: white">Reset Lương</button>
                         </div>
 
                         <!-- /.col-lg-12 -->
@@ -109,6 +111,8 @@ else
                                     <th>STT</th>
                                     <th>Họ tên</th>
                                     <th>Username</th>
+                                    <th>Tổng thời gian</th>
+                                    <th>Lương</th>
                                     <th>Sửa</th>
                                     <th>Xóa </th>
                                 </tr>
@@ -134,33 +138,46 @@ else
                                 $i            =    1;
                                 while ($row = mysqli_fetch_array($rs)) {
                                     echo " <tr>
-														<td><input type='checkbox' class='chk_box1' name='check_list[]' value='" . $row["idStaff"] . "'></td>
-														<td>$i</td>
-                                                        <td>" . $row["hoTen"] . "</td>
-														<td>" . $row["username"] . "</td>
-														<td><a href='edit_user.php?id=" . $row["idStaff"] . "'>Sửa</a></td>
-														<td><a href='javascript:del_confirm(\"del_user.php?id=" . $row["idStaff"] . "\")'>Xóa</a></td>
-														</tr>";
+                                            <td><input type='checkbox' class='chk_box1' name='check_list[]' value='" . $row["idStaff"] . "'></td>
+                                            <td>$i</td>
+                                            <td>" . $row["hoTen"] . "</td>
+                                            <td>" . $row["username"] . "</td>
+                                            <td>" . $row["tongTG"] . "</td>
+                                            <td>" . $row["tongLuong"] . "</td>
+                                            <td><a href='edit_user.php?id=" . $row["idStaff"] . "'>Sửa</a></td>
+                                            <td><a href='javascript:del_confirm(\"del_user.php?id=" . $row["idStaff"] . "\")'>Xóa</a></td>
+                                            </tr>";
                                     $i++;
                                 }
                                 ?>
                                 <?php
+                                if(isset($_POST['xoa'])){
                                 if (!empty($_POST['check_list'])) {
                                     foreach ($_POST['check_list'] as $check) {
                                         $sql9 = "delete from tblstaff where idStaff = '$check'";
-                                        $rs = mysqli_query($conn, $sql9);
+                                        $rs9 = mysqli_query($conn, $sql9);
                                     }
                                     echo "<script>window.location.href='list_user.php'</script>";
+                                }}
+                                else if(isset($_POST['reset'])){
+                                    $sql9 = "update tblstaff set tongTG='0', tongLuong = '0'";
+                                    $rs9 = mysqli_query($conn, $sql9);
+                                    $sql10 = "delete from tblchamcong";
+                                    $rs10 = mysqli_query($conn, $sql10);
                                 }
                                 ?>
                             </tbody>
                             <tr>
                                 <th colspan="4">
                                     <?php
-
                                     for ($i = 1; $i <= ceil($count / $pageSize); $i++)
                                         echo "<a href='list_user.php?page=$i'>" . $i . "</a>&nbsp&nbsp";
                                     ?>
+                                </th>
+                            </tr>
+                            <tr align="center">
+                                <th colspan="9">
+                                    <center><label style="background-color: #f2f2f2; width: 150px; border-radius: 10px;"><a href="./export_nhanvien.php">🖨️ Xuất Excel</a></label></center>
                                 </th>
                             </tr>
                         </table>
