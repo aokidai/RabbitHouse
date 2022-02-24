@@ -122,6 +122,7 @@ else
                             while ($line = fgets($txt_file)) {
                                 $tenHang = "";
                                 $soLuongBD = "";
+                                $soTien = "";
                                 date_default_timezone_set('Asia/Ho_Chi_Minh');
                                 $tgNK = date('Y-m-d H:i:s');
                                 $tgXK = "";
@@ -143,8 +144,15 @@ else
                                     $rs6 = mysqli_query($conn, $sql6);
                                     if (!$rs6) echo "<script>alert('Error:B')</script>";
                                 }
+                                if ($a == 3) {
+                                    $soTien = $line;
+                                    $soTien = (int) $soTien;
+                                    $sqlxy = "update tblkho set soTien = '$soTien' where idKho = '$idKhoMax'";
+                                    $rsxy = mysqli_query($conn, $sqlxy);
+                                    if (!$rs6) echo "<script>alert('Error:C')</script>";
+                                }
                                 $a++;
-                                if ($a > 2) {
+                                if ($a > 3) {
                                     $a = 1;
                                 }
                             }

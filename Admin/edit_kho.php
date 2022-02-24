@@ -103,18 +103,20 @@ else
                     $id             =    $_POST["txtid"];
                     $tenHang        =    $_POST["txtTenHang"];
                     $soLuong        =    $_POST["txtSoLuong"];
-                    $sql            =    "update tblkho set tenHang = '$tenHang', soLuongBD = '$soLuong', soLuongCL = '$soLuong' where idKho=$id";
+                    $soTien         =    $_POST["txtSoTien"];
+                    $sql            =    "update tblkho set soTien = '$soTien', tenHang = '$tenHang', soLuongBD = '$soLuong', soLuongCL = '$soLuong' where idKho=$id";
                     $rs             =    mysqli_query($conn, $sql);
                     if ($rs)
                         echo "<script>window.location.href='list_kho.php'</script>";
                     else echo "<script>alert('Error!')</script>";
                 } else {
                     $id         =    $_GET["id"];
-                    $sql        =    "select tenHang, soLuongBD from tblkho where idKho=$id";
+                    $sql        =    "select tenHang, soLuongBD, soTien from tblkho where idKho=$id";
                     $rs         =    mysqli_query($conn, $sql);
                     $row        =    $row = mysqli_fetch_array($rs);
                     $tenHang    =    $row["tenHang"];
                     $soLuong    =    $row["soLuongBD"];
+                    $soTien     =    $row["soTien"];
                 }
                 ?>
                 <form method="post">
@@ -126,8 +128,12 @@ else
                                 <input type="hidden" class="form-control" name="txtid" value="<?= $id ?>">
                             </tr>
                             <tr>
-                                <td>Số lượng / Kg<span style="color: red">(*)</span>:</td>
+                                <td>Số lượng<span style="color: red">(*)</span><span style="color: red" title="Đơn vị có thể là Kg, lon,...">(?)</span>:</td>
                                 <td><input class="form-control" name="txtSoLuong" value="<?= $soLuong ?>"></td>
+                            </tr>
+                            <tr>
+                                <td>Số tiền<span style="color: red">(*)</span>:</td>
+                                <td><input class="form-control" name="txtSoTien" value="<?= $soTien ?>"></td>
                             </tr>
                             <tr align="center">
                                 <td colspan="2"><button type="submit" class="btn btn-primary">Cập nhật</button> </td>

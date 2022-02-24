@@ -122,6 +122,7 @@ else
                                     <th>S.Lượng còn lại</th>
                                     <th>Thời gian nhập kho</th>
                                     <th>T.Gian xuất kho (mới nhất)</th>
+                                    <th>Số tiền</td>
                                     <th>Quản lí</th>
                                     <th>Sửa</th>
                                 </tr>
@@ -148,6 +149,7 @@ else
                                         $idNV = $row["id_user"];
                                         $tgXK = $row["thoiGianXK"];
                                         $tgXKtmp = "";
+                                        $soTien = $row["soTien"];
                                         if ($tgXK == "0000-00-00 00:00:00") {
                                             $tgXKtmp = "";
                                         } else $tgXKtmp = $row["thoiGianXK"];
@@ -163,6 +165,7 @@ else
                                                         <td>" . $row["soLuongCL"] . "</td>
                                                         <td>" . $row["thoiGianNK"] . "</td>
                                                         <td>$tgXKtmp</td>
+                                                        <td>$soTien</td>
                                                         <td>$hoTenNV</td>
 														<td><a href='edit_kho.php?id=" . $row["idKho"] . "'>Sửa</a></td>
 														</tr>";

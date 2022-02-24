@@ -389,15 +389,21 @@ if (isset($_SESSION["username"])) {
                         if (isset($_POST["xuatkho"])) {
                             if (!empty($_POST['check_list'])) {
                                 foreach ($_POST['check_list'] as $check) {
-                                    $sql00 = "select soLuongCL from tblKho where idKho = $check";
+                                    $sql00 = "select soLuongCL, tenHang from tblKho where idKho = $check";
                                     $rs00 = mysqli_query($conn, $sql00);
                                     $row00 = mysqli_fetch_array($rs00);
                                     $SLCLtmp = $row00["soLuongCL"];
+                                    $tenHangtmp = $row00["tenHang"];
                                     date_default_timezone_set('Asia/Ho_Chi_Minh');
                                     $tgXK = date('Y-m-d H:i:s');
-                                    $SLCLtmp--;
-                                    $sql9 = "update tblkho set thoiGianXK = '$tgXK', soLuongCL = '$SLCLtmp' where idKho = $check";
-                                    $rs9 = mysqli_query($conn, $sql9);
+                                    if($SLCLtmp > 0){
+                                        $SLCLtmp--;
+                                        $sql9 = "update tblkho set thoiGianXK = '$tgXK', soLuongCL = '$SLCLtmp' where idKho = $check";
+                                        $rs9 = mysqli_query($conn, $sql9);
+                                    }
+                                    else {
+                                        echo "<script>alert('Sản phẳm $tenHangtmp đã hết hàng trong kho, hãy dùng phần phản hòi để báo với quản lí!')</script>";
+                                    }
                                 }
                                 echo "<script>window.location.href='xuatkho.php'</script>";
                             }
