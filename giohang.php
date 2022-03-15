@@ -349,12 +349,12 @@ if (isset($_SESSION["username"])) {
 
 									?>
 									<td colspan="6" align="center">
-										<input type="submit" class="btn btn-success" id="muahang" style="background-color: red; width: 746px; height: 50px;" name="muahang" title="Mua hàng và thanh toán cho nhân viên giao hàng" value="Thanh toán khi nhận hàng">
-										<div style="padding-top: 20px;">
+										<input type="submit" class="btn btn-success" id="muahang" style="background-color: red; height: 35px;" name="muahang" title="Mua hàng và thanh toán cho nhân viên giao hàng" value="Thanh toán khi nhận hàng">
+										<div style="padding-top: 10px; width: 212px;">
 											<?php
 											$tiGiaHT = 22809;
 											$thanhTienVND1 = ($thanhTien11 * 1) / $tiGiaHT;
-											$thanhTienVND = round($thanhTienVND1, 1);
+											$thanhTienVND = round($thanhTienVND1, 2);
 											?>
 											<div id="smart-button-container">
 												<div style="text-align: center;">
