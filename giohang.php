@@ -293,6 +293,10 @@ if (isset($_SESSION["username"])) {
 								<tr align="center">
 									<?php
 									if (isset($_POST["muahang"])) {
+										if($thanhTien11 == 0 || $thanhTien11 == null){
+											echo "<script>alert('Không có hàng trong giỏ hàng!')</script>";
+											echo "<script>window.location.href='index2.php'</script>";
+										}
 										$tongSL1 = $thanhTien1 = 0;
 										date_default_timezone_set('Asia/Ho_Chi_Minh');
 										$time_act = date('Y-m-d H:i:s');
@@ -329,7 +333,7 @@ if (isset($_SESSION["username"])) {
 													if ($rs8) {
 														$sql6 = "delete from tblhoadon where idKhachhang = '$idKhachhang'";
 														$rs6 = mysqli_query($conn, $sql6);
-														echo "<script>alert(\"Quý khách sẻ phải thanh toán " . $thanhTien11 . " cho nhân viên giao hàng tại địa chỉ " . $diaChi . ". Cảm ơn quý khách đã sử dụng dịch vụ. Chúc quý khách một ngày tốt lành.\");</script>";
+														echo "<script>alert(\"Quý khách thanh toán " . $thanhTien11 . " và nhân viên sẽ giao hàng tại địa chỉ " . $diaChi . ". Cảm ơn quý khách đã sử dụng dịch vụ. Chúc quý khách một ngày tốt lành.\");</script>";
 														echo "<script>window.location.href='./index2.php'</script>";
 													}
 												}
@@ -345,7 +349,65 @@ if (isset($_SESSION["username"])) {
 
 									?>
 									<td colspan="6" align="center">
-										<input type="submit" class="btn btn-success" style="background-color: red" name="muahang" title="Mua hàng và thanh toán cho nhân viên giao hàng" value="Mua hàng">
+										<input type="submit" class="btn btn-success" id="muahang" style="background-color: red; width: 746px; height: 50px;" name="muahang" title="Mua hàng và thanh toán cho nhân viên giao hàng" value="Thanh toán khi nhận hàng">
+										<div style="padding-top: 20px;">
+											<?php
+											$tiGiaHT = 22809;
+											$thanhTienVND1 = ($thanhTien11 * 1) / $tiGiaHT;
+											$thanhTienVND = round($thanhTienVND1, 1);
+											?>
+											<div id="smart-button-container">
+												<div style="text-align: center;">
+													<div id="paypal-button-container"></div>
+												</div>
+											</div>
+											<script src="https://www.paypal.com/sdk/js?client-id=Acs-sQI19oaPGRrKfZdnaRtavv9DQa9aiavcQ7hKetDVc8ZLlsMObUIQNmY1ia2yUIfWswxU5vKTeKmN&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+											<script>
+												function initPayPalButton() {
+													paypal.Buttons({
+														style: {
+															shape: 'rect',
+															color: 'gold',
+															layout: 'vertical',
+															label: 'paypal',
+
+														},
+
+														createOrder: function(data, actions) {
+															return actions.order.create({
+																purchase_units: [{
+																	"amount": {
+																		"currency_code": "USD",
+																		"value": <?=$thanhTienVND?>
+																	}
+																}]
+															});
+														},
+
+														onApprove: function(data, actions) {
+															return actions.order.capture().then(function(orderData) {
+
+																// Full available details
+																console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+																// Show a success message within this page, e.g.
+																const element = document.getElementById('paypal-button-container');
+																element.innerHTML = '';
+																element.innerHTML = '<h3>Cảm ơn quý khách đã thanh toán!</h3>';
+
+																// Or go to another URL:  actions.redirect('thank_you.html');
+																document.getElementById("muahang").click();
+															});
+														},
+
+														onError: function(err) {
+															console.log(err);
+														}
+													}).render('#paypal-button-container');
+												}
+												initPayPalButton();
+											</script>
+										</div>
 									</td>
 								</tr>
 							</tbody>
@@ -377,13 +439,13 @@ if (isset($_SESSION["username"])) {
 		</article>
 		<footer>
 			<div style="text-align: center;">
-        <p>Liên hệ: Cafe Rabbit House X Dragon Inc<br />
-          〒542-0081 3-1 Minamisenba, Chuo-ku, Osaka-shi, Osaka<br />
-          Tel/Fax: 03-6472-xxxx<br />
-          Mobile: 090-3176-4xxx<br />
-          E-mail: info@dragoninc.co.jp</p>
-        <p>🄫 2021 Power by Dragon Inc</p>
-      </div>
+				<p>Liên hệ: Rabbit House Coffee<br />
+					〒542-0081 3-1 Minamisenba, Chuo-ku, Osaka-shi, Osaka<br />
+					Tel/Fax: 03-6472-xxxx<br />
+					Mobile: 090-3176-4xxx<br />
+					E-mail: info@dragoninc.co.jp</p>
+				<p>🄫 2021 Power by Dragon Inc</p>
+			</div>
 		</footer>
 
 </body>
