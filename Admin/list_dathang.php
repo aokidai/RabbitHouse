@@ -204,6 +204,11 @@
 													
 												?>
                                             </tbody>
+											<tr align="center">
+												<td colspan="11">
+													<button type="submit" class="btn btn-success" name="giaohang" style="margin-bottom: 20px" >Giao hàng</button>
+												</td>
+											</tr>
                                         </table>
                                     </div>
                     <!-- /.row -->

@@ -400,6 +400,29 @@ if (isset($_SESSION["username"])) {
                                         $SLCLtmp--;
                                         $sql9 = "update tblkho set thoiGianXK = '$tgXK', soLuongCL = '$SLCLtmp' where idKho = $check";
                                         $rs9 = mysqli_query($conn, $sql9);
+                                        if($rs9){
+                                            $sqlFirst = "select idKho from tbldoanhthukho";
+                                            $rsFirst = mysqli_query($conn, $sqlFirst);
+                                            $rowFirst = mysqli_fetch_array($rsFirst);
+                                            $idKhoFirst = $rowFirst["idKho"];
+                                            $sqlKhotmp = "select soTien, soLuongBD from tblkho where idKho = $check";
+                                            $rsKhotmp = mysqli_query($conn, $sqlKhotmp);
+                                            $rowKhotmp = mysqli_fetch_array($rsKhotmp);
+                                            $soTien = $rowKhotmp["soTien"];
+                                            $soLuongBD = $rowKhotmp["soLuongBD"];
+                                            $thanhTien1Hang = $soTien/$soLuongBD;
+                                            if($idKhoFirst != null){
+                                                $sql3Max = "select max(idDTK) as idDTK from tbldoanhthukho where idKho = '$check'";
+                                                $rs3Max = mysqli_query($conn, $sql3Max);
+                                                $row3Max = mysqli_fetch_array($rs3Max);
+                                                $maxIDDTK = $row3Max["idDTK"];
+                                                $sqlDelete = "delete from tbldoanhthukho where idDTK = '$maxIDDTK'";
+                                                $rsDelete = mysqli_query($conn, $sqlDelete);
+                                            }
+                                            $sql100 = "insert into tbldoanhthukho(ngayXK, thanhTien, idKho) values ('$tgXK', '$thanhTien1Hang', '$check')";
+                                            $rs100 = mysqli_query($conn, $sql100);
+                                            echo "<script>alert('Đã xuất kho thành công!')</script>";
+                                        }
                                     }
                                     else {
                                         echo "<script>alert('Sản phẳm $tenHangtmp đã hết hàng trong kho, hãy dùng phần phản hòi để báo với quản lí!')</script>";
@@ -410,6 +433,11 @@ if (isset($_SESSION["username"])) {
                         }
                         ?>
                     </tbody>
+                    <tr>
+                        <td colspan="8">
+                        <button type="submit" class="btn btn-success" name="xuatkho" title="Nếu nguyên liệu dùng để làm món cho khách hàng bị hết, nhân viên hãy chọn vào nguyên liệu đó và nhấn Xuất kho trước ngay khi lấy hàng ra khổi kho">Xuất kho</button>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </form>

@@ -445,6 +445,11 @@ if (isset($_SESSION["username"])) {
                         }
                         ?>
                     </tbody>
+                    <tr>
+                        <td colspan="12">
+                        <button type="submit" class="btn btn-success" name="giaohang">Giao hàng</button>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </form>

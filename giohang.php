@@ -255,20 +255,22 @@ if (isset($_SESSION["username"])) {
 									$sql2	= 	"select * from tblmon where idMon = " . $row["idMon"] . "";
 									$rs2 		=	mysqli_query($conn, $sql2);
 									$row2 = mysqli_fetch_array($rs2);
+									$tinhtien = $soluong * $row2["gia"];
 									echo " <tr>
-								<td><input type='checkbox' class='chk_box1' name='check_list[]' value='" . $row["iHhoadon"] . "'></td>
-								<td>$i</td>
-								<td>" . $row2["tenMon"] . "</td>
-								<td>$soluong</td>
-								<td>" . $tinhtien = $soluong * $row2["gia"] . "</td>
-								<td><a href='javascript:del_confirm(\"del_giohang.php?id=" . $row["iHhoadon"] . "\")'>Xóa</a></td>
-								</tr>";
+									<td><input type='checkbox' class='chk_box1' name='check_list[]' value='" . $row["iHhoadon"] . "'></td>
+									<td>$i</td>
+									<td>" . $row2["tenMon"] . "</td>
+									<td>$soluong</td>
+									<td>$tinhtien</td>
+									<td><a href='javascript:del_confirm(\"del_giohang.php?id=" . $row["iHhoadon"] . "\")'>Xóa</a></td>
+									</tr>";
 									$i++;
 								}
 								?>
 								<tr align="right">
 									<td colspan="6" style="text-align: centerright; font-weight: bold">Thành tiền:
 										<?php
+										error_reporting(E_ERROR | E_PARSE);
 										$thanhTien111 = $thanhTien11 = 0;
 										$sql11 = "select * from tblhoadon where idKhachhang = '$idKhachhang'";
 										$rs11 = mysqli_query($conn, $sql11);
@@ -315,7 +317,7 @@ if (isset($_SESSION["username"])) {
 												$diaChi = $row10["diachi"];
 											}
 											$giaoHang = "X";
-											$sql5 = "insert into tblchitiethd(idKhachhang, tongSL, tongTien, ngayThang, diaChiGH, daGH, idMon) values ('$idKhachhang2', '$tongSL', '$thanhTien1', '$time_act', '$diaChi', '$giaoHang', '$idMon1')";
+											$sql5 = "insert into tblchitiethd(idKhachhang, tongSL, tongTien, ngayThang, diaChiGH, daGH, idMon) values ('$idKhachhang2', '$tongSL', '$tinhtien', '$time_act', '$diaChi', '$giaoHang', '$idMon1')";
 											$rs5 = mysqli_query($conn, $sql5);
 											if ($rs5) {
 												$sql44 = "select max(idChiTiet) as idCTHD from tblchitiethd";

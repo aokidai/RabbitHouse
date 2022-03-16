@@ -43,7 +43,15 @@ if (isset($_SESSION["username"])) {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 </head>
-
+<script type="text/javascript">
+		const reloadtButton = document.querySelector("#reload");
+		// Reload everything:
+		function reload() {
+			reload = location.reload();
+		}
+		// Event listeners for reload
+		reloadButton.addEventListener("click", reload, false);
+	</script>
 <body>
 
     <div id="wrapper">
@@ -115,6 +123,7 @@ if (isset($_SESSION["username"])) {
                                 <input type="submit" name="xemDS" value="Xem danh sách" />
                             </form>
                         </div>
+                        <button onClick="window.location.reload();" class="btn btn-success" style="margin-bottom: 20px; float: right; margin-right: 2%; background-color: aqua; color: black">Tải lại dữ liệu</button>
                     </div>
 
                     <!-- /.col-lg-12 -->
@@ -158,8 +167,30 @@ if (isset($_SESSION["username"])) {
                             <th colspan="3">Tổng doanh thu:</th>
                             <th>
                                 <?php
-
                                 echo $TongTien;
+                                ?>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="3">Tổng vốn hàng hóa:</th>
+                            <th>
+                                <?php
+                                $sql3 = "select * from tbldoanhthukho where ngayXK = '$tmp'";
+                                $rs3 = mysqli_query($conn, $sql3);
+                                while ($row3 = mysqli_fetch_array($rs3)){
+                                    $thanhTien = $row3["thanhTien"];
+                                    $tongTT += $thanhTien;
+                                }
+                                echo $tongTT;
+                                ?>
+                            </th>
+                        </tr>
+                        <tr style="color: red;">
+                            <th colspan="3">Tổng doanh thu:</th>
+                            <th>
+                                <?php
+                                $TongDTTN = $TongTien - $tongTT;
+                                echo $TongDTTN;
                                 ?>
                             </th>
                         </tr>
