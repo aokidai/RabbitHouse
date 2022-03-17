@@ -373,7 +373,7 @@ if (isset($_SESSION["username"])) {
 				}
 				?>
 				<span>Gợi ý món <span style="font: Baskerville, 'Palatino Linotype', Palatino, 'Century Schoolbook L', 'Times New Roman', 'serif', normal; font-size: 20px">(Nhiệt độ: <?= $nhietDo ?> độ)</span></span>
-				<div style="margin-left: 7%">
+				<div style="margin-left: 10%">
 					<?php
 					include "include/connect.inc";
 					$sql2 = "select id, value1 from sensordata order by id DESC limit 1";
@@ -423,9 +423,9 @@ if (isset($_SESSION["username"])) {
 				</div>
 			</section>
 			</br></br>
-			<section id="info" align="center" style="padding-top: 35%;">
+			<section id="info" align="center" style="padding-top: 30%;">
 				<span>Món mới</span>
-				<div style="padding-left: 7%;">
+				<div style="padding-left: 10%;">
 					<?php
 					$sql		=	"select * from tblmon where conHang = 'O' limit 0, 12";
 					$rs 		=	mysqli_query($conn, $sql);
@@ -441,7 +441,7 @@ if (isset($_SESSION["username"])) {
 				</div>
 			</section>
 			</br></br>
-			<div id="info1" style="padding-top: 50%">
+			<div id="info1" style="padding-top: 45%">
 				</br></br>
 				<span style="margin-top: 200px">Twitter</span>
 				<div id="cont-footer-twitter" style="padding: 30px; float:left; margin-left:17%">

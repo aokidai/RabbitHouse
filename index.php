@@ -16,9 +16,8 @@ if (isset($_SESSION["username"])) {
 <style>
   #mon {
     width: 240px;
-    height: 320px;
     margin: 3px;
-    margin-top: 100px;
+    margin-top: 20px;
     text-align: center;
     float: left;
   }
@@ -340,7 +339,7 @@ if (isset($_SESSION["username"])) {
         }
         ?>
         <span>Gợi ý món <span style="font: Baskerville, 'Palatino Linotype', Palatino, 'Century Schoolbook L', 'Times New Roman', 'serif', normal; font-size: 20px">(Nhiệt độ: <?= $nhietDo ?> độ)</span></span>
-        <div style="margin-left: 10%">
+        <div style="margin-left: 7%">
           <?php
           include "include/connect.inc";
           $sql2 = "select id, value1 from sensordata order by id DESC limit 1";
@@ -390,9 +389,9 @@ if (isset($_SESSION["username"])) {
         </div>
       </section>
       </br></br>
-      <section id="info" align="center" style="padding-top: 35%;">
+      <section id="info" align="center" style="padding-top: 30%;">
         <span>Món mới</span>
-        <div style="padding-left: 10%;">
+        <div style="padding-left: 7%;">
           <?php
           $sql    =  "select * from tblmon where conHang = 'O' limit 0, 12";
           $rs     =  mysqli_query($conn, $sql);
@@ -408,9 +407,9 @@ if (isset($_SESSION["username"])) {
         </div>
       </section>
 
-      <div id="info1" style="padding-top: 50%">
+      <div id="info1" style="padding-top: 45%">
         </br></br>
-        <span style="margin-top: 250px">Twitter</span>
+        <span style="margin-top: 200px">Twitter</span>
         <div id="cont-footer-twitter" style="padding: 30px; float:left; margin-left:17%">
           <div class="twitter-widget" style="text-align: center;">
             <a class="twitter-timeline" style="text-align: center" ; data-height="300" data-width="800" data-theme="white" data-link-color="#ef3488" data-border-color="#ef3488" data-chrome="noheader nofooter noborders transparent" href="https://twitter.com/aokidaisuke91">ツイートの青木大介</a>

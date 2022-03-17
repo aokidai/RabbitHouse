@@ -250,6 +250,33 @@ if (isset($_SESSION["username"])) {
         font-size: 40px;
         font-weight: bold;
     }
+    #menu2 a {
+    text-decoration: none;
+    color: #000;
+    display: block;
+  }
+
+  #menu2 a:hover {
+    background: #F1F1F1;
+    color: #333;
+  }
+
+  #menu2 ul {
+
+    list-style-type: none;
+    text-align: center;
+
+  }
+
+  #menu2 li {
+    display: list-item;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    list-style-position: unset;
+    display: inline-block;
+    list-style-type: none;
+    margin-left: -2px;
+  }
 </style>
 
 <body>
@@ -374,9 +401,9 @@ if (isset($_SESSION["username"])) {
         <article>
             </br>
             <aside>
-                <div id="menu" align="center">
+                <div id="menu2" align="center">
                     <span id="ttLoai">Loại món </span>
-                    <ul style="margin-right: 22%; padding-top: 5px">
+                    <ul style="padding-top: 5px">
                         <?php
                         include "../include/left.php";
                         ?>
@@ -384,9 +411,9 @@ if (isset($_SESSION["username"])) {
                 </div>
             </aside>
             <br/>
-            <section id="info" align="center" style="padding-top: 5%;">
+            <section id="info" align="center">
                 <span>Món mới</span>
-                <div style="margin-left: 7%;">
+                <div style="margin-left: 10%;">
                     <?php
                     include "../include/connect.inc";
                     $sql        =    "select * from tblmon where conHang = 'O' limit 0, 12";
