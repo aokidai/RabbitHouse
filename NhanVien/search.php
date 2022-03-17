@@ -295,63 +295,47 @@ if (isset($_SESSION["username"])) {
         }(document, 'script', 'facebook-jssdk'));
     </script>
     <header>
-        <div>
-            <div id="logo"><a href="./index.php" title="Trang chủ"><img src="../img/logo.png"></a></div>
-            <div id="menu">
-                <ul>
-                    <li><a href="./donhang.php" title="Đơn hàng">Đơn hàng</a></li>
-                    <li><a href="./doanhthu.php" title="Doanh thu của nhân viên">Doanh thu</a></li>
-                    <li><a href="./giohang.php" title="Giỏ hàng bán hàng cho nhân viên">Giỏ hàng</a></li>
-                    <li><a href="./information.php" title="Thông tin nhân viên">Thông tin</a></li>
-                    <li style="width: 200px;"><a href="./tmppage.php" title="Đăng xuất">Chào: <?php include "../include/connect.inc";
-                                                                                                $sql0 = "select * from tblstaff where username = '$user'";
-                                                                                                $rs0 = mysqli_query($conn, $sql0);
-                                                                                                $row0 = mysqli_fetch_array($rs0);
-                                                                                                $hoTen = $row0["hoTen"];
-                                                                                                echo $hoTen;
-                                                                                                ?></a></li>
-                </ul>
-            </div>
-            <div> <br /><br /><br />
-                <div align="center">
-                    <?php
-                    include "../include/connect.inc";
-                    $idMon = $_GET["id"];
-                    $sql = "select tenMon from tblmon where idMon = $idMon";
-                    $rs = mysqli_query($conn, $sql);
-                    $row = mysqli_fetch_array($rs);
-                    $tenMon = $row["tenMon"];
-                    ?>
-                    <form action="index.php" method="GET">
-                        <input id="searchbar" name="txtsearchMon" type="text" placeholder="<?= $tenMon ?>">
-                        <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
-                    </form>
-                </div>
-                <script type="text/javascript">
-                    $(function() {
-                        $("#searchbar").autocomplete({
-                            source: 'ajax-mon-search.php',
-                        });
-                    });
-                </script>
-                <br />
+        <?php include "./header.php"; ?>
+        <div> <br /><br /><br />
+            <div align="center">
                 <?php
                 include "../include/connect.inc";
-                if (isset($_GET["txtsearchMon"])) {
-                    $searchMon = $_GET["txtsearchMon"];
-                    $sql = "select idMon, tenMon from tblmon where tenMon like '%$searchMon%' and conHang = 'O'";
-                    $rs = mysqli_query($conn, $sql);
-                    while ($row = mysqli_fetch_assoc($rs)) {
-                        //echo "<div id='link' onClick='addText(\"".$row['tenMon']."\");'>" . $row['tenMon'] . "</div>"; 
-                        echo "<script>window.location.href='search.php?id=" . $row["idMon"] . "'</script>";
-                    }
-                    $tmp = $_GET["txtsearchMon"];
-                    if ($tmp == $searchMon) {
-                        echo ("<span style=\"text-align:center; color:red; font-size: 30px\"><center>Không có sản phẩm đó!</center></span>");
-                    }
-                }
+                $idMon = $_GET["id"];
+                $sql = "select tenMon from tblmon where idMon = $idMon";
+                $rs = mysqli_query($conn, $sql);
+                $row = mysqli_fetch_array($rs);
+                $tenMon = $row["tenMon"];
                 ?>
+                <form action="search.php" method="GET">
+                    <input id="searchbar" name="txtsearchMon" type="text" placeholder="<?= $tenMon ?>">
+                    <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
+                </form>
             </div>
+            <script type="text/javascript">
+                $(function() {
+                    $("#searchbar").autocomplete({
+                        source: 'ajax-mon-search.php',
+                    });
+                });
+            </script>
+            <br />
+            <?php
+            include "../include/connect.inc";
+            if (isset($_GET["txtsearchMon"])) {
+                $searchMon = $_GET["txtsearchMon"];
+                $sql = "select idMon, tenMon from tblmon where tenMon like '%$searchMon%' and conHang = 'O'";
+                $rs = mysqli_query($conn, $sql);
+                while ($row = mysqli_fetch_assoc($rs)) {
+                    //echo "<div id='link' onClick='addText(\"".$row['tenMon']."\");'>" . $row['tenMon'] . "</div>"; 
+                    echo "<script>window.location.href='search.php?id=" . $row["idMon"] . "'</script>";
+                }
+                $tmp = $_GET["txtsearchMon"];
+                if ($tmp == $searchMon) {
+                    echo ("<span style=\"text-align:center; color:red; font-size: 30px\"><center>Không có sản phẩm đó!</center></span>");
+                }
+            }
+            ?>
+        </div>
     </header>
     <article>
         <input type="hidden" class="form-control" name="txtid" value="<?= $_GET["id"] ?>">
@@ -379,14 +363,14 @@ if (isset($_SESSION["username"])) {
     </article>
     <div>
         <footer>
-           <div style="text-align: center;">
-        <p>Liên hệ: Rabbit House Coffee<br />
-          〒542-0081 3-1 Minamisenba, Chuo-ku, Osaka-shi, Osaka<br />
-          Tel/Fax: 03-6472-xxxx<br />
-          Mobile: 090-3176-4xxx<br />
-          E-mail: info@dragoninc.co.jp</p>
-        <p>🄫 2021 Power by Dragon Inc</p>
-      </div>
+            <div style="text-align: center;">
+                <p>Liên hệ: Rabbit House Coffee<br />
+                    〒542-0081 3-1 Minamisenba, Chuo-ku, Osaka-shi, Osaka<br />
+                    Tel/Fax: 03-6472-xxxx<br />
+                    Mobile: 090-3176-4xxx<br />
+                    E-mail: info@dragoninc.co.jp</p>
+                <p>🄫 2021 Power by Dragon Inc</p>
+            </div>
         </footer>
     </div>
 </body>

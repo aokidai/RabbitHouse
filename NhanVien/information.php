@@ -300,26 +300,11 @@ if (isset($_SESSION["username"])) {
         }(document, 'script', 'facebook-jssdk'));
     </script>
     <header>
-        <div>
-            <div id="logo"><a href="./index.php" title="Trang chủ"><img src="../img/logo.png"></a></div>
-            <div id="menu">
-                <ul>
-                    <li><a href="./report.php" title="Gửi phản hồi đến quản trị viên để giải quyết các vấn đề.">Phản hồi</a></li>
-                    <li><a href="./lichsu.php" title="Xem lịch sử bán hàng.">Lịch sử</a></li>
-                    <li><a href="./xuatkho.php" title="Nếu nguyên liệu trong kho cần dùng hết nhanh hơn dự kiến của hệ thống, nhân viên cần phải báo xuất kho.">Xuất kho</a></li>
-                    <li><a href="./information.php" title="Thông tin tài khoản.">Thông tin</a></li>
-                    <li style="width: 200px;"><a href="../index.php" title="Đăng xuất.">Chào: <?php include "../include/connect.inc";
-                                                                                                $sql0 = "select * from tblstaff where username = '$user'";
-                                                                                                $rs0 = mysqli_query($conn, $sql0);
-                                                                                                $row0 = mysqli_fetch_array($rs0);
-                                                                                                $hoTen = $row0["hoTen"];
-                                                                                                echo $hoTen;
-                                                                                                ?></a></li>
-                </ul>
-            </div>
+        <?php include "./header.php"; ?>
+        </div>
             <div> <br /><br /><br />
                 <div align="center">
-                    <form action="index.php" method="GET">
+                    <form action="information.php" method="GET">
                         <input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
                         <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
                     </form>

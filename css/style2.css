@@ -6,37 +6,7 @@
     width: 200px;
     height: 60px;
 }
-#menu{
-    padding-top: 1%;
-    margin-right: 15%;
-}
-#menu ul{
-    float: right;
-    list-style-type: none;
-    overflow: hidden;
-    text-align: center;
-}
-#menu li{
-    display: list-item;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    list-style-position:unset;
-    display: inline-block;
-    list-style-type:none;
-    line-height: 40px;
-    margin-left: -2px;
-    width: 120px;
-    height: 40px;
-}
-#menu a {
-    text-decoration: none;
-    color: #000;
-    display: block;
-}
-#menu a:hover {
-    background: #F1F1F1;
-    color: #333;
-}
+
 #photo img{
     clear: both;
     display: block;
@@ -44,9 +14,6 @@
     margin-right: auto;
     width: 1125px;
     height: 375px;
-}
-#info{
-    padding: 70px;
 }
 #info span{
     text-align: center;
@@ -65,9 +32,6 @@
 }
 #naiyo{
     width: 500px;
-}
-#info{
-    padding: 50px;
 }
 #info span{
     text-align: center;

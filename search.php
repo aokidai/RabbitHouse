@@ -148,25 +148,7 @@ if (isset($_SESSION["username"])) {
         }(document, 'script', 'facebook-jssdk'));
     </script>
     <header>
-        <div>
-            <div id="logo"><a href="./index2.php" title="Trang chủ"><img src="./img/logo.png"></a></div>
-            <div id="menu">
-                <ul>
-                    <li><a href="./giohang.php" title="Giỏ hàng những món đã chọn">Giỏ hàng</a></li>
-                    <li><a href="./produce.php" title="Xem các sản phẩm theo loại">Sản phẩm</a></li>
-                    <li><a href="./information.php" title="Thông tin tài khoản">Thông tin</a></li>
-                    <li style="width: 200px;"><a href="./index.php" title="Đăng xuất">Chào:
-                            <?php include "./include/connect.inc";
-                            $sql090 = "select tenKH from tblkhachhang where idKhachhang = '$idKhachhang'";
-                            $rs090 = mysqli_query($conn, $sql090);
-                            $row090 = mysqli_fetch_array($rs090);
-                            $hoTen = $row090["tenKH"];
-                            echo $hoTen;
-                            ?>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+        <?php include "./header.php"; ?>
             <div> <br /><br /><br />
                 <div align="center">
                     <?php

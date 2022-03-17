@@ -286,26 +286,10 @@ if (isset($_SESSION["username"])) {
         }(document, 'script', 'facebook-jssdk'));
     </script>
     <header>
-        <div>
-            <div id="logo"><a href="./index.php" title="Trang chủ"><img src="../img/logo.png"></a></div>
-            <div id="menu">
-                <ul>
-                    <li><a href="./donhang.php" title="Đơn hàng">Đơn hàng</a></li>
-                    <li><a href="./doanhthu.php" title="Doanh thu của nhân viên">Doanh thu</a></li>
-                    <li><a href="./giohang.php" title="Giỏ hàng bán hàng cho nhân viên">Giỏ hàng</a></li>
-                    <li><a href="./information.php" title="Thông tin nhân viên">Thông tin</a></li>
-                    <li style="width: 200px;"><a href="./tmppage.php" title="Đăng xuất">Chào: <?php include "../include/connect.inc";
-                                                                                                $sql0 = "select * from tblstaff where username = '$user'";
-                                                                                                $rs0 = mysqli_query($conn, $sql0);
-                                                                                                $row0 = mysqli_fetch_array($rs0);
-                                                                                                $hoTen = $row0["hoTen"];
-                                                                                                echo $hoTen;
-                                                                                                ?></a></li>
-                </ul>
-            </div>
+        <?php include "./header.php"; ?>
             <div> <br /><br /><br />
                 <div align="center">
-                    <form action="index.php" method="GET">
+                    <form action="xuatkho.php" method="GET">
                         <input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
                         <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
                     </form>

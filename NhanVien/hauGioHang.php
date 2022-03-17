@@ -287,22 +287,7 @@ if (isset($_SESSION["username"])) {
 	</script>
 	<header>
 		<div>
-			<div id="logo"><a href="./index.php"><img src="../img/logo.png"></a></div>
-			<div id="menu">
-				<ul>
-					<li><a href="./donhang.php" title="Đơn hàng">Đơn hàng</a></li>
-					<li><a href="./doanhthu.php" title="Doanh thu của nhân viên">Doanh thu</a></li>
-					<li><a href="./giohang.php" title="Giỏ hàng bán hàng cho nhân viên">Giỏ hàng</a></li>
-					<li><a href="./information.php" title="Thông tin nhân viên">Thông tin</a></li>
-					<li style="width: 200px;"><a href="./tmppage.php" title="Đăng xuất">Chào: <?php include "../include/connect.inc";
-																								$sql0 = "select * from tblstaff where username = '$user'";
-																								$rs0 = mysqli_query($conn, $sql0);
-																								$row0 = mysqli_fetch_array($rs0);
-																								$hoTen = $row0["hoTen"];
-																								echo $hoTen;
-																								?></a></li>
-				</ul>
-			</div>
+			<?php include "./header.php"; ?>
 			<div> <br /><br /><br />
 				<div align="center">
 					<form action="index2.php" method="GET">

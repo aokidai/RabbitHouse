@@ -26,9 +26,8 @@ if (isset($_SESSION["username"])) {
 <style>
     #mon {
         width: 240px;
-        height: 320px;
         margin: 3px;
-        margin-top: 100px;
+        margin-top: 20px;
         text-align: center;
         float: left;
     }
@@ -243,14 +242,14 @@ if (isset($_SESSION["username"])) {
             font-size: 11px
         }
     }
-    #ttLoai{
-	display: block;
-	text-align: center;
-	font-family: 'Times New Roman', Times, serif;
-	font-size: 40px;
-	font-weight: bold;
-	margin-left: 18%;
-}
+
+    #ttLoai {
+        display: block;
+        text-align: center;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 40px;
+        font-weight: bold;
+    }
 </style>
 
 <body>
@@ -284,57 +283,41 @@ if (isset($_SESSION["username"])) {
         }(document, 'script', 'facebook-jssdk'));
     </script>
     <header>
-        <div>
-            <div id="logo"><a href="./index.php" title="Trang chủ"><img src="../img/logo.png"></a></div>
-            <div id="menu">
-                <ul>
-                    <li><a href="./donhang.php" title="Đơn hàng">Đơn hàng</a></li>
-                    <li><a href="./doanhthu.php" title="Doanh thu của nhân viên">Doanh thu</a></li>
-                    <li><a href="./giohang.php" title="Giỏ hàng bán hàng cho nhân viên">Giỏ hàng</a></li>
-                    <li><a href="./information.php" title="Thông tin nhân viên">Thông tin</a></li>
-                    <li style="width: 200px;"><a href="./tmppage.php" title="Đăng xuất">Chào: <?php include "../include/connect.inc";
-                        $sql0 = "select * from tblstaff where username = '$user'";
-                        $rs0 = mysqli_query($conn, $sql0);
-                        $row0 = mysqli_fetch_array($rs0);
-                        $hoTen = $row0["hoTen"];
-                        echo $hoTen;
-                    ?></a></li>
-                </ul>
+        <?php include "./header.php"; ?>
+        <div> <br /><br /><br />
+            <div align="center">
+                <form action="index.php" method="GET">
+                    <input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
+                    <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
+                </form>
             </div>
-            <div> <br /><br /><br />
-                <div align="center">
-                    <form action="index.php" method="GET">
-                        <input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
-                        <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
-                    </form>
-                </div>
-                <script type="text/javascript">
-                    $(function() {
-                        $("#searchbar").autocomplete({
-                            source: 'ajax-mon-search.php',
-                        });
+            <script type="text/javascript">
+                $(function() {
+                    $("#searchbar").autocomplete({
+                        source: 'ajax-mon-search.php',
                     });
-                </script>
-                <br />
-                <?php
-                include "../include/connect.inc";
-                if (isset($_GET["txtsearchMon"])) {
-                    $searchMon = $_GET["txtsearchMon"];
-                    $sql = "select idMon, tenMon from tblmon where tenMon like '%$searchMon%' and conHang = 'O'";
-                    $rs = mysqli_query($conn, $sql);
-                    while ($row = mysqli_fetch_assoc($rs)) {
-                        //echo "<div id='link' onClick='addText(\"".$row['tenMon']."\");'>" . $row['tenMon'] . "</div>"; 
-                        echo "<script>window.location.href='search.php?id=" . $row["idMon"] . "'</script>";
-                    }
-                    $tmp = $_GET["txtsearchMon"];
-                    if ($tmp == $searchMon) {
-                        echo ("<span style=\"text-align:center; color:red; font-size: 30px\"><center>Không có sản phẩm đó!</center></span>");
-                    }
+                });
+            </script>
+            <br />
+            <?php
+            include "../include/connect.inc";
+            if (isset($_GET["txtsearchMon"])) {
+                $searchMon = $_GET["txtsearchMon"];
+                $sql = "select idMon, tenMon from tblmon where tenMon like '%$searchMon%' and conHang = 'O'";
+                $rs = mysqli_query($conn, $sql);
+                while ($row = mysqli_fetch_assoc($rs)) {
+                    //echo "<div id='link' onClick='addText(\"".$row['tenMon']."\");'>" . $row['tenMon'] . "</div>"; 
+                    echo "<script>window.location.href='search.php?id=" . $row["idMon"] . "'</script>";
                 }
+                $tmp = $_GET["txtsearchMon"];
+                if ($tmp == $searchMon) {
+                    echo ("<span style=\"text-align:center; color:red; font-size: 30px\"><center>Không có sản phẩm đó!</center></span>");
+                }
+            }
 
-                ?>
+            ?>
 
-            </div>
+        </div>
     </header>
     <div id="body">
         <div id="photo">
@@ -389,46 +372,47 @@ if (isset($_SESSION["username"])) {
             </script>
         </div>
         <article>
-	  </br>  
-	 <aside>
-	  <div id="menu" align="center">
-		  <span id="ttLoai">Loại món </span>
-			<ul style="margin-right: 22%; padding-top: 5px">
-				<?php
-					include "../include/left.php";	
-				?>
-			</ul>
-		</div>
-	</aside>
-	<section id="info" align="center" style="padding-top: 5%;">
-		<span>Món mới</span>
-		<div style="margin-left: 7%;">
-			<?php
-				include "../include/connect.inc";
-				$sql		=	"select * from tblmon where conHang = 'O' limit 0, 12";
-				$rs 		=	mysqli_query($conn, $sql);												   
-				while($row=mysqli_fetch_array($rs)){	
-			?>
-			<div id="mon">
-				<p id="tenMon"><a href="#" values="<?=$row["tenMon"]?>"><?=$row["tenMon"]?></a></p>
-				<img id="hinhAnh" src="../uploads/<?=$row["hinhAnh"]?>">
-				<p id="donGia">Đơn giá: <span><?=$row["gia"]?>VND</span></p>
-				<a href='hauGioHang.php?id=<?=$row["idMon"]?>' title="Thêm vào giỏ hàng"><img id="nutmuahang" src="../img/Chonmua.png"></a>
-			</div>
-		<?php }?>
-	  </section>  
-        <div style="padding-top: 70%;">
-            <footer>
-               <div style="text-align: center;">
-        <p>Liên hệ: Rabbit House Coffee<br />
-          〒542-0081 3-1 Minamisenba, Chuo-ku, Osaka-shi, Osaka<br />
-          Tel/Fax: 03-6472-xxxx<br />
-          Mobile: 090-3176-4xxx<br />
-          E-mail: info@dragoninc.co.jp</p>
-        <p>🄫 2021 Power by Dragon Inc</p>
-      </div>
-            </footer>
-        </div>
+            </br>
+            <aside>
+                <div id="menu" align="center">
+                    <span id="ttLoai">Loại món </span>
+                    <ul style="margin-right: 22%; padding-top: 5px">
+                        <?php
+                        include "../include/left.php";
+                        ?>
+                    </ul>
+                </div>
+            </aside>
+            <br/>
+            <section id="info" align="center" style="padding-top: 5%;">
+                <span>Món mới</span>
+                <div style="margin-left: 7%;">
+                    <?php
+                    include "../include/connect.inc";
+                    $sql        =    "select * from tblmon where conHang = 'O' limit 0, 12";
+                    $rs         =    mysqli_query($conn, $sql);
+                    while ($row = mysqli_fetch_array($rs)) {
+                    ?>
+                        <div id="mon">
+                            <p id="tenMon"><a href="#" values="<?= $row["tenMon"] ?>"><?= $row["tenMon"] ?></a></p>
+                            <img id="hinhAnh" src="../uploads/<?= $row["hinhAnh"] ?>">
+                            <p id="donGia">Đơn giá: <span><?= $row["gia"] ?>VND</span></p>
+                            <a href='hauGioHang.php?id=<?= $row["idMon"] ?>' title="Thêm vào giỏ hàng"><img id="nutmuahang" src="../img/Chonmua.png"></a>
+                        </div>
+                    <?php } ?>
+            </section>
+            <div style="padding-top: 70%;">
+                <footer>
+                    <div style="text-align: center;">
+                        <p>Liên hệ: Rabbit House Coffee<br />
+                            〒542-0081 3-1 Minamisenba, Chuo-ku, Osaka-shi, Osaka<br />
+                            Tel/Fax: 03-6472-xxxx<br />
+                            Mobile: 090-3176-4xxx<br />
+                            E-mail: info@dragoninc.co.jp</p>
+                        <p>🄫 2021 Power by Dragon Inc</p>
+                    </div>
+                </footer>
+            </div>
 </body>
 
 </html>

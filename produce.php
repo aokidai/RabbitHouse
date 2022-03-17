@@ -27,9 +27,8 @@ if (isset($_SESSION["username"])) {
 <style>
   #mon {
     width: 240px;
-    height: 320px;
     margin: 3px;
-    margin-top: 100px;
+    margin-top: 20px;
     text-align: center;
     float: left;
   }
@@ -77,7 +76,6 @@ if (isset($_SESSION["username"])) {
 
   #ttLoai {
     display: block;
-    padding-left: 18%;
     text-align: center;
     font-family: 'Times New Roman', Times, serif;
     font-size: 40px;
@@ -157,25 +155,7 @@ if (isset($_SESSION["username"])) {
     }(document, 'script', 'facebook-jssdk'));
   </script>
   <header>
-    <div>
-      <div id="logo"><a href="./index2.php" title="Trang chủ"><img src="./img/logo.png"></a></div>
-      <div id="menu">
-        <ul>
-          <li><a href="./giohang.php" title="Giỏ hàng những món đã chọn">Giỏ hàng</a></li>
-          <li><a href="./produce.php" title="Xem các sản phẩm theo loại">Sản phẩm</a></li>
-          <li><a href="./information.php" title="Thông tin tài khoản">Thông tin</a></li>
-          <li style="width: 200px;"><a href="./index.php" title="Đăng xuất">Chào:
-              <?php include "./include/connect.inc";
-              $sql090 = "select tenKH from tblkhachhang where idKhachhang = '$idKhachhang'";
-              $rs090 = mysqli_query($conn, $sql090);
-              $row090 = mysqli_fetch_array($rs090);
-              $hoTen = $row090["tenKH"];
-              echo $hoTen;
-              ?>
-            </a>
-          </li>
-        </ul>
-      </div>
+    <?php include "./header.php"; ?>
       <div> <br /><br /><br />
         <div align="center">
           <form action="produce.php" method="GET">
@@ -224,6 +204,7 @@ if (isset($_SESSION["username"])) {
         </ul>
       </div>
     </aside>
+    <br/>
     <section id="info" align="center" style="padding-top: 5%;">
       <span>Món mới</span>
       <div style="margin-left: 7%;">
