@@ -341,7 +341,7 @@ if (isset($_SESSION["username"])) {
                 <- </button>
                     <button class="btn btn-success" type="submit" name="giaohang" style="margin-bottom: 20px; float: right; margin-right: 2%;">Giao hàng</button>
                     <div class="table-responsive table-bordered">
-                        <table class="table" align="center">
+                        <table class="table" style="width:97%" align="center">
                             <?php
                             $sql        =    "select * from tblchitiethd where idChitiet = $id";
                             $rs         =    mysqli_query($conn, $sql);

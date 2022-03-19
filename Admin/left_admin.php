@@ -8,7 +8,7 @@
 						<a href="../Admin/list_loai.php">Danh mục loại món</a>
 					</li>
 					<li><a href="../Admin/list_mon.php">Danh mục món</a></li>
-					<li><a href="../Admin/list_kho.php">Danh mục kho</a></li>
+					<li><a href="../Admin/list_kho.php?page=1">Danh mục kho</a></li>
 				</ul>
 				<!-- /.nav-second-level -->
 			</li>

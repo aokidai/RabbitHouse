@@ -85,7 +85,7 @@
                                                                                                                             ?></a>
                 <div class="dropdown-content">
                     <a href="information.php" title="Thông tin của nhân viên và đổi mật khẩu.">Thông tin</a>
-                    <a href="xuatkho.php" title="Kiểm tra và xuất kho khi hết hàng hóa bên ngoài.">Xuất kho</a>
+                    <a href="xuatkho.php" title="Kiểm tra và xuất kho khi hết hàng hóa bên ngoài.">Quản lí kho</a>
                     <a href="lichsu.php" title="Lịch sử bán hàng của nhân viên.">Lịch sử</a>
                     <a href="report.php" title="Báo cáo lại cho quản lí biết về các vấn đề.">Phản hồi</a>
                     <a href="tmppage.php" title="Chấm công và đăng xuất">Đăng xuất</a>

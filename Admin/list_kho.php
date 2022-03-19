@@ -1,7 +1,9 @@
 <?php
 session_start();
-if (isset($_SESSION["username"]))
+if (isset($_SESSION["username"])){
     $username    =    $_SESSION["username"];
+    unset($_SESSION["pages"]);;
+    }
 else
     header("location:login.php");
 ?>
@@ -105,7 +107,7 @@ else
                             <button type="button" class="btn btn-success" style="margin-bottom: 20px" onClick="javascript:window.location.href='insert_kho.php'" title="Nhập tay các hàng hóa, chỉ sử dụng để bổ sung ít hàng.">Thêm hàng</button>
                             <button type="button" class="btn btn-success" style="margin-bottom: 20px" onClick="javascript:window.location.href='import_kho.php'" title="Nhập hàng hóa tự động bằng file text.">Thên hàng tự động</button>
                             <button type="submit" class="btn btn-success" style="margin-bottom: 20px; background-color: red;">Xóa hàng</button>
-                            <button onClick="window.location.reload();" class="btn btn-success" style="margin-bottom: 20px; float: right; margin-right: 2%; background-color: aqua; color: black">Tải lại dữ liệu</button>
+                            <button type="button" onClick="javascript:window.location.href='list_kho.php?page=1'" class="btn btn-success" style="margin-bottom: 20px; float: right; margin-right: 2%; background-color: aqua; color: black">Tải lại dữ liệu</button>
                         </div>
 
                         <!-- /.col-lg-12 -->
@@ -136,11 +138,12 @@ else
                             </script>
                             <tbody> <?php
                                     include("../include/connect.inc");
+                                    $_SESSION["pages"]       =    $_GET["page"];
                                     $sql        =    "select * from tblkho";
                                     $rs         =    mysqli_query($conn, $sql);
                                     $count        =    mysqli_num_rows($rs);
                                     // Hiển thị
-                                    $pageSize = 5;
+                                    $pageSize = 10;
                                     $pos         =    (!isset($_GET["page"])) ? 0 : ($_GET["page"] - 1) * $pageSize;
                                     $sql        =    "select * from tblkho limit $pos, $pageSize";
                                     $rs         =    mysqli_query($conn, $sql);
@@ -158,17 +161,17 @@ else
                                         $row99 = mysqli_fetch_array($rs99);
                                         $hoTenNV = $row99["hoTen"];
                                         echo " <tr>
-														<td><input type='checkbox' class='chk_box1' name='check_list[]' value='" . $row["idKho"] . "'></td>
-														<td>$i</td>
-														<td>" . $row["tenHang"] . "</td>
-                                                        <td>" . $row["soLuongBD"] . "</td>
-                                                        <td>" . $row["soLuongCL"] . "</td>
-                                                        <td>" . $row["thoiGianNK"] . "</td>
-                                                        <td>$tgXKtmp</td>
-                                                        <td>$soTien</td>
-                                                        <td>$hoTenNV</td>
-														<td><a href='edit_kho.php?id=" . $row["idKho"] . "'>Sửa</a></td>
-														</tr>";
+                                                <td><input type='checkbox' class='chk_box1' name='check_list[]' value='" . $row["idKho"] . "'></td>
+                                                <td>$i</td>
+                                                <td>" . $row["tenHang"] . "</td>
+                                                <td>" . $row["soLuongBD"] . "</td>
+                                                <td>" . $row["soLuongCL"] . "</td>
+                                                <td>" . $row["thoiGianNK"] . "</td>
+                                                <td>$tgXKtmp</td>
+                                                <td>$soTien</td>
+                                                <td>$hoTenNV</td>
+                                                <td><a href='edit_kho.php?id=" . $row["idKho"] . "'>Sửa</a></td>
+                                                </tr>";
                                         $i++;
                                     }
                                     ?> <?php
@@ -183,8 +186,9 @@ else
                                 <tr>
                                     <th colspan="4">
                                         <?php
-                                        for ($i = 1; $i <= ceil($count / $pageSize); $i++)
+                                        for ($i = 1; $i <= ceil($count / $pageSize); $i++){
                                             echo "<a href='list_kho.php?page=$i'>" . $i . "</a>&nbsp&nbsp";
+                                        }
                                         ?>
                                     </th>
                                 </tr>

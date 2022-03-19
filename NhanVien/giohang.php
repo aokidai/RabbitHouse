@@ -341,7 +341,7 @@ if (isset($_SESSION["username"])) {
         <br /><br />
         <form method="post" action="giohang.php">
             <div class="table-responsive table-bordered">
-                <table class="table" align="center">
+                <table class="table" style="width:97%" align="center">
                     <thead>
                         <tr>
                             <th><input type="checkbox" name="checkbox" class="chk_box"></th>

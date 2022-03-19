@@ -158,6 +158,8 @@ else
                             }
                             fclose($txt_file);
                             $status = unlink($openFileNew);
+                            $sqlDelete = "delete from tblkhotmp";
+                            $rsDelete = mysqli_query($conn, $sqlDelete);
                             if (!$status) {
                                 echo "<script>alert('Error:Delete File')</script>";
                             }

@@ -338,7 +338,7 @@ if (isset($_SESSION["username"])) {
             <button type="submit" class="btn btn-success" name="xoahang" style="margin-bottom: 20px; background-color: red; float: left; margin-left: 10px">Xóa hàng</button>
             <button onClick="window.location.reload();" class="btn btn-success" style="margin-bottom: 20px; float: right; margin-right: 2%; background-color: aqua; color: black">Tải lại dữ liệu</button>
             <div class="table-responsive table-bordered">
-                <table class="table" align="center">
+                <table class="table" style="width: 97%;" align="center">
                     <thead>
                         <tr>
                             <th><input type="checkbox" name="checkbox" class="chk_box" onClick="toggle(this)"></th>

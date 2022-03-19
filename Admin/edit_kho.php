@@ -1,7 +1,8 @@
 <?php
 session_start();
-if (isset($_SESSION["username"]))
+if (isset($_SESSION["username"])){
     $username    =    $_SESSION["username"];
+    $pages = $_SESSION["pages"];}
 else
     header("location:login.php");
 ?>
@@ -104,10 +105,10 @@ else
                     $tenHang        =    $_POST["txtTenHang"];
                     $soLuong        =    $_POST["txtSoLuong"];
                     $soTien         =    $_POST["txtSoTien"];
-                    $sql            =    "update tblkho set soTien = '$soTien', tenHang = '$tenHang', soLuongBD = '$soLuong', soLuongCL = '$soLuong' where idKho=$id";
+                    $sql            =    "update tblkho set soTien = '$soTien', tenHang = '$tenHang', soLuongBD = '$soLuong' where idKho=$id";
                     $rs             =    mysqli_query($conn, $sql);
                     if ($rs)
-                        echo "<script>window.location.href='list_kho.php'</script>";
+                        echo "<script>window.location.href='list_kho.php?page=$pages'</script>";
                     else echo "<script>alert('Error!')</script>";
                 } else {
                     $id         =    $_GET["id"];

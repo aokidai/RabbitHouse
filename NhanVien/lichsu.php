@@ -343,7 +343,7 @@ if (isset($_SESSION["username"])) {
 	  <div><span style="font-size: 20px; color: red">Trạng thái gia hàng được biểu diển bởi kí tự X và O. X là chưa giao hàng còn O là đã giao hàng.</span></div>
 	  <form method="post" action="lichsu.php">
 		 <div class="table-responsive table-bordered">
-				<table class="table" align="center">
+				 <table class="table" style="width:97%" align="center">
 					<thead>
 						<tr>
 							<th><input type="checkbox" name="checkbox" class="chk_box"></th>

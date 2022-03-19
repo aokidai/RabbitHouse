@@ -324,9 +324,10 @@ if (isset($_SESSION["username"])) {
         <form method="post" action="xuatkho.php">
             <span>Xuất Kho Hàng Hóa</span><br />
             <button type="submit" class="btn btn-success" name="xuatkho" style="margin-bottom: 20px; float: left; margin-left: 2%;" title="Nếu nguyên liệu dùng để làm món cho khách hàng bị hết, nhân viên hãy chọn vào nguyên liệu đó và nhấn Xuất kho trước ngay khi lấy hàng ra khổi kho">Xuất kho</button>
-            <label style="margin-bottom: 20px; font-size: 15px; font-weight: bold; float: right; margin-right: 2%; color: red" title="Mỗi lần xuất kho là 1Kg. Số lượng ban đầu và số lượng còn lại cũng được tính theo đơn vị Kg. Khi nhân viên nhận thấy hết nguyên liệu, nhân viên phải vào đây để cập nhật khi lấy hàng mới.">(?)</label>
+            <label style="margin-bottom: 20px; font-size: 15px; font-weight: bold; float: left; margin-left: 5px; margin-top: 7px; color: red" title="Mỗi lần xuất kho là 1Kg. Số lượng ban đầu và số lượng còn lại cũng được tính theo đơn vị Kg. Khi nhân viên nhận thấy hết nguyên liệu, nhân viên phải vào đây để cập nhật khi lấy hàng mới.">(?)</label>
+            <button type="button" class="btn btn-success" onClick="javascript:window.location.href='check_mon.php'" style="margin-bottom: 20px; font-size: 15px; font-weight: bold; float: right; margin-right: 2%; background-color: red; color: white" title="Trường hợp món hết hàng, nhân viên vào đây để chuyển trạng thái món sang hết hàng">Trạng thái món</button>
             <div class="table-responsive table-bordered">
-                <table class="table" align="center">
+                <table class="table" style="width:97%" align="center">
                     <thead>
                         <tr>
                             <th><input type="checkbox" name="checkbox" class="chk_box" onClick="toggle(this)"></th>

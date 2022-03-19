@@ -3,7 +3,6 @@ session_start();
 if (isset($_SESSION["username"])) {
     $username    =    $_SESSION["username"];
     $idKhachhang = $_SESSION["idStaff"];
-    unset($_SESSION["ThoiGian"]);
 } else
     header("location:../login.php");
 ?>
@@ -255,26 +254,9 @@ if (isset($_SESSION["username"])) {
         margin-left: 18%;
     }
 </style>
-<script type="text/javascript">
-    const reloadtButton = document.querySelector("#reload");
-    // Reload everything:
-    function reload() {
-        reload = location.reload();
-    }
-    // Event listeners for reload
-    reloadButton.addEventListener("click", reload, false);
-</script>
 
 <body>
-    <?php
-    $user = $username;
-    include "../include/connect.inc";
-    $sql0000 = "select idStaff from tblstaff where username = '$user'";
-    $rs0000 = mysqli_query($conn, $sql0000);
-    $row0000 = mysqli_fetch_array($rs0000);
-    $idStaff = $row0000["idStaff"];
-    ?>
-
+    <?php $user = $username ?>
     <!-- Messenger Plugin chat Code -->
     <div id="fb-root"></div>
 
@@ -305,123 +287,109 @@ if (isset($_SESSION["username"])) {
     </script>
     <header>
         <?php include "./header.php"; ?>
-            <div> <br /><br /><br />
-                <div align="center">
-                    <form action="doanhthu.php" method="GET">
-                        <input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
-                        <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
-                    </form>
-                </div>
-                <script type="text/javascript">
-                    $(function() {
-                        $("#searchbar").autocomplete({
-                            source: 'ajax-mon-search.php',
-                        });
-                    });
-                </script>
-                <br />
-                <?php
-                if (isset($_GET["txtsearchMon"])) {
-                    $searchMon = $_GET["txtsearchMon"];
-                    $sql = "select idMon, tenMon from tblmon where tenMon like '%$searchMon%' and conHang = 'O'";
-                    $rs = mysqli_query($conn, $sql);
-                    while ($row = mysqli_fetch_assoc($rs)) {
-                        //echo "<div id='link' onClick='addText(\"".$row['tenMon']."\");'>" . $row['tenMon'] . "</div>"; 
-                        echo "<script>window.location.href='search.php?id=" . $row["idMon"] . "'</script>";
-                    }
-                    $tmp = $_GET["txtsearchMon"];
-                    if ($tmp == $searchMon) {
-                        echo ("<span style=\"text-align:center; color:red; font-size: 30px\"><center>Không có sản phẩm đó!</center></span>");
-                    }
-                }
-                ?>
+        <div> <br /><br /><br />
+            <div align="center">
+                <form action="xuatkho.php" method="GET">
+                    <input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
+                    <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
+                </form>
             </div>
+            <script type="text/javascript">
+                $(function() {
+                    $("#searchbar").autocomplete({
+                        source: 'ajax-mon-search.php',
+                    });
+                });
+            </script>
+            <br />
+            <?php
+            include "../include/connect.inc";
+            if (isset($_GET["txtsearchMon"])) {
+                $searchMon = $_GET["txtsearchMon"];
+                $sql = "select idMon, tenMon from tblmon where tenMon like '%$searchMon%' and conHang = 'O'";
+                $rs = mysqli_query($conn, $sql);
+                while ($row = mysqli_fetch_assoc($rs)) {
+                    //echo "<div id='link' onClick='addText(\"".$row['tenMon']."\");'>" . $row['tenMon'] . "</div>"; 
+                    echo "<script>window.location.href='search.php?id=" . $row["idMon"] . "'</script>";
+                }
+                $tmp = $_GET["txtsearchMon"];
+                if ($tmp == $searchMon) {
+                    echo ("<span style=\"text-align:center; color:red; font-size: 30px\"><center>Không có sản phẩm đó!</center></span>");
+                }
+            }
+            ?>
+        </div>
     </header>
     <section id="info" align="center">
-        <form method="post" action="doanhthu.php">
-            <span>Doanh Thu của <?= $hoTen ?></span><br />
-            <button onClick="window.location.reload();" class="btn btn-success" style="margin-bottom: 20px; float: right; margin-right: 2%; background-color: aqua; color: black">Tải lại dữ liệu</button>
-            <form action="doanhthu.php" method="post">
-                <div style="float: left; margin-left: 20px">
-                    <label for="Manufacturer">Chọn thời gian: </label>
-                    <select id="cmbThoiGian" name="ThoiGian">
-                        <?php
-                        error_reporting(E_ERROR | E_PARSE);
-                        include("../include/connect.inc");
-                        $sql        =    "select DISTINCT ngay from tbldoanhthu";
-                        $rs         =    mysqli_query($conn, $sql);
-                        while ($row = mysqli_fetch_array($rs)) {
-                            $ngay = $row["ngay"];
-                            echo " 
-											<option value=" . $row["ngay"] . ">" . $row["ngay"] . "</option>
-										";
-                        }
-                        ?>
-                    </select>
-                    <input type="submit" name="xemDS" value="Xem danh sách" />
-                </div>
-                <br /><br />
-                <div style="float: left; margin-left: 20px">
-                    <?php
-                    $ngaythang = $_POST['ThoiGian'];
-                    ?>
-                    <label for="Manufacturer" style="color: red; font-weight: bold;">Thời gian đã chọn: </label> <?= $ngaythang ?>
-                </div>
-            </form>
+        <form method="post" action="check_mon.php">
+            <span>Trạng thái món</span><br />
+            <button type="submit" class="btn btn-success" name="hethang" style="margin-bottom: 20px; float: left; margin-left: 2%;" title="Trong trường hợp hàng trong kho hết làm việc chế biến ra món đó bị gián đoạn thì món đó sẽ vào trạng thái hết hàng. Trường hợp hàng vào kho đã đủ, hàng sẽ được cập nhật lại nên có thể pha chế món đó.">Hết hàng? Có hàng?</button>
             <div class="table-responsive table-bordered">
                 <table class="table" style="width:97%" align="center">
                     <thead>
                         <tr>
                             <th><input type="checkbox" name="checkbox" class="chk_box" onClick="toggle(this)"></th>
                             <th>STT</th>
-                            <th>Ngày tháng</th>
-                            <th>Số lượng</th>
-                            <th>Thành tiền</th>
+                            <th>Tên món</th>
+                            <th>Giá</th>
+                            <th>Hình ảnh</th>
+                            <th>Trạng thái hiện tại</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         include("../include/connect.inc");
-                        if (isset($_POST['xemDS'])) {
-                            $tmp = $_POST['ThoiGian'];
-                            $_SESSION["ThoiGian"] = $tmp;
-                            $TongTien = 0;
-                            $sql00 = "select idChiTiet from tblchitiethd where idStaff = '$idStaff'";
-                            $rs00 = mysqli_query($conn, $sql00);
-                            while ($row00 = mysqli_fetch_array($rs00)) {
-                                $idCT = $row00["idChiTiet"];
-                                $sql2        =    "select * from tbldoanhthu where ngay = '$tmp' and idChiTiet = '$idCT'";
-                                $rs2        =    mysqli_query($conn, $sql2);
-                                $i            =    1;
-                                while ($row2 = mysqli_fetch_array($rs2)) {
-                                    error_reporting(E_ERROR | E_PARSE);
-                                    $TongTien = $TongTien + ($row2["thanhTien"]);
-                                    echo " <tr>
-                                        <td><input type='checkbox' class='chk_box1' name='check_list[]' value='" . $row["idDoanhThu"] . "'></td>
-                                        <td>$i</td>
-                                        <td>" . $row2["ngay"] . "</td>
-                                        <td>" . $row2["tongSL"] . "</td>
-                                        <td>" . $row2["thanhTien"] . "</td>
-                                        </tr>";
-                                    $i++;
+                        $sql        =    "select * from tblmon";
+                        $rs         =    mysqli_query($conn, $sql);
+                        $count        =    mysqli_num_rows($rs);
+                        // Hiển thị
+                        $pageSize = 5;
+                        $pos         =    (!isset($_GET["page"])) ? 0 : ($_GET["page"] - 1) * $pageSize;
+                        $sql        =    "select * from tblmon limit $pos, $pageSize";
+                        $rs         =    mysqli_query($conn, $sql);
+                        $i            =    1;
+                        while ($row = mysqli_fetch_array($rs)) {
+                            $trangThai = $row["conHang"];
+                            if ($trangThai == "X") {
+                                $trangThai2 = "Hết";
+                            } else $trangThai2 = "Còn";
+                            echo " <tr>
+                                    <td><input type='checkbox' class='chk_box1' name='check_list[]' value='" . $row["idMon"] . "'></td>
+                                    <td>$i</td>
+                                    <td>" . $row["tenMon"] . "</td>
+                                    <td>" . $row["gia"] . "</td>
+                                    <td><img src='../uploads/" . $row["hinhAnh"] . "' width=100 height=100></td>
+                                    <td>$trangThai2</td>
+                                    </tr>";
+                            $i++;
+                        }
+                        ?>
+                        <?php
+                        if (isset($_POST["hethang"])) {
+                            if (!empty($_POST['check_list'])) {
+                                foreach ($_POST['check_list'] as $check) {
+                                    $sqlCheck = "select conHang from tblmon where idMon = '$check'";
+                                    $rsCheck = mysqli_query($conn, $sqlCheck);
+                                    $rowCheck = mysqli_fetch_array($rsCheck);
+                                    $trangThaitmp = $rowCheck["conHang"];
+                                    if ($trangThaitmp == "O") {
+                                        $sql9 = "update tblmon set conHang = 'X' where idMon = '$check'";
+                                        $rs = mysqli_query($conn, $sql9);
+                                    } else {
+                                        $sql9 = "update tblmon set conHang = 'O' where idMon = '$check'";
+                                        $rs = mysqli_query($conn, $sql9);
+                                    }
                                 }
+                                echo "<script>alert('Đã cập nhật')</script>";
+                                echo "<script>window.location.href='check_mon.php'</script>";
                             }
                         }
                         ?>
                     </tbody>
                     <tr>
-                        <th colspan="4">Tổng doanh thu:</th>
-                        <th>
-                            <?php
-                            error_reporting(E_ERROR | E_PARSE);
-                            echo $TongTien;
-                            ?>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th colspan="5">
-                            <label style="background-color: #f2f2f2; width: 150px; border-radius: 10px;"><a href="./export_doanhthu.php">🖨️ Xuất Excel</a></label>
-                        </th>
+                        <td colspan="8">
+                            <button type="submit" class="btn btn-success" name="xuatkho" title="Nếu nguyên liệu dùng để làm món cho khách hàng bị hết, nhân viên hãy chọn vào nguyên liệu đó và nhấn Xuất kho trước ngay khi lấy hàng ra khổi kho">Xuất kho</button>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -436,16 +404,16 @@ if (isset($_SESSION["username"])) {
         </script>
     </section>
     </section>
-    <div style="padding-top: 15%;">
+    <div style="padding-top: 1%;">
         <footer>
-           <div style="text-align: center;">
-        <p>Liên hệ: Rabbit House Coffee<br />
-          〒542-0081 3-1 Minamisenba, Chuo-ku, Osaka-shi, Osaka<br />
-          Tel/Fax: 03-6472-xxxx<br />
-          Mobile: 090-3176-4xxx<br />
-          E-mail: info@dragoninc.co.jp</p>
-        <p>🄫 2021 Power by Dragon Inc</p>
-      </div>
+            <div style="text-align: center;">
+                <p>Liên hệ: Rabbit House Coffee<br />
+                    〒542-0081 3-1 Minamisenba, Chuo-ku, Osaka-shi, Osaka<br />
+                    Tel/Fax: 03-6472-xxxx<br />
+                    Mobile: 090-3176-4xxx<br />
+                    E-mail: info@dragoninc.co.jp</p>
+                <p>🄫 2021 Power by Dragon Inc</p>
+            </div>
         </footer>
     </div>
 </body>
