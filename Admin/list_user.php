@@ -1,7 +1,9 @@
 <?php
 session_start();
-if (isset($_SESSION["username"]))
+if (isset($_SESSION["username"])){
     $username    =    $_SESSION["username"];
+    unset($_SESSION["pages"]);;
+    }
 else
     header("location:login.php");
 ?>
@@ -128,6 +130,7 @@ else
                             <tbody>
                                 <?php
                                 include("../include/connect.inc");
+                                $_SESSION["pages"]       =    $_GET["page"];
                                 $sql        =    "select * from tblstaff";
                                 $rs         =    mysqli_query($conn, $sql);
                                 $count        =    mysqli_num_rows($rs);

@@ -1,7 +1,8 @@
 <?php
 session_start();
-if (isset($_SESSION["username"]))
+if (isset($_SESSION["username"])){
     $username    =    $_SESSION["username"];
+    $pages = $_SESSION["pages"];}
 else
     header("location:login.php");
 ?>
@@ -108,7 +109,7 @@ else
                     $sql = "update tblstaff set hoTen = '$hoTen', soDT = '$SoDT', username= '$user' where idStaff=$id";
                     $rs = mysqli_query($conn, $sql);
                     if ($rs)
-                        echo "<script>window.location.href='list_user.php'</script>";
+                        echo "<script>window.location.href='list_user.php?page=$pages'</script>";
                 } else if(isset($_POST['reset'])){
                     $id = $_POST["txtid"];
                     $user =  $_POST["txtUser"];
@@ -119,7 +120,7 @@ else
                     $rs =  mysqli_query($conn, $sql);
                     if ($rs)
                         echo "<script>alert('Đã reset mật khẩu!')</script>";
-                    echo "<script>window.location.href='list_user.php'</script>";
+                    echo "<script>window.location.href='list_user.php?page=$pages'</script>";
                 }  else {
                     $id = $_GET["id"];
                     $sql = "select * from tblstaff where idStaff=$id";

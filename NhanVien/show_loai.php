@@ -26,9 +26,8 @@ if (isset($_SESSION["username"])) {
 <style>
     #mon {
         width: 240px;
-        height: 320px;
         margin: 3px;
-        margin-top: 100px;
+        margin-top: 20px;
         text-align: center;
         float: left;
     }
@@ -250,7 +249,34 @@ if (isset($_SESSION["username"])) {
         font-family: 'Times New Roman', Times, serif;
         font-size: 40px;
         font-weight: bold;
-        margin-left: 18%;
+    }
+
+    #menu2 a {
+        text-decoration: none;
+        color: #000;
+        display: block;
+    }
+
+    #menu2 a:hover {
+        background: #F1F1F1;
+        color: #333;
+    }
+
+    #menu2 ul {
+
+        list-style-type: none;
+        text-align: center;
+
+    }
+
+    #menu2 li {
+        display: list-item;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        list-style-position: unset;
+        display: inline-block;
+        list-style-type: none;
+        margin-left: -2px;
     }
 </style>
 
@@ -286,40 +312,40 @@ if (isset($_SESSION["username"])) {
     </script>
     <header>
         <?php include "./header.php"; ?>
-            <div> <br /><br /><br />
-                <div align="center">
-                    <form action="show_loai.php" method="GET">
-                        <input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
-                        <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
-                    </form>
-                </div>
-                <script type="text/javascript">
-                    $(function() {
-                        $("#searchbar").autocomplete({
-                            source: 'ajax-mon-search.php',
-                        });
-                    });
-                </script>
-                <br />
-                <?php
-                include "../include/connect.inc";
-                if (isset($_GET["txtsearchMon"])) {
-                    $searchMon = $_GET["txtsearchMon"];
-                    $sql = "select idMon, tenMon from tblmon where tenMon like '%$searchMon%' and conHang = 'O'";
-                    $rs = mysqli_query($conn, $sql);
-                    while ($row = mysqli_fetch_assoc($rs)) {
-                        //echo "<div id='link' onClick='addText(\"".$row['tenMon']."\");'>" . $row['tenMon'] . "</div>"; 
-                        echo "<script>window.location.href='search.php?id=" . $row["idMon"] . "'</script>";
-                    }
-                    $tmp = $_GET["txtsearchMon"];
-                    if ($tmp == $searchMon) {
-                        echo ("<span style=\"text-align:center; color:red; font-size: 30px\"><center>Không có sản phẩm đó!</center></span>");
-                    }
-                }
-
-                ?>
-
+        <div> <br /><br /><br />
+            <div align="center">
+                <form action="show_loai.php" method="GET">
+                    <input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
+                    <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
+                </form>
             </div>
+            <script type="text/javascript">
+                $(function() {
+                    $("#searchbar").autocomplete({
+                        source: 'ajax-mon-search.php',
+                    });
+                });
+            </script>
+            <br />
+            <?php
+            include "../include/connect.inc";
+            if (isset($_GET["txtsearchMon"])) {
+                $searchMon = $_GET["txtsearchMon"];
+                $sql = "select idMon, tenMon from tblmon where tenMon like '%$searchMon%' and conHang = 'O'";
+                $rs = mysqli_query($conn, $sql);
+                while ($row = mysqli_fetch_assoc($rs)) {
+                    //echo "<div id='link' onClick='addText(\"".$row['tenMon']."\");'>" . $row['tenMon'] . "</div>"; 
+                    echo "<script>window.location.href='search.php?id=" . $row["idMon"] . "'</script>";
+                }
+                $tmp = $_GET["txtsearchMon"];
+                if ($tmp == $searchMon) {
+                    echo ("<span style=\"text-align:center; color:red; font-size: 30px\"><center>Không có sản phẩm đó!</center></span>");
+                }
+            }
+
+            ?>
+
+        </div>
     </header>
     <div id="body">
         <div id="photo">
@@ -377,16 +403,16 @@ if (isset($_SESSION["username"])) {
         <article>
             </br>
             <aside>
-                <div id="menu" align="center">
+                <div id="menu2" align="center">
                     <span id="ttLoai">Loại món </span>
-                    <ul style="margin-right: 22%; padding-top: 5px">
+                    <ul style="padding-top: 5px">
                         <?php
                         include "../include/left.php";
                         ?>
                     </ul>
                 </div>
             </aside>
-            <section id="info" align="center" style="padding-top: 5%;">
+            <section id="info" align="center">
                 <span>Món theo loại</span>
                 <?php
                 include "../include/connect.inc";
@@ -397,35 +423,31 @@ if (isset($_SESSION["username"])) {
                 if ($count > 0)
                     while ($row = mysqli_fetch_array($rs)) {
                 ?>
-                    <table align="center">
-                        <tr>
-                            <td>
-                                <div id="mon" style="margin-top: 20px">
-                                    <p id="tenMon"><a href="#"><?= $row["tenMon"] ?></a></p>
-                                    <img id="hinhAnh" src="../uploads/<?= $row["hinhAnh"] ?>">
-                                    <p id="donGia">Đơn giá: <span><?= $row["gia"] ?>VND</span></p>
-                                    <a href='hauGioHang.php?id=<?= $row["idMon"] ?>' title="Thêm vào giỏ hàng"><img id="nutmuahang" src="../img/Chonmua.png"></a>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
+                 <div style="margin-left: 10%;">
+                    <div id="mon" style="margin-top: 20px">
+                        <p id="tenMon"><a href="#"><?= $row["tenMon"] ?></a></p>
+                        <img id="hinhAnh" src="../uploads/<?= $row["hinhAnh"] ?>">
+                        <p id="donGia">Đơn giá: <span><?= $row["gia"] ?>VND</span></p>
+                        <a href='hauGioHang.php?id=<?= $row["idMon"] ?>' title="Thêm vào giỏ hàng"><img id="nutmuahang" src="../img/Chonmua.png"></a>
+                    </div>
+                    </div>
                 <?php }
                 else
                     echo "<center><span style='margin-top:30px; font-size:30px; color:red'>Hiện tại không có món nào!</span></center>";
                 ?>
-                </br></br>
+               
             </section>
         </article>
-        <div style="padding-top: 15%;">
+        <div style="padding-top: 45%;">
             <footer>
-               <div style="text-align: center;">
-        <p>Liên hệ: Rabbit House Coffee<br />
-          〒542-0081 3-1 Minamisenba, Chuo-ku, Osaka-shi, Osaka<br />
-          Tel/Fax: 03-6472-xxxx<br />
-          Mobile: 090-3176-4xxx<br />
-          E-mail: info@dragoninc.co.jp</p>
-        <p>🄫 2021 Power by Dragon Inc</p>
-      </div>
+                <div style="text-align: center;">
+                    <p>Liên hệ: Rabbit House Coffee<br />
+                        〒542-0081 3-1 Minamisenba, Chuo-ku, Osaka-shi, Osaka<br />
+                        Tel/Fax: 03-6472-xxxx<br />
+                        Mobile: 090-3176-4xxx<br />
+                        E-mail: info@dragoninc.co.jp</p>
+                    <p>🄫 2021 Power by Dragon Inc</p>
+                </div>
             </footer>
         </div>
 </body>

@@ -1,7 +1,8 @@
 <?php
 session_start();
-if (isset($_SESSION["username"]))
+if (isset($_SESSION["username"])){
     $username    =    $_SESSION["username"];
+    $pages = $_SESSION["pages"];}
 else
     header("location:login.php");
 ?>
@@ -123,7 +124,7 @@ else
                             unlink("../uploads/" . $_POST["txtHinh"]);
                             move_uploaded_file($name_tmp, "../uploads/" . $image);
                         }
-                        echo "<script>window.location.href='list_mon.php'</script>";
+                        echo "<script>window.location.href='list_mon.php?page=$pages'</script>";
                     } else
                         echo "<script>alert('Thêm món không thành công')</script>";
                 } else {

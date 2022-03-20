@@ -1,7 +1,8 @@
 <?php
 session_start();
-if (isset($_SESSION["username"]))
+if (isset($_SESSION["username"])){
     $username    =    $_SESSION["username"];
+    $pages = $_SESSION["pages"];}
 else
     header("location:login.php");
 ?>
@@ -106,7 +107,7 @@ else
                     $sql            =    "update tblloai set  tenLoai= '$tenLoai' where idLoai=$id";
                     $rs             =    mysqli_query($conn, $sql);
                     if ($rs)
-                        echo "<script>window.location.href='list_loai.php'</script>";
+                        echo "<script>window.location.href='list_loai.php?page=$pages'</script>";
                 } else {
                     $id            =    $_GET["id"];
                     $sql        =    "select * from tblloai where idLoai=$id";

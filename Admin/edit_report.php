@@ -1,7 +1,8 @@
 <?php
 session_start();
-if (isset($_SESSION["username"]))
+if (isset($_SESSION["username"])){
     $username    =    $_SESSION["username"];
+    $pages = $_SESSION["pages"];}
 else
     header("location:login.php");
 ?>
@@ -108,7 +109,7 @@ else
                 $noiDung = $row["vanDe"];
                 $hoTenNV = $row["hoTenNV"];
                 if(isset($_POST["update"]))
-                    echo "<script>window.location.href='list_report.php'</script>";
+                    echo "<script>window.location.href='list_report.php?page=$pages'</script>";
                 ?>
                 <form method="post">
                     <table class="table table-striped table-bordered table-hover" style="width:80%" align="center">
