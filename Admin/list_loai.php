@@ -71,11 +71,13 @@
                             <i class="fa fa-user fa-fw"></i><?=$hoTenNVtmp?><b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-							<li><a href="#"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a>
-                            </li>
+                            <li><a href="./backup/export_data.php"><i class="fa fa-user fa-fw"></i>Xuất dữ liệu</a></li>
                             <li class="divider"></li>
-                            <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a>
-                            </li>
+                            <li><a href="./backup/import_data.php"><i class="fa fa-user fa-fw"></i>Nhập dữ liệu</a></li>
+                            <li class="divider"></li>
+                            <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a></li>
+                            <li class="divider"></li>
+                            <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
                         </ul>
                     </li>
                 </ul>
