@@ -299,7 +299,8 @@ if (isset($_SESSION["username"])) {
 												$diaChi = $row10["diachi"];
 											}
 											$giaoHang = "X";
-											$sql5 = "insert into tblchitiethd(idKhachhang, tongSL, tongTien, ngayThang, diaChiGH, daGH, idMon) values ('$idKhachhang2', '$tongSL', '$tinhtien', '$time_act', '$diaChi', '$giaoHang', '$idMon1')";
+											$idStafftmp = 0;
+											$sql5 = "insert into tblchitiethd(idKhachhang, tongSL, tongTien, ngayThang, diaChiGH, daGH, idMon, idStaff) values ('$idKhachhang2', '$tongSL', '$tinhtien', '$time_act', '$diaChi', '$giaoHang', '$idMon1', '$idStafftmp')";
 											$rs5 = mysqli_query($conn, $sql5);
 											if ($rs5) {
 												$sql44 = "select max(idChiTiet) as idCTHD from tblchitiethd";

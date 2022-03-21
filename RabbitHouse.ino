@@ -17,7 +17,7 @@ DHT dht(DHTPIN, DHTTYPE);
 const char* ssid     = "wifiname";
 const char* password = "passwifi";
 
-const char* serverName = "http://rabbithouse.atwebpages.com/MonNhung/esp_data.php";
+const char* serverName = "http://rabbithousecoffee.onlinewebshop.com/MonNhung/esp_data.php";
 
 String apiKeyValue = "kjsjkhjdhfd";
 
