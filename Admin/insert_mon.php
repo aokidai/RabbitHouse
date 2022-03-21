@@ -114,7 +114,7 @@ else
                     $rs                 =    mysqli_query($conn, $sql);
                     if ($rs) {
                         move_uploaded_file($name_tmp, "../uploads/" . $image);
-                        echo "<script>window.location.href='list_mon.php'</script>";
+                        echo "<script>window.location.href='list_mon.php?page=1'</script>";
                     } else
                         echo "<script>alert('Thêm món không thành công')</script>";
                 } else {

@@ -112,7 +112,7 @@ else
                     values('$tenHang', '$soLuongNK', '$soLuongNK', '$tgNK', '$tgXK', '$idNV', '$soTien')";
                     $rs             =    mysqli_query($conn, $sql);
                     if ($rs)
-                        echo "<script>window.location.href='list_kho.php'</script>";
+                        echo "<script>window.location.href='list_kho.php?page=1'</script>";
                     else echo "<script>alert('Error!')</script>";
                 }
                 ?>

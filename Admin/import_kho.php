@@ -165,7 +165,7 @@ else
                                 echo "<script>alert('Error:Delete File')</script>";
                             }
                             echo "<script>alert('Đã lưu kho')</script>";
-                            echo "<script>window.location.href='list_kho.php'</script>";
+                            echo "<script>window.location.href='list_kho.php?page=1'</script>";
                         } else echo "<script>alert('Error!')</script>";
                     }
                     ?>

@@ -2,7 +2,7 @@
 session_start();
 if (isset($_SESSION["username"])){
     $username    =    $_SESSION["username"];
-    unset($_SESSION["pages"]);;
+    unset($_SESSION["pages"]);
     }
 else
 	header("location:login.php");
@@ -123,10 +123,12 @@ else
 													 window.location.href=strlink;
 											 }
 											</script>
-                                            <tbody
+                                            <tbody>
 												<?php 
 													include("../include/connect.inc"); 
                                                     $_SESSION["pages"]       =    $_GET["page"];
+                                                    $_SESSION["pagesDel"]    =    $_GET["page"];
+                                                    $pageDel = $_SESSION["pagesDel"]; 
 													$sql		=	"select * from tblmon";
 												   	$rs 		=	mysqli_query($conn, $sql);
 												    $count		=	mysqli_num_rows($rs);
@@ -160,7 +162,8 @@ else
 																$sql9 = "delete from tblmon where idMon = '$check'";
 																$rs = mysqli_query($conn, $sql9);
 														}
-														echo"<script>window.location.href='list_mon.php'</script>";
+														echo"<script>window.location.href='list_mon.php?page=$pagesDel'</script>";
+                                                        unset($_SESSION["pagesDel"]);
 													}
 												?>
                                                

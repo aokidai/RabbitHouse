@@ -2,7 +2,7 @@
 session_start();
 if (isset($_SESSION["username"])){
     $username    =    $_SESSION["username"];
-    unset($_SESSION["pages"]);;
+    unset($_SESSION["pages"]);
     }
 else
 	header("location:login.php");

@@ -109,7 +109,7 @@ else
                     $sql            =    "insert into tblStaff(diachi, hoTen, soDT, username, password) values('$diaChi', '$hoTen', '$soDT', '$user', '$pass')";
                     $rs             =    mysqli_query($conn, $sql);
                     if ($rs)
-                        echo "<script>window.location.href='list_user.php'</script>";
+                        echo "<script>window.location.href='list_user.php?page=1'</script>";
                 }
                 ?>
                 <form method="post">

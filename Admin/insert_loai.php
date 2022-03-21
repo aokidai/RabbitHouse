@@ -105,7 +105,7 @@ else
                     $sql            =    "insert into tblloai(tenLoai) values('$tenLoai')";
                     $rs             =    mysqli_query($conn, $sql);
                     if ($rs)
-                        echo "<script>window.location.href='list_loai.php'</script>";
+                        echo "<script>window.location.href='list_loai.php?page=1'</script>";
                 }
                 ?>
                 <form method="post">
