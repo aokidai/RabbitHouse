@@ -114,7 +114,7 @@ else
                                     <th>STT</th>
                                     <th>Họ tên</th>
                                     <th>Username</th>
-                                    <th>Tổng thời gian</th>
+                                    <th>Tổng thời gian (Giờ)</th>
                                     <th>Lương</th>
                                     <th>Sửa</th>
                                     <th>Xóa </th>
