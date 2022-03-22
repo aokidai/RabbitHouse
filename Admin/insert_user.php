@@ -117,15 +117,18 @@ else
                         <tbody>
                             <tr>
                                 <td>Họ tên<span style="color: red">(*)</span>:</td>
-                                <td><input type="text" class="form-control" name="txtHoTen"></td>
+                                <td><input type="text" class="form-control" name="txtHoTen" placeholder="Họ tên nhân viên"></td>
                             </tr>
                             <tr>
                                 <td>Số điện thoại<span style="color: red">(*)</span>:</td>
-                                <td><input type="number" class="form-control" name="txtSoDT"></td>
+                                <td><input type="number" class="form-control" name="txtSoDT" placeholder="090xxxxxxxx"></td>
                             </tr>
                             <tr>
-                                <td>Username<span style="color: red">(*)</span>:</td>
-                                <td><input class="form-control" name="txtUser"></td>
+                                <td>Tên đăng nhập<span style="color: red">(*)</span>:</td>
+                                <td><input class="form-control" name="txtUser" placeholder="Tên tài khoản nhân viên"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Mật khẩu mạc định là: <label style="color: red;">Demo@123</label></td>
                             </tr>
                             <tr align="center">
                                 <td colspan="2"><button type="submit" class="btn btn-primary">Thêm</button> </td>

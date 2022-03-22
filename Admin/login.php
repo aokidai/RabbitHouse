@@ -107,11 +107,11 @@
                         <tbody>
                             <tr>
                                 <td>Tên tài khoản<span style="color: red">(*)</span>:</td>
-                                <td><input type="text" class="form-control" name="txtusername"></td>
+                                <td><input type="text" class="form-control" name="txtusername" placeholder="Tên đăng nhập"></td>
                             </tr>
                             <tr>
                                 <td>Mật khẩu<span style="color: red">(*)</span>:</td>
-                                <td><input type="password" class="form-control" name="txtpassword"></td>
+                                <td><input type="password" class="form-control" name="txtpassword" placeholder="Mật khẩu"></td>
                             </tr>
                             <tr align="center">
                                 <td colspan="2"><button type="submit" name="button" class="btn btn-primary">Đăng nhập</button></td>

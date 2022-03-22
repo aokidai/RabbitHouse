@@ -122,7 +122,7 @@ else
                         <tbody>
                             <tr>
                                 <td>Tên hàng<span style="color: red">(*)</span>:</td>
-                                <td><input class="form-control" name="txtTenHang"></td>
+                                <td><input class="form-control" name="txtTenHang" placeholder="Tên hàng"></td>
                             </tr>
                             <tr>
                                 <td>Số lượng<span style="color: red">(*)</span><span style="color: red" title="Đơn vị có thể là Kg, lon,...">(?)</span>:</td>
@@ -130,7 +130,7 @@ else
                             </tr>
                             <tr>
                                 <td>Số tiền<span style="color: red">(*)</span>:</td>
-                                <td><input type="number" class="form-control" name="txtSoTien"></td>
+                                <td><input type="number" class="form-control" name="txtSoTien" placeholder="Số tiền"></td>
                             </tr>
                             <tr align="center">
                                 <td colspan="2"><button type="submit" class="btn btn-primary">Thêm</button> </td>

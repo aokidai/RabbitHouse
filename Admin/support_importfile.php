@@ -111,10 +111,10 @@ else
 
                     <div class="table-responsive table-bordered">
                         <div>
-                            <span style="font-weight: 700;">1. Để upload file trắc nghiệm ta cần gì?</span><br />
+                            <span style="font-weight: 700;">1. Để upload file kho ta cần gì?</span><br />
                             <span>- Ta cần chuẩn bị file text với dạng (*.txt) và có cấu trúc như sau:</span><br />
                             <center><img style="width: 80%; height: auto;" src="../img/user_import1.png"></center><br/>
-                            <span style="font-weight: 700; clear: both;">2. Upload nội dung câu hỏi lên website</span><br />
+                            <span style="font-weight: 700; clear: both;">2. Upload nội dung kho lên website</span><br />
                             <center><img src="../img/user_import2.png"></center><br />
                             <span style="font-weight: 700; color: red; font-size: 20px;"><i>*Lưu ý: Với khối lượng chỉ cần nhập số là đủ (Không nhập thêm bất kì gì vào dòng số lượng)</i></span><br/>
                         </div>

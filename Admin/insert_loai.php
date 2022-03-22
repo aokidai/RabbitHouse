@@ -113,7 +113,7 @@ else
                         <tbody>
                             <tr>
                                 <td>Loại món<span style="color: red">(*)</span>:</td>
-                                <td><input class="form-control" name="txtLoai"></td>
+                                <td><input class="form-control" name="txtLoai" placeholder="Tên loại món"></td>
                             </tr>
                             <tr align="center">
                                 <td colspan="2"><button type="submit" class="btn btn-primary">Thêm</button> </td>

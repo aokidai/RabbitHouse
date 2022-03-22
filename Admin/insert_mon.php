@@ -138,11 +138,11 @@ else
                             </tr>
                             <tr>
                                 <td>Tên món<span style="color: red">(*)</span>:</td>
-                                <td><input class="form-control" name="txtTenMon"></td>
+                                <td><input class="form-control" name="txtTenMon" placeholder="Tên món"></td>
                             </tr>
                             <tr>
                                 <td>Giá<span style="color: red">(*)</span>:</td>
-                                <td><input type="number" class="form-control" name="txtGia"></td>
+                                <td><input type="number" class="form-control" name="txtGia" placeholder="Giá tiền"></td>
                             </tr>
                             <tr>
                                 <td>Hình ảnh:</td>
@@ -150,12 +150,12 @@ else
                             </tr>
                             <tr>
                                 <td>Gợi Ý:</td>
-                                <td><input type="number" class="form-control" name="txtGoiY" id="txtGoiY"></input> </td>
+                                <td><input type="number" class="form-control" name="txtGoiY" id="txtGoiY" placeholder="Nhiệt độ gợi ý"></input> </td>
                             </tr>
                             <tr>
                                 <td>Công thức</td>
                                 <td>
-                                    <textarea name="txtdes" id="txtdes" rows="10" class="form-control"></textarea>
+                                    <textarea name="txtdes" id="txtdes" rows="10" class="form-control" placeholder="Công thức chế biến món"></textarea>
                                 </td>
                             </tr>
                             <tr align="center">
