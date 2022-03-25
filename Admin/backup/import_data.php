@@ -1,15 +1,7 @@
 <?php
-// Name of the data file
-include "../../include/connect.inc";
-$sqlx = "select max(idBackup) as idBackup from backupdata";
-$rsx = mysqli_query($conn, $sqlx);
-$rowx = mysqli_fetch_array($rsx);
-$idMax = $rowx["idBackup"];
-$sql1 = "select tenFile from backupdata where idBackup = '$idMax'";
-$rs1 = mysqli_query($conn, $sql1);
-$row1 = mysqli_fetch_array($rs1);
-
-$filename = $row1["tenFile"];
+$myfile = fopen("database_name.txt", "r") or die("Unable to open file!");
+$filename = fread($myfile,filesize("database_name.txt"));
+fclose($myfile);
 // MySQL host
 $mysqlHost = 'localhost';
 // MySQL username
