@@ -6,4 +6,4 @@ See LICENSE.md for licennse information.
 
 ### Installtion
 Upload website to host and use rabbithouse.sql this is database.
-In file ==incluce`/`connect.inc ==, ==Admin/backup/import_data.php== and ==Admin/backup/import_data.php== edit about: "***Servername***, ***username***, ***password*** and ***database name***".
+In file `incluce/connect.inc `, `Admin/backup/import_data.php` and `Admin/backup/import_data.php` edit about: "***Servername***, ***username***, ***password*** and ***database name***".
