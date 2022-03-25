@@ -1,6 +1,6 @@
 # Rabbit House coffee online shop
 
-Rabbit House coffee online shop - http://rabbithousecoffee.onlinewebshop.net/. (space, space, Enter)
+Rabbit House coffee online shop - http://rabbithousecoffee.onlinewebshop.net/. <br/>
 Copyright (C) 2019 by Dragon Inc. - Minamisenba Chuo-ku Osaka.
 See LICENSE.md for licennse information.
 
