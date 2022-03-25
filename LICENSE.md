@@ -10,7 +10,7 @@ All rights reserved.<br/>
 When we building web-shop we was use some Intellectual Property.<br/>
 * CKEditor - The text editor for Internet - https://ckeditor.com/ Copyright (c) 2003-2020, CKSource - Frederico Knabben.
 * Photo - The picture of food in the internet
-* Rabbit House logo - Copyright (C) 2011 Rabbit House cafe shop<br/>
+* Rabbit House logo - Copyright (C) 2011 Rabbit House cafe shop
 ##
 Parts of code taken from the following libraries are included in Rabbit House coffee online shop<br/>
 * jQuery (inspired the domReady function, ckeditor_base.js) - Copyright (c) 2011 John Resig, https://jquery.com/
