@@ -117,11 +117,11 @@ else
                         <tbody>
                             <tr>
                                 <td>Tên khuyến mãi<span style="color: red">(*)</span>:</td>
-                                <td><input class="form-control" name="txtTenKM"></td>
+                                <td><input class="form-control" name="txtTenKM" placeholder="Tên khuyến mãi"></td>
                             </tr>
                             <tr>
                                 <td>Khuyến mãi (%)<span style="color: red">(*)</span>:</td>
-                                <td><input class="form-control" name="txtKM"></td>
+                                <td><input class="form-control" name="txtKM" type="number" value="10"></td>
                             </tr>
                             <tr>
                                 <td>Thời gian bắt đầu<span style="color: red">(*)</span>:</td>
