@@ -128,6 +128,7 @@ else
                                 }
                             </script>
                             <tbody> <?php
+                                    error_reporting(E_ERROR | E_PARSE);
                                     include("../include/connect.inc");
                                     $sql        =    "select * from tblkhuyenmai";
                                     $rs         =    mysqli_query($conn, $sql);

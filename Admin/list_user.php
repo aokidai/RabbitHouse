@@ -129,6 +129,7 @@ else
                             </script>
                             <tbody>
                                 <?php
+                                error_reporting(E_ERROR | E_PARSE);
                                 include("../include/connect.inc");
                                 $_SESSION["pages"]       =    $_GET["page"];
                                 $sql        =    "select * from tblstaff";
