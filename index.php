@@ -332,7 +332,11 @@ if (isset($_SESSION["username"])) {
       <section id="info" align="center">
         <?php
         include "include/connect.inc";
-        $sql3 = "select id, value1 from sensordata order by id DESC limit 1";
+        $sql3Max = "select max(id) as id from sensordata";
+        $rs3Max = mysqli_query($conn, $sql3Max);
+        $row3Max = mysqli_fetch_array($rs3Max);
+        $idMax = $row3Max["id"];
+        $sql3 = "select value1 from sensordata where id = $idMax";
         $rs3 = mysqli_query($conn, $sql3);
         while ($row3 = mysqli_fetch_array($rs3)) {
           $nhietDo = $row3["value1"];
