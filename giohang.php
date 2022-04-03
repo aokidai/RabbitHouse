@@ -149,38 +149,38 @@ if (isset($_SESSION["username"])) {
 	</script>
 	<header>
 		<?php include "./header.php"; ?>
-			<div> <br /><br /><br />
-				<div align="center">
-					<form action="giohang.php" method="GET">
-						<input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
-						<input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
-					</form>
-				</div>
-				<script type="text/javascript">
-					$(function() {
-						$("#searchbar").autocomplete({
-							source: 'ajax-mon-search.php',
-						});
-					});
-				</script>
-				<br />
-				<?php
-				include "./include/connect.inc";
-				if (isset($_GET["timKiem"])) {
-					$searchMon = $_GET["txtsearchMon"];
-					$sql = "select idMon, tenMon from tblmon where tenMon like '%$searchMon%' and conHang = 'O'";
-					$rs = mysqli_query($conn, $sql);
-					while ($row = mysqli_fetch_assoc($rs)) {
-						//echo "<div id='link' onClick='addText(\"".$row['tenMon']."\");'>" . $row['tenMon'] . "</div>"; 
-						echo "<script>window.location.href='search.php?id=" . $row["idMon"] . "'</script>";
-					}
-					$tmp = $_GET["txtsearchMon"];
-					if ($tmp == $searchMon) {
-						echo ("<span style=\"text-align:center; color:red; font-size: 30px\"><center>Không có sản phẩm đó!</center></span>");
-					}
-				}
-				?>
+		<div> <br /><br /><br />
+			<div align="center">
+				<form action="giohang.php" method="GET">
+					<input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
+					<input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
+				</form>
 			</div>
+			<script type="text/javascript">
+				$(function() {
+					$("#searchbar").autocomplete({
+						source: 'ajax-mon-search.php',
+					});
+				});
+			</script>
+			<br />
+			<?php
+			include "./include/connect.inc";
+			if (isset($_GET["timKiem"])) {
+				$searchMon = $_GET["txtsearchMon"];
+				$sql = "select idMon, tenMon from tblmon where tenMon like '%$searchMon%' and conHang = 'O'";
+				$rs = mysqli_query($conn, $sql);
+				while ($row = mysqli_fetch_assoc($rs)) {
+					//echo "<div id='link' onClick='addText(\"".$row['tenMon']."\");'>" . $row['tenMon'] . "</div>"; 
+					echo "<script>window.location.href='search.php?id=" . $row["idMon"] . "'</script>";
+				}
+				$tmp = $_GET["txtsearchMon"];
+				if ($tmp == $searchMon) {
+					echo ("<span style=\"text-align:center; color:red; font-size: 30px\"><center>Không có sản phẩm đó!</center></span>");
+				}
+			}
+			?>
+		</div>
 		</div>
 	</header>
 	<div id="body">
@@ -207,7 +207,7 @@ if (isset($_SESSION["username"])) {
 						<input type="submit" class="btn btn-success" name="xoahang" value="Xóa hàng" title="Chọn vào những món muốn xóa và nhấn Xóa hàng">
 					</div>
 					<div class="table-responsive table-bordered">
-						 <table class="table" style="width:97%" align="center">
+						<table class="table" style="width:97%" align="center">
 							<thead>
 								<tr>
 									<th><input type="checkbox" name="checkbox" class="chk_box"></th>
@@ -277,7 +277,7 @@ if (isset($_SESSION["username"])) {
 								<tr align="center">
 									<?php
 									if (isset($_POST["muahang"])) {
-										if($thanhTien11 == 0 || $thanhTien11 == null){
+										if ($thanhTien11 == 0 || $thanhTien11 == null) {
 											echo "<script>alert('Không có hàng trong giỏ hàng!')</script>";
 											echo "<script>window.location.href='index2.php'</script>";
 										}
@@ -363,7 +363,7 @@ if (isset($_SESSION["username"])) {
 																purchase_units: [{
 																	"amount": {
 																		"currency_code": "USD",
-																		"value": <?=$thanhTienVND?>
+																		"value": <?= $thanhTienVND ?>
 																	}
 																}]
 															});
@@ -394,6 +394,11 @@ if (isset($_SESSION["username"])) {
 											</script>
 										</div>
 									</td>
+								</tr>
+								<tr align="center">
+									<th colspan="6">
+										<center><label style="background-color: #f2f2f2; width: 150px; border-radius: 10px;"><a href="./export_hoadon.php" target="_blank">📜 Xuất hóa đơn</a></label></center>
+									</th>
 								</tr>
 							</tbody>
 						</table>

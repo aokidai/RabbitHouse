@@ -258,41 +258,41 @@ if (isset($_SESSION["username"])) {
 <body>
     <?php $user = $username;
     $idKhachhang = $idKhach1; ?>
-     
+
     <header>
         <?php include "./header.php"; ?>
-            <div> <br /><br /><br />
-                <div align="center">
-                    <form action="giohang.php" method="GET">
-                        <input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
-                        <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
-                    </form>
-                </div>
-                <script type="text/javascript">
-                    $(function() {
-                        $("#searchbar").autocomplete({
-                            source: 'ajax-mon-search.php',
-                        });
-                    });
-                </script>
-                <br />
-                <?php
-                include "../include/connect.inc";
-                if (isset($_GET["txtsearchMon"])) {
-                    $searchMon = $_GET["txtsearchMon"];
-                    $sql = "select idMon, tenMon from tblmon where tenMon like '%$searchMon%' and conHang = 'O'";
-                    $rs = mysqli_query($conn, $sql);
-                    while ($row = mysqli_fetch_assoc($rs)) {
-                        //echo "<div id='link' onClick='addText(\"".$row['tenMon']."\");'>" . $row['tenMon'] . "</div>"; 
-                        echo "<script>window.location.href='search.php?id=" . $row["idMon"] . "'</script>";
-                    }
-                    $tmp = $_GET["txtsearchMon"];
-                    if ($tmp == $searchMon) {
-                        echo ("<span style=\"text-align:center; color:red; font-size: 30px\"><center>Không có sản phẩm đó!</center></span>");
-                    }
-                }
-                ?>
+        <div> <br /><br /><br />
+            <div align="center">
+                <form action="giohang.php" method="GET">
+                    <input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
+                    <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
+                </form>
             </div>
+            <script type="text/javascript">
+                $(function() {
+                    $("#searchbar").autocomplete({
+                        source: 'ajax-mon-search.php',
+                    });
+                });
+            </script>
+            <br />
+            <?php
+            include "../include/connect.inc";
+            if (isset($_GET["txtsearchMon"])) {
+                $searchMon = $_GET["txtsearchMon"];
+                $sql = "select idMon, tenMon from tblmon where tenMon like '%$searchMon%' and conHang = 'O'";
+                $rs = mysqli_query($conn, $sql);
+                while ($row = mysqli_fetch_assoc($rs)) {
+                    //echo "<div id='link' onClick='addText(\"".$row['tenMon']."\");'>" . $row['tenMon'] . "</div>"; 
+                    echo "<script>window.location.href='search.php?id=" . $row["idMon"] . "'</script>";
+                }
+                $tmp = $_GET["txtsearchMon"];
+                if ($tmp == $searchMon) {
+                    echo ("<span style=\"text-align:center; color:red; font-size: 30px\"><center>Không có sản phẩm đó!</center></span>");
+                }
+            }
+            ?>
+        </div>
     </header>
     <section id="info" align="center">
         <span>Giỏ Hàng</span>
@@ -440,6 +440,11 @@ if (isset($_SESSION["username"])) {
                                 <input type="submit" class="btn btn-success" name="xoahang" value="Xóa hàng" title="Chọn vào những món muốn xóa và nhấn Xóa hàng">
                             </td>
                         </tr>
+                        <tr align="center">
+                            <th colspan="6">
+                                <center><label style="background-color: #f2f2f2; width: 150px; border-radius: 10px;"><a href="./export_hoadon.php" target="_blank">📜 Xuất hóa đơn</a></label></center>
+                            </th>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -455,14 +460,14 @@ if (isset($_SESSION["username"])) {
     </section>
     <div style="padding-top: 15%;">
         <footer>
-           <div style="text-align: center;">
-        <p>Liên hệ: Rabbit House Coffee<br />
-          〒542-0081 3-1 Minamisenba, Chuo-ku, Osaka-shi, Osaka<br />
-          Tel/Fax: 03-6472-xxxx<br />
-          Mobile: 090-3176-4xxx<br />
-          E-mail: info@dragoninc.co.jp</p>
-        <p>🄫 2021 Power by Dragon Inc</p>
-      </div>
+            <div style="text-align: center;">
+                <p>Liên hệ: Rabbit House Coffee<br />
+                    〒542-0081 3-1 Minamisenba, Chuo-ku, Osaka-shi, Osaka<br />
+                    Tel/Fax: 03-6472-xxxx<br />
+                    Mobile: 090-3176-4xxx<br />
+                    E-mail: info@dragoninc.co.jp</p>
+                <p>🄫 2021 Power by Dragon Inc</p>
+            </div>
         </footer>
     </div>
 </body>
