@@ -105,7 +105,7 @@ else
 <body>
   <header>
     <div>
-    <div id="logo"><a href="./index2.php"><img src="../../img/logo.png"></a></div>
+    <div id="logo"><a href="./BanHang.php"><img src="../../img/logo.png"></a></div>
     <div id="menu">
       <ul>
 		<li><span>Chào: <?=$username?></span></li>

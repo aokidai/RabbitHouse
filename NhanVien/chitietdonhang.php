@@ -321,14 +321,16 @@ if (isset($_SESSION["username"])) {
                             while ($row = mysqli_fetch_array($rs)) {
                                 $idMon = $row["idMon"];
                                 $status = $row["daGH"];
-                                $thanhTien = $row["tongTien"];
+                                $thanhTien1 = $row["tongTien"];
+                                $khuyeMai = $row["khuyenmai"];
+                                $thanhTien = $thanhTien1 - ($khuyeMai * 100);
                                 $soLuong = $row["tongSL"];
                                 if ($status == "O") {
                                     $check = "none";
                                 } else $check = "true";
                                 $idKH = $row["idKhachhang"];
                                 $idStaff = $row["idStaff"];
-                                if ($idKH != null && $idStaff == null) {
+                                if ($idKH != null && $idStaff == 0) {
                                     $sql1 = "select * from tblkhachhang where idKhachhang = $idKH";
                                     $rs1 = mysqli_query($conn, $sql1);
                                     while ($row1 = mysqli_fetch_array($rs1)) {
@@ -354,7 +356,7 @@ if (isset($_SESSION["username"])) {
                                 $rs9 = mysqli_query($conn, $sql9);
                                 date_default_timezone_set('Asia/Ho_Chi_Minh');
                                 $time_act = date('Y-m-d');
-                                $sql15 = "insert into tbldoanhthu (idChiTiet, ngay, thanhTien, tongSL) values ( '$idChiTiet', '$time_act', '$thanhTien', '$soLuong')";
+                                $sql15 = "insert into tbldoanhthu (idChiTiet, ngay, thanhTien, tongSL) values ( '$id', '$time_act', '$thanhTien', '$soLuong')";
                                 $rs15 = mysqli_query($conn, $sql15);
                                 if ($rs15)
                                     echo "<script>window.location.href='donhang.php'</script>";
@@ -389,7 +391,7 @@ if (isset($_SESSION["username"])) {
                             </tr>
                             <tr>
                                 <th>Tổng tiền</th>
-                                <td><?= $tongTien ?></td>
+                                <td><?= $tongTien ?><?php if($khuyeMai!=null) echo " Còn lại $thanhTien" ?></td>
                             </tr>
                             <tr>
                                 <th>Trạng thái GH</th>

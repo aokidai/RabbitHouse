@@ -4,7 +4,7 @@ if (isset($_SESSION["username"])) {
     $username    =    $_SESSION["username"];
     $idKhachhang = $_SESSION["idKhachhang"];
 } else
-    header("location:login.php");
+    header("location:../login.php");
 ?>
 <style>
     body {
@@ -192,7 +192,7 @@ if (isset($_SESSION["username"])) {
 <body onload="window.print();">
     <div id="page" class="page">
         <div class="header">
-            <div class="logo"><img style="width: 200px; height: 60px;" src="./img/logo.png" /></div>
+            <div class="logo"><img style="width: 200px; height: 60px;" src="../img/logo.png" /></div>
             <div class="company">Rabbit House</div>
         </div>
         <br />
@@ -211,7 +211,7 @@ if (isset($_SESSION["username"])) {
                 <th>Thành tiền</th>
             </tr>
             <?php
-            include "./include/connect.inc";
+            include "../include/connect.inc";
             $pos = 1;
             $sql1 = "select idMon, soLuong, ThanhTien from tblhoadon where idKhachHang = $idKhachhang";
             $rs1 = mysqli_query($conn, $sql1);

@@ -4,7 +4,7 @@ if (isset($_SESSION["username"])) {
 	$username	=	$_SESSION["username"];
 	$idKhachhang = $_SESSION["idKhachhang"];
 } else
-	header("location:login.php");
+	header("location:../login.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,8 +12,8 @@ if (isset($_SESSION["username"])) {
 <head>
 	<meta charset="UTF-8">
 	<title>Rabbit House</title>
-	<link rel="icon" type="image/png" sizes="32x16" href="./img/rabbithouse.png">
-	<link rel="stylesheet" type="text/css" href="./css/style2.css?" />
+	<link rel="icon" type="image/png" sizes="32x16" href="../img/rabbithouse.png">
+	<link rel="stylesheet" type="text/css" href="../css/style2.css?" />
 	<!-- jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -26,12 +26,13 @@ if (isset($_SESSION["username"])) {
 </head>
 <style>
 	#mon {
-        width: 240px;
-        margin: 3px;
-        margin-top: 20px;
-        text-align: center;
-        float: left;
-    }
+		width: 240px;
+		margin: 3px;
+		margin-top: 20px;
+		text-align: center;
+		float: left;
+	}
+
 	#tenMon {
 		margin-top: 5px;
 		vertical-align: top;
@@ -278,7 +279,7 @@ if (isset($_SESSION["username"])) {
 		<?php include "./header.php"; ?>
 		<div> <br /><br /><br />
 			<div align="center">
-				<form action="index2.php" method="GET">
+				<form action="index.php" method="GET">
 					<input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
 					<input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
 				</form>
@@ -292,7 +293,7 @@ if (isset($_SESSION["username"])) {
 			</script>
 			<br />
 			<?php
-			include "./include/connect.inc";
+			include "../include/connect.inc";
 			if (isset($_GET["txtsearchMon"])) {
 				$searchMon = $_GET["txtsearchMon"];
 				$sql = "select idMon, tenMon from tblmon where tenMon like '%$searchMon%' and conHang = 'O'";
@@ -316,15 +317,15 @@ if (isset($_SESSION["username"])) {
 			<div class="slideshow-container">
 
 				<div class="mySlides fade">
-					<img src="./img/bg-photo-1.jpg" style="width:100%">
+					<img src="../img/bg-photo-1.jpg" style="width:100%">
 				</div>
 
 				<div class="mySlides fade">
-					<img src="./img/bg-photo-2.jpg" style="width:100%">
+					<img src="../img/bg-photo-2.jpg" style="width:100%">
 				</div>
 
 				<div class="mySlides fade">
-					<img src="./img/bg-photo-3.jpg" style="width:100%">
+					<img src="../img/bg-photo-3.jpg" style="width:100%">
 				</div>
 
 				<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -379,7 +380,7 @@ if (isset($_SESSION["username"])) {
 				<span>Gợi ý món <span style="font: Baskerville, 'Palatino Linotype', Palatino, 'Century Schoolbook L', 'Times New Roman', 'serif', normal; font-size: 20px">(Nhiệt độ: <?= $nhietDo ?> độ)</span></span>
 				<div style="margin-left: 10%">
 					<?php
-					include "include/connect.inc";
+					include "../include/connect.inc";
 					$sql2 = "select id, value1 from sensordata order by id DESC limit 1";
 					$rs2 = mysqli_query($conn, $sql2);
 					$nhietDo = 0;
@@ -392,9 +393,9 @@ if (isset($_SESSION["username"])) {
 					?>
 								<div id="mon">
 									<p id="tenMon"><a href="#" values="<?= $row["tenMon"] ?>"><?= $row["tenMon"] ?></a></p>
-									<img id="hinhAnh" src="uploads/<?= $row["hinhAnh"] ?>">
+									<img id="hinhAnh" src="../uploads/<?= $row["hinhAnh"] ?>">
 									<p id="donGia">Đơn giá: <span><?= $row["gia"] ?>VND</span></p>
-									<a href='hauGioHang.php?id=<?= $row["idMon"] ?>' title="Thêm vào giỏ hàng"><img id="nutmuahang" src="./img/Chonmua.png"></a>
+									<a href='hauGioHang.php?id=<?= $row["idMon"] ?>' title="Thêm vào giỏ hàng"><img id="nutmuahang" src="../img/Chonmua.png"></a>
 								</div>
 							<?php }
 						} else if ($nhietDo < 29) {
@@ -404,9 +405,9 @@ if (isset($_SESSION["username"])) {
 							?>
 								<div id="mon">
 									<p id="tenMon"><a href="#" values="<?= $row["tenMon"] ?>"><?= $row["tenMon"] ?></a></p>
-									<img id="hinhAnh" src="uploads/<?= $row["hinhAnh"] ?>">
+									<img id="hinhAnh" src="../uploads/<?= $row["hinhAnh"] ?>">
 									<p id="donGia">Đơn giá: <span><?= $row["gia"] ?>VND</span></p>
-									<a href='hauGioHang.php?id=<?= $row["idMon"] ?>' title="Thêm vào giỏ hàng"><img id="nutmuahang" src="./img/Chonmua.png"></a>
+									<a href='hauGioHang.php?id=<?= $row["idMon"] ?>' title="Thêm vào giỏ hàng"><img id="nutmuahang" src="../img/Chonmua.png"></a>
 								</div>
 							<?php }
 						} else if ($nhietDo > 28) {
@@ -416,9 +417,9 @@ if (isset($_SESSION["username"])) {
 							?>
 								<div id="mon">
 									<p id="tenMon"><a href="#" values="<?= $row["tenMon"] ?>"><?= $row["tenMon"] ?></a></p>
-									<img id="hinhAnh" src="uploads/<?= $row["hinhAnh"] ?>">
+									<img id="hinhAnh" src="../uploads/<?= $row["hinhAnh"] ?>">
 									<p id="donGia">Đơn giá: <span><?= $row["gia"] ?>VND</span></p>
-									<a href='hauGioHang.php?id=<?= $row["idMon"] ?>' title="Thêm vào giỏ hàng"><img id="nutmuahang" src="./img/Chonmua.png"></a>
+									<a href='hauGioHang.php?id=<?= $row["idMon"] ?>' title="Thêm vào giỏ hàng"><img id="nutmuahang" src="../img/Chonmua.png"></a>
 								</div>
 					<?php
 							}
@@ -437,9 +438,9 @@ if (isset($_SESSION["username"])) {
 					?>
 						<div id="mon">
 							<p id="tenMon"><a href="#" values="<?= $row["tenMon"] ?>"><?= $row["tenMon"] ?></a></p>
-							<img id="hinhAnh" src="uploads/<?= $row["hinhAnh"] ?>">
+							<img id="hinhAnh" src="../uploads/<?= $row["hinhAnh"] ?>">
 							<p id="donGia">Đơn giá: <span><?= $row["gia"] ?>VND</span></p>
-							<a href='hauGioHang.php?id=<?= $row["idMon"] ?>' title="Thêm vào giỏ hàng"><img id="nutmuahang" src="./img/Chonmua.png"></a>
+							<a href='hauGioHang.php?id=<?= $row["idMon"] ?>' title="Thêm vào giỏ hàng"><img id="nutmuahang" src="../img/Chonmua.png"></a>
 						</div>
 					<?php } ?>
 				</div>
@@ -450,14 +451,14 @@ if (isset($_SESSION["username"])) {
 				<span style="margin-top: 200px">Twitter</span>
 				<div id="cont-footer-twitter" style="padding: 30px; float:left; margin-left:17%">
 					<div class="twitter-widget" style="text-align: center;">
-						<a class="twitter-timeline" style="text-align: center" ; data-height="300" data-width="800" data-theme="white" data-link-color="#ef3488" data-border-color="#ef3488" data-chrome="noheader nofooter noborders transparent" href="https://twitter.com/aokidaisuke91">ツイートの青木大介</a>
+						<a class="twitter-timeline" style="text-align: center" data-height="300" data-width="800" data-theme="white" data-link-color="#ef3488" data-border-color="#ef3488" data-chrome="noheader nofooter noborders transparent" href="https://twitter.com/aokidaisuke91">ツイートの青木大介</a>
 						<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 					</div>
 				</div>
 				<ul>
-					<li><a href="https://twitter.com/intent/tweet?text=%E9%9D%92%E6%9C%A8%E5%A4%A7%E4%BB%8B%E3%81%AE%E5%85%AC%E5%BC%8F%E3%82%B5%E3%82%A4%E3%83%88%E3%81%A7%E3%81%99%E3%80%82%0D%0A&%E3%81%BF%E3%82%93%E3%81%AA%E3%81%95%E3%82%93%E3%82%88%E3%82%8D%E3%81%97%E3%81%8F%EF%BD%9E&hashtags=&related=" title="Twitter"><img src="./img/twitter.png"></a></li>
-					<li><a href="https://social-plugins.line.me/lineit/share?text=%E9%9D%92%E6%9C%A8%E5%A4%A7%E4%BB%8B%E3%81%AE%E5%85%AC%E5%BC%8F%E3%82%B5%E3%82%A4%E3%83%88%E3%81%A7%E3%81%99%E3%80%82" title="Line"><img src="./img/line.png"></a></li>
-					<li><a href="#" title="Facebook"><img src="./img/facebook.png"></a></li>
+					<li><a href="https://twitter.com/intent/tweet?text=%E9%9D%92%E6%9C%A8%E5%A4%A7%E4%BB%8B%E3%81%AE%E5%85%AC%E5%BC%8F%E3%82%B5%E3%82%A4%E3%83%88%E3%81%A7%E3%81%99%E3%80%82%0D%0A&%E3%81%BF%E3%82%93%E3%81%AA%E3%81%95%E3%82%93%E3%82%88%E3%82%8D%E3%81%97%E3%81%8F%EF%BD%9E&hashtags=&related=" title="Twitter"><img src="../img/twitter.png"></a></li>
+					<li><a href="https://social-plugins.line.me/lineit/share?text=%E9%9D%92%E6%9C%A8%E5%A4%A7%E4%BB%8B%E3%81%AE%E5%85%AC%E5%BC%8F%E3%82%B5%E3%82%A4%E3%83%88%E3%81%A7%E3%81%99%E3%80%82" title="Line"><img src="../img/line.png"></a></li>
+					<li><a href="#" title="Facebook"><img src="../img/facebook.png"></a></li>
 				</ul>
 			</div>
 		</article>

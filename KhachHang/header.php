@@ -70,7 +70,7 @@
     }
 </style>
 <div>
-    <div id="logo"><a href="./index2.php" title="Trang chủ"><img src="./img/logo.png"></a></div>
+    <div id="logo"><a href="./index.php" title="Trang chủ"><img src="../img/logo.png"></a></div>
     <div id="menu">
         <ul>
             <li><a href="./giohang.php" title="Giỏ hàng những món đã chọn">Giỏ hàng</a></li>
@@ -78,7 +78,7 @@
             <li><a href="./information.php" title="Thông tin tài khoản">Thông tin</a></li>
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn" title="Thông tin khách hàng, quản lí lịch sử, báo cáo, đăng xuất">Chào:
-                    <?php include "./include/connect.inc";
+                    <?php include "../include/connect.inc";
                     $sql090 = "select tenKH from tblkhachhang where idKhachhang = '$idKhachhang'";
                     $rs090 = mysqli_query($conn, $sql090);
                     $row090 = mysqli_fetch_array($rs090);
@@ -89,7 +89,7 @@
                 <div class="dropdown-content">
                     <a href="./lichsumuahang.php" title="Lịch sử mua hàng của khách hàng.">Lịch sử</a>
                     <a href="./report.php" title="Phản hồi đến quản trị viên về hệ thống.">Phản hồi</a>
-                    <a href="./index.php" title="Đăng xuất.">Đăng xuất</a>
+                    <a href="../index.php" title="Đăng xuất.">Đăng xuất</a>
                 </div>
             </li>
         </ul>

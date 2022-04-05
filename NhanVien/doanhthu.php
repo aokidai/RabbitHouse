@@ -347,6 +347,7 @@ if (isset($_SESSION["username"])) {
                         <tr>
                             <th><input type="checkbox" name="checkbox" class="chk_box" onClick="toggle(this)"></th>
                             <th>STT</th>
+                            <th>Mã hóa đơn</th>
                             <th>Ngày tháng</th>
                             <th>Số lượng</th>
                             <th>Thành tiền</th>
@@ -372,6 +373,7 @@ if (isset($_SESSION["username"])) {
                                     echo " <tr>
                                         <td><input type='checkbox' class='chk_box1' name='check_list[]' value='" . $row["idDoanhThu"] . "'></td>
                                         <td>$i</td>
+                                        <td>" . $row2["idChiTiet"] . "</td>
                                         <td>" . $row2["ngay"] . "</td>
                                         <td>" . $row2["tongSL"] . "</td>
                                         <td>" . $row2["thanhTien"] . "</td>
@@ -383,7 +385,7 @@ if (isset($_SESSION["username"])) {
                         ?>
                     </tbody>
                     <tr>
-                        <th colspan="4">Tổng doanh thu:</th>
+                        <th colspan="5">Tổng doanh thu:</th>
                         <th>
                             <?php
                             error_reporting(E_ERROR | E_PARSE);
@@ -392,7 +394,7 @@ if (isset($_SESSION["username"])) {
                         </th>
                     </tr>
                     <tr>
-                        <th colspan="5">
+                        <th colspan="6">
                             <label style="background-color: #f2f2f2; width: 150px; border-radius: 10px;"><a href="./export_doanhthu.php">🖨️ Xuất Excel</a></label>
                         </th>
                     </tr>

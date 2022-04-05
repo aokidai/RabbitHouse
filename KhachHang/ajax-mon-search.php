@@ -1,5 +1,5 @@
 <?php
-require_once('include/connect.inc');
+require_once('../include/connect.inc');
 
 function get_mon($conn , $term){	
 	$query = "SELECT * FROM tblmon WHERE tenMon LIKE '%".$term."%' and conHang = 'O' ORDER BY tenMon ASC";

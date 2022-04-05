@@ -111,7 +111,7 @@ if (isset($_SESSION["username"])) {
                             </div>
                             <div style="margin-bottom: 12px; float: left; margin-left: 10px;">
                                 <form action="kho_manage.php" method="post">
-                                    <label for="Manufacturer">Tháng nhập kho: </label>
+                                    <label for="Manufacturer">Tháng xuất kho: </label>
                                     <select id="cmbThoiGian" name="ThoiGian">
                                         <?php
                                         include("../include/connect.inc");
@@ -120,7 +120,7 @@ if (isset($_SESSION["username"])) {
                                         }
                                         ?>
                                     </select>
-                                    <input type="submit" name="xemDS" title="Thời gian có được chọn để xem tồn kho được tính từ thời gian nhập kho" value="Xem danh sách" />
+                                    <input type="submit" name="xemDS" title="Thời gian có được chọn để xem tồn kho được tính từ thời gian nhập kho đến thời gian xuất kho" value="Xem danh sách" />
                                     <br/>
                                     <span style="color: red; font-weight: bold;">Tháng tồn kho: 
                                         <?php
@@ -170,7 +170,7 @@ if (isset($_SESSION["username"])) {
                                         $tmp = $_POST['ThoiGian'];
                                         $_SESSION["ThoiGian"] = $tmp;
                                         $_SESSION["pages"] = $_GET["page"];
-                                        $sql = "select * from tblkho where month(thoiGianNK) = '$tmp'";
+                                        $sql = "select * from tblkho where month(thoiGianXK) = '$tmp'";
                                         $rs = mysqli_query($conn, $sql);
                                         $i = 1;
                                         while ($row = mysqli_fetch_array($rs)) {

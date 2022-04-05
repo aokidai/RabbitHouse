@@ -21,8 +21,8 @@ $sql3 = "select luongCB from tblluongnv";
 $rs3 = mysqli_query($conn, $sql3);
 $row3 = mysqli_fetch_array($rs3);
 $LuongCB = $row3["luongCB"];
-$tongLuong = $tongTG * $LuongCB;
-$sql = "update tblchamcong set TGRa = '$time_act', tongTG = '$tongTG', TongLuong = '$tongLuong' where idChamCong = $idMax";
+$tongLuong = $tongTGtmp * $LuongCB;
+$sql = "update tblchamcong set TGRa = '$time_act', tongTG = '$tongTGtmp', TongLuong = '$tongLuong' where idChamCong = $idMax";
 $rs = mysqli_query($conn, $sql);
 if($rs) {
     $sql1 = "select TongLuong, tongTG from tblchamcong where idNhanVien = $idKhachhang";

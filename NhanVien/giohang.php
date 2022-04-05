@@ -402,7 +402,7 @@ if (isset($_SESSION["username"])) {
                                         $diaChi = $row10["diachi"];
                                     }
                                     $giaoHang = "X";
-                                    $sql5 = "insert into tblchitiethd(idStaff, tongSL, tongTien, ngayThang, diaChiGH, daGH, idMon) values ('$idKhachhang2', '$tongSL', '$tinhtien', '$time_act', '$diaChi', '$giaoHang', '$idMon1')";
+                                    $sql5 = "insert into tblchitiethd(idStaff, tongSL, tongTien, ngayThang, diaChiGH, daGH, idMon, khuyenmai) values ('$idKhachhang2', '$tongSL', '$thanhTien', '$time_act', '$diaChi', '$giaoHang', '$idMon1', '$khuyenMai')";
                                     $rs5 = mysqli_query($conn, $sql5);
                                     if ($rs5) {
                                         $sql44 = "select max(idChiTiet) as idCTHD from tblchitiethd";
@@ -413,6 +413,18 @@ if (isset($_SESSION["username"])) {
                                         $rs20 = mysqli_query($conn, $sql20);
                                         while ($row20 = mysqli_fetch_array($rs20)) {
                                             $thanhTien4 = $row20["ThanhTien"];
+											$thanhTien4tmp = $row20["ThanhTien"];
+                                            $sql00 = "select * from tblkhuyenmai";
+                                            $rs00 = mysqli_query($conn, $sql00);
+                                            $row00 = mysqli_fetch_array($rs00);
+                                            $TGBDtmp = $row00["thoiGianBD"];
+                                            $TGKTtmp = $row00["thoiGianKT"];
+                                            $khuyenMai = $row00["khuyenMai"];
+                                            date_default_timezone_set('Asia/Ho_Chi_Minh');
+                                            $time_act = date('Y-m-d H:i:s');
+                                            if ($TGBDtmp <= $time_act && $time_act <= $TGKTtmp) {
+                                                $thanhTien4 = $thanhTien4tmp - ($khuyenMai * 100);
+                                            } else $thanhTien4 = $thanhTien4tmp;
                                             $idMon4 = $row20["idMon"];
                                             $trangThaiGHtmp = "X";
                                             $sql8 = "insert into tbllichsu(idStaff, idMon, soluong, gia, thoigian, daGH, idChitiet) values ('$idKhachhang2', '$idMon4', '$tongSL', '$thanhTien4', '$time_act', '$trangThaiGHtmp', '$idCTHD')";

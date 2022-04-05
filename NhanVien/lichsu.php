@@ -344,7 +344,7 @@ if (isset($_SESSION["username"])) {
 								<td>$i</td>
 								<td>".$row2["tenMon"]."</td>
 								<td>".$row["soluong"]."</td>
-								<td>".$tinhtien=$row["soluong"]*$row2["gia"]."</td>
+								<td>".$row["gia"]."</td>
 								<td>".$row["thoigian"]."</td>
 								<td>".$row["daGH"]."</td>
 								</tr>";	

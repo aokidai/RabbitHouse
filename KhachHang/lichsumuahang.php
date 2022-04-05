@@ -4,7 +4,7 @@ if (isset($_SESSION["username"])) {
 	$username	=	$_SESSION["username"];
 	$idKhachhang = $_SESSION["idKhachhang"];
 } else
-	header("location:login.php");
+	header("location:../login.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,8 +12,8 @@ if (isset($_SESSION["username"])) {
 <head>
 	<meta charset="UTF-8">
 	<title>Rabbit House</title>
-	<link rel="icon" type="image/png" sizes="32x16" href="./img/rabbithouse.png">
-	<link rel="stylesheet" type="text/css" href="./css/style2.css?" />
+	<link rel="icon" type="image/png" sizes="32x16" href="../img/rabbithouse.png">
+	<link rel="stylesheet" type="text/css" href="../css/style2.css?" />
 	<!-- jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -151,7 +151,7 @@ if (isset($_SESSION["username"])) {
 		<?php include "./header.php"; ?>
 			<div> <br /><br /><br />
 				<div align="center">
-					<form action="hauGioHang.php" method="GET">
+					<form action="giohang.php" method="GET">
 						<input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
 						<input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
 					</form>
@@ -165,7 +165,7 @@ if (isset($_SESSION["username"])) {
 				</script>
 				<br />
 				<?php
-				include "./include/connect.inc";
+				include "../include/connect.inc";
 				if (isset($_GET["timKiem"])) {
 					$searchMon = $_GET["txtsearchMon"];
 					$sql = "select idMon, tenMon from tblmon where tenMon like '%$searchMon%' and conHang = 'O'";
@@ -179,72 +179,81 @@ if (isset($_SESSION["username"])) {
 						echo ("<span style=\"text-align:center; color:red; font-size: 30px\"><center>Không có sản phẩm đó!</center></span>");
 					}
 				}
-
 				?>
-
 			</div>
 		</div>
 	</header>
 	<div id="body">
 		<article>
 			<section id="info" align="center">
-				<span>Đưa Sản Phẩm vào Giỏ Hàng</span><br /><br />
-				<?php
-				include "./include/connect.inc";
-				if (isset($_POST["txtSoLuong"])) {
-					date_default_timezone_set('Asia/Ho_Chi_Minh');
-					$time_act = date('Y-m-d H:i:s');
-					$idMon			=	$_POST["txtIdMon"];
-					$soLuong = $_POST["txtSoLuong"];
-					$sql3 = "select * from tblmon where idMon = " . $_GET["id"];
-					$rs3 = mysqli_query($conn, $sql3);
-					$row3 = mysqli_fetch_array($rs3);
-					if ($rs3) {
-						$gia			=	$row3["gia"];
-						$thanhTien		=  $soLuong * $gia;
-						$sql		=	"insert into tblhoadon(idKhachhang, idMon, soLuong, ngayThang, ThanhTien) values ('$idKhachhang', '$idMon', '$soLuong', '$time_act', '$thanhTien')";
-						$rs 				=	mysqli_query($conn, $sql);
-						if ($rs) {
-							echo "<script>window.location.href='giohang.php'</script>";
-						} else
-							echo "<script>alert('Thêm món không thành công')</script>";
-					}
-				} else {
-					$sql			=	"select * from tblmon where idMon= " . $_GET["id"];
-					$rs				=	mysqli_query($conn, $sql);
-					$row			=	mysqli_fetch_array($rs);
-					$tenMon			= 	$row["tenMon"];
-					$gia 			=	$row["gia"];
-				}
-				?>
-				<form method="post" enctype="multipart/form-data">
-					<table class="table table-striped table-bordered table-hover" style="width:90%" align="center">
-						<tbody>
-							<tr>
-								<input type="text" hidden="true" name="txtIdMon" value='<?= $_GET["id"] ?>'>
-							</tr>
-							<tr>
-
-								<td>Tên món:</td>
-								<td><input readonly class="form-control" name="txtTenMon" value="<?= $tenMon ?>"></td>
-							</tr>
-							<tr>
-								<td>Giá:</td>
-								<td><input readonly class="form-control" name="txtGia" value="<?= $gia ?>"></td>
-							</tr>
-							<tr>
-								<td>Số lượng</td>
-								<td><input type="number" class="form-control" name="txtSoLuong" value="1"></td>
-							</tr>
-							<tr>
-								<td colspan="2"><button type="submit" class="btn btn-primary" title="Thêm vào giỏ hàng">Thêm vào giỏ hàng</button></td>
-							</tr>
-					</table>
+				<span>Lịch sử mua hàng</span>
+				<div><span style="font-size: 20px; color: red">Trạng thái gia hàng được biểu diển bởi kí tự X và O. X là chưa giao hàng còn O là đã giao hàng.</span></div>
+				<br />
+				<form method="post" action="lichsumuahang.php">
+					<div class="table-responsive table-bordered">
+						 <table class="table" style="width:97%" align="center">
+							<thead>
+								<tr>
+									<th><input type="checkbox" name="checkbox" class="chk_box"></th>
+									<th>STT</th>
+									<th>Tên món</th>
+									<th>Số lượng</th>
+									<th>Thành tiền</th>
+									<th>Thời gian</th>
+									<th>Trạng thái</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+								$tinhtien = 0;
+								include("../include/connect.inc");
+								$sql		=	"select * from tbllichsu where idKhachhang = '$idKhachhang'";
+								$rs 		=	mysqli_query($conn, $sql);
+								$i			=	1;
+								while ($row = mysqli_fetch_array($rs)) {
+									$sql2	= 	"select * from tblmon where idMon = " . $row["idMon"] . "";
+									$rs2 		=	mysqli_query($conn, $sql2);
+									$row2 = mysqli_fetch_array($rs2);
+									echo " <tr>
+								<td><input type='checkbox' class='chk_box1' name='check_list[]' value='" . $row["idlichSu"] . "'></td>
+								<td>$i</td>
+								<td>" . $row2["tenMon"] . "</td>
+								<td>" . $row["soluong"] . "</td>
+								<td>" . $row["gia"] . "</td>
+								<td>" . $row["thoigian"] . "</td>
+								<td>" . $row["daGH"] . "</td>
+								</tr>";
+									$i++;
+								}
+								?>
+								<tr align="center">
+									<?php
+									if (isset($_POST["xoahang"])) {
+										foreach ($_POST['check_list'] as $check) {
+											$sql9 = "delete from tbllichSu where idlichSu = '$check'";
+											$rs = mysqli_query($conn, $sql9);
+										}
+										echo "<script>window.location.href='lichsumuahang.php'</script>";
+									}
+									?>
+									<th colspan="7" align="center">
+										<input type="submit" class="btn btn-success" name="xoahang" value="Xóa hàng" title="Nếu muốn xóa hàng ta cần chọn hàng cần xóa và nhấn nút Xóa hàng">
+									</th>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</form>
+				<script type="text/javascript">
+					$(function() {
+						$('.chk_box').click(function() {
+							$('.chk_box1').prop('checked', this.checked);
+						});
+					});
+				</script>
 			</section>
 			<div id="info1">
-				</br></br>
-				<span style="margin-top: 10px">Twitter</span>
+				<span>Twitter</span>
 				<div id="cont-footer-twitter" style="padding: 30px; float:left; margin-left:17%">
 					<div class="twitter-widget" style="text-align: center;">
 						<a class="twitter-timeline" style="text-align: center" ; data-height="300" data-width="800" data-theme="white" data-link-color="#ef3488" data-border-color="#ef3488" data-chrome="noheader nofooter noborders transparent" href="https://twitter.com/aokidaisuke91">ツイートの青木大介</a>
@@ -252,9 +261,9 @@ if (isset($_SESSION["username"])) {
 					</div>
 				</div>
 				<ul>
-					<li><a href="https://twitter.com/intent/tweet?text=%E9%9D%92%E6%9C%A8%E5%A4%A7%E4%BB%8B%E3%81%AE%E5%85%AC%E5%BC%8F%E3%82%B5%E3%82%A4%E3%83%88%E3%81%A7%E3%81%99%E3%80%82%0D%0A&%E3%81%BF%E3%82%93%E3%81%AA%E3%81%95%E3%82%93%E3%82%88%E3%82%8D%E3%81%97%E3%81%8F%EF%BD%9E&hashtags=&related=" title="Twitter"><img src="./img/twitter.png"></a></li>
-					<li><a href="https://social-plugins.line.me/lineit/share?text=%E9%9D%92%E6%9C%A8%E5%A4%A7%E4%BB%8B%E3%81%AE%E5%85%AC%E5%BC%8F%E3%82%B5%E3%82%A4%E3%83%88%E3%81%A7%E3%81%99%E3%80%82" title="Line"><img src="./img/line.png"></a></li>
-					<li><a href="#" title="Facebook"><img src="./img/facebook.png"></a></li>
+					<li><a href="https://twitter.com/intent/tweet?text=%E9%9D%92%E6%9C%A8%E5%A4%A7%E4%BB%8B%E3%81%AE%E5%85%AC%E5%BC%8F%E3%82%B5%E3%82%A4%E3%83%88%E3%81%A7%E3%81%99%E3%80%82%0D%0A&%E3%81%BF%E3%82%93%E3%81%AA%E3%81%95%E3%82%93%E3%82%88%E3%82%8D%E3%81%97%E3%81%8F%EF%BD%9E&hashtags=&related=" title="Twitter"><img src="../img/twitter.png"></a></li>
+					<li><a href="https://social-plugins.line.me/lineit/share?text=%E9%9D%92%E6%9C%A8%E5%A4%A7%E4%BB%8B%E3%81%AE%E5%85%AC%E5%BC%8F%E3%82%B5%E3%82%A4%E3%83%88%E3%81%A7%E3%81%99%E3%80%82" title="Line"><img src="../img/line.png"></a></li>
+					<li><a href="#" title="Facebook"><img src="../img/facebook.png"></a></li>
 				</ul>
 			</div>
 		</article>

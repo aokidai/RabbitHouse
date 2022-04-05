@@ -335,7 +335,7 @@ if (isset($_SESSION["username"])) {
                             <td><input type="text" class="form-control" name="txtName" id="textfield4"></td>
                         </tr>
                         <tr align="center">
-                            <td>Vấn đề gập phải<span style="color: red">(*)</span>:</td>
+                            <td>Vấn đề gặp phải<span style="color: red">(*)</span>:</td>
                             <td><textarea name="txtdes" id="txtdes" rows="10" class="form-control"></textarea></td>
                         </tr>
                         <tr align="center">

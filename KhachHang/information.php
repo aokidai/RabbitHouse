@@ -4,7 +4,7 @@ if (isset($_SESSION["username"])) {
 	$username	=	$_SESSION["username"];
 	$idKhachhang = $_SESSION["idKhachhang"];
 } else
-	header("location:login.php");
+	header("location:../login.php");
 ?>
 <!doctype html>
 <html>
@@ -12,25 +12,25 @@ if (isset($_SESSION["username"])) {
 <head>
 	<meta charset="utf-8">
 	<title>Rabbit House</title>
-	<link rel="icon" type="image/png" sizes="32x16" href="./img/rabbithouse.png">
+	<link rel="icon" type="image/png" sizes="32x16" href="../img/rabbithouse.png">
 	<!-- Bootstrap Core CSS -->
-	<link href="../css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- MetisMenu CSS -->
-	<link href="../css/metisMenu.min.css" rel="stylesheet">
+	<link href="../../css/metisMenu.min.css" rel="stylesheet">
 
 	<!-- Timeline CSS -->
-	<link href="../css/timeline.css" rel="stylesheet">
+	<link href="../../css/timeline.css" rel="stylesheet">
 
 	<!-- Custom CSS -->
-	<link href="../css/startmin.css" rel="stylesheet">
+	<link href="../../css/startmin.css" rel="stylesheet">
 
 	<!-- Morris Charts CSS -->
-	<link href="../css/morris.css" rel="stylesheet">
+	<link href="../../css/morris.css" rel="stylesheet">
 
 	<!-- Custom Fonts -->
-	<link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" type="text/css" href="./css/style2.css?" />
+	<link href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="../css/style2.css?" />
 	<!-- jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -173,7 +173,7 @@ if (isset($_SESSION["username"])) {
 				</script>
 				<br />
 				<?php
-				include "./include/connect.inc";
+				include "../include/connect.inc";
 				if (isset($_GET["timKiem"])) {
 					$searchMon = $_GET["txtsearchMon"];
 					$sql = "select idMon, tenMon from tblmon where tenMon like '%$searchMon%'and conHang = 'O'";
@@ -196,7 +196,7 @@ if (isset($_SESSION["username"])) {
 	<div id="body">
 		<br />
 		<?php
-		include "./include/connect.inc";
+		include "../include/connect.inc";
 		if (isset($_POST["txtusername"])) {
 			$tenKH	= $_POST["txtName"];
 			$soDT = $_POST["txtSDT"];
@@ -245,7 +245,7 @@ if (isset($_SESSION["username"])) {
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2"><a href="./forgot.php" title="Đổi mật khẩu?"><span style="float: right; color: red"><i>Đổi mật khẩu?</i></span></a></td>
+							<td colspan="2"><a href="../forgot.php" title="Đổi mật khẩu?"><span style="float: right; color: red"><i>Đổi mật khẩu?</i></span></a></td>
 						</tr>
 					</tbody>
 				</table>

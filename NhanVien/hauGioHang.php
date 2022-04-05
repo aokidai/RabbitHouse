@@ -290,7 +290,7 @@ if (isset($_SESSION["username"])) {
 			<?php include "./header.php"; ?>
 			<div> <br /><br /><br />
 				<div align="center">
-					<form action="index2.php" method="GET">
+					<form action="index.php" method="GET">
 						<input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
 						<input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
 					</form>
@@ -325,7 +325,7 @@ if (isset($_SESSION["username"])) {
 	</header>
 	<div id="body">
 		<article>
-			<section id="info" align="center">
+			<section id="info" align="center" style="padding-bottom: 70px;">
 				<span>Đưa SP vào Giỏ Hàng</span><br /><br />
 				<?php
 				include "../include/connect.inc";

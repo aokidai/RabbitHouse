@@ -297,7 +297,7 @@ if (isset($_SESSION["username"])) {
     if (mysqli_num_rows($rs) > 0) {
       $_SESSION["username"]  = $row["username"];
       $_SESSION["idKhachhang"] = $row["idKhachhang"];
-      echo "<script>window.location.href='index2.php'</script>";
+      echo "<script>window.location.href='./KhachHang/index.php'</script>";
     } else {
       $sql2 = "select username, password, idStaff from tblstaff where username='$username' and password='$password'";
       $rs2 = mysqli_query($conn, $sql2);

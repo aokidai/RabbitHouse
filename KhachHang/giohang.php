@@ -4,7 +4,7 @@ if (isset($_SESSION["username"])) {
 	$username	=	$_SESSION["username"];
 	$idKhachhang = $_SESSION["idKhachhang"];
 } else
-	header("location:login.php");
+	header("location:../login.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,8 +12,8 @@ if (isset($_SESSION["username"])) {
 <head>
 	<meta charset="UTF-8">
 	<title>Rabbit House</title>
-	<link rel="icon" type="image/png" sizes="32x16" href="./img/rabbithouse.png">
-	<link rel="stylesheet" type="text/css" href="./css/style2.css?" />
+	<link rel="icon" type="image/png" sizes="32x16" href="../img/rabbithouse.png">
+	<link rel="stylesheet" type="text/css" href="../css/style2.css?" />
 	<!-- jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -165,7 +165,7 @@ if (isset($_SESSION["username"])) {
 			</script>
 			<br />
 			<?php
-			include "./include/connect.inc";
+			include "../include/connect.inc";
 			if (isset($_GET["timKiem"])) {
 				$searchMon = $_GET["txtsearchMon"];
 				$sql = "select idMon, tenMon from tblmon where tenMon like '%$searchMon%' and conHang = 'O'";
@@ -228,7 +228,7 @@ if (isset($_SESSION["username"])) {
 							<tbody>
 								<?php
 								$tinhtien = 0;
-								include("./include/connect.inc");
+								include("../include/connect.inc");
 								$sql		=	"select * from tblhoadon where idKhachhang = '$idKhachhang'";
 								$rs 		=	mysqli_query($conn, $sql);
 								$i			=	1;
@@ -279,7 +279,7 @@ if (isset($_SESSION["username"])) {
 									if (isset($_POST["muahang"])) {
 										if ($thanhTien11 == 0 || $thanhTien11 == null) {
 											echo "<script>alert('Không có hàng trong giỏ hàng!')</script>";
-											echo "<script>window.location.href='index2.php'</script>";
+											echo "<script>window.location.href='index.php'</script>";
 										}
 										$tongSL1 = $thanhTien1 = 0;
 										date_default_timezone_set('Asia/Ho_Chi_Minh');
@@ -300,7 +300,7 @@ if (isset($_SESSION["username"])) {
 											}
 											$giaoHang = "X";
 											$idStafftmp = 0;
-											$sql5 = "insert into tblchitiethd(idKhachhang, tongSL, tongTien, ngayThang, diaChiGH, daGH, idMon, idStaff) values ('$idKhachhang2', '$tongSL', '$tinhtien', '$time_act', '$diaChi', '$giaoHang', '$idMon1', '$idStafftmp')";
+											$sql5 = "insert into tblchitiethd(idKhachhang, tongSL, tongTien, ngayThang, diaChiGH, daGH, idMon, idStaff, khuyenmai) values ('$idKhachhang2', '$tongSL', '$thanhTien', '$time_act', '$diaChi', '$giaoHang', '$idMon1', '$idStafftmp', '$khuyenMai')";
 											$rs5 = mysqli_query($conn, $sql5);
 											if ($rs5) {
 												$sql44 = "select max(idChiTiet) as idCTHD from tblchitiethd";
@@ -311,6 +311,18 @@ if (isset($_SESSION["username"])) {
 												$rs20 = mysqli_query($conn, $sql20);
 												while ($row20 = mysqli_fetch_array($rs20)) {
 													$thanhTien4 = $row20["ThanhTien"];
+													$thanhTien4tmp = $row20["ThanhTien"];
+													$sql00 = "select * from tblkhuyenmai";
+													$rs00 = mysqli_query($conn, $sql00);
+													$row00 = mysqli_fetch_array($rs00);
+													$TGBDtmp = $row00["thoiGianBD"];
+													$TGKTtmp = $row00["thoiGianKT"];
+													$khuyenMai = $row00["khuyenMai"];
+													date_default_timezone_set('Asia/Ho_Chi_Minh');
+													$time_act = date('Y-m-d H:i:s');
+													if ($TGBDtmp <= $time_act && $time_act <= $TGKTtmp) {
+														$thanhTien4 = $thanhTien4tmp - ($khuyenMai * 100);
+													} else $thanhTien4 = $thanhTien4tmp;
 													$idMon4 = $row20["idMon"];
 													$trangThaiGHtmp = "X";
 													$sql8 = "insert into tbllichsu(idKhachhang, idMon, soluong, gia, thoigian, daGH, idChitiet) values ('$idKhachhang2', '$idMon4', '$tongSL', '$thanhTien4', '$time_act', '$trangThaiGHtmp', '$idCTHD')";
@@ -319,7 +331,7 @@ if (isset($_SESSION["username"])) {
 														$sql6 = "delete from tblhoadon where idKhachhang = '$idKhachhang'";
 														$rs6 = mysqli_query($conn, $sql6);
 														echo "<script>alert(\"Quý khách thanh toán " . $thanhTien11 . " và nhân viên sẽ giao hàng tại địa chỉ " . $diaChi . ". Cảm ơn quý khách đã sử dụng dịch vụ. Chúc quý khách một ngày tốt lành.\");</script>";
-														echo "<script>window.location.href='./index2.php'</script>";
+														echo "<script>window.location.href='./index.php'</script>";
 													}
 												}
 											} else echo "<script>alert('Mua hàng không thành công!')</script>";
@@ -421,9 +433,9 @@ if (isset($_SESSION["username"])) {
 					</div>
 				</div>
 				<ul>
-					<li><a href="https://twitter.com/intent/tweet?text=%E9%9D%92%E6%9C%A8%E5%A4%A7%E4%BB%8B%E3%81%AE%E5%85%AC%E5%BC%8F%E3%82%B5%E3%82%A4%E3%83%88%E3%81%A7%E3%81%99%E3%80%82%0D%0A&%E3%81%BF%E3%82%93%E3%81%AA%E3%81%95%E3%82%93%E3%82%88%E3%82%8D%E3%81%97%E3%81%8F%EF%BD%9E&hashtags=&related=" title="Twitter"><img src="./img/twitter.png"></a></li>
-					<li><a href="https://social-plugins.line.me/lineit/share?text=%E9%9D%92%E6%9C%A8%E5%A4%A7%E4%BB%8B%E3%81%AE%E5%85%AC%E5%BC%8F%E3%82%B5%E3%82%A4%E3%83%88%E3%81%A7%E3%81%99%E3%80%82" title="Line"><img src="./img/line.png"></a></li>
-					<li><a href="#" title="Facebook"><img src="./img/facebook.png"></a></li>
+					<li><a href="https://twitter.com/intent/tweet?text=%E9%9D%92%E6%9C%A8%E5%A4%A7%E4%BB%8B%E3%81%AE%E5%85%AC%E5%BC%8F%E3%82%B5%E3%82%A4%E3%83%88%E3%81%A7%E3%81%99%E3%80%82%0D%0A&%E3%81%BF%E3%82%93%E3%81%AA%E3%81%95%E3%82%93%E3%82%88%E3%82%8D%E3%81%97%E3%81%8F%EF%BD%9E&hashtags=&related=" title="Twitter"><img src="../img/twitter.png"></a></li>
+					<li><a href="https://social-plugins.line.me/lineit/share?text=%E9%9D%92%E6%9C%A8%E5%A4%A7%E4%BB%8B%E3%81%AE%E5%85%AC%E5%BC%8F%E3%82%B5%E3%82%A4%E3%83%88%E3%81%A7%E3%81%99%E3%80%82" title="Line"><img src="../img/line.png"></a></li>
+					<li><a href="#" title="Facebook"><img src="../img/facebook.png"></a></li>
 				</ul>
 			</div>
 		</article>

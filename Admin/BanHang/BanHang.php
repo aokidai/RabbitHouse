@@ -72,7 +72,7 @@ else
 		margin-right: auto;
 		font-family: 'Times New Roman', Times, serif;
 		font-size: 40px;
-		font-weight: bold;"
+		font-weight: bold;
 		margin-left: 50%;
 	}
 #info1{

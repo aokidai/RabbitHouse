@@ -4,7 +4,7 @@ if (isset($_SESSION["username"])) {
     $username    =    $_SESSION["username"];
     $idKhachhang = $_SESSION["idKhachhang"];
 } else
-    header("location:./login.php");
+    header("location:../login.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,8 +12,8 @@ if (isset($_SESSION["username"])) {
 <head>
     <meta charset="UTF-8">
     <title>Rabbit House</title>
-    <link rel="icon" type="image/png" sizes="32x16" href="./img/rabbithouse.png">
-    <link rel="stylesheet" type="text/css" href="./css/style2.css?" />
+    <link rel="icon" type="image/png" sizes="32x16" href="../img/rabbithouse.png">
+    <link rel="stylesheet" type="text/css" href="../css/style2.css?" />
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -316,7 +316,7 @@ if (isset($_SESSION["username"])) {
                 </script>
                 <br />
                 <?php
-                include "./include/connect.inc";
+                include "../include/connect.inc";
                 if (isset($_GET["txtsearchMon"])) {
                     $searchMon = $_GET["txtsearchMon"];
                     $sql = "select idMon, tenMon from tblmon where tenMon like '%$searchMon%' and conHang = 'O'";
@@ -337,7 +337,7 @@ if (isset($_SESSION["username"])) {
     </header>
     <form method="post" action="report.php">
         <?php
-        include "./include/connect.inc";
+        include "../include/connect.inc";
         if (isset($_POST["txtdes"])) {
             $tenNV = $_POST["txtName"];
             $vanDe = $_POST["txtdes"];
@@ -360,7 +360,7 @@ if (isset($_SESSION["username"])) {
                     <td><input type="text" class="form-control" name="txtName" id="textfield4"></td>
                 </tr>
                 <tr align="center">
-                    <td>Vấn đề gập phải<span style="color: red">(*)</span>:</td>
+                    <td>Vấn đề gặp phải<span style="color: red">(*)</span>:</td>
                     <td><textarea name="txtdes" id="txtdes" rows="10" class="form-control"></textarea></td>
                 </tr>
                 <tr align="center">

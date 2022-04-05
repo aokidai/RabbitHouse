@@ -136,6 +136,7 @@ if (isset($_SESSION["username"])) {
                         <thead>
                             <tr>
                                 <th>STT</th>
+                                <th>Mã hóa đơn</th>
                                 <th>Ngày tháng</th>
                                 <th>Số lượng</th>
                                 <th>Thành tiền</th>
@@ -156,6 +157,7 @@ if (isset($_SESSION["username"])) {
                                     $TongTien = $TongTien + ($row2["thanhTien"]);
                                     echo " <tr>
                                             <td>$i</td>
+                                            <td>" . $row2["idChiTiet"] . "</td>
                                             <td>" . $row2["ngay"] . "</td>
                                             <td>" . $row2["tongSL"] . "</td>
                                             <td>" . $row2["thanhTien"] . "</td>
@@ -166,7 +168,7 @@ if (isset($_SESSION["username"])) {
                             ?>
                         </tbody>
                         <tr>
-                            <th colspan="3">Tổng doanh thu:</th>
+                            <th colspan="4">Tổng doanh thu:</th>
                             <th>
                                 <?php
                                 echo $TongTien;
@@ -174,7 +176,7 @@ if (isset($_SESSION["username"])) {
                             </th>
                         </tr>
                         <tr>
-                            <th colspan="3">Tổng vốn hàng hóa:</th>
+                            <th colspan="4">Tổng vốn hàng hóa:</th>
                             <th>
                                 <?php
                                 $sql3 = "select * from tbldoanhthukho where ngayXK = '$tmp'";
@@ -190,7 +192,7 @@ if (isset($_SESSION["username"])) {
                             </th>
                         </tr>
                         <tr style="color: red;">
-                            <th colspan="3">Tổng doanh thu:</th>
+                            <th colspan="4">Tổng doanh thu:</th>
                             <th>
                                 <?php
                                 $TongDTTN = $TongTien - $tongTT;
@@ -199,7 +201,7 @@ if (isset($_SESSION["username"])) {
                             </th>
                         </tr>
                         <tr align="center">
-                            <th colspan="4">
+                            <th colspan="5">
                                 <center><label style="background-color: #f2f2f2; width: 150px; border-radius: 10px;"><a href="./export_doanhthu.php">🖨️ Xuất Excel</a></label></center>
                             </th>
                         </tr>
