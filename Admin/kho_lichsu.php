@@ -99,38 +99,14 @@ if (isset($_SESSION["username"])) {
             include "./left_admin.php";
             ?>
         </nav>
-        <form action="list_kho.php" method="post">
+        <form action="kho_lichsu.php" method="post">
             <div id="page-wrapper">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1 class="page-header">DANH SÁCH HÀNG HÓA TRONG KHO</h1>
-                            <ul class="abc" style="background-color: #5cb85c; border-color: #4cae4c; width: 120px; height: 34px; list-style-type: none; text-align: center;float: left; margin-right: 5px; border-radius: 3px; padding-left: 0px; margin-bottom: 0px;">
-                                <li class="dropdown" style="display: list-item; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; list-style-position: unset; display: inline-block; list-style-type: none;">
-                                    <a class="dropdown-toggle" title="Có thể lựa chọn 1 trong 2 cách nhập hàng hóa vào kho." data-toggle="dropdown" style="display: inline-block; color: white; text-align: center; text-decoration: none; padding-top: 7px; padding-right: 2px;">
-                                        Thêm hàng hóa
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-user">
-                                        <li><a href="./insert_kho.php" title="Nhập tay các hàng hóa, chỉ sử dụng để bổ sung ít hàng.">Thêm hàng</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="./import_kho.php" title="Nhập hàng hóa tự động bằng file text.">Thên hàng tự động</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <button type="submit" name="xoahang" class="btn btn-success" style="margin-bottom: 20px; background-color: red;" title="Xóa hàng hóa được chọn và các hàng hóa có số lượng là 0. Trong trường hợp chỉ xóa các hàng hóa có số lượng còn lại là 0 chỉ cần nhấn nút xóa để tự động xóa mà không cần chọn hàng hóa tương ứng.">Xóa hàng</button>
-                            <button type="button" onClick="javascript:window.location.href='list_kho.php?page=1'" class="btn btn-success" style="margin-bottom: 20px; float: right; background-color: aqua; color: black">Tải lại dữ liệu</button>
-                            <ul class="abc" style="background-color: orange; border-color: #4cae4c; width: 120px; height: 34px; list-style-type: none; text-align: center; float: right; margin-right: 5px; border-radius: 3px; padding-left: 0px; margin-bottom: 0px;">
-                                <li class="dropdown" style="display: list-item; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; list-style-position: unset; display: inline-block; list-style-type: none;">
-                                    <a class="dropdown-toggle" title="Quản lý kho" data-toggle="dropdown" style="display: inline-block; color: black; text-align: center; text-decoration: none; padding-top: 7px; padding-right: 2px;">
-                                        Quản lý kho
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-user">
-                                        <li><a href="./kho_manage.php" title="Kiểm tra tồn kho theo tháng.">Quản lý tồn kho</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="./kho_lichsu.php" title="Kiểm tra lịch sử hàng hóa bị xóa khổi kho.">Lịch sử kho</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            <h1 class="page-header">LỊCH SỬ XÓA HÀNG HÓA TRONG KHO</h1>
+                            <button type="button" class="btn btn-success" style="margin-bottom: 20px" onClick="javascript:window.location.href='list_kho.php?page=1'" title="Trở về danh sách hàng hóa trong kho"><-</button>
+                            <button type="button" onClick="javascript:window.location.href='kho_lichsu.php'" class="btn btn-success" style="margin-bottom: 20px; float: right; background-color: aqua; color: black">Tải lại dữ liệu</button>
                         </div>
 
                         <!-- /.col-lg-12 -->
@@ -149,21 +125,20 @@ if (isset($_SESSION["username"])) {
                                     <th title="Thòi gian xuất kho">T.G X.K (mới nhất)</th>
                                     <th title="Số tiền hàng hóa ban đầu">Số tiền BD</td>
                                     <th title="Số tiền hàng hóa đã xuất kho">S.T xuất kho</td>
-                                    <th>Quản lí</th>
-                                    <th>Sửa</th>
+                                    <th title="Thời gian xóa hàng hóa">T.G xóa</th>
                                 </tr>
                             </thead>
                             <tbody> <?php
                                     error_reporting(E_ERROR | E_PARSE);
                                     include("../include/connect.inc");
                                     $_SESSION["pages"]       =    $_GET["page"];
-                                    $sql        =    "select * from tblkho";
+                                    $sql        =    "select * from tbllichsukho";
                                     $rs         =    mysqli_query($conn, $sql);
                                     $count        =    mysqli_num_rows($rs);
                                     // Hiển thị
                                     $pageSize = 10;
                                     $pos         =    (!isset($_GET["page"])) ? 0 : ($_GET["page"] - 1) * $pageSize;
-                                    $sql        =    "select * from tblkho limit $pos, $pageSize";
+                                    $sql        =    "select * from tbllichsukho limit $pos, $pageSize";
                                     $rs         =    mysqli_query($conn, $sql);
                                     $i            =    1;
                                     while ($row = mysqli_fetch_array($rs)) {
@@ -171,6 +146,7 @@ if (isset($_SESSION["username"])) {
                                         $tgXK = $row["thoiGianXK"];
                                         $tgXKtmp = "";
                                         $soTien = $row["soTien"];
+                                        $TGXoa = $row["thoiGianLuuTT"];
                                         $TH = $row["tenHang"];
                                         $SLBD = $row["soLuongBD"];
                                         $SLCL = $row["soLuongCL"];
@@ -178,10 +154,6 @@ if (isset($_SESSION["username"])) {
                                         if ($tgXK == "0000-00-00 00:00:00") {
                                             $tgXKtmp = "";
                                         } else $tgXKtmp = $row["thoiGianXK"];
-                                        $sql99 = "select hoTen from tblusers where id_user = $idNV";
-                                        $rs99 = mysqli_query($conn, $sql99);
-                                        $row99 = mysqli_fetch_array($rs99);
-                                        $hoTenNV = $row99["hoTen"];
                                         $soTientmpA1 = ($SLCL * $soTien) / $SLBD;
                                         $soTienDX = $soTien - $soTientmpA1;
                                         echo " <tr>
@@ -194,66 +166,21 @@ if (isset($_SESSION["username"])) {
                                                 <td>$tgXKtmp</td>
                                                 <td>$soTien</td>
                                                 <td>$soTienDX</td>
-                                                <td>$hoTenNV</td>
-                                                <td><a href='edit_kho.php?id=" . $row["idKho"] . "'>Sửa</a></td>
-                                                </tr>";
+                                                <td>$TGXoa</td>
+                                            </tr>";
                                         $i++;
                                     }
-                                    ?> <?php
-                                        if (isset($_POST['xoahang'])) {
-                                            date_default_timezone_set('Asia/Ho_Chi_Minh');
-                                            $thoiGianLuuTT = date('Y-m-d H:i:s');
-                                            $sqlSaveA = "select * from tblkho where soLuongCL = 0";
-                                            $rsSaveA = mysqli_query($conn, $sqlSaveA);
-                                            while ($rowSaveA = mysqli_fetch_array($rsSaveA)) {
-                                                $tenHang = $rowSaveA["tenHang"];
-                                                $soLuongBD = $rowSaveA["soLuongBD"];
-                                                $soLuongCL = $rowSaveA["soLuongCL"];
-                                                $thoiGianNK = $rowSaveA["thoiGianNK"];
-                                                $thoiGianXK = $rowSaveA["thoiGianXK"];
-                                                $id_user = $rowSaveA["id_user"];
-                                                $soTien = $rowSaveA["soTien"];
-                                                $sqlSaveData1 = "insert into tbllichsukho (tenHang, soLuongBD, soLuongCL, thoiGianNK, thoiGianXK, id_user, soTien, thoiGianLuuTT) values ('$tenHang', '$soLuongBD', '$soLuongCL', '$thoiGianNK', '$thoiGianXK', '$id_user', '$soTien', '$thoiGianLuuTT')";
-                                                $rsSaveData1 = mysqli_query($conn, $sqlSaveData1);
-                                            }
-                                            $sql1 = "delete from tblkho where soLuongCL = 0";
-                                            $rs1 = mysqli_query($conn, $sql1);
-                                            foreach ($_POST['check_list'] as $check) {
-                                                $sqlSaveB = "select * from tblkho where idKho = '$check'";
-                                                $rsSaveB = mysqli_query($conn, $sqlSaveB);
-                                                while ($rowSaveB = mysqli_fetch_array($rsSaveB)) {
-                                                    $tenHang1 = $rowSaveB["tenHang"];
-                                                    $soLuongBD1 = $rowSaveB["soLuongBD"];
-                                                    $soLuongCL1 = $rowSaveB["soLuongCL"];
-                                                    $thoiGianNK1 = $rowSaveB["thoiGianNK"];
-                                                    $thoiGianXK1 = $rowSaveB["thoiGianXK"];
-                                                    $id_user1 = $rowSaveB["id_user"];
-                                                    $soTien1 = $rowSaveB["soTien"];
-                                                    $sqlSaveData2 = "insert into tbllichsukho (tenHang, soLuongBD, soLuongCL, thoiGianNK, thoiGianXK, id_user, soTien, thoiGianLuuTT) values ('$tenHang1', '$soLuongBD1', '$soLuongCL1', '$thoiGianNK1', '$thoiGianXK1', '$id_user1', '$soTien1', '$thoiGianLuuTT')";
-                                                    $rsSaveData2 = mysqli_query($conn, $sqlSaveData2);
-                                                }
-                                                $sql9 = "delete from tblkho where idKho = '$check'";
-                                                $rs1 = mysqli_query($conn, $sql9);
-                                            }
-                                            echo "<script>alert('Đã cập nhật')</script>";
-                                            echo "<script>window.location.href='list_kho.php?page=1'</script>";
-                                        }
-                                        ?>
+                                    ?> 
                                 <tr>
                                     <th colspan="4">
                                         <?php
                                         for ($i = 1; $i <= ceil($count / $pageSize); $i++) {
-                                            echo "<a href='list_kho.php?page=$i'>" . $i . "</a>&nbsp&nbsp";
+                                            echo "<a href='kho_lichsu.php?page=$i'>" . $i . "</a>&nbsp&nbsp";
                                         }
                                         ?>
                                     </th>
                                 </tr>
                             </tbody>
-                            <tr align="center">
-                                <th colspan="9">
-                                    <center><label style="background-color: #f2f2f2; width: 150px; border-radius: 10px;"><a href="./export_kho.php">🖨️ Xuất Excel</a></label></center>
-                                </th>
-                            </tr>
                         </table>
                     </div>
                     <!-- /.row -->

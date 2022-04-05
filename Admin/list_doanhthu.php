@@ -183,7 +183,9 @@ if (isset($_SESSION["username"])) {
                                     $thanhTien = $row3["thanhTien"];
                                     $tongTT += $thanhTien;
                                 }
-                                echo $tongTT;
+                                if($tongTT == 0) echo 0;
+                                else
+                                    echo $tongTT;
                                 ?>
                             </th>
                         </tr>
