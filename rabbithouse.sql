@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: 127.0.0.1
--- 生成日時: 2022-03-21 12:26:07
+-- 生成日時: 2022-04-05 08:16:06
 -- サーバのバージョン： 10.4.22-MariaDB
 -- PHP のバージョン: 8.0.13
 
@@ -20,25 +20,6 @@ SET time_zone = "+00:00";
 --
 -- データベース: `rabbithouse`
 --
-
--- --------------------------------------------------------
-
---
--- テーブルの構造 `backupdata`
---
-
-CREATE TABLE `backupdata` (
-  `idBackup` int(11) NOT NULL,
-  `tenFile` text COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- テーブルのデータのダンプ `backupdata`
---
-
-INSERT INTO `backupdata` (`idBackup`, `tenFile`) VALUES
-(1, 'db-backup-1647737554-cbb0c0211b0e052851619816754c0426.sql'),
-(2, 'db-backup-1647738474-cbb0c0211b0e052851619816754c0426.sql');
 
 -- --------------------------------------------------------
 
@@ -119,8 +100,19 @@ INSERT INTO `tblchamcong` (`idChamCong`, `idNhanVien`, `TGVao`, `TGRa`, `TongLuo
 (16, 3, '2022-03-17 08:08:30', '0000-00-00 00:00:00', 0, 0),
 (17, 3, '2022-03-17 08:11:08', '2022-03-17 08:14:19', 159167, 3),
 (18, 3, '2022-03-19 09:07:43', '0000-00-00 00:00:00', 0, 0),
-(19, 3, '2022-03-20 20:53:54', NULL, 0, NULL),
-(20, 3, '2022-03-20 21:01:01', '2022-03-20 21:03:13', 110000, 2);
+(19, 3, '2022-03-20 20:53:54', '0000-00-00 00:00:00', 0, 0),
+(20, 3, '2022-03-20 21:01:01', '2022-03-20 21:03:13', 110000, 2),
+(21, 3, '2022-03-21 18:56:08', '0000-00-00 00:00:00', 0, 0),
+(22, 3, '2022-03-21 19:14:43', '0000-00-00 00:00:00', 0, 0),
+(23, 3, '2022-03-22 08:03:39', '2022-03-22 08:03:59', 0, 0),
+(24, 3, '2022-03-22 08:33:12', '0000-00-00 00:00:00', 0, 0),
+(25, 3, '2022-03-23 07:42:46', '0000-00-00 00:00:00', 0, 0),
+(26, 3, '2022-03-29 07:40:27', NULL, 0, NULL),
+(27, 3, '2022-03-29 08:02:21', NULL, 0, NULL),
+(28, 3, '2022-03-31 07:26:40', NULL, 0, NULL),
+(29, 3, '2022-04-02 07:59:30', NULL, 0, NULL),
+(30, 3, '2022-04-03 08:02:06', NULL, 0, NULL),
+(31, 3, '2022-04-04 07:39:41', NULL, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -145,8 +137,8 @@ CREATE TABLE `tblchitiethd` (
 --
 
 INSERT INTO `tblchitiethd` (`idChiTiet`, `idKhachhang`, `tongSL`, `tongTien`, `ngayThang`, `diaChiGH`, `daGH`, `idMon`, `idStaff`) VALUES
-(228, 58, 1, 10000, '2022-01-26 03:30:00', 'Osaka, Osaka, Japan', 'X', 23, 0),
-(229, 0, 1, 10000, '2022-01-27 05:45:52', 'Rabbit House', 'X', 22, 3),
+(228, 58, 1, 10000, '2022-03-29 00:45:24', 'Osaka, Osaka, Japan', 'O', 23, 0),
+(229, 0, 1, 10000, '2022-03-29 00:45:35', 'Rabbit House', 'O', 22, 3),
 (230, 0, 1, 20000, '2022-02-09 01:31:13', 'Rabbit House', 'O', 22, 3),
 (231, 0, 1, 10000, '2022-02-09 01:31:13', 'Rabbit House', 'O', 22, 3),
 (232, 0, 1, 10000, '2022-02-09 01:31:13', 'Rabbit House', 'O', 22, 3),
@@ -166,7 +158,13 @@ INSERT INTO `tblchitiethd` (`idChiTiet`, `idKhachhang`, `tongSL`, `tongTien`, `n
 (246, 0, 1, 100000, '2022-03-16 00:47:20', 'Rabbit House', 'X', 19, 3),
 (247, 0, 1, 100000, '2022-03-16 00:47:20', 'Rabbit House', 'X', 21, 3),
 (248, 58, 1, 100000, '2022-03-16 00:50:07', 'Osaka, Osaka, Japan', 'X', 22, 0),
-(249, 58, 1, 100000, '2022-03-16 00:50:07', 'Osaka, Osaka, Japan', 'X', 21, 0);
+(249, 58, 1, 100000, '2022-03-16 00:50:07', 'Osaka, Osaka, Japan', 'X', 21, 0),
+(250, 58, 1, 100000, '2022-03-21 12:14:56', 'Osaka, Osaka, Japan', 'O', 21, 0),
+(251, NULL, 2, 10000, '2022-04-03 01:09:22', 'Rabbit House', 'X', 22, 3),
+(252, NULL, 1, 10000, '2022-04-03 01:09:22', 'Rabbit House', 'X', 19, 3),
+(253, NULL, 1, 10000, '2022-04-03 01:09:22', 'Rabbit House', 'X', 22, 3),
+(254, NULL, 1, 10000, '2022-04-03 01:14:14', 'Rabbit House', 'X', 22, 3),
+(255, NULL, 1, 10000, '2022-04-03 01:16:41', 'Rabbit House', 'X', 23, 3);
 
 -- --------------------------------------------------------
 
@@ -226,7 +224,10 @@ INSERT INTO `tbldoanhthu` (`idDoanhThu`, `idChiTiet`, `ngay`, `thanhTien`, `tong
 (35, 232, '2022-02-09', 120000, 1, '0000-00-00 00:00:00', 0),
 (36, 241, '2022-03-16', 210000, 1, '0000-00-00 00:00:00', 0),
 (37, 242, '2022-03-16', 210000, 1, '0000-00-00 00:00:00', 0),
-(38, 243, '2022-03-16', 210000, 1, '0000-00-00 00:00:00', 0);
+(38, 243, '2022-03-16', 210000, 1, '0000-00-00 00:00:00', 0),
+(39, 250, '2022-03-21', 100000, 1, '0000-00-00 00:00:00', 0),
+(40, 228, '2022-03-29', 100000, 1, NULL, NULL),
+(41, 0, '2022-03-29', 10000, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -248,8 +249,9 @@ CREATE TABLE `tbldoanhthukho` (
 INSERT INTO `tbldoanhthukho` (`idDTK`, `ngayXK`, `thanhTien`, `idKho`) VALUES
 (29, '2022-03-16', 1000, 30),
 (31, '2022-03-16', 1000, 31),
-(33, '2022-03-19', 100000, 2),
-(34, '2022-03-19', 10000, 3);
+(34, '2022-03-19', 10000, 3),
+(35, '2022-03-29', 11000, 2),
+(36, '2022-04-04', 10000, 98);
 
 -- --------------------------------------------------------
 
@@ -274,7 +276,13 @@ CREATE TABLE `tblhoadon` (
 INSERT INTO `tblhoadon` (`iHhoadon`, `idKhachhang`, `idMon`, `soLuong`, `ThanhTien`, `ngayThang`, `idstaff`) VALUES
 (177, 0, 21, 1, 100000, '2021-11-05 17:00:00', 0),
 (196, 3, 22, 1, 10000, '2022-01-19 01:45:35', 0),
-(238, 0, 21, 1, 100000, '2022-03-19 17:00:00', NULL);
+(238, 0, 21, 1, 100000, '2022-03-19 17:00:00', 0),
+(240, 58, 23, 1, 10000, '2022-03-22 01:27:00', 0),
+(241, 58, 19, 1, 10000, '2022-03-22 01:27:14', 0),
+(242, 58, 24, 2, 30000, '2022-03-22 01:27:25', 0),
+(245, 58, 23, 1, 10000, '2022-03-27 00:54:15', NULL),
+(246, 58, 23, 1, 10000, '2022-03-28 03:30:01', NULL),
+(247, 58, 23, 1, 10000, '2022-04-02 00:58:51', NULL);
 
 -- --------------------------------------------------------
 
@@ -322,11 +330,11 @@ CREATE TABLE `tblkho` (
 --
 
 INSERT INTO `tblkho` (`idKho`, `tenHang`, `soLuongBD`, `soLuongCL`, `thoiGianNK`, `thoiGianXK`, `id_user`, `soTien`) VALUES
-(2, 'Cafe xay sẳn', 10, 8, '2022-01-24 08:43:09', '2022-03-19 10:36:53', 1, 110000),
+(2, 'Cafe xay sẳn', 10, 7, '2022-01-24 08:43:09', '2022-03-29 07:44:29', 1, 110000),
 (3, 'Bánh tráng', 10, 9, '2022-01-24 09:06:05', '2022-03-19 10:36:53', 1, 100000),
-(4, 'Trứng cút', 10, 10, '2022-01-24 09:06:17', '2022-02-24 07:26:10', 1, 100000),
-(5, 'CoCa', 10, 10, '2022-01-24 09:06:34', '2022-02-24 07:26:10', 1, 1000000),
-(6, 'Thịt + đồ nướng', 10, 10, '2022-01-24 09:07:30', '2022-02-24 07:29:31', 1, 1000000),
+(4, 'Trứng cút', 10, 10, '2022-01-24 09:06:17', '0000-00-00 00:00:00', 1, 100000),
+(5, 'CoCa', 10, 10, '2022-01-24 09:06:34', '0000-00-00 00:00:00', 1, 1000000),
+(6, 'Thịt + đồ nướng', 10, 10, '2022-01-24 09:07:30', '0000-00-00 00:00:00', 1, 1000000),
 (7, 'Muối', 10, 10, '2022-01-24 09:07:42', '0000-00-00 00:00:00', 1, 100000),
 (8, 'Đường', 10, 10, '2022-01-24 09:07:51', '0000-00-00 00:00:00', 1, 100000),
 (9, 'Chuối', 10, 10, '2022-01-24 09:08:06', '0000-00-00 00:00:00', 1, 100000),
@@ -335,10 +343,10 @@ INSERT INTO `tblkho` (`idKho`, `tenHang`, `soLuongBD`, `soLuongCL`, `thoiGianNK`
 (12, 'hạt nêm', 10, 10, '2022-02-11 09:31:50', '0000-00-00 00:00:00', 1, 100000),
 (13, 'mì chính', 10, 10, '2022-02-11 09:35:25', '0000-00-00 00:00:00', 1, 100000),
 (14, 'Nước ngọt', 10, 10, '2022-02-13 11:30:46', '0000-00-00 00:00:00', 1, 100000),
-(95, 'Hạt tiêu\r\n', 10, 10, '2022-03-21 08:56:17', '0000-00-00 00:00:00', 1, 10000),
-(96, 'Rau nguồi tây\r\n', 10, 10, '2022-03-21 08:56:17', '0000-00-00 00:00:00', 1, 10000),
-(97, 'Đường thẻ\r\n', 10, 10, '2022-03-21 08:56:17', '0000-00-00 00:00:00', 1, 10000),
-(98, 'Sửa đặt\r\n', 10, 10, '2022-03-21 08:56:17', '0000-00-00 00:00:00', 1, 100000);
+(133, 'Hạt tiêu\r\n', 10, 10, '2022-04-05 08:27:35', '0000-00-00 00:00:00', 1, 10000),
+(134, 'Rau nguồi tây\r\n', 10, 10, '2022-04-05 08:27:35', '0000-00-00 00:00:00', 1, 10000),
+(135, 'Đường thẻ\r\n', 10, 10, '2022-04-05 08:27:35', '0000-00-00 00:00:00', 1, 10000),
+(136, 'Sửa đặt\r\n', 10, 10, '2022-04-05 08:27:35', '0000-00-00 00:00:00', 1, 100000);
 
 -- --------------------------------------------------------
 
@@ -366,6 +374,14 @@ CREATE TABLE `tblkhuyenmai` (
   `thoiGianBD` datetime NOT NULL,
   `thoiGianKT` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- テーブルのデータのダンプ `tblkhuyenmai`
+--
+
+INSERT INTO `tblkhuyenmai` (`idKM`, `idKhachhang`, `khuyenMai`, `tichLuy`, `tenKM`, `thoiGianBD`, `thoiGianKT`) VALUES
+(16, NULL, 50, NULL, 'Khuyến mãi truy ân khách hàng', '2022-03-20 07:49:00', '2022-04-01 07:49:00'),
+(17, NULL, 10, NULL, 'Hello tháng 4', '2022-04-01 07:49:00', '2022-04-09 07:49:00');
 
 -- --------------------------------------------------------
 
@@ -407,31 +423,12 @@ INSERT INTO `tbllichsu` (`idlichSu`, `idKhachhang`, `idMon`, `gia`, `thoigian`, 
 (82, 63, 24, 15000, '2021-11-13 00:58:32', 1, 0, 0, ''),
 (83, 63, 21, 100000, '2021-11-13 01:02:06', 1, 0, 0, ''),
 (84, 63, 21, 100000, '2021-11-13 01:02:06', 1, 0, 0, ''),
-(85, 58, 23, 20000, '2021-11-27 02:42:13', 2, 0, 0, ''),
-(86, 58, 24, 15000, '2021-11-27 02:42:13', 2, 0, 0, ''),
-(87, 58, 23, 10000, '2021-11-27 04:28:50', 1, 0, 0, ''),
-(88, 58, 23, 10000, '2021-11-27 04:28:50', 1, 0, 0, ''),
-(89, 58, 21, 100000, '2021-12-12 00:03:19', 1, 0, 0, ''),
-(90, 58, 23, 10000, '2021-12-12 00:03:19', 1, 0, 0, ''),
-(91, 58, 20, 10000, '2021-12-12 00:24:52', 1, 0, 0, ''),
 (92, 0, 22, 10000, '2022-01-19 01:55:34', 1, 0, 0, ''),
 (93, 0, 20, 10000, '2022-01-19 01:55:34', 1, 0, 0, ''),
 (94, 0, 21, 100000, '2022-01-21 01:01:50', 1, 0, 0, ''),
 (95, 0, 22, 10000, '2022-01-21 01:06:02', 1, 0, 0, ''),
 (96, 0, 22, 10000, '2022-01-21 01:08:59', 1, 0, 0, ''),
 (97, 0, 22, 10000, '2022-01-21 01:09:26', 1, 0, 0, ''),
-(98, 0, 22, 10000, '2022-01-21 01:10:45', 1, 0, 3, ''),
-(99, 0, 22, 10000, '2022-01-21 01:12:22', 1, 0, 3, ''),
-(100, 0, 22, 10000, '2022-01-21 01:13:20', 1, 0, 3, ''),
-(101, 0, 21, 100000, '2022-01-21 01:21:09', 1, 0, 3, ''),
-(102, 0, 23, 10000, '2022-01-21 01:22:23', 1, 0, 3, ''),
-(103, 0, 21, 100000, '2022-01-21 02:19:46', 1, 0, 3, ''),
-(104, 0, 20, 10000, '2022-01-22 01:42:30', 1, 0, 3, ''),
-(105, 0, 23, 10000, '2022-01-22 01:42:48', 1, 0, 3, ''),
-(106, 0, 22, 10000, '2022-01-22 06:24:52', 1, 0, 3, ''),
-(107, 0, 21, 100000, '2022-01-22 06:25:18', 1, 0, 3, ''),
-(108, 58, 23, 10000, '2022-01-25 01:42:42', 1, 0, 0, ''),
-(109, 58, 23, 10000, '2022-01-26 03:30:00', 1, 0, 0, ''),
 (110, 0, 22, 10000, '2022-01-27 05:45:52', 1, 0, 3, 'X'),
 (111, 0, 22, 10000, '2022-01-27 05:45:52', 1, 0, 3, 'X'),
 (112, 0, 22, 10000, '2022-01-27 05:48:02', 1, 0, 3, 'X'),
@@ -452,7 +449,41 @@ INSERT INTO `tbllichsu` (`idlichSu`, `idKhachhang`, `idMon`, `gia`, `thoigian`, 
 (127, 0, 19, 10000, '2022-03-16 00:47:20', 1, 246, 3, 'X'),
 (128, 0, 21, 100000, '2022-03-16 00:47:20', 1, 246, 3, 'X'),
 (129, 58, 22, 10000, '2022-03-16 00:50:07', 1, 248, 0, 'X'),
-(130, 58, 21, 100000, '2022-03-16 00:50:07', 1, 248, 0, 'X');
+(130, 58, 21, 100000, '2022-03-16 00:50:07', 1, 248, 0, 'X'),
+(131, 58, 21, 100000, '2022-03-21 12:14:56', 1, 250, 0, 'O'),
+(132, NULL, 22, 20000, '2022-04-03 01:09:22', 2, 251, 3, 'X'),
+(133, NULL, 19, 10000, '2022-04-03 01:09:22', 2, 251, 3, 'X'),
+(134, NULL, 22, 10000, '2022-04-03 01:09:22', 2, 251, 3, 'X'),
+(135, NULL, 22, 10000, '2022-04-03 01:14:14', 1, 254, 3, 'X'),
+(136, NULL, 23, 10000, '2022-04-03 01:16:41', 1, 255, 3, 'X');
+
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `tbllichsukho`
+--
+
+CREATE TABLE `tbllichsukho` (
+  `idLSK` int(11) NOT NULL,
+  `tenHang` text COLLATE utf8_unicode_ci NOT NULL,
+  `soLuongBD` int(11) NOT NULL,
+  `soLuongCL` int(11) NOT NULL,
+  `thoiGianNK` datetime NOT NULL,
+  `thoiGianXK` datetime NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `soTien` int(11) NOT NULL,
+  `thoiGianLuuTT` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- テーブルのデータのダンプ `tbllichsukho`
+--
+
+INSERT INTO `tbllichsukho` (`idLSK`, `tenHang`, `soLuongBD`, `soLuongCL`, `thoiGianNK`, `thoiGianXK`, `id_user`, `soTien`, `thoiGianLuuTT`) VALUES
+(15, 'Sửa đặt\r\n', 10, 0, '2022-04-05 07:55:57', '2022-04-05 08:27:15', 1, 100000, '2022-04-05 07:56:21'),
+(16, 'Hạt tiêu\r\n', 10, 10, '2022-04-05 07:55:57', '0000-00-00 00:00:00', 1, 10000, '2022-04-05 07:57:08'),
+(17, 'Rau nguồi tây\r\n', 10, 10, '2022-04-05 07:55:57', '0000-00-00 00:00:00', 1, 10000, '2022-04-05 07:57:08'),
+(18, 'Đường thẻ\r\n', 10, 10, '2022-04-05 07:55:57', '0000-00-00 00:00:00', 1, 10000, '2022-04-05 07:57:08');
 
 -- --------------------------------------------------------
 
@@ -568,7 +599,7 @@ CREATE TABLE `tblstaff` (
 --
 
 INSERT INTO `tblstaff` (`idStaff`, `hoTen`, `soDT`, `username`, `password`, `diachi`, `tongTG`, `tongLuong`) VALUES
-(3, 'Trần Tiến Đú', 101010101, 'dutt', '1111', 'Rabbit House', 102, 5159168),
+(3, 'Trần Tiến Đạt', 101010101, 'dutt', '1111', 'Rabbit House', 102, 5159168),
 (4, 'Nguyễn Minh Quân', 101010101, 'quannm', 'password', 'Rabbit House', 0, 0);
 
 -- --------------------------------------------------------
@@ -592,7 +623,7 @@ CREATE TABLE `tblusers` (
 
 INSERT INTO `tblusers` (`id_user`, `username`, `password`, `hoTen`, `soDT`, `diachi`) VALUES
 (1, 'admin', '1111', 'Nguyễn Văn Bách', 901234567, 'Rabbit House'),
-(27, 'hungnv', '1111', 'Nguyễn Văn Hùng', 904567890, 'Rabbit House');
+(27, 'hungnv', 'Demo@123', 'Nguyễn Văn Hùng', 904567890, 'Rabbit House');
 
 -- --------------------------------------------------------
 
@@ -620,12 +651,6 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 -- ダンプしたテーブルのインデックス
 --
-
---
--- テーブルのインデックス `backupdata`
---
-ALTER TABLE `backupdata`
-  ADD PRIMARY KEY (`idBackup`);
 
 --
 -- テーブルのインデックス `sensordata`
@@ -694,6 +719,12 @@ ALTER TABLE `tbllichsu`
   ADD PRIMARY KEY (`idlichSu`);
 
 --
+-- テーブルのインデックス `tbllichsukho`
+--
+ALTER TABLE `tbllichsukho`
+  ADD PRIMARY KEY (`idLSK`);
+
+--
 -- テーブルのインデックス `tblloai`
 --
 ALTER TABLE `tblloai`
@@ -735,12 +766,6 @@ ALTER TABLE `tblusers`
 --
 
 --
--- テーブルの AUTO_INCREMENT `backupdata`
---
-ALTER TABLE `backupdata`
-  MODIFY `idBackup` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- テーブルの AUTO_INCREMENT `sensordata`
 --
 ALTER TABLE `sensordata`
@@ -750,31 +775,31 @@ ALTER TABLE `sensordata`
 -- テーブルの AUTO_INCREMENT `tblchamcong`
 --
 ALTER TABLE `tblchamcong`
-  MODIFY `idChamCong` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `idChamCong` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- テーブルの AUTO_INCREMENT `tblchitiethd`
 --
 ALTER TABLE `tblchitiethd`
-  MODIFY `idChiTiet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=250;
+  MODIFY `idChiTiet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=256;
 
 --
 -- テーブルの AUTO_INCREMENT `tbldoanhthu`
 --
 ALTER TABLE `tbldoanhthu`
-  MODIFY `idDoanhThu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `idDoanhThu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- テーブルの AUTO_INCREMENT `tbldoanhthukho`
 --
 ALTER TABLE `tbldoanhthukho`
-  MODIFY `idDTK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `idDTK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- テーブルの AUTO_INCREMENT `tblhoadon`
 --
 ALTER TABLE `tblhoadon`
-  MODIFY `iHhoadon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=239;
+  MODIFY `iHhoadon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=251;
 
 --
 -- テーブルの AUTO_INCREMENT `tblkhachhang`
@@ -786,31 +811,37 @@ ALTER TABLE `tblkhachhang`
 -- テーブルの AUTO_INCREMENT `tblkho`
 --
 ALTER TABLE `tblkho`
-  MODIFY `idKho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+  MODIFY `idKho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
 
 --
 -- テーブルの AUTO_INCREMENT `tblkhotmp`
 --
 ALTER TABLE `tblkhotmp`
-  MODIFY `idkhotmp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `idkhotmp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- テーブルの AUTO_INCREMENT `tblkhuyenmai`
 --
 ALTER TABLE `tblkhuyenmai`
-  MODIFY `idKM` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idKM` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- テーブルの AUTO_INCREMENT `tbllichsu`
 --
 ALTER TABLE `tbllichsu`
-  MODIFY `idlichSu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
+  MODIFY `idlichSu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+
+--
+-- テーブルの AUTO_INCREMENT `tbllichsukho`
+--
+ALTER TABLE `tbllichsukho`
+  MODIFY `idLSK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- テーブルの AUTO_INCREMENT `tblloai`
 --
 ALTER TABLE `tblloai`
-  MODIFY `idLoai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `idLoai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- テーブルの AUTO_INCREMENT `tblluongnv`
