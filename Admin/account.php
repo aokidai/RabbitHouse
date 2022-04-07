@@ -99,19 +99,18 @@ else
                     <!-- /.col-lg-12 -->
                 </div>
                 <?php
-                $usertmp = $username;
                 include "../include/connect.inc";
                 if (isset($_POST["update"])) {
                     $user = $_POST["txtUser"];
                     $SoDT = $_POST["txtSoDT"];
                     $hoTen = $_POST["txtHoTen"];
-                    $sql = "update tblusers set hoTen = '$hoTen', soDT = '$SoDT' where username='$usertmp'";
+                    $sql = "update tblusers set hoTen = '$hoTen', soDT = '$SoDT' where username='$user00tmp'";
                     $rs = mysqli_query($conn, $sql);
                     if ($rs)
                         echo "<script>alert('Đã lưu thành công!')</script>";
                     echo "<script>window.location.href='account.php'</script>";
                 }  else {
-                    $sql = "select * from tblusers where username='$usertmp'";
+                    $sql = "select * from tblusers where username='$user00tmp'";
                     $rs = mysqli_query($conn, $sql);
                     $row = $row = mysqli_fetch_array($rs);
                     $user = $row["username"];
