@@ -51,6 +51,19 @@ else
 	// Event listeners for reload
 	reloadButton.addEventListener("click", reload, false);
 </script>
+<style>
+	#myInput {
+		width: 15%;
+		font-size: 16px;
+		margin-bottom: 12px;
+		float: right;
+		margin-right: 10px;
+		display: block;
+		border: none;
+		border-bottom: 1px solid #ccc;
+		margin-top: 8px;
+	}
+</style>
 
 <body>
 
@@ -108,12 +121,12 @@ else
 						<button type="submit" class="btn btn-success" name="giaohang" style="margin-bottom: 20px">Giao hàng</button>
 						<button type="submit" class="btn btn-success" name="xoahang" style="margin-bottom: 20px; background-color: red">Xóa hàng</button>
 						<button onClick="window.location.reload();" class="btn btn-success" style="margin-bottom: 20px; float: right; margin-right: 2%; background-color: aqua; color: black">Tải lại dữ liệu</button>
-						<!-- /.col-lg-12 -->
+						<input type="text" id="myInput" class="w3-input" onkeyup="myFunction()" placeholder="Tìm tên khách hàng..." title="Tìm kiếm khách hàng đặt hàng">
 					</div>
 					<div><span style="font-size: 20px; color: red">Trạng thái gia hàng được biểu diển bởi kí tự X và O. X là chưa giao hàng còn O là đã giao hàng.</span></div>
 					<div class="table-responsive table-bordered">
 
-						<table class="table">
+						<table class="table" id="myTable">
 							<thead>
 								<tr>
 									<th><input type="checkbox" name="checkbox" class="chk_box" onClick="toggle(this)"></th>
@@ -129,7 +142,7 @@ else
 									<th>Trạng thái GH</th>
 								</tr>
 							</thead>
-							<tbody <?php
+							<tbody> <?php
 									include("../include/connect.inc");
 									$sql		=	"select * from tblchitiethd";
 									$rs 		=	mysqli_query($conn, $sql);
@@ -192,7 +205,7 @@ else
 												$time_act = date('Y-m-d');
 												$sqlTientmp = "select * from tblchitiethd where idChiTiet = '$check'";
 												$rsTientmp = mysqli_query($conn, $sqlTientmp);
-												while($rowTientmp = mysqli_fetch_array($rsTientmp)){
+												while ($rowTientmp = mysqli_fetch_array($rsTientmp)) {
 													$TienTmp = $rowTientmp["tongTien"];
 													$khuyenMaitmp = $rowTientmp["khuyenmai"];
 													$ThanhTienImport = $TienTmp - ($khuyenMaitmp * 100);
@@ -215,12 +228,55 @@ else
 									}
 
 									?> </tbody>
-								<tr align="center">
-									<td colspan="11">
-										<button type="submit" class="btn btn-success" name="giaohang" style="margin-bottom: 20px">Giao hàng</button>
-									</td>
-								</tr>
 						</table>
+						<div style="text-align: center;">
+							<button type="submit" class="btn btn-success" name="giaohang" style="margin-bottom: 20px">Giao hàng</button>
+						</div>
+						<script>
+							function myFunction() {
+								var input, filter, table, tr, td, i, txtValue;
+								input = document.getElementById("myInput");
+								filter = input.value.toUpperCase();
+								table = document.getElementById("myTable");
+								tr = table.getElementsByTagName("tr");
+								for (i = 0; i < tr.length; i++) {
+									td = tr[i].getElementsByTagName("td")[5];
+									if (td) {
+										txtValue = td.textContent || td.innerText;
+										if (txtValue.toUpperCase().indexOf(filter) > -1) {
+											tr[i].style.display = "";
+										} else {
+											tr[i].style.display = "none";
+										}
+									}
+								}
+							}
+						</script>
+						<script>
+							$('th').click(function() {
+								var table = $(this).parents('table').eq(0)
+								var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
+								this.asc = !this.asc
+								if (!this.asc) {
+									rows = rows.reverse()
+								}
+								for (var i = 0; i < rows.length; i++) {
+									table.append(rows[i])
+								}
+							})
+
+							function comparer(index) {
+								return function(a, b) {
+									var valA = getCellValue(a, index),
+										valB = getCellValue(b, index)
+									return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB)
+								}
+							}
+
+							function getCellValue(row, index) {
+								return $(row).children('td').eq(index).text()
+							}
+						</script>
 					</div>
 					<!-- /.row -->
 				</div>

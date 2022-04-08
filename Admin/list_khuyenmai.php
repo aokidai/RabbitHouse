@@ -1,7 +1,9 @@
 <?php
 session_start();
-if (isset($_SESSION["username"]))
+if (isset($_SESSION["username"])){
     $username    =    $_SESSION["username"];
+    unset($_SESSION["pages"]);
+}
 else
     header("location:login.php");
 ?>
@@ -130,6 +132,7 @@ else
                             <tbody> <?php
                                     error_reporting(E_ERROR | E_PARSE);
                                     include("../include/connect.inc");
+                                    $_SESSION["pages"]       =    $_GET["page"];
                                     $sql        =    "select * from tblkhuyenmai";
                                     $rs         =    mysqli_query($conn, $sql);
                                     $count        =    mysqli_num_rows($rs);
@@ -169,7 +172,7 @@ else
                                                     $rs9 = mysqli_query($conn, $sql9);
                                                 }
                                             }
-                                            echo "<script>window.location.href='list_khuyenmai.php'</script>";
+                                            echo "<script>window.location.href='list_khuyenmai.php?page=1'</script>";
                                         }
                                         ?> 
                                 <tr>

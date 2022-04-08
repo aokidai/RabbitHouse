@@ -42,11 +42,11 @@
 			<li>
 				<a href="#"><i class="fa fa-server fa-fw"></i>Bán hàng & phản hồi<span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-					<li>
+					<!-- <li>
 						<a href="../Admin/BanHang/BanHang.php">Bán hàng</a>
-					</li>
+					</li> -->
 					<li>
-						<a href="../Admin/list_khuyenmai.php">Khuyến mãi</a>
+						<a href="../Admin/list_khuyenmai.php?page=1">Khuyến mãi</a>
 					</li>
 					<li>
 						<a href="../Admin/list_report.php?page=1">Phản hồi</a>

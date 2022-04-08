@@ -163,8 +163,7 @@ else
 	  </br> </br>  </br> 
 	 <aside>
 	  <div id="menu" align="center" class="d-flex align-items-center">
-		  <span id="ttLoai">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loại món </span>
+		  <span id="ttLoai">Loại món </span>
 			<ul style="margin-right: 20%; margin-left:40%">
 				<?php
 					include "../../include/left.php";	

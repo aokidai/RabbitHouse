@@ -116,7 +116,10 @@ else
                                 <td><input class="form-control" name="txtLoai" placeholder="Tên loại món"></td>
                             </tr>
                             <tr align="center">
-                                <td colspan="2"><button type="submit" class="btn btn-primary">Thêm</button> </td>
+                                <td colspan="2">
+                                    <button type="submit" class="btn btn-primary">Thêm</button>
+                                    <button type="button" onClick="javascript:window.location.href='list_loai.php?page=1'" class="btn btn-warning">Hủy</button> 
+                                </td>
                             </tr>
                     </table>
                 </form>

@@ -23,6 +23,7 @@ if (isset($_SESSION["username"])) {
 
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <style>
     #mon {
@@ -253,6 +254,14 @@ if (isset($_SESSION["username"])) {
         font-weight: bold;
         margin-left: 18%;
     }
+
+    #myInput {
+        width: 15%;
+        font-size: 16px;
+        margin-bottom: 12px;
+        float: right;
+        margin-right: 10px;
+    }
 </style>
 <script type="text/javascript">
     const reloadtButton = document.querySelector("#reload");
@@ -266,43 +275,43 @@ if (isset($_SESSION["username"])) {
 
 <body>
     <?php $user = $username ?>
-     
+
     <header>
         <?php include "./header.php"; ?>
-            <div> <br /><br /><br />
-                <div align="center">
-                    <form action="donhang.php" method="GET">
-                        <input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
-                        <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
-                    </form>
-                </div>
-                <script type="text/javascript">
-                    $(function() {
-                        $("#searchbar").autocomplete({
-                            source: 'ajax-mon-search.php',
-                        });
-                    });
-                </script>
-                <br />
-                <?php
-                include "../include/connect.inc";
-                if (isset($_GET["txtsearchMon"])) {
-                    $searchMon = $_GET["txtsearchMon"];
-                    $sql = "select idMon, tenMon from tblmon where tenMon like '%$searchMon%' and conHang = 'O'";
-                    $rs = mysqli_query($conn, $sql);
-                    while ($row = mysqli_fetch_assoc($rs)) {
-                        //echo "<div id='link' onClick='addText(\"".$row['tenMon']."\");'>" . $row['tenMon'] . "</div>"; 
-                        echo "<script>window.location.href='search.php?id=" . $row["idMon"] . "'</script>";
-                    }
-                    $tmp = $_GET["txtsearchMon"];
-                    if ($tmp == $searchMon) {
-                        echo ("<span style=\"text-align:center; color:red; font-size: 30px\"><center>Không có sản phẩm đó!</center></span>");
-                    }
-                }
-
-                ?>
-
+        <div> <br /><br /><br />
+            <div align="center">
+                <form action="donhang.php" method="GET">
+                    <input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
+                    <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
+                </form>
             </div>
+            <script type="text/javascript">
+                $(function() {
+                    $("#searchbar").autocomplete({
+                        source: 'ajax-mon-search.php',
+                    });
+                });
+            </script>
+            <br />
+            <?php
+            include "../include/connect.inc";
+            if (isset($_GET["txtsearchMon"])) {
+                $searchMon = $_GET["txtsearchMon"];
+                $sql = "select idMon, tenMon from tblmon where tenMon like '%$searchMon%' and conHang = 'O'";
+                $rs = mysqli_query($conn, $sql);
+                while ($row = mysqli_fetch_assoc($rs)) {
+                    //echo "<div id='link' onClick='addText(\"".$row['tenMon']."\");'>" . $row['tenMon'] . "</div>"; 
+                    echo "<script>window.location.href='search.php?id=" . $row["idMon"] . "'</script>";
+                }
+                $tmp = $_GET["txtsearchMon"];
+                if ($tmp == $searchMon) {
+                    echo ("<span style=\"text-align:center; color:red; font-size: 30px\"><center>Không có sản phẩm đó!</center></span>");
+                }
+            }
+
+            ?>
+
+        </div>
     </header>
     <section id="info" align="center">
         <form method="post" action="donhang.php">
@@ -310,8 +319,9 @@ if (isset($_SESSION["username"])) {
             <button type="submit" class="btn btn-success" name="giaohang" style="margin-bottom: 20px; float: left; margin-left: 2%;">Giao hàng</button>
             <button type="submit" class="btn btn-success" name="xoahang" style="margin-bottom: 20px; background-color: red; float: left; margin-left: 10px">Xóa hàng</button>
             <button onClick="window.location.reload();" class="btn btn-success" style="margin-bottom: 20px; float: right; margin-right: 2%; background-color: aqua; color: black">Tải lại dữ liệu</button>
+            <input type="text" id="myInput" class="w3-input" onkeyup="myFunction()" placeholder="Tìm tên khách hàng..." title="Tìm kiếm khách hàng đặt hàng">
             <div class="table-responsive table-bordered">
-                <table class="table" style="width: 97%;" align="center">
+                <table class="table" style="width: 97%;" align="center" id="myTable">
                     <thead>
                         <tr>
                             <th><input type="checkbox" name="checkbox" class="chk_box" onClick="toggle(this)"></th>
@@ -340,7 +350,7 @@ if (isset($_SESSION["username"])) {
                             $status = $row["daGH"];
                             $thanhTien1 = $row["tongTien"];
                             $khuyenMaiDC = $row["khuyenmai"];
-                            if($khuyenMaiDC != null){
+                            if ($khuyenMaiDC != null) {
                                 $thanhTien = $thanhTien1 - ($khuyenMaiDC * 100);
                             } else
                                 $thanhTien = $thanhTien1;
@@ -394,7 +404,7 @@ if (isset($_SESSION["username"])) {
                                     $time_act = date('Y-m-d');
                                     $sqlTientmp = "select * from tblchitiethd where idChiTiet = '$check'";
                                     $rsTientmp = mysqli_query($conn, $sqlTientmp);
-                                    while($rowTientmp = mysqli_fetch_array($rsTientmp)){
+                                    while ($rowTientmp = mysqli_fetch_array($rsTientmp)) {
                                         $TienTmp = $rowTientmp["tongTien"];
                                         $khuyenMaitmp = $rowTientmp["khuyenmai"];
                                         $ThanhTienImport = $TienTmp - ($khuyenMaitmp * 100);
@@ -417,12 +427,55 @@ if (isset($_SESSION["username"])) {
                         }
                         ?>
                     </tbody>
-                    <tr>
-                        <td colspan="12">
-                        <button type="submit" class="btn btn-success" name="giaohang">Giao hàng</button>
-                        </td>
-                    </tr>
                 </table>
+                <div style="text-align: center;">
+                    <button type="submit" class="btn btn-success" name="giaohang">Giao hàng</button>
+                </div>
+                <script>
+                    function myFunction() {
+                        var input, filter, table, tr, td, i, txtValue;
+                        input = document.getElementById("myInput");
+                        filter = input.value.toUpperCase();
+                        table = document.getElementById("myTable");
+                        tr = table.getElementsByTagName("tr");
+                        for (i = 0; i < tr.length; i++) {
+                            td = tr[i].getElementsByTagName("td")[5];
+                            if (td) {
+                                txtValue = td.textContent || td.innerText;
+                                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                    tr[i].style.display = "";
+                                } else {
+                                    tr[i].style.display = "none";
+                                }
+                            }
+                        }
+                    }
+                </script>
+                <script>
+                    $('th').click(function() {
+                        var table = $(this).parents('table').eq(0)
+                        var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
+                        this.asc = !this.asc
+                        if (!this.asc) {
+                            rows = rows.reverse()
+                        }
+                        for (var i = 0; i < rows.length; i++) {
+                            table.append(rows[i])
+                        }
+                    })
+
+                    function comparer(index) {
+                        return function(a, b) {
+                            var valA = getCellValue(a, index),
+                                valB = getCellValue(b, index)
+                            return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB)
+                        }
+                    }
+
+                    function getCellValue(row, index) {
+                        return $(row).children('td').eq(index).text()
+                    }
+                </script>
             </div>
         </form>
         <script language="JavaScript">
@@ -437,14 +490,14 @@ if (isset($_SESSION["username"])) {
     </section>
     <div style="padding-top: 15%;">
         <footer>
-           <div style="text-align: center;">
-        <p>Liên hệ: Rabbit House Coffee<br />
-          〒542-0081 3-1 Minamisenba, Chuo-ku, Osaka-shi, Osaka<br />
-          Tel/Fax: 03-6472-xxxx<br />
-          Mobile: 090-3176-4xxx<br />
-          E-mail: info@dragoninc.co.jp</p>
-        <p>🄫 2021 Power by Dragon Inc</p>
-      </div>
+            <div style="text-align: center;">
+                <p>Liên hệ: Rabbit House Coffee<br />
+                    〒542-0081 3-1 Minamisenba, Chuo-ku, Osaka-shi, Osaka<br />
+                    Tel/Fax: 03-6472-xxxx<br />
+                    Mobile: 090-3176-4xxx<br />
+                    E-mail: info@dragoninc.co.jp</p>
+                <p>🄫 2021 Power by Dragon Inc</p>
+            </div>
         </footer>
     </div>
 </body>

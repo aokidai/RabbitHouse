@@ -173,7 +173,7 @@ else
 						</tr>
 						<tr>
 						  <td>&nbsp;</td>
-						  <td><button type="submit" class="btn btn-primary">Thêm</button><button type="reset" class="btn btn-warning" style="margin-left: 10px">Hũy</button></td>
+						  <td><button type="submit" class="btn btn-primary">Thêm</button><button type="reset" class="btn btn-warning" style="margin-left: 10px">Hủy</button></td>
 						</tr>
 				</table>
 			</form>

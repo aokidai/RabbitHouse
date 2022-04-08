@@ -1,7 +1,9 @@
 <?php
 session_start();
-if (isset($_SESSION["username"]))
+if (isset($_SESSION["username"])){
     $username    =    $_SESSION["username"];
+    $pages = $_SESSION["pages"];
+}
 else
     header("location:login.php");
 ?>
@@ -57,7 +59,7 @@ else
     $TGKTtmp = $row0["thoiGianKT"];
     if($TGBDtmp <= $time_act && $time_act <= $TGKTtmp || $TGKTtmp <= $time_act){
         echo "<script>alert('Không thể sửa vì đang hoặc đã qua thời gian khuyến mãi')</script>";
-        echo "<script>window.location.href='list_khuyenmai.php'</script>";
+        echo "<script>window.location.href='list_khuyenmai.php?page=$pages'</script>";
     }
     ?>
     <div id="wrapper">
@@ -156,7 +158,10 @@ else
                                 <td><input type="datetime-local" name="txtTGKT"  value="<?php echo date('Y-m-d\TH:i:s', strtotime($TGKT)); ?>" REQUIRED></td>
                             </tr>
                             <tr align="center">
-                                <td colspan="2"><button type="submit" class="btn btn-primary">Cập nhật</button> </td>
+                                <td colspan="2">
+                                    <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                    <button type="button" onClick="javascript:window.location.href='list_khuyenmai.php?page=<?=$pages?>'" class="btn btn-warning">Hủy</button>
+                                </td>
                             </tr>
 
                     </table>

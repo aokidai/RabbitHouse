@@ -196,7 +196,10 @@ else
                                 </td>
                             </tr>
                             <tr align="center">
-                                <td colspan="2"><button type="submit" class="btn btn-primary">Cập nhật</button> </td>
+                                <td colspan="2">
+                                    <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                    <button type="button" onClick="javascript:window.location.href='list_mon.php?page=<?=$pages?>'" class="btn btn-warning">Hủy</button> 
+                                </td>
                             </tr>
 
                     </table>

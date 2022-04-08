@@ -307,7 +307,6 @@ if (isset($_SESSION["username"])) {
 					echo ("<span style=\"text-align:center; color:red; font-size: 30px\"><center>Không có sản phẩm đó!</center></span>");
 				}
 			}
-
 			?>
 
 		</div>

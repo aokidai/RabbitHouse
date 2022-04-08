@@ -177,7 +177,10 @@ else
                                     <td><input type="file" class="form-control" name="txtHinh" id="fileField"></td>
                                 </tr>
                                 <tr align="center">
-                                    <td colspan="2"><button type="submit" name="chon" class="btn btn-primary">Thêm</button> </td>
+                                    <td colspan="2">
+                                        <button type="submit" name="chon" class="btn btn-primary">Thêm</button>
+                                        <button type="button" onClick="javascript:window.location.href='list_kho.php?page=1'" class="btn btn-warning">Hủy</button> 
+                                    </td>
                                 </tr>
                                 <tr align="right">
                                     <td colspan="2">
