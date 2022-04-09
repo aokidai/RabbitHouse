@@ -253,6 +253,18 @@ if (isset($_SESSION["username"])) {
         font-weight: bold;
         margin-left: 18%;
     }
+
+    #myInput {
+		width: 15%;
+		font-size: 16px;
+		margin-bottom: 12px;
+		float: right;
+		margin-right: 10px;
+		display: block;
+		border: none;
+		border-bottom: 1px solid #ccc;
+		margin-top: 8px;
+	}
 </style>
 
 <body>
@@ -299,8 +311,9 @@ if (isset($_SESSION["username"])) {
             <button type="submit" class="btn btn-success" name="xuatkho" style="margin-bottom: 20px; float: left; margin-left: 2%;" title="Nếu nguyên liệu dùng để làm món cho khách hàng bị hết, nhân viên hãy chọn vào nguyên liệu đó và nhấn Xuất kho trước ngay khi lấy hàng ra khổi kho">Xuất kho</button>
             <label style="margin-bottom: 20px; font-size: 15px; font-weight: bold; float: left; margin-left: 5px; margin-top: 7px; color: red" title="Mỗi lần xuất kho là 1Kg. Số lượng ban đầu và số lượng còn lại cũng được tính theo đơn vị Kg. Khi nhân viên nhận thấy hết nguyên liệu, nhân viên phải vào đây để cập nhật khi lấy hàng mới.">(?)</label>
             <button type="button" class="btn btn-success" onClick="javascript:window.location.href='check_mon.php'" style="margin-bottom: 20px; font-size: 15px; font-weight: bold; float: right; margin-right: 2%; background-color: red; color: white" title="Trường hợp món hết hàng, nhân viên vào đây để chuyển trạng thái món sang hết hàng">Trạng thái món</button>
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Tìm tên hàng hóa..." title="Tìm kiếm hàng hóa cần xuất kho">
             <div class="table-responsive table-bordered">
-                <table class="table" style="width:97%" align="center">
+                <table class="table" style="width:97%" align="center" id="myTable">
                     <thead>
                         <tr>
                             <th><input type="checkbox" name="checkbox" class="chk_box" onClick="toggle(this)"></th>
@@ -391,12 +404,55 @@ if (isset($_SESSION["username"])) {
                         }
                         ?>
                     </tbody>
-                    <tr>
-                        <td colspan="8">
-                        <button type="submit" class="btn btn-success" name="xuatkho" title="Nếu nguyên liệu dùng để làm món cho khách hàng bị hết, nhân viên hãy chọn vào nguyên liệu đó và nhấn Xuất kho trước ngay khi lấy hàng ra khổi kho">Xuất kho</button>
-                        </td>
-                    </tr>
                 </table>
+                <div style="text-align: center;">
+                    <button type="submit" class="btn btn-success" name="xuatkho" title="Nếu nguyên liệu dùng để làm món cho khách hàng bị hết, nhân viên hãy chọn vào nguyên liệu đó và nhấn Xuất kho trước ngay khi lấy hàng ra khổi kho">Xuất kho</button>
+                </div>
+                <script>
+                    function myFunction() {
+                        var input, filter, table, tr, td, i, txtValue;
+                        input = document.getElementById("myInput");
+                        filter = input.value.toUpperCase();
+                        table = document.getElementById("myTable");
+                        tr = table.getElementsByTagName("tr");
+                        for (i = 0; i < tr.length; i++) {
+                            td = tr[i].getElementsByTagName("td")[2];
+                            if (td) {
+                                txtValue = td.textContent || td.innerText;
+                                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                    tr[i].style.display = "";
+                                } else {
+                                    tr[i].style.display = "none";
+                                }
+                            }
+                        }
+                    }
+                </script>
+                <script>
+                    $('th').click(function() {
+                        var table = $(this).parents('table').eq(0)
+                        var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
+                        this.asc = !this.asc
+                        if (!this.asc) {
+                            rows = rows.reverse()
+                        }
+                        for (var i = 0; i < rows.length; i++) {
+                            table.append(rows[i])
+                        }
+                    })
+
+                    function comparer(index) {
+                        return function(a, b) {
+                            var valA = getCellValue(a, index),
+                                valB = getCellValue(b, index)
+                            return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB)
+                        }
+                    }
+
+                    function getCellValue(row, index) {
+                        return $(row).children('td').eq(index).text()
+                    }
+                </script>
             </div>
         </form>
         <script language="JavaScript">
