@@ -2,7 +2,8 @@
 session_start();
 if (isset($_SESSION["username"])) {
     $username    =    $_SESSION["username"];
-    unset($_SESSION["ThoiGian"]);
+    $thoigian = $_SESSION["ThoiGian"];
+    unset($_SESSION["ThoiGian2"]);
 } else
     header("location:login.php");
 ?>
@@ -44,14 +45,15 @@ if (isset($_SESSION["username"])) {
         <![endif]-->
 </head>
 <script type="text/javascript">
-		const reloadtButton = document.querySelector("#reload");
-		// Reload everything:
-		function reload() {
-			reload = location.reload();
-		}
-		// Event listeners for reload
-		reloadButton.addEventListener("click", reload, false);
-	</script>
+    const reloadtButton = document.querySelector("#reload");
+    // Reload everything:
+    function reload() {
+        reload = location.reload();
+    }
+    // Event listeners for reload
+    reloadButton.addEventListener("click", reload, false);
+</script>
+
 <body>
 
     <div id="wrapper">
@@ -81,15 +83,15 @@ if (isset($_SESSION["username"])) {
                         ?>
                         <i class="fa fa-user fa-fw"></i><?= $hoTenNVtmp ?><b class="caret"></b>
                     </a>
-                   <ul class="dropdown-menu dropdown-user">
-                            <li><a href="./backup/export_data.php"><i class="fa fa-user fa-fw"></i>Xuất dữ liệu</a></li>
-                            <li class="divider"></li>
-                            <li><a href="./backup/import_data.php"><i class="fa fa-user fa-fw"></i>Nhập dữ liệu</a></li>
-                            <li class="divider"></li>
-                            <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a></li>
-                            <li class="divider"></li>
-                            <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
-                        </ul>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="./backup/export_data.php"><i class="fa fa-user fa-fw"></i>Xuất dữ liệu</a></li>
+                        <li class="divider"></li>
+                        <li><a href="./backup/import_data.php"><i class="fa fa-user fa-fw"></i>Nhập dữ liệu</a></li>
+                        <li class="divider"></li>
+                        <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a></li>
+                        <li class="divider"></li>
+                        <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
+                    </ul>
                 </li>
             </ul>
             <!-- /.navbar-top-links -->
@@ -116,12 +118,35 @@ if (isset($_SESSION["username"])) {
                                     while ($row = mysqli_fetch_array($rs)) {
                                         $ngay = $row["ngay"];
                                         echo " 
-											<option value=" . $row["ngay"] . ">" . $row["ngay"] . "</option>
+											<option id='$ngay' value=" . $row["ngay"] . ">" . $row["ngay"] . "</option>
 										";
                                     }
                                     ?>
                                 </select>
-
+                                <input type="submit" name="tmpppp" id="hide" value="Nhiều ngày" />
+                                <?php
+                                error_reporting(E_ERROR | E_PARSE);
+                                if (isset($_POST['tmpppp'])) {
+                                    echo "<select id='cmbThoiGian' name='ThoiGian2' style='margin-left: -85px; margin-right: 5px;'>";
+                                    $tmpx = $_POST['ThoiGian'];
+                                    $_SESSION["ThoiGian"] = $tmpx;
+                                    include("../include/connect.inc");
+                                    $sql        =    "select DISTINCT ngay from tbldoanhthu where ngay >= '$tmpx'";
+                                    $rs         =    mysqli_query($conn, $sql);
+                                    while ($row = mysqli_fetch_array($rs)) {
+                                        $ngay = $row["ngay"];
+                                        echo " 
+                                        <option id='option2' value=" . $row["ngay"] . ">" . $row["ngay"] . "</option>
+                                    ";
+                                    }
+                                    echo "</select>";
+                                    echo "<script>document.getElementById('hide').style.visibility = 'hidden'</script>";
+                                    echo "<script>
+                                            abc = document.getElementById('$tmpx');
+                                            abc.setAttribute('selected', 'selected');
+                                           </script>";
+                                }
+                                ?>
                                 <input type="submit" name="xemDS" value="Xem danh sách" />
                             </form>
                         </div>
@@ -147,10 +172,17 @@ if (isset($_SESSION["username"])) {
                             error_reporting(E_ERROR | E_PARSE);
                             if (isset($_POST['xemDS'])) {
                                 $tmp = $_POST['ThoiGian'];
+                                $tmp2 = $_POST['ThoiGian2'];
                                 $_SESSION["ThoiGian"] = $tmp;
+                                $_SESSION["ThoiGian2"] = $tmp2;
                                 $TongTien = 0;
-                                $sql2        =    "select * from tbldoanhthu where ngay = '$tmp'";
-                                $rs2        =    mysqli_query($conn, $sql2);
+                                if($tmp2 == null){
+                                    $sql2        =    "select * from tbldoanhthu where ngay = '$tmp'";
+                                    $rs2        =    mysqli_query($conn, $sql2);
+                                } else{
+                                    $sql2        =    "select * from tbldoanhthu where ngay between '$thoigian' and '$tmp2'";
+                                    $rs2        =    mysqli_query($conn, $sql2);
+                                }
                                 $i            =    1;
                                 while ($row2 = mysqli_fetch_array($rs2)) {
 
@@ -181,11 +213,11 @@ if (isset($_SESSION["username"])) {
                                 <?php
                                 $sql3 = "select * from tbldoanhthukho where ngayXK = '$tmp'";
                                 $rs3 = mysqli_query($conn, $sql3);
-                                while ($row3 = mysqli_fetch_array($rs3)){
+                                while ($row3 = mysqli_fetch_array($rs3)) {
                                     $thanhTien = $row3["thanhTien"];
                                     $tongTT += $thanhTien;
                                 }
-                                if($tongTT == 0) echo 0;
+                                if ($tongTT == 0) echo 0;
                                 else
                                     echo $tongTT;
                                 ?>
