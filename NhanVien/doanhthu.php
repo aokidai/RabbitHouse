@@ -1,9 +1,11 @@
 <?php
 session_start();
+error_reporting(E_ERROR | E_PARSE);
 if (isset($_SESSION["username"])) {
     $username    =    $_SESSION["username"];
     $idKhachhang = $_SESSION["idStaff"];
-    unset($_SESSION["ThoiGian"]);
+    $thoigian = $_SESSION["ThoiGian"];
+    unset($_SESSION["ThoiGian2"]);
 } else
     header("location:../login.php");
 ?>
@@ -275,40 +277,40 @@ if (isset($_SESSION["username"])) {
     $idStaff = $row0000["idStaff"];
     ?>
 
-     
+
     <header>
         <?php include "./header.php"; ?>
-            <div> <br /><br /><br />
-                <div align="center">
-                    <form action="doanhthu.php" method="GET">
-                        <input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
-                        <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
-                    </form>
-                </div>
-                <script type="text/javascript">
-                    $(function() {
-                        $("#searchbar").autocomplete({
-                            source: 'ajax-mon-search.php',
-                        });
-                    });
-                </script>
-                <br />
-                <?php
-                if (isset($_GET["txtsearchMon"])) {
-                    $searchMon = $_GET["txtsearchMon"];
-                    $sql = "select idMon, tenMon from tblmon where tenMon like '%$searchMon%' and conHang = 'O'";
-                    $rs = mysqli_query($conn, $sql);
-                    while ($row = mysqli_fetch_assoc($rs)) {
-                        //echo "<div id='link' onClick='addText(\"".$row['tenMon']."\");'>" . $row['tenMon'] . "</div>"; 
-                        echo "<script>window.location.href='search.php?id=" . $row["idMon"] . "'</script>";
-                    }
-                    $tmp = $_GET["txtsearchMon"];
-                    if ($tmp == $searchMon) {
-                        echo ("<span style=\"text-align:center; color:red; font-size: 30px\"><center>Không có sản phẩm đó!</center></span>");
-                    }
-                }
-                ?>
+        <div> <br /><br /><br />
+            <div align="center">
+                <form action="doanhthu.php" method="GET">
+                    <input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
+                    <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
+                </form>
             </div>
+            <script type="text/javascript">
+                $(function() {
+                    $("#searchbar").autocomplete({
+                        source: 'ajax-mon-search.php',
+                    });
+                });
+            </script>
+            <br />
+            <?php
+            if (isset($_GET["txtsearchMon"])) {
+                $searchMon = $_GET["txtsearchMon"];
+                $sql = "select idMon, tenMon from tblmon where tenMon like '%$searchMon%' and conHang = 'O'";
+                $rs = mysqli_query($conn, $sql);
+                while ($row = mysqli_fetch_assoc($rs)) {
+                    //echo "<div id='link' onClick='addText(\"".$row['tenMon']."\");'>" . $row['tenMon'] . "</div>"; 
+                    echo "<script>window.location.href='search.php?id=" . $row["idMon"] . "'</script>";
+                }
+                $tmp = $_GET["txtsearchMon"];
+                if ($tmp == $searchMon) {
+                    echo ("<span style=\"text-align:center; color:red; font-size: 30px\"><center>Không có sản phẩm đó!</center></span>");
+                }
+            }
+            ?>
+        </div>
     </header>
     <section id="info" align="center">
         <form method="post" action="doanhthu.php">
@@ -326,19 +328,45 @@ if (isset($_SESSION["username"])) {
                         while ($row = mysqli_fetch_array($rs)) {
                             $ngay = $row["ngay"];
                             echo " 
-											<option value=" . $row["ngay"] . ">" . $row["ngay"] . "</option>
-										";
+								<option id='$ngay' value=" . $row["ngay"] . ">" . $row["ngay"] . "</option>
+								";
                         }
                         ?>
                     </select>
+                    <input type="submit" name="tmpppp" id="hide" value="Nhiều ngày" />
+                    <?php
+                    error_reporting(E_ERROR | E_PARSE);
+                    if (isset($_POST['tmpppp'])) {
+                        echo "<select id='cmbThoiGian' name='ThoiGian2' style='margin-left: -105px; margin-right: 5px;'>";
+                        $tmpx = $_POST['ThoiGian'];
+                        $_SESSION["ThoiGian"] = $tmpx;
+                        include("../include/connect.inc");
+                        $sql        =    "select DISTINCT ngay from tbldoanhthu where ngay >= '$tmpx'";
+                        $rs         =    mysqli_query($conn, $sql);
+                        while ($row = mysqli_fetch_array($rs)) {
+                            $ngay = $row["ngay"];
+                            echo " 
+                                <option id='option2' value=" . $row["ngay"] . ">" . $row["ngay"] . "</option>
+                                ";
+                        }
+                        echo "</select>";
+                        echo "<script>document.getElementById('hide').style.visibility = 'hidden'</script>";
+                        echo "<script>
+                                abc = document.getElementById('$tmpx');
+                                abc.setAttribute('selected', 'selected');
+                              </script>";
+                    }
+                    ?>
                     <input type="submit" name="xemDS" value="Xem danh sách" />
                 </div>
                 <br /><br />
                 <div style="float: left; margin-left: 20px">
                     <?php
                     $ngaythang = $_POST['ThoiGian'];
+                    $ngaythang2 = $_POST['ThoiGian2'];
                     ?>
                     <label for="Manufacturer" style="color: red; font-weight: bold;">Thời gian đã chọn: </label> <?= $ngaythang ?>
+                    <?php if($ngaythang2 != null) echo " - $ngaythang2"?>
                 </div>
             </form>
             <div class="table-responsive table-bordered">
@@ -355,17 +383,25 @@ if (isset($_SESSION["username"])) {
                     </thead>
                     <tbody>
                         <?php
+                        error_reporting(E_ERROR | E_PARSE);
                         include("../include/connect.inc");
                         if (isset($_POST['xemDS'])) {
                             $tmp = $_POST['ThoiGian'];
+                            $tmp2 = $_POST['ThoiGian2'];
                             $_SESSION["ThoiGian"] = $tmp;
+                            $_SESSION["ThoiGian2"] = $tmp2;
                             $TongTien = 0;
                             $sql00 = "select idChiTiet from tblchitiethd where idStaff = '$idStaff'";
                             $rs00 = mysqli_query($conn, $sql00);
                             while ($row00 = mysqli_fetch_array($rs00)) {
                                 $idCT = $row00["idChiTiet"];
-                                $sql2        =    "select * from tbldoanhthu where ngay = '$tmp' and idChiTiet = '$idCT'";
-                                $rs2        =    mysqli_query($conn, $sql2);
+                                if ($tmp2 == null) {
+                                    $sql2        =    "select * from tbldoanhthu where ngay = '$tmp' and idChiTiet = '$idCT'";
+                                    $rs2        =    mysqli_query($conn, $sql2);
+                                } else {
+                                    $sql2        =    "select * from tbldoanhthu where ngay between '$thoigian' and '$tmp2' and idChiTiet = '$idCT'";
+                                    $rs2        =    mysqli_query($conn, $sql2);
+                                }
                                 $i            =    1;
                                 while ($row2 = mysqli_fetch_array($rs2)) {
                                     error_reporting(E_ERROR | E_PARSE);
@@ -413,14 +449,14 @@ if (isset($_SESSION["username"])) {
     </section>
     <div style="padding-top: 15%;">
         <footer>
-           <div style="text-align: center;">
-        <p>Liên hệ: Rabbit House Coffee<br />
-          〒542-0081 3-1 Minamisenba, Chuo-ku, Osaka-shi, Osaka<br />
-          Tel/Fax: 03-6472-xxxx<br />
-          Mobile: 090-3176-4xxx<br />
-          E-mail: info@dragoninc.co.jp</p>
-        <p>🄫 2021 Power by Dragon Inc</p>
-      </div>
+            <div style="text-align: center;">
+                <p>Liên hệ: Rabbit House Coffee<br />
+                    〒542-0081 3-1 Minamisenba, Chuo-ku, Osaka-shi, Osaka<br />
+                    Tel/Fax: 03-6472-xxxx<br />
+                    Mobile: 090-3176-4xxx<br />
+                    E-mail: info@dragoninc.co.jp</p>
+                <p>🄫 2021 Power by Dragon Inc</p>
+            </div>
         </footer>
     </div>
 </body>
