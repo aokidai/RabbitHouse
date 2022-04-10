@@ -417,6 +417,10 @@ if (isset($_SESSION["username"])) {
                                     $i++;
                                 }
                             }
+                            echo "<script>
+                                abc = document.getElementById('$tmp');
+                                abc.setAttribute('selected', 'selected');
+                              </script>";
                         }
                         ?>
                     </tbody>
