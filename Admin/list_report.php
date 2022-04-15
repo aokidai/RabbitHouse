@@ -89,7 +89,7 @@ else
 					include"./left_admin.php";
 				?>
             </nav>
-		<form action="list_user.php" method="post">
+		<form action="list_report.php" method="post">
 			<div id="page-wrapper">
                 <div class="container-fluid">
                     <div class="row">
