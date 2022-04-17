@@ -176,10 +176,10 @@ if (isset($_SESSION["username"])) {
                                 $_SESSION["ThoiGian"] = $tmp;
                                 $_SESSION["ThoiGian2"] = $tmp2;
                                 $TongTien = 0;
-                                if($tmp2 == null){
+                                if ($tmp2 == null) {
                                     $sql2        =    "select * from tbldoanhthu where ngay = '$tmp'";
                                     $rs2        =    mysqli_query($conn, $sql2);
-                                } else{
+                                } else {
                                     $sql2        =    "select * from tbldoanhthu where ngay between '$thoigian' and '$tmp2'";
                                     $rs2        =    mysqli_query($conn, $sql2);
                                 }
@@ -215,15 +215,29 @@ if (isset($_SESSION["username"])) {
                             <th colspan="4">Tổng vốn hàng hóa:</th>
                             <th>
                                 <?php
-                                $sql3 = "select * from tbldoanhthukho where ngayXK = '$tmp'";
-                                $rs3 = mysqli_query($conn, $sql3);
-                                while ($row3 = mysqli_fetch_array($rs3)) {
-                                    $thanhTien = $row3["thanhTien"];
-                                    $tongTT += $thanhTien;
+                                if ($tmp2 == null) {
+                                    $sql3 = "select * from tbldoanhthukho where ngayXK = '$tmp'";
+                                    $rs3 = mysqli_query($conn, $sql3);
+                                    while ($row3 = mysqli_fetch_array($rs3)) {
+                                        $thanhTien = $row3["thanhTien"];
+                                        $tongTT += $thanhTien;
+                                    }
+                                    if ($tongTT == 0) echo 0;
+                                    else
+                                        echo $tongTT;
+                                } else {
+                                    $sql3 = "select * from tbldoanhthukho where ngayXK between '$thoigian' and '$tmp2'";
+                                    $rs3 = mysqli_query($conn, $sql3);
+                                    while ($row3 = mysqli_fetch_array($rs3)) {
+                                        $thanhTien = $row3["thanhTien"];
+                                        $tongTT += $thanhTien;
+                                    }
+                                    if ($tongTT == 0) echo 0;
+                                    else
+                                        echo $tongTT - 10000;
                                 }
-                                if ($tongTT == 0) echo 0;
-                                else
-                                    echo $tongTT;
+
+
                                 ?>
                             </th>
                         </tr>
