@@ -111,13 +111,26 @@ else
                     $sql            =    "insert into tblkho(tenHang, soLuongBD, soLuongCL, thoiGianNK, thoiGianXK, id_user, soTien) 
                     values('$tenHang', '$soLuongNK', '$soLuongNK', '$tgNK', '$tgXK', '$idNV', '$soTien')";
                     $rs             =    mysqli_query($conn, $sql);
-                    if ($rs)
-                        echo "<script>window.location.href='list_kho.php?page=1'</script>";
+                    if ($rs){
+                        $trangThai = $_POST['trangThai'];
+                        if($trangThai == "O"){
+                            $sql1 = "select idMon from tblMon where conHang = 'X'";
+                            $rs1 = mysqli_query($conn, $sql1);
+                            while($row1 = mysqli_fetch_array($rs1)){
+                                $idMonCheck = $row1['idMon'];
+                                $sql2 = "update tblMon set conHang='O' where idMon = '$idMonCheck'";
+                                $rs2 = mysqli_query($conn, $sql2);
+                                if($rs2) echo "<script>window.location.href='list_kho.php?page=1'</script>";
+                                else echo "<script>alert('Error!')</script>";
+                            }
+                        } else echo "<script>window.location.href='list_kho.php?page=1'</script>";
+                    }
+                       
                     else echo "<script>alert('Error!')</script>";
                 }
                 ?>
                 <form method="post">
-                    <table class="table table-striped table-bordered table-hover" style="width:50%" align="center">
+                    <table class="table table-striped table-bordered table-hover" style="width:70%" align="center">
 
                         <tbody>
                             <tr>
@@ -131,6 +144,13 @@ else
                             <tr>
                                 <td>Số tiền<span style="color: red">(*)</span>:</td>
                                 <td><input type="number" class="form-control" name="txtSoTien" placeholder="Số tiền"></td>
+                            </tr>
+                            <tr>
+                                <td>Đổi trạng thái món?<span style="color: red">(*)</span><span style="color: red" title="Khi nhập hàng vào kho thì có chuyển toàn bộ món sang trạng thái còn hàng hay không? Trong trường hợp cần chuyển chọn Chuyển, ngược lại chọn Không chuyển">(?)</span>:</td>
+                                <td>
+                                    <input type="radio" id="conHang" name="trangThai" value="O" checked><label style="padding-left: 5px;">Chuyển</label>
+                                    <input type="radio" id="hetHang" name="trangThai" value="X"><label style="padding-left: 5px;">Không chuyển</label>
+                                </td>
                             </tr>
                             <tr align="center">
                                 <td colspan="2">

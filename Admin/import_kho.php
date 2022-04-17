@@ -75,14 +75,14 @@ else
                         <i class="fa fa-user fa-fw"></i><?= $hoTenNVtmp ?><b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                            <li><a href="./backup/export_data.php"><i class="fa fa-user fa-fw"></i>Xuất dữ liệu</a></li>
-                            <li class="divider"></li>
-                            <li><a href="./backup/import_data.php"><i class="fa fa-user fa-fw"></i>Nhập dữ liệu</a></li>
-                            <li class="divider"></li>
-                            <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a></li>
-                            <li class="divider"></li>
-                            <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
-                        </ul>
+                        <li><a href="./backup/export_data.php"><i class="fa fa-user fa-fw"></i>Xuất dữ liệu</a></li>
+                        <li class="divider"></li>
+                        <li><a href="./backup/import_data.php"><i class="fa fa-user fa-fw"></i>Nhập dữ liệu</a></li>
+                        <li class="divider"></li>
+                        <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a></li>
+                        <li class="divider"></li>
+                        <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
+                    </ul>
                 </li>
             </ul>
             <!-- /.navbar-top-links -->
@@ -164,8 +164,23 @@ else
                             if (!$status) {
                                 echo "<script>alert('Error:Delete File')</script>";
                             }
-                            echo "<script>alert('Đã lưu kho')</script>";
-                            echo "<script>window.location.href='list_kho.php?page=1'</script>";
+                            $trangThai = $_POST['trangThai'];
+                            if ($trangThai == "O") {
+                                $sql1xx = "select idMon from tblMon where conHang = 'X'";
+                                $rs1xx = mysqli_query($conn, $sql1xx);
+                                while ($row1xx = mysqli_fetch_array($rs1xx)) {
+                                    $idMonCheck = $row1xx['idMon'];
+                                    $sql2xx = "update tblMon set conHang='O' where idMon = '$idMonCheck'";
+                                    $rs2xx = mysqli_query($conn, $sql2xx);
+                                    if ($rs2xx) {
+                                        echo "<script>alert('Đã lưu kho')</script>";
+                                        echo "<script>window.location.href='list_kho.php?page=1'</script>";
+                                    } else echo "<script>alert('Error!')</script>";
+                                }
+                            } else {
+                                echo "<script>alert('Đã lưu kho')</script>";
+                                echo "<script>window.location.href='list_kho.php?page=1'</script>";
+                            }
                         } else echo "<script>alert('Error!')</script>";
                     }
                     ?>
@@ -176,10 +191,17 @@ else
                                     <td>File hàng hóa(*):<label style="color:red" title="Chỉ upload file text có đuôi *.txt">(?)</label></td>
                                     <td><input type="file" class="form-control" name="txtHinh" id="fileField"></td>
                                 </tr>
+                                <tr>
+                                    <td>Đổi trạng thái món?<span style="color: red">(*)</span><span style="color: red" title="Khi nhập hàng vào kho thì có chuyển toàn bộ món sang trạng thái còn hàng hay không? Trong trường hợp cần chuyển chọn Chuyển, ngược lại chọn Không chuyển">(?)</span>:</td>
+                                    <td>
+                                        <input type="radio" id="conHang" name="trangThai" value="O" checked><label style="padding-left: 5px;">Chuyển</label>
+                                        <input type="radio" id="hetHang" name="trangThai" value="X"><label style="padding-left: 5px;">Không chuyển</label>
+                                    </td>
+                                </tr>
                                 <tr align="center">
                                     <td colspan="2">
                                         <button type="submit" name="chon" class="btn btn-primary">Thêm</button>
-                                        <button type="button" onClick="javascript:window.location.href='list_kho.php?page=1'" class="btn btn-warning">Hủy</button> 
+                                        <button type="button" onClick="javascript:window.location.href='list_kho.php?page=1'" class="btn btn-warning">Hủy</button>
                                     </td>
                                 </tr>
                                 <tr align="right">
