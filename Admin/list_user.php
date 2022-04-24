@@ -1,10 +1,9 @@
 <?php
 session_start();
-if (isset($_SESSION["username"])){
+if (isset($_SESSION["username"])) {
     $username    =    $_SESSION["username"];
     unset($_SESSION["pages"]);
-    }
-else
+} else
     header("location:login.php");
 ?>
 <!DOCTYPE html>
@@ -44,6 +43,19 @@ else
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 </head>
+<style>
+#myInput {
+    width: 15%;
+    font-size: 16px;
+    margin-bottom: 12px;
+    float: right;
+    margin-right: 10px;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    margin-top: 8px;
+}
+</style>
 
 <body>
 
@@ -75,14 +87,14 @@ else
                         <i class="fa fa-user fa-fw"></i><?= $hoTenNVtmp ?><b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                            <li><a href="./backup/export_data.php"><i class="fa fa-user fa-fw"></i>Xuất dữ liệu</a></li>
-                            <li class="divider"></li>
-                            <li><a href="./backup/import_data.php"><i class="fa fa-user fa-fw"></i>Nhập dữ liệu</a></li>
-                            <li class="divider"></li>
-                            <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a></li>
-                            <li class="divider"></li>
-                            <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
-                        </ul>
+                        <li><a href="./backup/export_data.php"><i class="fa fa-user fa-fw"></i>Xuất dữ liệu</a></li>
+                        <li class="divider"></li>
+                        <li><a href="./backup/import_data.php"><i class="fa fa-user fa-fw"></i>Nhập dữ liệu</a></li>
+                        <li class="divider"></li>
+                        <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a></li>
+                        <li class="divider"></li>
+                        <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
+                    </ul>
                 </li>
             </ul>
             <!-- /.navbar-top-links -->
@@ -97,20 +109,30 @@ else
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 class="page-header">DANH SÁCH NHÂN VIÊN</h1>
-                            <button type="button" class="btn btn-success" style="margin-bottom: 20px" onClick="javascript:window.location.href='insert_user.php'">Thêm nhân viên</button>
-                            <button type="submit" name="xoa" class="btn btn-success" style="margin-bottom: 20px">Xóa nhân viên</button>
-                            <button type="button" onClick="javascript:window.location.href='insert_luong.php'" class="btn btn-success" style="margin-bottom: 20px; float: right; margin-right: 2%; background-color: aqua; color: black">Quản Lí Lương</button>
-                            <button type="submit" name="reset" class="btn btn-success" style="margin-bottom: 20px; float: right; margin-right: 10px; background-color: red; color: white">Reset Lương</button>
+                            <button type="button" class="btn btn-success" style="margin-bottom: 20px"
+                                onClick="javascript:window.location.href='insert_user.php'">Thêm nhân viên</button>
+                            <button type="submit" name="xoa" class="btn btn-success" style="margin-bottom: 20px">Xóa
+                                nhân viên</button>
+                            <button type="button" onClick="javascript:window.location.href='insert_luong.php'"
+                                class="btn btn-success"
+                                style="margin-bottom: 20px; float: right; margin-right: 2%; background-color: aqua; color: black">Quản
+                                Lí Lương</button>
+                            <button type="submit" name="reset" class="btn btn-success"
+                                style="margin-bottom: 20px; float: right; margin-right: 10px; background-color: red; color: white">Reset
+                                Lương</button>
+                            <input type="text" id="myInput" class="w3-input" onkeyup="myFunction()"
+                                placeholder="Tìm tên nhân viên..." title="Tìm kiếm nhân viên">
                         </div>
 
                         <!-- /.col-lg-12 -->
                     </div>
 
                     <div class="table-responsive table-bordered">
-                        <table class="table">
+                        <table class="table" id="myTable">
                             <thead>
                                 <tr>
-                                    <th><input type="checkbox" name="checkbox" class="chk_box" onClick="toggle(this)"></th>
+                                    <th><input type="checkbox" name="checkbox" class="chk_box" onClick="toggle(this)">
+                                    </th>
                                     <th>STT</th>
                                     <th>Họ tên</th>
                                     <th>Username</th>
@@ -121,11 +143,11 @@ else
                                 </tr>
                             </thead>
                             <script>
-                                function del_confirm(strlink) {
-                                    ok = confirm("Bạn có muốn xóa không?");
-                                    if (ok != 0)
-                                        window.location.href = strlink;
-                                }
+                            function del_confirm(strlink) {
+                                ok = confirm("Bạn có muốn xóa không?");
+                                if (ok != 0)
+                                    window.location.href = strlink;
+                            }
                             </script>
                             <tbody>
                                 <?php
@@ -156,15 +178,15 @@ else
                                 }
                                 ?>
                                 <?php
-                                if(isset($_POST['xoa'])){
-                                if (!empty($_POST['check_list'])) {
-                                    foreach ($_POST['check_list'] as $check) {
-                                        $sql9 = "delete from tblstaff where idStaff = '$check'";
-                                        $rs9 = mysqli_query($conn, $sql9);
+                                if (isset($_POST['xoa'])) {
+                                    if (!empty($_POST['check_list'])) {
+                                        foreach ($_POST['check_list'] as $check) {
+                                            $sql9 = "delete from tblstaff where idStaff = '$check'";
+                                            $rs9 = mysqli_query($conn, $sql9);
+                                        }
+                                        echo "<script>window.location.href='list_user.php'</script>";
                                     }
-                                    echo "<script>window.location.href='list_user.php'</script>";
-                                }}
-                                else if(isset($_POST['reset'])){
+                                } else if (isset($_POST['reset'])) {
                                     $sql9 = "update tblstaff set tongTG='0', tongLuong = '0'";
                                     $rs9 = mysqli_query($conn, $sql9);
                                     $sql10 = "delete from tblchamcong";
@@ -182,10 +204,32 @@ else
                             </tr>
                             <tr align="center">
                                 <th colspan="9">
-                                    <center><label style="background-color: #f2f2f2; width: 150px; border-radius: 10px;"><a href="./export_nhanvien.php">🖨️ Xuất Excel</a></label></center>
+                                    <center><label
+                                            style="background-color: #f2f2f2; width: 150px; border-radius: 10px;"><a
+                                                href="./export_nhanvien.php">🖨️ Xuất Excel</a></label></center>
                                 </th>
                             </tr>
                         </table>
+                        <script>
+                        function myFunction() {
+                            var input, filter, table, tr, td, i, txtValue;
+                            input = document.getElementById("myInput");
+                            filter = input.value.toUpperCase();
+                            table = document.getElementById("myTable");
+                            tr = table.getElementsByTagName("tr");
+                            for (i = 0; i < tr.length; i++) {
+                                td = tr[i].getElementsByTagName("td")[2];
+                                if (td) {
+                                    txtValue = td.textContent || td.innerText;
+                                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                        tr[i].style.display = "";
+                                    } else {
+                                        tr[i].style.display = "none";
+                                    }
+                                }
+                            }
+                        }
+                        </script>
                     </div>
                     <!-- /.row -->
                 </div>
@@ -197,12 +241,12 @@ else
     </div>
     <!-- /#wrapper -->
     <script language="JavaScript">
-        function toggle(source) {
-            checkboxes = document.getElementsByName('check_list[]');
-            for (var i = 0, n = checkboxes.length; i < n; i++) {
-                checkboxes[i].checked = source.checked;
-            }
+    function toggle(source) {
+        checkboxes = document.getElementsByName('check_list[]');
+        for (var i = 0, n = checkboxes.length; i < n; i++) {
+            checkboxes[i].checked = source.checked;
         }
+    }
     </script>
     <!-- jQuery -->
     <script src="../js/jquery.min.js"></script>

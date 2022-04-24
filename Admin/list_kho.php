@@ -44,14 +44,27 @@ if (isset($_SESSION["username"])) {
         <![endif]-->
 </head>
 <script type="text/javascript">
-    const reloadtButton = document.querySelector("#reload");
-    // Reload everything:
-    function reload() {
-        reload = location.reload();
-    }
-    // Event listeners for reload
-    reloadButton.addEventListener("click", reload, false);
+const reloadtButton = document.querySelector("#reload");
+// Reload everything:
+function reload() {
+    reload = location.reload();
+}
+// Event listeners for reload
+reloadButton.addEventListener("click", reload, false);
 </script>
+<style>
+#myInput {
+    width: 15%;
+    font-size: 16px;
+    margin-bottom: 12px;
+    float: right;
+    margin-right: 10px;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    margin-top: 8px;
+}
+</style>
 
 <body>
 
@@ -105,42 +118,64 @@ if (isset($_SESSION["username"])) {
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 class="page-header">DANH SÁCH HÀNG HÓA TRONG KHO</h1>
-                            <ul class="abc" style="background-color: #5cb85c; border-color: #4cae4c; width: 120px; height: 34px; list-style-type: none; text-align: center;float: left; margin-right: 5px; border-radius: 3px; padding-left: 0px; margin-bottom: 0px;">
-                                <li class="dropdown" style="display: list-item; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; list-style-position: unset; display: inline-block; list-style-type: none;">
-                                    <a class="dropdown-toggle" title="Có thể lựa chọn 1 trong 2 cách nhập hàng hóa vào kho." data-toggle="dropdown" style="display: inline-block; color: white; text-align: center; text-decoration: none; padding-top: 7px; padding-right: 2px;">
+                            <ul class="abc"
+                                style="background-color: #5cb85c; border-color: #4cae4c; width: 120px; height: 34px; list-style-type: none; text-align: center;float: left; margin-right: 5px; border-radius: 3px; padding-left: 0px; margin-bottom: 0px;">
+                                <li class="dropdown"
+                                    style="display: list-item; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; list-style-position: unset; display: inline-block; list-style-type: none;">
+                                    <a class="dropdown-toggle"
+                                        title="Có thể lựa chọn 1 trong 2 cách nhập hàng hóa vào kho. Trong trường hợp hàng hóa đó đã tồn tại, yêu cầu quản lý CHỈ sửa hàng hóa đó với dạng số lượng củ + số lượng mới và giá thành mới, KHÔNG được phép thêm hàng hóa trùng lập vào kho."
+                                        data-toggle="dropdown"
+                                        style="display: inline-block; color: white; text-align: center; text-decoration: none; padding-top: 7px; padding-right: 2px;">
                                         Thêm hàng hóa
                                     </a>
                                     <ul class="dropdown-menu dropdown-user">
-                                        <li><a href="./insert_kho.php" title="Nhập tay các hàng hóa, chỉ sử dụng để bổ sung ít hàng.">Thêm hàng</a></li>
+                                        <li><a href="./insert_kho.php"
+                                                title="Nhập tay các hàng hóa, chỉ sử dụng để bổ sung ít hàng.">Thêm
+                                                hàng</a></li>
                                         <li class="divider"></li>
-                                        <li><a href="./import_kho.php" title="Nhập hàng hóa tự động bằng file text.">Thên hàng tự động</a></li>
+                                        <li><a href="./import_kho.php"
+                                                title="Nhập hàng hóa tự động bằng file text.">Thên hàng tự động</a></li>
                                     </ul>
                                 </li>
                             </ul>
-                            <button type="submit" name="xoahang" class="btn btn-success" style="margin-bottom: 20px; background-color: red;" title="Xóa hàng hóa được chọn và các hàng hóa có số lượng là 0. Trong trường hợp chỉ xóa các hàng hóa có số lượng còn lại là 0 chỉ cần nhấn nút xóa để tự động xóa mà không cần chọn hàng hóa tương ứng.">Xóa hàng</button>
-                            <button type="button" onClick="javascript:window.location.href='list_kho.php?page=1'" class="btn btn-success" style="margin-bottom: 20px; float: right; background-color: aqua; color: black">Tải lại dữ liệu</button>
-                            <ul class="abc" style="background-color: orange; border-color: #4cae4c; width: 120px; height: 34px; list-style-type: none; text-align: center; float: right; margin-right: 5px; border-radius: 3px; padding-left: 0px; margin-bottom: 0px;">
-                                <li class="dropdown" style="display: list-item; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; list-style-position: unset; display: inline-block; list-style-type: none;">
-                                    <a class="dropdown-toggle" title="Quản lý kho" data-toggle="dropdown" style="display: inline-block; color: black; text-align: center; text-decoration: none; padding-top: 7px; padding-right: 2px;">
+                            <button type="submit" name="xoahang" class="btn btn-success"
+                                style="margin-bottom: 20px; background-color: red;"
+                                title="Xóa hàng hóa được chọn và các hàng hóa có số lượng là 0. Trong trường hợp chỉ xóa các hàng hóa có số lượng còn lại là 0 chỉ cần nhấn nút xóa để tự động xóa mà không cần chọn hàng hóa tương ứng.">Xóa
+                                hàng</button>
+                            <button type="button" onClick="javascript:window.location.href='list_kho.php?page=1'"
+                                class="btn btn-success"
+                                style="margin-bottom: 20px; float: right; background-color: aqua; color: black">Tải lại
+                                dữ liệu</button>
+                            <ul class="abc"
+                                style="background-color: orange; border-color: #4cae4c; width: 120px; height: 34px; list-style-type: none; text-align: center; float: right; margin-right: 5px; border-radius: 3px; padding-left: 0px; margin-bottom: 0px;">
+                                <li class="dropdown"
+                                    style="display: list-item; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; list-style-position: unset; display: inline-block; list-style-type: none;">
+                                    <a class="dropdown-toggle" title="Quản lý kho" data-toggle="dropdown"
+                                        style="display: inline-block; color: black; text-align: center; text-decoration: none; padding-top: 7px; padding-right: 2px;">
                                         Quản lý kho
                                     </a>
                                     <ul class="dropdown-menu dropdown-user">
-                                        <li><a href="./kho_manage.php" title="Kiểm tra tồn kho theo tháng.">Quản lý tồn kho</a></li>
+                                        <li><a href="./kho_manage.php" title="Kiểm tra tồn kho theo tháng.">Quản lý tồn
+                                                kho</a></li>
                                         <li class="divider"></li>
-                                        <li><a href="./kho_lichsu.php" title="Kiểm tra lịch sử hàng hóa bị xóa khổi kho.">Lịch sử kho</a></li>
+                                        <li><a href="./kho_lichsu.php"
+                                                title="Kiểm tra lịch sử hàng hóa bị xóa khổi kho.">Lịch sử kho</a></li>
                                     </ul>
                                 </li>
                             </ul>
+                            <input type="text" id="myInput" class="w3-input" onkeyup="myFunction()"
+                                placeholder="Tìm tên hàng hóa..." title="Tìm kiếm hàng hóa trong kho">
                         </div>
 
                         <!-- /.col-lg-12 -->
                     </div>
 
                     <div class="table-responsive table-bordered">
-                        <table class="table">
+                        <table class="table" id="myTable">
                             <thead>
                                 <tr>
-                                    <th><input type="checkbox" name="checkbox" class="chk_box" onClick="toggle(this)"></th>
+                                    <th><input type="checkbox" name="checkbox" class="chk_box" onClick="toggle(this)">
+                                    </th>
                                     <th>STT</th>
                                     <th>Tên hàng</th>
                                     <th title="Số lượng ban đầu">S.L ban đầu</th>
@@ -251,10 +286,32 @@ if (isset($_SESSION["username"])) {
                             </tbody>
                             <tr align="center">
                                 <th colspan="9">
-                                    <center><label style="background-color: #f2f2f2; width: 150px; border-radius: 10px;"><a href="./export_kho.php">🖨️ Xuất Excel</a></label></center>
+                                    <center><label
+                                            style="background-color: #f2f2f2; width: 150px; border-radius: 10px;"><a
+                                                href="./export_kho.php">🖨️ Xuất Excel</a></label></center>
                                 </th>
                             </tr>
                         </table>
+                        <script>
+                        function myFunction() {
+                            var input, filter, table, tr, td, i, txtValue;
+                            input = document.getElementById("myInput");
+                            filter = input.value.toUpperCase();
+                            table = document.getElementById("myTable");
+                            tr = table.getElementsByTagName("tr");
+                            for (i = 0; i < tr.length; i++) {
+                                td = tr[i].getElementsByTagName("td")[2];
+                                if (td) {
+                                    txtValue = td.textContent || td.innerText;
+                                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                        tr[i].style.display = "";
+                                    } else {
+                                        tr[i].style.display = "none";
+                                    }
+                                }
+                            }
+                        }
+                        </script>
                     </div>
                     <!-- /.row -->
                 </div>
@@ -263,12 +320,12 @@ if (isset($_SESSION["username"])) {
             <!-- /#page-wrapper -->
         </form>
         <script language="JavaScript">
-            function toggle(source) {
-                checkboxes = document.getElementsByName('check_list[]');
-                for (var i = 0, n = checkboxes.length; i < n; i++) {
-                    checkboxes[i].checked = source.checked;
-                }
+        function toggle(source) {
+            checkboxes = document.getElementsByName('check_list[]');
+            for (var i = 0, n = checkboxes.length; i < n; i++) {
+                checkboxes[i].checked = source.checked;
             }
+        }
         </script>
     </div>
     <!-- /#wrapper -->

@@ -1,9 +1,9 @@
 <?php
 session_start();
-if (isset($_SESSION["username"])){
+if (isset($_SESSION["username"])) {
     $username    =    $_SESSION["username"];
-    $pages = $_SESSION["pages"];}
-else
+    $pages = $_SESSION["pages"];
+} else
     header("location:login.php");
 ?>
 <!DOCTYPE html>
@@ -64,24 +64,24 @@ else
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="account.php">
                         <?php
-                            $user00tmp = $username;
-                            include "../include/connect.inc";
-                            $sql0000 = "select hoTen from tblusers where username = '$user00tmp'";
-                            $rs0000 = mysqli_query($conn, $sql0000);
-                            $row0000 = mysqli_fetch_array($rs0000);
-                            $hoTenNVtmp = $row0000["hoTen"];
-                            ?>
-                            <i class="fa fa-user fa-fw"></i><?=$hoTenNVtmp?><b class="caret"></b>
+                        $user00tmp = $username;
+                        include "../include/connect.inc";
+                        $sql0000 = "select hoTen from tblusers where username = '$user00tmp'";
+                        $rs0000 = mysqli_query($conn, $sql0000);
+                        $row0000 = mysqli_fetch_array($rs0000);
+                        $hoTenNVtmp = $row0000["hoTen"];
+                        ?>
+                        <i class="fa fa-user fa-fw"></i><?= $hoTenNVtmp ?><b class="caret"></b>
                     </a>
-                   <ul class="dropdown-menu dropdown-user">
-                            <li><a href="./backup/export_data.php"><i class="fa fa-user fa-fw"></i>Xuất dữ liệu</a></li>
-                            <li class="divider"></li>
-                            <li><a href="./backup/import_data.php"><i class="fa fa-user fa-fw"></i>Nhập dữ liệu</a></li>
-                            <li class="divider"></li>
-                            <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a></li>
-                            <li class="divider"></li>
-                            <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
-                        </ul>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="./backup/export_data.php"><i class="fa fa-user fa-fw"></i>Xuất dữ liệu</a></li>
+                        <li class="divider"></li>
+                        <li><a href="./backup/import_data.php"><i class="fa fa-user fa-fw"></i>Nhập dữ liệu</a></li>
+                        <li class="divider"></li>
+                        <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a></li>
+                        <li class="divider"></li>
+                        <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
+                    </ul>
                 </li>
             </ul>
             <!-- /.navbar-top-links -->
@@ -95,7 +95,7 @@ else
                 <div class="row">
                     <div class="col-lg-12">
                         <?php $id = $_GET["id"]; ?>
-                        <h1 class="page-header">XEM PHẢN HỒI SỐ <?=$id?></h1>
+                        <h1 class="page-header">XEM PHẢN HỒI SỐ <?= $id ?></h1>
                     </div>
 
                     <!-- /.col-lg-12 -->
@@ -107,16 +107,29 @@ else
                 $row = $row = mysqli_fetch_array($rs);
                 $thoiGian = $row["thoiGian"];
                 $noiDung = $row["vanDe"];
-                $hoTenNV = $row["hoTenNV"];
-                if(isset($_POST["update"]))
+                $hoTenNVtmp = $row["hoTenNV"];
+                $tieuDe = $row['title'];
+                $loai = $row['type'];
+                if ($hoTenNVtmp == null) {
+                    $hoTenNV = "(Giấu tên)";
+                } else $hoTenNV = $hoTenNVtmp;
+                if (isset($_POST["update"]))
                     echo "<script>window.location.href='list_report.php?page=$pages'</script>";
                 ?>
                 <form method="post">
                     <table class="table table-striped table-bordered table-hover" style="width:80%" align="center">
                         <tbody>
                             <tr>
+                                <th>Tiêu đề:</th>
+                                <th><?= $tieuDe ?></th>
+                            </tr>
+                            <tr>
                                 <td style="width: 30%;">Họ tên người phản hồi:</td>
-                                <td><?= $hoTenNV ?></td>
+                                <td><i><?= $hoTenNV ?></i></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 30%;">Nhóm phản hồi:</td>
+                                <td><i><?= $loai ?></i></td>
                             </tr>
                             <tr>
                                 <td>Thời gian phản hồi:</td>
@@ -128,7 +141,8 @@ else
                                 <input type="hidden" class="form-control" name="txtid" value="<?= $id ?>">
                             </tr>
                             <tr align="center">
-                                <td colspan="2"><button type="submit" name="update" class="btn btn-primary">Xong</button></td>
+                                <td colspan="2"><button type="submit" name="update"
+                                        class="btn btn-primary">Xong</button></td>
                             </tr>
                     </table>
                 </form>

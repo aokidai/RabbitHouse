@@ -25,239 +25,251 @@ if (isset($_SESSION["username"])) {
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <style>
-    #mon {
-        width: 240px;
-        height: 320px;
-        margin: 3px;
-        margin-top: 100px;
-        text-align: center;
-        float: left;
+#mon {
+    width: 240px;
+    height: 320px;
+    margin: 3px;
+    margin-top: 100px;
+    text-align: center;
+    float: left;
+}
+
+#tenMon {
+    margin-top: 5px;
+    vertical-align: top;
+    height: 40px;
+    font-size: 25px;
+}
+
+#tenMon a {
+    text-decoration: none;
+    color: #000;
+    font-size: 25px;
+}
+
+#tenMon a:hover {
+    color: #000;
+}
+
+#hinhAnh {
+    width: 150px;
+    height: 200px;
+}
+
+#hinhAnh:hover {
+    transfrom: scale(1.1);
+}
+
+#dongia {
+    margin-top: 10px;
+    font-size: 30px;
+}
+
+#donGia span {
+    color: #000;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#nutchonmua {
+    height: 30px;
+}
+
+#info1 {
+    padding: 50px;
+}
+
+#info1 span {
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+#info1 ul {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    list-style-type: none;
+    overflow: hidden;
+    text-align: center;
+    margin-top: 30%;
+}
+
+#info1 ul li {
+    display: list-item;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    list-style-position: unset;
+    display: inline-block;
+    list-style-type: none;
+    line-height: 40px;
+    margin-left: -2px;
+    width: 120px;
+    height: 40px;
+}
+
+#info1 ul li a img {
+    width: 70px;
+    height: 70px;
+}
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    font-family: Verdana, sans-serif;
+    margin: 0
+}
+
+.mySlides {
+    display: none
+}
+
+img {
+    vertical-align: middle;
+}
+
+/* Slideshow container */
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Caption text */
+.text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active,
+.dot:hover {
+    background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+    from {
+        opacity: .4
     }
 
-    #tenMon {
-        margin-top: 5px;
-        vertical-align: top;
-        height: 40px;
-        font-size: 25px;
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
     }
 
-    #tenMon a {
-        text-decoration: none;
-        color: #000;
-        font-size: 25px;
+    to {
+        opacity: 1
     }
+}
 
-    #tenMon a:hover {
-        color: #000;
-    }
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
 
-    #hinhAnh {
-        width: 150px;
-        height: 200px;
-    }
-
-    #hinhAnh:hover {
-        transfrom: scale(1.1);
-    }
-
-    #dongia {
-        margin-top: 10px;
-        font-size: 30px;
-    }
-
-    #donGia span {
-        color: #000;
-        font-size: 30px;
-        font-weight: bold;
-    }
-
-    #nutchonmua {
-        height: 30px;
-    }
-
-    #info1 {
-        padding: 50px;
-    }
-
-    #info1 span {
-        text-align: center;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        font-family: 'Times New Roman', Times, serif;
-        font-size: 40px;
-        font-weight: bold;
-    }
-
-    #info1 ul {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        list-style-type: none;
-        overflow: hidden;
-        text-align: center;
-        margin-top: 30%;
-    }
-
-    #info1 ul li {
-        display: list-item;
-        text-rendering: optimizeLegibility;
-        -webkit-font-smoothing: antialiased;
-        list-style-position: unset;
-        display: inline-block;
-        list-style-type: none;
-        line-height: 40px;
-        margin-left: -2px;
-        width: 120px;
-        height: 40px;
-    }
-
-    #info1 ul li a img {
-        width: 70px;
-        height: 70px;
-    }
-
-    * {
-        box-sizing: border-box
-    }
-
-    body {
-        font-family: Verdana, sans-serif;
-        margin: 0
-    }
-
-    .mySlides {
-        display: none
-    }
-
-    img {
-        vertical-align: middle;
-    }
-
-    /* Slideshow container */
-    .slideshow-container {
-        max-width: 1000px;
-        position: relative;
-        margin: auto;
-    }
-
-    /* Next & previous buttons */
     .prev,
-    .next {
-        cursor: pointer;
-        position: absolute;
-        top: 50%;
-        width: auto;
-        padding: 16px;
-        margin-top: -22px;
-        color: white;
-        font-weight: bold;
-        font-size: 18px;
-        transition: 0.6s ease;
-        border-radius: 0 3px 3px 0;
-        user-select: none;
-    }
-
-    /* Position the "next button" to the right */
-    .next {
-        right: 0;
-        border-radius: 3px 0 0 3px;
-    }
-
-    /* On hover, add a black background color with a little bit see-through */
-    .prev:hover,
-    .next:hover {
-        background-color: rgba(0, 0, 0, 0.8);
-    }
-
-    /* Caption text */
+    .next,
     .text {
-        color: #f2f2f2;
-        font-size: 15px;
-        padding: 8px 12px;
-        position: absolute;
-        bottom: 8px;
-        width: 100%;
-        text-align: center;
+        font-size: 11px
     }
+}
 
-    /* Number text (1/3 etc) */
-    .numbertext {
-        color: #f2f2f2;
-        font-size: 12px;
-        padding: 8px 12px;
-        position: absolute;
-        top: 0;
-    }
+#ttLoai {
+    display: block;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 40px;
+    font-weight: bold;
+    margin-left: 18%;
+}
 
-    /* The dots/bullets/indicators */
-    .dot {
-        cursor: pointer;
-        height: 15px;
-        width: 15px;
-        margin: 0 2px;
-        background-color: #bbb;
-        border-radius: 50%;
-        display: inline-block;
-        transition: background-color 0.6s ease;
-    }
-
-    .active,
-    .dot:hover {
-        background-color: #717171;
-    }
-
-    /* Fading animation */
-    .fade {
-        -webkit-animation-name: fade;
-        -webkit-animation-duration: 1.5s;
-        animation-name: fade;
-        animation-duration: 1.5s;
-    }
-
-    @-webkit-keyframes fade {
-        from {
-            opacity: .4
-        }
-
-        to {
-            opacity: 1
-        }
-    }
-
-    @keyframes fade {
-        from {
-            opacity: .4
-        }
-
-        to {
-            opacity: 1
-        }
-    }
-
-    /* On smaller screens, decrease text size */
-    @media only screen and (max-width: 300px) {
-
-        .prev,
-        .next,
-        .text {
-            font-size: 11px
-        }
-    }
-
-    #ttLoai {
-        display: block;
-        text-align: center;
-        font-family: 'Times New Roman', Times, serif;
-        font-size: 40px;
-        font-weight: bold;
-        margin-left: 18%;
-    }
+#myInput {
+    width: 15%;
+    font-size: 16px;
+    margin-bottom: 12px;
+    float: right;
+    margin-right: 30px;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    margin-top: 8px;
+}
 </style>
 
 <body>
     <?php $user = $username ?>
-     
+
     <header>
         <?php include "./header.php"; ?>
         <div> <br /><br /><br />
@@ -268,11 +280,11 @@ if (isset($_SESSION["username"])) {
                 </form>
             </div>
             <script type="text/javascript">
-                $(function() {
-                    $("#searchbar").autocomplete({
-                        source: 'ajax-mon-search.php',
-                    });
+            $(function() {
+                $("#searchbar").autocomplete({
+                    source: 'ajax-mon-search.php',
                 });
+            });
             </script>
             <br />
             <?php
@@ -296,9 +308,14 @@ if (isset($_SESSION["username"])) {
     <section id="info" align="center">
         <form method="post" action="check_mon.php">
             <span>Trạng thái món</span><br />
-            <button type="submit" class="btn btn-success" name="hethang" style="margin-bottom: 20px; float: left; margin-left: 2%;" title="Trong trường hợp hàng trong kho hết làm việc chế biến ra món đó bị gián đoạn thì món đó sẽ vào trạng thái hết hàng. Trường hợp hàng vào kho đã đủ, hàng sẽ được cập nhật lại nên có thể pha chế món đó.">Hết hàng? Có hàng?</button>
+            <button type="submit" class="btn btn-success" name="hethang"
+                style="margin-bottom: 20px; float: left; margin-left: 2%;"
+                title="Trong trường hợp hàng trong kho hết làm việc chế biến ra món đó bị gián đoạn thì món đó sẽ vào trạng thái hết hàng. Trường hợp hàng vào kho đã đủ, hàng sẽ được cập nhật lại nên có thể pha chế món đó.">Hết
+                hàng? Có hàng?</button>
+            <input type="text" id="myInput" class="w3-input" onkeyup="myFunction()" placeholder="Tìm tên món..."
+                title="Tìm kiếm món cần chuyển trạng thái từ còn hàng sang hết hàng và ngược lại">
             <div class="table-responsive table-bordered">
-                <table class="table" style="width:97%" align="center">
+                <table class="table" style="width:97%" align="center" id="myTable">
                     <thead>
                         <tr>
                             <th><input type="checkbox" name="checkbox" class="chk_box" onClick="toggle(this)"></th>
@@ -359,21 +376,62 @@ if (isset($_SESSION["username"])) {
                         }
                         ?>
                     </tbody>
-                    <tr>
-                        <td colspan="8">
-                            <button type="submit" class="btn btn-success" name="xuatkho" title="Nếu nguyên liệu dùng để làm món cho khách hàng bị hết, nhân viên hãy chọn vào nguyên liệu đó và nhấn Xuất kho trước ngay khi lấy hàng ra khổi kho">Xuất kho</button>
-                        </td>
-                    </tr>
                 </table>
+                <script>
+                function myFunction() {
+                    var input, filter, table, tr, td, i, txtValue;
+                    input = document.getElementById("myInput");
+                    filter = input.value.toUpperCase();
+                    table = document.getElementById("myTable");
+                    tr = table.getElementsByTagName("tr");
+                    for (i = 0; i < tr.length; i++) {
+                        td = tr[i].getElementsByTagName("td")[2];
+                        if (td) {
+                            txtValue = td.textContent || td.innerText;
+                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }
+                    }
+                }
+                </script>
+                <script>
+                $('th').click(function() {
+                    var table = $(this).parents('table').eq(0)
+                    var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
+                    this.asc = !this.asc
+                    if (!this.asc) {
+                        rows = rows.reverse()
+                    }
+                    for (var i = 0; i < rows.length; i++) {
+                        table.append(rows[i])
+                    }
+                })
+
+                function comparer(index) {
+                    return function(a, b) {
+                        var valA = getCellValue(a, index),
+                            valB = getCellValue(b, index)
+                        return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(
+                            valB)
+                    }
+                }
+
+                function getCellValue(row, index) {
+                    return $(row).children('td').eq(index).text()
+                }
+                </script>
             </div>
         </form>
         <script language="JavaScript">
-            function toggle(source) {
-                checkboxes = document.getElementsByName('check_list[]');
-                for (var i = 0, n = checkboxes.length; i < n; i++) {
-                    checkboxes[i].checked = source.checked;
-                }
+        function toggle(source) {
+            checkboxes = document.getElementsByName('check_list[]');
+            for (var i = 0, n = checkboxes.length; i < n; i++) {
+                checkboxes[i].checked = source.checked;
             }
+        }
         </script>
     </section>
     </section>

@@ -9,82 +9,82 @@ else
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="">
-	<meta name="author" content="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-	<title>Quản trị Rabbit House</title>
-	<link rel="icon" type="image/png" sizes="32x16" href="../img/rabbithouse.png">
-	<!-- Bootstrap Core CSS -->
-	<link href="../css/bootstrap.min.css" rel="stylesheet">
+    <title>Quản trị Rabbit House</title>
+    <link rel="icon" type="image/png" sizes="32x16" href="../img/rabbithouse.png">
+    <!-- Bootstrap Core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
 
-	<!-- MetisMenu CSS -->
-	<link href="../css/metisMenu.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="../css/metisMenu.min.css" rel="stylesheet">
 
-	<!-- Timeline CSS -->
-	<link href="../css/timeline.css" rel="stylesheet">
+    <!-- Timeline CSS -->
+    <link href="../css/timeline.css" rel="stylesheet">
 
-	<!-- Custom CSS -->
-	<link href="../css/startmin.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../css/startmin.css" rel="stylesheet">
 
-	<!-- Morris Charts CSS -->
-	<link href="../css/morris.css" rel="stylesheet">
+    <!-- Morris Charts CSS -->
+    <link href="../css/morris.css" rel="stylesheet">
 
-	<!-- Custom Fonts -->
-	<link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom Fonts -->
+    <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 </head>
 <script type="text/javascript">
-	const reloadtButton = document.querySelector("#reload");
-	// Reload everything:
-	function reload() {
-		reload = location.reload();
-	}
-	// Event listeners for reload
-	reloadButton.addEventListener("click", reload, false);
+const reloadtButton = document.querySelector("#reload");
+// Reload everything:
+function reload() {
+    reload = location.reload();
+}
+// Event listeners for reload
+reloadButton.addEventListener("click", reload, false);
 </script>
 <style>
-	#myInput {
-		width: 15%;
-		font-size: 16px;
-		margin-bottom: 12px;
-		float: right;
-		margin-right: 10px;
-		display: block;
-		border: none;
-		border-bottom: 1px solid #ccc;
-		margin-top: 8px;
-	}
+#myInput {
+    width: 15%;
+    font-size: 16px;
+    margin-bottom: 12px;
+    float: right;
+    margin-right: 10px;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    margin-top: 8px;
+}
 </style>
 
 <body>
 
-	<div id="wrapper">
+    <div id="wrapper">
 
-		<!-- Navigation -->
-		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="blank.php">Rabbit House</a>
-			</div>
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="blank.php">Rabbit House</a>
+            </div>
 
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<ul class="nav navbar-right navbar-top-links">
-				<li class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="account.php">
-						<?php
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <ul class="nav navbar-right navbar-top-links">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="account.php">
+                        <?php
 						$user00tmp = $username;
 						include "../include/connect.inc";
 						$sql0000 = "select hoTen from tblusers where username = '$user00tmp'";
@@ -92,57 +92,64 @@ else
 						$row0000 = mysqli_fetch_array($rs0000);
 						$hoTenNVtmp = $row0000["hoTen"];
 						?>
-						<i class="fa fa-user fa-fw"></i><?= $hoTenNVtmp ?><b class="caret"></b>
-					</a>
-					<ul class="dropdown-menu dropdown-user">
-						<li><a href="./backup/export_data.php"><i class="fa fa-user fa-fw"></i>Xuất dữ liệu</a></li>
-						<li class="divider"></li>
-						<li><a href="./backup/import_data.php"><i class="fa fa-user fa-fw"></i>Nhập dữ liệu</a></li>
-						<li class="divider"></li>
-						<li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a></li>
-						<li class="divider"></li>
-						<li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
-					</ul>
-				</li>
-			</ul>
-			<!-- /.navbar-top-links -->
+                        <i class="fa fa-user fa-fw"></i><?= $hoTenNVtmp ?><b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="./backup/export_data.php"><i class="fa fa-user fa-fw"></i>Xuất dữ liệu</a></li>
+                        <li class="divider"></li>
+                        <li><a href="./backup/import_data.php"><i class="fa fa-user fa-fw"></i>Nhập dữ liệu</a></li>
+                        <li class="divider"></li>
+                        <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a></li>
+                        <li class="divider"></li>
+                        <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- /.navbar-top-links -->
 
-			<?php
+            <?php
 			include "./left_admin.php";
 			?>
-		</nav>
-		<form action="list_dathang.php" method="post">
-			<div id="page-wrapper">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-lg-12">
-							<h1 class="page-header">DANH SÁCH ĐẶT HÀNG</h1>
-						</div>
-						<button type="submit" class="btn btn-success" name="giaohang" style="margin-bottom: 20px">Giao hàng</button>
-						<button type="submit" class="btn btn-success" name="xoahang" style="margin-bottom: 20px; background-color: red">Xóa hàng</button>
-						<button onClick="window.location.reload();" class="btn btn-success" style="margin-bottom: 20px; float: right; margin-right: 2%; background-color: aqua; color: black">Tải lại dữ liệu</button>
-						<input type="text" id="myInput" class="w3-input" onkeyup="myFunction()" placeholder="Tìm tên khách hàng..." title="Tìm kiếm khách hàng đặt hàng">
-					</div>
-					<div><span style="font-size: 20px; color: red">Trạng thái gia hàng được biểu diển bởi kí tự X và O. X là chưa giao hàng còn O là đã giao hàng.</span></div>
-					<div class="table-responsive table-bordered">
+        </nav>
+        <form action="list_dathang.php" method="post">
+            <div id="page-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">DANH SÁCH ĐẶT HÀNG</h1>
+                        </div>
+                        <button type="submit" class="btn btn-success" name="giaohang" style="margin-bottom: 20px">Giao
+                            hàng</button>
+                        <button type="submit" class="btn btn-success" name="xoahang"
+                            style="margin-bottom: 20px; background-color: red">Xóa hàng</button>
+                        <button onClick="window.location.reload();" class="btn btn-success"
+                            style="margin-bottom: 20px; float: right; margin-right: 2%; background-color: aqua; color: black">Tải
+                            lại dữ liệu</button>
+                        <input type="text" id="myInput" class="w3-input" onkeyup="myFunction()"
+                            placeholder="Tìm tên khách hàng..." title="Tìm kiếm khách hàng đặt hàng">
+                    </div>
+                    <div><span style="font-size: 20px; color: red">Trạng thái gia hàng được biểu diển bởi kí tự X và O.
+                            X là chưa giao hàng còn O là đã giao hàng.</span></div>
+                    <div class="table-responsive table-bordered">
 
-						<table class="table" id="myTable">
-							<thead>
-								<tr>
-									<th><input type="checkbox" name="checkbox" class="chk_box" onClick="toggle(this)"></th>
-									<th>STT</th>
-									<th>Mã đặt hàng</th>
-									<th>Món</th>
-									<th>Số lượng</th>
-									<th>Tên khách hàng</th>
-									<th>Số điện thoại</th>
-									<th>Địa chỉ</th>
-									<th>Thời gian</th>
-									<th>Tổng tiền</th>
-									<th>Trạng thái GH</th>
-								</tr>
-							</thead>
-							<tbody> <?php
+                        <table class="table" id="myTable">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" name="checkbox" class="chk_box" onClick="toggle(this)">
+                                    </th>
+                                    <th>STT</th>
+                                    <th>Mã đặt hàng</th>
+                                    <th>Món</th>
+                                    <th>Số lượng</th>
+                                    <th>Tên khách hàng</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Thời gian</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Trạng thái GH</th>
+                                </tr>
+                            </thead>
+                            <tbody> <?php
 									include("../include/connect.inc");
 									$sql		=	"select * from tblchitiethd";
 									$rs 		=	mysqli_query($conn, $sql);
@@ -228,89 +235,91 @@ else
 									}
 
 									?> </tbody>
-						</table>
-						<div style="text-align: center;">
-							<button type="submit" class="btn btn-success" name="giaohang" style="margin-bottom: 20px">Giao hàng</button>
-						</div>
-						<script>
-							function myFunction() {
-								var input, filter, table, tr, td, i, txtValue;
-								input = document.getElementById("myInput");
-								filter = input.value.toUpperCase();
-								table = document.getElementById("myTable");
-								tr = table.getElementsByTagName("tr");
-								for (i = 0; i < tr.length; i++) {
-									td = tr[i].getElementsByTagName("td")[5];
-									if (td) {
-										txtValue = td.textContent || td.innerText;
-										if (txtValue.toUpperCase().indexOf(filter) > -1) {
-											tr[i].style.display = "";
-										} else {
-											tr[i].style.display = "none";
-										}
-									}
-								}
-							}
-						</script>
-						<script>
-							$('th').click(function() {
-								var table = $(this).parents('table').eq(0)
-								var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
-								this.asc = !this.asc
-								if (!this.asc) {
-									rows = rows.reverse()
-								}
-								for (var i = 0; i < rows.length; i++) {
-									table.append(rows[i])
-								}
-							})
+                        </table>
+                        <div style="text-align: center;">
+                            <button type="submit" class="btn btn-success" name="giaohang"
+                                style="margin-bottom: 20px">Giao hàng</button>
+                        </div>
+                        <script>
+                        function myFunction() {
+                            var input, filter, table, tr, td, i, txtValue;
+                            input = document.getElementById("myInput");
+                            filter = input.value.toUpperCase();
+                            table = document.getElementById("myTable");
+                            tr = table.getElementsByTagName("tr");
+                            for (i = 0; i < tr.length; i++) {
+                                td = tr[i].getElementsByTagName("td")[5];
+                                if (td) {
+                                    txtValue = td.textContent || td.innerText;
+                                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                        tr[i].style.display = "";
+                                    } else {
+                                        tr[i].style.display = "none";
+                                    }
+                                }
+                            }
+                        }
+                        </script>
+                        <script>
+                        $('th').click(function() {
+                            var table = $(this).parents('table').eq(0)
+                            var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
+                            this.asc = !this.asc
+                            if (!this.asc) {
+                                rows = rows.reverse()
+                            }
+                            for (var i = 0; i < rows.length; i++) {
+                                table.append(rows[i])
+                            }
+                        })
 
-							function comparer(index) {
-								return function(a, b) {
-									var valA = getCellValue(a, index),
-										valB = getCellValue(b, index)
-									return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB)
-								}
-							}
+                        function comparer(index) {
+                            return function(a, b) {
+                                var valA = getCellValue(a, index),
+                                    valB = getCellValue(b, index)
+                                return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString()
+                                    .localeCompare(valB)
+                            }
+                        }
 
-							function getCellValue(row, index) {
-								return $(row).children('td').eq(index).text()
-							}
-						</script>
-					</div>
-					<!-- /.row -->
-				</div>
-				<!-- /.container-fluid -->
-			</div>
-			<!-- /#page-wrapper -->
-		</form>
-		<script language="JavaScript">
-			function toggle(source) {
-				checkboxes = document.getElementsByName('check_list[]');
-				for (var i = 0, n = checkboxes.length; i < n; i++) {
-					checkboxes[i].checked = source.checked;
-				}
-			}
-		</script>
-	</div>
-	<!-- /#wrapper -->
+                        function getCellValue(row, index) {
+                            return $(row).children('td').eq(index).text()
+                        }
+                        </script>
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /#page-wrapper -->
+        </form>
+        <script language="JavaScript">
+        function toggle(source) {
+            checkboxes = document.getElementsByName('check_list[]');
+            for (var i = 0, n = checkboxes.length; i < n; i++) {
+                checkboxes[i].checked = source.checked;
+            }
+        }
+        </script>
+    </div>
+    <!-- /#wrapper -->
 
-	<!-- jQuery -->
-	<script src="../js/jquery.min.js"></script>
+    <!-- jQuery -->
+    <script src="../js/jquery.min.js"></script>
 
-	<!-- Bootstrap Core JavaScript -->
-	<script src="../js/bootstrap.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../js/bootstrap.min.js"></script>
 
-	<!-- Metis Menu Plugin JavaScript -->
-	<script src="../js/metisMenu.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../js/metisMenu.min.js"></script>
 
-	<!-- Morris Charts JavaScript -->
-	<script src="../js/raphael.min.js"></script>
-	<script src="../js/morris.min.js"></script>
-	<script src="../js/morris-data.js"></script>
+    <!-- Morris Charts JavaScript -->
+    <script src="../js/raphael.min.js"></script>
+    <script src="../js/morris.min.js"></script>
+    <script src="../js/morris-data.js"></script>
 
-	<!-- Custom Theme JavaScript -->
-	<script src="../js/startmin.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="../js/startmin.js"></script>
 
 </body>
 
