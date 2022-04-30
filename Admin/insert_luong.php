@@ -73,14 +73,14 @@ else
                         <i class="fa fa-user fa-fw"></i><?= $hoTenNVtmp ?><b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                            <li><a href="./backup/export_data.php"><i class="fa fa-user fa-fw"></i>Xuất dữ liệu</a></li>
-                            <li class="divider"></li>
-                            <li><a href="./backup/import_data.php"><i class="fa fa-user fa-fw"></i>Nhập dữ liệu</a></li>
-                            <li class="divider"></li>
-                            <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a></li>
-                            <li class="divider"></li>
-                            <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
-                        </ul>
+                        <li><a href="./backup/export_data.php"><i class="fa fa-user fa-fw"></i>Xuất dữ liệu</a></li>
+                        <li class="divider"></li>
+                        <li><a href="./backup/import_data.php"><i class="fa fa-user fa-fw"></i>Nhập dữ liệu</a></li>
+                        <li class="divider"></li>
+                        <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a></li>
+                        <li class="divider"></li>
+                        <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
+                    </ul>
                 </li>
             </ul>
             <!-- /.navbar-top-links -->
@@ -94,7 +94,8 @@ else
                 <div class="row">
                     <div class="col-lg-12" style="padding-bottom: 10px;">
                         <h1 class="page-header">SỬA MỨC LƯƠNG CƠ BẢN CỦA NHÂN VIÊN</h1>
-                        <span>Lương cơ bản là lương góc chưa / 1 giờ<br/>Để tính được lương góc của nhân viên = lương cơ bản + số giờ nhân viên làm việc<br/></span>
+                        <span>Lương cơ bản là lương góc chưa / 1 giờ<br />Để tính được lương góc của nhân viên = lương
+                            cơ bản + số giờ nhân viên làm việc<br /></span>
                     </div>
 
                     <!-- /.col-lg-12 -->
@@ -110,7 +111,7 @@ else
                     $row        =    $row = mysqli_fetch_array($rs);
                     $luongCB    =    $row["luongCB"];
                     $id = $row["idLuong"];
-                    
+
                     if ($luongCB == null && $id == null) {
                         $sql2            =    "insert into tblluongnv(luongCB, ngayLap) values ('$luongCB3', '$time_act')";
                         $rs2             =    mysqli_query($conn, $sql2);
@@ -136,14 +137,20 @@ else
                         <tbody>
                             <tr>
                                 <td>Lương cơ bản/Giờ<span style="color: red">(*)</span>:</td>
-                                <td><input class="form-control" type="number" name="txtluong" value="<?= $luongCB1 ?>"></td>
+                                <td><input class="form-control" type="number" name="txtluong" value="<?= $luongCB1 ?>">
+                                </td>
                             </tr>
                             <tr>
                                 <td>Ngày lập lương:</td>
                                 <td><input class="form-control" readonly name="txttg" value="<?= $TG ?>"></td>
                             </tr>
                             <tr align="center">
-                                <td colspan="2"><button type="submit" class="btn btn-primary">Cập nhật</button> </td>
+                                <td colspan="2">
+                                    <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                    <button type="button"
+                                        onClick="javascript:window.location.href='list_user.php?page=1'"
+                                        class="btn btn-warning">Hủy</button>
+                                </td>
                             </tr>
                     </table>
                 </form>

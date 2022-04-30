@@ -188,25 +188,33 @@ else
                         <table class="table table-striped table-bordered table-hover" style="width:50%" align="center">
                             <tbody>
                                 <tr>
-                                    <td>File hàng hóa(*):<label style="color:red" title="Chỉ upload file text có đuôi *.txt">(?)</label></td>
+                                    <td>File hàng hóa<span style="color: red">(*)</span><label style="color:red"
+                                            title="Chỉ upload file text có đuôi *.txt">(?)</label>:</td>
                                     <td><input type="file" class="form-control" name="txtHinh" id="fileField"></td>
                                 </tr>
                                 <tr>
-                                    <td>Đổi trạng thái món?<span style="color: red">(*)</span><span style="color: red" title="Khi nhập hàng vào kho thì có chuyển toàn bộ món sang trạng thái còn hàng hay không? Trong trường hợp cần chuyển chọn Chuyển, ngược lại chọn Không chuyển">(?)</span>:</td>
+                                    <td>Đổi trạng thái món?<span style="color: red">(*)</span><span style="color: red"
+                                            title="Khi nhập hàng vào kho thì có chuyển toàn bộ món sang trạng thái còn hàng hay không? Trong trường hợp cần chuyển chọn Chuyển, ngược lại chọn Không chuyển">(?)</span>:
+                                    </td>
                                     <td>
-                                        <input type="radio" id="conHang" name="trangThai" value="O" checked><label style="padding-left: 5px;">Chuyển</label>
-                                        <input type="radio" id="hetHang" name="trangThai" value="X"><label style="padding-left: 5px;">Không chuyển</label>
+                                        <input type="radio" id="conHang" name="trangThai" value="O" checked><label
+                                            style="padding-left: 5px;">Chuyển</label>
+                                        <input type="radio" id="hetHang" name="trangThai" value="X"><label
+                                            style="padding-left: 5px;">Không chuyển</label>
                                     </td>
                                 </tr>
                                 <tr align="center">
                                     <td colspan="2">
                                         <button type="submit" name="chon" class="btn btn-primary">Thêm</button>
-                                        <button type="button" onClick="javascript:window.location.href='list_kho.php?page=1'" class="btn btn-warning">Hủy</button>
+                                        <button type="button"
+                                            onClick="javascript:window.location.href='list_kho.php?page=1'"
+                                            class="btn btn-warning">Hủy</button>
                                     </td>
                                 </tr>
                                 <tr align="right">
                                     <td colspan="2">
-                                        <a href="./support_importfile.php"><label style="color: red;"><i>Bạn cần hổ trợ?</i></label></a>
+                                        <a href="./support_importfile.php"><label style="color: red;"><i>Bạn cần hổ
+                                                    trợ?</i></label></a>
                                     </td>
                                 </tr>
                         </table>

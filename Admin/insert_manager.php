@@ -63,24 +63,24 @@ else
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="account.php">
                         <?php
-                            $user00tmp = $username;
-                            include "../include/connect.inc";
-                            $sql0000 = "select hoTen from tblusers where username = '$user00tmp'";
-                            $rs0000 = mysqli_query($conn, $sql0000);
-                            $row0000 = mysqli_fetch_array($rs0000);
-                            $hoTenNVtmp = $row0000["hoTen"];
-                            ?>
-                            <i class="fa fa-user fa-fw"></i><?=$hoTenNVtmp?><b class="caret"></b>
+                        $user00tmp = $username;
+                        include "../include/connect.inc";
+                        $sql0000 = "select hoTen from tblusers where username = '$user00tmp'";
+                        $rs0000 = mysqli_query($conn, $sql0000);
+                        $row0000 = mysqli_fetch_array($rs0000);
+                        $hoTenNVtmp = $row0000["hoTen"];
+                        ?>
+                        <i class="fa fa-user fa-fw"></i><?= $hoTenNVtmp ?><b class="caret"></b>
                     </a>
-                   <ul class="dropdown-menu dropdown-user">
-                            <li><a href="./backup/export_data.php"><i class="fa fa-user fa-fw"></i>Xuất dữ liệu</a></li>
-                            <li class="divider"></li>
-                            <li><a href="./backup/import_data.php"><i class="fa fa-user fa-fw"></i>Nhập dữ liệu</a></li>
-                            <li class="divider"></li>
-                            <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a></li>
-                            <li class="divider"></li>
-                            <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
-                        </ul>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="./backup/export_data.php"><i class="fa fa-user fa-fw"></i>Xuất dữ liệu</a></li>
+                        <li class="divider"></li>
+                        <li><a href="./backup/import_data.php"><i class="fa fa-user fa-fw"></i>Nhập dữ liệu</a></li>
+                        <li class="divider"></li>
+                        <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a></li>
+                        <li class="divider"></li>
+                        <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
+                    </ul>
                 </li>
             </ul>
             <!-- /.navbar-top-links -->
@@ -106,10 +106,13 @@ else
                     $hoTen = $_POST["txtHoTen"];
                     $soDT = $_POST["txtSoDT"];
                     $diaChi = "Rabbit House";
-                    $sql            =    "insert into tblusers(diachi, hoTen, soDT, username, password) values('$diaChi', '$hoTen', '$soDT', '$user', '$pass')";
-                    $rs             =    mysqli_query($conn, $sql);
-                    if ($rs)
-                        echo "<script>window.location.href='list_manager.php?page=1'</script>";
+                    if ($user != null && $soDT != null && $hoTen != null) {
+                        $sql            =    "insert into tblusers(diachi, hoTen, soDT, username, password) values('$diaChi', '$hoTen', '$soDT', '$user', '$pass')";
+                        $rs             =    mysqli_query($conn, $sql);
+                        if ($rs)
+                            echo "<script>window.location.href='list_manager.php?page=1'</script>";
+                    } else
+                        echo "<script>alert('Kiểm tra lại thông tin Họ tên, Số điện thoại và Tên tài khoản')</script>";
                 }
                 ?>
                 <form method="post">
@@ -117,11 +120,13 @@ else
                         <tbody>
                             <tr>
                                 <td>Họ tên<span style="color: red">(*)</span>:</td>
-                                <td><input type="text" class="form-control" name="txtHoTen" placeholder="Họ tên quản lý"></td>
+                                <td><input type="text" class="form-control" name="txtHoTen"
+                                        placeholder="Họ tên quản lý"></td>
                             </tr>
                             <tr>
                                 <td>Số điện thoại<span style="color: red">(*)</span>:</td>
-                                <td><input type="number" class="form-control" name="txtSoDT" placeholder="090xxxxxxxx"></td>
+                                <td><input type="number" class="form-control" name="txtSoDT" placeholder="090xxxxxxxx">
+                                </td>
                             </tr>
                             <tr>
                                 <td>Tên tài khoản<span style="color: red">(*)</span>:</td>
@@ -133,7 +138,9 @@ else
                             <tr align="center">
                                 <td colspan="2">
                                     <button type="submit" class="btn btn-primary">Thêm</button>
-                                    <button type="button" onClick="javascript:window.location.href='list_manager.php?page=1'" class="btn btn-warning">Hủy</button>
+                                    <button type="button"
+                                        onClick="javascript:window.location.href='list_manager.php?page=1'"
+                                        class="btn btn-warning">Hủy</button>
                                 </td>
                             </tr>
 

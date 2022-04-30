@@ -106,10 +106,13 @@ else
                     $hoTen = $_POST["txtHoTen"];
                     $soDT = $_POST["txtSoDT"];
                     $diaChi = "Rabbit House";
-                    $sql            =    "insert into tblStaff(diachi, hoTen, soDT, username, password, tongTG, tongLuong) values('$diaChi', '$hoTen', '$soDT', '$user', '$pass', 0, 0)";
-                    $rs             =    mysqli_query($conn, $sql);
-                    if ($rs)
-                        echo "<script>window.location.href='list_user.php?page=1'</script>";
+                    if ($user != null && $soDT != null && $hoTen != null) {
+                        $sql            =    "insert into tblStaff(diachi, hoTen, soDT, username, password, tongTG, tongLuong) values('$diaChi', '$hoTen', '$soDT', '$user', '$pass', 0, 0)";
+                        $rs             =    mysqli_query($conn, $sql);
+                        if ($rs)
+                            echo "<script>window.location.href='list_user.php?page=1'</script>";
+                    } else
+                        echo "<script>alert('Kiểm tra lại thông tin Họ tên, Số điện thoại và Tên tài khoản')</script>";
                 }
                 ?>
                 <form method="post">

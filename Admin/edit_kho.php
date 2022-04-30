@@ -1,9 +1,9 @@
 <?php
 session_start();
-if (isset($_SESSION["username"])){
+if (isset($_SESSION["username"])) {
     $username    =    $_SESSION["username"];
-    $pages = $_SESSION["pages"];}
-else
+    $pages = $_SESSION["pages"];
+} else
     header("location:login.php");
 ?>
 <!DOCTYPE html>
@@ -74,14 +74,14 @@ else
                         <i class="fa fa-user fa-fw"></i><?= $hoTenNVtmp ?><b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                            <li><a href="./backup/export_data.php"><i class="fa fa-user fa-fw"></i>Xuất dữ liệu</a></li>
-                            <li class="divider"></li>
-                            <li><a href="./backup/import_data.php"><i class="fa fa-user fa-fw"></i>Nhập dữ liệu</a></li>
-                            <li class="divider"></li>
-                            <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a></li>
-                            <li class="divider"></li>
-                            <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
-                        </ul>
+                        <li><a href="./backup/export_data.php"><i class="fa fa-user fa-fw"></i>Xuất dữ liệu</a></li>
+                        <li class="divider"></li>
+                        <li><a href="./backup/import_data.php"><i class="fa fa-user fa-fw"></i>Nhập dữ liệu</a></li>
+                        <li class="divider"></li>
+                        <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a></li>
+                        <li class="divider"></li>
+                        <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
+                    </ul>
                 </li>
             </ul>
             <!-- /.navbar-top-links -->
@@ -130,17 +130,22 @@ else
                                 <input type="hidden" class="form-control" name="txtid" value="<?= $id ?>">
                             </tr>
                             <tr>
-                                <td>Số lượng<span style="color: red">(*)</span><span style="color: red" title="Đơn vị có thể là Kg, lon,...">(?)</span>:</td>
-                                <td><input class="form-control" name="txtSoLuong" value="<?= $soLuong ?>"></td>
+                                <td>Số lượng<span style="color: red">(*)</span><span style="color: red"
+                                        title="Đơn vị có thể là Kg, lon,...">(?)</span>:</td>
+                                <td><input class="form-control" name="txtSoLuong" type="number" value="<?= $soLuong ?>">
+                                </td>
                             </tr>
                             <tr>
                                 <td>Số tiền<span style="color: red">(*)</span>:</td>
-                                <td><input class="form-control" name="txtSoTien" value="<?= $soTien ?>"></td>
+                                <td><input class="form-control" name="txtSoTien" type="number" value="<?= $soTien ?>">
+                                </td>
                             </tr>
                             <tr align="center">
                                 <td colspan="2">
                                     <button type="submit" class="btn btn-primary">Cập nhật</button>
-                                    <button type="button" onClick="javascript:window.location.href='list_kho.php?page=<?=$pages?>'" class="btn btn-warning">Hủy</button> 
+                                    <button type="button"
+                                        onClick="javascript:window.location.href='list_kho.php?page=<?= $pages ?>'"
+                                        class="btn btn-warning">Hủy</button>
                                 </td>
                             </tr>
 

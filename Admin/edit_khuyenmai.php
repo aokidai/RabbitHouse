@@ -1,10 +1,9 @@
 <?php
 session_start();
-if (isset($_SESSION["username"])){
+if (isset($_SESSION["username"])) {
     $username    =    $_SESSION["username"];
     $pages = $_SESSION["pages"];
-}
-else
+} else
     header("location:login.php");
 ?>
 <!DOCTYPE html>
@@ -57,7 +56,7 @@ else
     $row0 = mysqli_fetch_array($rs0);
     $TGBDtmp = $row0["thoiGianBD"];
     $TGKTtmp = $row0["thoiGianKT"];
-    if($TGBDtmp <= $time_act && $time_act <= $TGKTtmp || $TGKTtmp <= $time_act){
+    if ($TGBDtmp <= $time_act && $time_act <= $TGKTtmp || $TGKTtmp <= $time_act) {
         echo "<script>alert('Không thể sửa vì đang hoặc đã qua thời gian khuyến mãi')</script>";
         echo "<script>window.location.href='list_khuyenmai.php?page=$pages'</script>";
     }
@@ -87,14 +86,14 @@ else
                         <i class="fa fa-user fa-fw"></i><?= $hoTenNVtmp ?><b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                            <li><a href="./backup/export_data.php"><i class="fa fa-user fa-fw"></i>Xuất dữ liệu</a></li>
-                            <li class="divider"></li>
-                            <li><a href="./backup/import_data.php"><i class="fa fa-user fa-fw"></i>Nhập dữ liệu</a></li>
-                            <li class="divider"></li>
-                            <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a></li>
-                            <li class="divider"></li>
-                            <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
-                        </ul>
+                        <li><a href="./backup/export_data.php"><i class="fa fa-user fa-fw"></i>Xuất dữ liệu</a></li>
+                        <li class="divider"></li>
+                        <li><a href="./backup/import_data.php"><i class="fa fa-user fa-fw"></i>Nhập dữ liệu</a></li>
+                        <li class="divider"></li>
+                        <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a></li>
+                        <li class="divider"></li>
+                        <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
+                    </ul>
                 </li>
             </ul>
             <!-- /.navbar-top-links -->
@@ -147,20 +146,25 @@ else
                             </tr>
                             <tr>
                                 <td>Khuyến mãi (%)<span style="color: red">(*)</span>:</td>
-                                <td><input class="form-control" name="txtKM" value="<?= $KhuyenMai ?>"></td>
+                                <td><input class="form-control" name="txtKM" type="number" value="<?= $KhuyenMai ?>">
+                                </td>
                             </tr>
                             <tr>
                                 <td>Thời gian bắt đầu<span style="color: red">(*)</span>:</td>
-                                <td><input type="datetime-local" name="txtTGBD"  value="<?php echo date('Y-m-d\TH:i:s', strtotime($TGBD)); ?>" REQUIRED></td>
+                                <td><input type="datetime-local" name="txtTGBD"
+                                        value="<?php echo date('Y-m-d\TH:i:s', strtotime($TGBD)); ?>" REQUIRED></td>
                             </tr>
                             <tr>
                                 <td>Thời gian kết thúc<span style="color: red">(*)</span>:</td>
-                                <td><input type="datetime-local" name="txtTGKT"  value="<?php echo date('Y-m-d\TH:i:s', strtotime($TGKT)); ?>" REQUIRED></td>
+                                <td><input type="datetime-local" name="txtTGKT"
+                                        value="<?php echo date('Y-m-d\TH:i:s', strtotime($TGKT)); ?>" REQUIRED></td>
                             </tr>
                             <tr align="center">
                                 <td colspan="2">
                                     <button type="submit" class="btn btn-primary">Cập nhật</button>
-                                    <button type="button" onClick="javascript:window.location.href='list_khuyenmai.php?page=<?=$pages?>'" class="btn btn-warning">Hủy</button>
+                                    <button type="button"
+                                        onClick="javascript:window.location.href='list_khuyenmai.php?page=<?= $pages ?>'"
+                                        class="btn btn-warning">Hủy</button>
                                 </td>
                             </tr>
 

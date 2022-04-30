@@ -73,14 +73,14 @@ else
                         <i class="fa fa-user fa-fw"></i><?= $hoTenNVtmp ?><b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                            <li><a href="./backup/export_data.php"><i class="fa fa-user fa-fw"></i>Xuất dữ liệu</a></li>
-                            <li class="divider"></li>
-                            <li><a href="./backup/import_data.php"><i class="fa fa-user fa-fw"></i>Nhập dữ liệu</a></li>
-                            <li class="divider"></li>
-                            <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a></li>
-                            <li class="divider"></li>
-                            <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
-                        </ul>
+                        <li><a href="./backup/export_data.php"><i class="fa fa-user fa-fw"></i>Xuất dữ liệu</a></li>
+                        <li class="divider"></li>
+                        <li><a href="./backup/import_data.php"><i class="fa fa-user fa-fw"></i>Nhập dữ liệu</a></li>
+                        <li class="divider"></li>
+                        <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a></li>
+                        <li class="divider"></li>
+                        <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
+                    </ul>
                 </li>
             </ul>
             <!-- /.navbar-top-links -->
@@ -102,10 +102,12 @@ else
                 if (isset($_POST["txtLoai"])) {
                     include "../include/connect.inc";
                     $tenLoai    =    $_POST["txtLoai"];
-                    $sql            =    "insert into tblloai(tenLoai) values('$tenLoai')";
-                    $rs             =    mysqli_query($conn, $sql);
-                    if ($rs)
-                        echo "<script>window.location.href='list_loai.php?page=1'</script>";
+                    if ($tenLoai != null) {
+                        $sql            =    "insert into tblloai(tenLoai) values('$tenLoai')";
+                        $rs             =    mysqli_query($conn, $sql);
+                        if ($rs)
+                            echo "<script>window.location.href='list_loai.php?page=1'</script>";
+                    } else echo "<script>alert('Tên loại món tróng!')</script>";
                 }
                 ?>
                 <form method="post">
@@ -118,7 +120,9 @@ else
                             <tr align="center">
                                 <td colspan="2">
                                     <button type="submit" class="btn btn-primary">Thêm</button>
-                                    <button type="button" onClick="javascript:window.location.href='list_loai.php?page=1'" class="btn btn-warning">Hủy</button> 
+                                    <button type="button"
+                                        onClick="javascript:window.location.href='list_loai.php?page=1'"
+                                        class="btn btn-warning">Hủy</button>
                                 </td>
                             </tr>
                     </table>

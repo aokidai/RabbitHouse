@@ -64,24 +64,24 @@ else
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="account.php">
                         <?php
-                            $user00tmp = $username;
-                            include "../include/connect.inc";
-                            $sql0000 = "select hoTen from tblusers where username = '$user00tmp'";
-                            $rs0000 = mysqli_query($conn, $sql0000);
-                            $row0000 = mysqli_fetch_array($rs0000);
-                            $hoTenNVtmp = $row0000["hoTen"];
-                            ?>
-                            <i class="fa fa-user fa-fw"></i><?=$hoTenNVtmp?><b class="caret"></b>
+                        $user00tmp = $username;
+                        include "../include/connect.inc";
+                        $sql0000 = "select hoTen from tblusers where username = '$user00tmp'";
+                        $rs0000 = mysqli_query($conn, $sql0000);
+                        $row0000 = mysqli_fetch_array($rs0000);
+                        $hoTenNVtmp = $row0000["hoTen"];
+                        ?>
+                        <i class="fa fa-user fa-fw"></i><?= $hoTenNVtmp ?><b class="caret"></b>
                     </a>
-                   <ul class="dropdown-menu dropdown-user">
-                            <li><a href="./backup/export_data.php"><i class="fa fa-user fa-fw"></i>Xuất dữ liệu</a></li>
-                            <li class="divider"></li>
-                            <li><a href="./backup/import_data.php"><i class="fa fa-user fa-fw"></i>Nhập dữ liệu</a></li>
-                            <li class="divider"></li>
-                            <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a></li>
-                            <li class="divider"></li>
-                            <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
-                        </ul>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="./backup/export_data.php"><i class="fa fa-user fa-fw"></i>Xuất dữ liệu</a></li>
+                        <li class="divider"></li>
+                        <li><a href="./backup/import_data.php"><i class="fa fa-user fa-fw"></i>Nhập dữ liệu</a></li>
+                        <li class="divider"></li>
+                        <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a></li>
+                        <li class="divider"></li>
+                        <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
+                    </ul>
                 </li>
             </ul>
             <!-- /.navbar-top-links -->
@@ -110,13 +110,19 @@ else
                     $noiDung         =   $_POST["txtdes"];
                     $name_tmp        =    $_FILES["txtHinh"]["tmp_name"];
                     $goiY            =     $_POST["txtGoiY"];
-                    $sql                =    "insert into tblmon(idLoai, tenMon, gia,  hinhAnh, goiY, conHang, moTa) values($idLoai, '$tenMon', $gia, '$image', '$goiY', '$trangThai', '$noiDung')";
-                    $rs                 =    mysqli_query($conn, $sql);
-                    if ($rs) {
-                        move_uploaded_file($name_tmp, "../uploads/" . $image);
-                        echo "<script>window.location.href='list_mon.php?page=1'</script>";
-                    } else
-                        echo "<script>alert('Thêm món không thành công')</script>";
+                    if ($tenMon != null && $gia != null) {
+                        $sql                =    "insert into tblmon(idLoai, tenMon, gia,  hinhAnh, goiY, conHang, moTa) values($idLoai, '$tenMon', $gia, '$image', '$goiY', '$trangThai', '$noiDung')";
+                        $rs                 =    mysqli_query($conn, $sql);
+                        if ($rs) {
+                            move_uploaded_file($name_tmp, "../uploads/" . $image);
+                            echo "<script>window.location.href='list_mon.php?page=1'</script>";
+                        } else
+                            echo "<script>alert('Thêm món không thành công')</script>";
+                    } else {
+                        echo "<script>alert('Kiểm tra lại thông tin Tên món và Giá')</script>";
+                        $sql            =    "select * from tblloai ";
+                        $rs                =    mysqli_query($conn, $sql);
+                    }
                 } else {
                     $sql            =    "select * from tblloai ";
                     $rs                =    mysqli_query($conn, $sql);
@@ -150,18 +156,22 @@ else
                             </tr>
                             <tr>
                                 <td>Gợi Ý:</td>
-                                <td><input type="number" class="form-control" name="txtGoiY" id="txtGoiY" placeholder="Nhiệt độ gợi ý"></input> </td>
+                                <td><input type="number" class="form-control" name="txtGoiY" id="txtGoiY"
+                                        placeholder="Nhiệt độ gợi ý"></input> </td>
                             </tr>
                             <tr>
                                 <td>Công thức</td>
                                 <td>
-                                    <textarea name="txtdes" id="txtdes" rows="10" class="form-control" placeholder="Công thức chế biến món"></textarea>
+                                    <textarea name="txtdes" id="txtdes" rows="10" class="form-control"
+                                        placeholder="Công thức chế biến món"></textarea>
                                 </td>
                             </tr>
                             <tr align="center">
                                 <td colspan="2">
                                     <button type="submit" class="btn btn-primary">Thêm</button>
-                                    <button type="button" onClick="javascript:window.location.href='list_mon.php?page=1'" class="btn btn-warning">Hủy</button> 
+                                    <button type="button"
+                                        onClick="javascript:window.location.href='list_mon.php?page=1'"
+                                        class="btn btn-warning">Hủy</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -173,9 +183,9 @@ else
         </div>
         <!-- /#page-wrapper -->
         <script>
-            // Replace the <textarea id="editor1"> with a CKEditor
-            // instance, using default configuration.
-            CKEDITOR.replace('txtdes');
+        // Replace the <textarea id="editor1"> with a CKEditor
+        // instance, using default configuration.
+        CKEDITOR.replace('txtdes');
         </script>
     </div>
     <!-- /#wrapper -->

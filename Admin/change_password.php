@@ -63,24 +63,18 @@ else
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="account.php">
                         <?php
-                            $user00tmp = $username;
-                            include "../include/connect.inc";
-                            $sql0000 = "select hoTen from tblusers where username = '$user00tmp'";
-                            $rs0000 = mysqli_query($conn, $sql0000);
-                            $row0000 = mysqli_fetch_array($rs0000);
-                            $hoTenNVtmp = $row0000["hoTen"];
-                            ?>
-                            <i class="fa fa-user fa-fw"></i><?=$hoTenNVtmp?><b class="caret"></b>
+                        $user00tmp = $username;
+                        include "../include/connect.inc";
+                        $sql0000 = "select hoTen from tblusers where username = '$user00tmp'";
+                        $rs0000 = mysqli_query($conn, $sql0000);
+                        $row0000 = mysqli_fetch_array($rs0000);
+                        $hoTenNVtmp = $row0000["hoTen"];
+                        ?>
+                        <i class="fa fa-user fa-fw"></i><?= $hoTenNVtmp ?><b class="caret"></b>
                     </a>
-                   <ul class="dropdown-menu dropdown-user">
-                            <li><a href="./backup/export_data.php"><i class="fa fa-user fa-fw"></i>Xuất dữ liệu</a></li>
-                            <li class="divider"></li>
-                            <li><a href="./backup/import_data.php"><i class="fa fa-user fa-fw"></i>Nhập dữ liệu</a></li>
-                            <li class="divider"></li>
-                            <li><a href="account.php"><i class="fa fa-user fa-fw"></i>Quản lí tài khoản</a></li>
-                            <li class="divider"></li>
-                            <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
-                        </ul>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a></li>
+                    </ul>
                 </li>
             </ul>
             <!-- /.navbar-top-links -->
@@ -98,16 +92,19 @@ else
                 $user = $username;
                 include "../include/connect.inc";
                 if (isset($_POST["txtpassword"])) {
-                  $password  =  $_POST["txtpassword"];
-                  $repass  =  $_POST["txtrepass"];
-                  if ($password == $repass) {
-                    $sql    =  "update tblusers set tblusers.password= '$password' where username='$user'";
-                    $rs    =  mysqli_query($conn, $sql);
-                    if ($rs) {
-                      echo "<script>window.location.href='blank.php'</script>";
-                    }
-                  } else
-                    echo "<script>alert('Mật khẩu không trùng')</script>";
+                    $password  =  $_POST["txtpassword"];
+                    $repass  =  $_POST["txtrepass"];
+                    if ($password != null && $repass != null) {
+                        if ($password == $repass) {
+                            $sql    =  "update tblusers set tblusers.password= '$password' where username='$user'";
+                            $rs    =  mysqli_query($conn, $sql);
+                            if ($rs) {
+                                echo "<script>window.location.href='blank.php'</script>";
+                            }
+                        } else
+                            echo "<script>alert('Mật khẩu không trùng!')</script>";
+                    } else
+                        echo "<script>alert('Kiểm tra lại mật khẩu và nhập lại mật khẩu!')</script>";
                 }
                 ?>
                 <form method="post">
@@ -122,7 +119,11 @@ else
                                 <td><input type="password" class="form-control" name="txtrepass"></td>
                             </tr>
                             <tr align="center">
-                                <td colspan="2"><button type="submit" name="update" class="btn btn-primary">Cập nhật</button> </td>
+                                <td colspan="2">
+                                    <button type="submit" name="update" class="btn btn-primary">Cập nhật</button>
+                                    <button type="button" onClick="javascript:window.location.href='login.php'"
+                                        class="btn btn-warning">Hủy</button>
+                                </td>
                             </tr>
 
                     </table>
