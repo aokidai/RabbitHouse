@@ -318,12 +318,14 @@ reloadButton.addEventListener("click", reload, false);
                 $loai = 'Nhân viên';
                 $tieuDe = $_POST["txtTitle"];
                 $time_act = date('Y-m-d H:i:s');
-                $sql = "insert into tblreport (hoTenNV, vanDe, thoiGian, type, title) values ('$loai', '$vanDe', '$time_act', '$loai', '$tieuDe')";
-                $rs = mysqli_query($conn, $sql);
-                if ($rs) {
-                    echo "<script>alert('Lưu thành công!')</script>";
-                    echo "<script>window.location.href='index.php'</script>";
-                } else echo "<script>alert('Error!')</script>";
+                if ($tieuDe != null && $vanDe != null) {
+                    $sql = "insert into tblreport (hoTenNV, vanDe, thoiGian, type, title) values ('$loai', '$vanDe', '$time_act', '$loai', '$tieuDe')";
+                    $rs = mysqli_query($conn, $sql);
+                    if ($rs) {
+                        echo "<script>alert('Lưu thành công!')</script>";
+                        echo "<script>window.location.href='index.php'</script>";
+                    } else echo "<script>alert('Error!')</script>";
+                } else echo "<script>alert('Tiêu đề hoặc nội dung bị tróng!')</script>";
             }
             ?>
             <form id="form" name="frmLogin" method="post" action="report.php">

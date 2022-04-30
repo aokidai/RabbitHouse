@@ -274,7 +274,7 @@ img {
         <?php include "./header.php"; ?>
         <div> <br /><br /><br />
             <div align="center">
-                <form action="xuatkho.php" method="GET">
+                <form action="check_mon.php" method="GET">
                     <input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
                     <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
                 </form>

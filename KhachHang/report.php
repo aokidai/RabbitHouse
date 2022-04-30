@@ -26,243 +26,258 @@ if (isset($_SESSION["username"])) {
     <script src="../ckeditor/ckeditor.js"></script>
 </head>
 <style>
-    #mon {
-        width: 240px;
-        height: 320px;
-        margin: 3px;
-        margin-top: 100px;
-        text-align: center;
-        float: left;
+#mon {
+    width: 240px;
+    height: 320px;
+    margin: 3px;
+    margin-top: 100px;
+    text-align: center;
+    float: left;
+}
+
+#tenMon {
+    margin-top: 5px;
+    vertical-align: top;
+    height: 40px;
+    font-size: 25px;
+}
+
+#tenMon a {
+    text-decoration: none;
+    color: #000;
+    font-size: 25px;
+}
+
+#tenMon a:hover {
+    color: #000;
+}
+
+#hinhAnh {
+    width: 150px;
+    height: 200px;
+}
+
+#hinhAnh:hover {
+    transfrom: scale(1.1);
+}
+
+#dongia {
+    margin-top: 10px;
+    font-size: 30px;
+}
+
+#donGia span {
+    color: #000;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#nutchonmua {
+    height: 30px;
+}
+
+#info1 {
+    padding: 50px;
+}
+
+#info1 span {
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+#info1 ul {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    list-style-type: none;
+    overflow: hidden;
+    text-align: center;
+    margin-top: 30%;
+}
+
+#info1 ul li {
+    display: list-item;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    list-style-position: unset;
+    display: inline-block;
+    list-style-type: none;
+    line-height: 40px;
+    margin-left: -2px;
+    width: 120px;
+    height: 40px;
+}
+
+#info1 ul li a img {
+    width: 70px;
+    height: 70px;
+}
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    font-family: Verdana, sans-serif;
+    margin: 0
+}
+
+.mySlides {
+    display: none
+}
+
+img {
+    vertical-align: middle;
+}
+
+/* Slideshow container */
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Caption text */
+.text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active,
+.dot:hover {
+    background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+    from {
+        opacity: .4
     }
 
-    #tenMon {
-        margin-top: 5px;
-        vertical-align: top;
-        height: 40px;
-        font-size: 25px;
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
     }
 
-    #tenMon a {
-        text-decoration: none;
-        color: #000;
-        font-size: 25px;
+    to {
+        opacity: 1
     }
+}
 
-    #tenMon a:hover {
-        color: #000;
-    }
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
 
-    #hinhAnh {
-        width: 150px;
-        height: 200px;
-    }
-
-    #hinhAnh:hover {
-        transfrom: scale(1.1);
-    }
-
-    #dongia {
-        margin-top: 10px;
-        font-size: 30px;
-    }
-
-    #donGia span {
-        color: #000;
-        font-size: 30px;
-        font-weight: bold;
-    }
-
-    #nutchonmua {
-        height: 30px;
-    }
-
-    #info1 {
-        padding: 50px;
-    }
-
-    #info1 span {
-        text-align: center;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        font-family: 'Times New Roman', Times, serif;
-        font-size: 40px;
-        font-weight: bold;
-    }
-
-    #info1 ul {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        list-style-type: none;
-        overflow: hidden;
-        text-align: center;
-        margin-top: 30%;
-    }
-
-    #info1 ul li {
-        display: list-item;
-        text-rendering: optimizeLegibility;
-        -webkit-font-smoothing: antialiased;
-        list-style-position: unset;
-        display: inline-block;
-        list-style-type: none;
-        line-height: 40px;
-        margin-left: -2px;
-        width: 120px;
-        height: 40px;
-    }
-
-    #info1 ul li a img {
-        width: 70px;
-        height: 70px;
-    }
-
-    * {
-        box-sizing: border-box
-    }
-
-    body {
-        font-family: Verdana, sans-serif;
-        margin: 0
-    }
-
-    .mySlides {
-        display: none
-    }
-
-    img {
-        vertical-align: middle;
-    }
-
-    /* Slideshow container */
-    .slideshow-container {
-        max-width: 1000px;
-        position: relative;
-        margin: auto;
-    }
-
-    /* Next & previous buttons */
     .prev,
-    .next {
-        cursor: pointer;
-        position: absolute;
-        top: 50%;
-        width: auto;
-        padding: 16px;
-        margin-top: -22px;
-        color: white;
-        font-weight: bold;
-        font-size: 18px;
-        transition: 0.6s ease;
-        border-radius: 0 3px 3px 0;
-        user-select: none;
-    }
-
-    /* Position the "next button" to the right */
-    .next {
-        right: 0;
-        border-radius: 3px 0 0 3px;
-    }
-
-    /* On hover, add a black background color with a little bit see-through */
-    .prev:hover,
-    .next:hover {
-        background-color: rgba(0, 0, 0, 0.8);
-    }
-
-    /* Caption text */
+    .next,
     .text {
-        color: #f2f2f2;
-        font-size: 15px;
-        padding: 8px 12px;
-        position: absolute;
-        bottom: 8px;
-        width: 100%;
-        text-align: center;
+        font-size: 11px
     }
+}
 
-    /* Number text (1/3 etc) */
-    .numbertext {
-        color: #f2f2f2;
-        font-size: 12px;
-        padding: 8px 12px;
-        position: absolute;
-        top: 0;
-    }
-
-    /* The dots/bullets/indicators */
-    .dot {
-        cursor: pointer;
-        height: 15px;
-        width: 15px;
-        margin: 0 2px;
-        background-color: #bbb;
-        border-radius: 50%;
-        display: inline-block;
-        transition: background-color 0.6s ease;
-    }
-
-    .active,
-    .dot:hover {
-        background-color: #717171;
-    }
-
-    /* Fading animation */
-    .fade {
-        -webkit-animation-name: fade;
-        -webkit-animation-duration: 1.5s;
-        animation-name: fade;
-        animation-duration: 1.5s;
-    }
-
-    @-webkit-keyframes fade {
-        from {
-            opacity: .4
-        }
-
-        to {
-            opacity: 1
-        }
-    }
-
-    @keyframes fade {
-        from {
-            opacity: .4
-        }
-
-        to {
-            opacity: 1
-        }
-    }
-
-    /* On smaller screens, decrease text size */
-    @media only screen and (max-width: 300px) {
-
-        .prev,
-        .next,
-        .text {
-            font-size: 11px
-        }
-    }
-
-    #ttLoai {
-        display: block;
-        text-align: center;
-        font-family: 'Times New Roman', Times, serif;
-        font-size: 40px;
-        font-weight: bold;
-        margin-left: 18%;
-    }
+#ttLoai {
+    display: block;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 40px;
+    font-weight: bold;
+    margin-left: 18%;
+}
 </style>
 <script type="text/javascript">
-    const reloadtButton = document.querySelector("#reload");
-    // Reload everything:
-    function reload() {
-        reload = location.reload();
+const reloadtButton = document.querySelector("#reload");
+// Reload everything:
+function reload() {
+    reload = location.reload();
+}
+// Event listeners for reload
+reloadButton.addEventListener("click", reload, false);
+</script>
+<script>
+function checkLogin() {
+    if (document.frmLogin.txtTitle.value == "") {
+        alert("Tiêu đề bị tróng!");
+        document.form.txtUsername.focus();
+        return;
     }
-    // Event listeners for reload
-    reloadButton.addEventListener("click", reload, false);
+    if (document.frmLogin.txtdes.value == "") {
+        alert("Nội dung bị tróng!");
+        document.form.txtPassword.focus();
+        return;
+    }
+    document.frmLogin.submit();
+}
 </script>
 
 <body>
@@ -278,25 +293,25 @@ if (isset($_SESSION["username"])) {
     </div>
 
     <script>
-        var chatbox = document.getElementById('fb-customer-chat');
-        chatbox.setAttribute("page_id", "784897768537480");
-        chatbox.setAttribute("attribution", "biz_inbox");
+    var chatbox = document.getElementById('fb-customer-chat');
+    chatbox.setAttribute("page_id", "784897768537480");
+    chatbox.setAttribute("attribution", "biz_inbox");
 
-        window.fbAsyncInit = function() {
-            FB.init({
-                xfbml: true,
-                version: 'v11.0'
-            });
-        };
+    window.fbAsyncInit = function() {
+        FB.init({
+            xfbml: true,
+            version: 'v11.0'
+        });
+    };
 
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
     </script>
     <header>
         <?php include "./header.php"; ?>
@@ -308,11 +323,11 @@ if (isset($_SESSION["username"])) {
                 </form>
             </div>
             <script type="text/javascript">
-                $(function() {
-                    $("#searchbar").autocomplete({
-                        source: 'ajax-mon-search.php',
-                    });
+            $(function() {
+                $("#searchbar").autocomplete({
+                    source: 'ajax-mon-search.php',
                 });
+            });
             </script>
             <br />
             <?php
@@ -335,7 +350,7 @@ if (isset($_SESSION["username"])) {
 
         </div>
     </header>
-    <form method="post" action="report.php">
+    <form method="post" action="report.php" name="frmLogin">
         <?php
         include "../include/connect.inc";
         if (isset($_POST["txtdes"])) {
@@ -344,18 +359,22 @@ if (isset($_SESSION["username"])) {
             $loai = 'Khách hàng';
             $tieuDe = $_POST["txtTitle"];
             $time_act = date('Y-m-d H:i:s');
-            $sql = "insert into tblreport (hoTenNV, vanDe, thoiGian, type, title) values ('$tenNV', '$vanDe', '$time_act', '$loai', '$tieuDe')";
-            $rs = mysqli_query($conn, $sql);
-            if ($rs) {
-                echo "<script>alert('Lưu thành công!')</script>";
-                echo "<script>window.location.href='index.php'</script>";
-            } else echo "<script>alert('Error!')</script>";
+            if ($tieuDe != null && $vanDe != null) {
+                $sql = "insert into tblreport (hoTenNV, vanDe, thoiGian, type, title) values ('$tenNV', '$vanDe', '$time_act', '$loai', '$tieuDe')";
+                $rs = mysqli_query($conn, $sql);
+                if ($rs) {
+                    echo "<script>alert('Lưu thành công!')</script>";
+                    echo "<script>window.location.href='index.php'</script>";
+                } else echo "<script>alert('Error!')</script>";
+            } else echo "<script>alert('Tiêu đề hoặc nội dung bị tróng!')</script>";
         }
         ?>
-        <table align="center" class="table table-striped table-bordered table-hover" style="width:80%; margin-top: 20px">
+        <table align="center" class="table table-striped table-bordered table-hover"
+            style="width:80%; margin-top: 20px">
             <tbody>
                 <tr>
-                    <td colspan="2" align="center"><span style="font-weight: bold; font-size:20px; font-family: 'Times New Roman', Times, serif;">Phản
+                    <td colspan="2" align="center"><span
+                            style="font-weight: bold; font-size:20px; font-family: 'Times New Roman', Times, serif;">Phản
                             hồi đến quản trị viên</span></td>
                 </tr>
                 <tr align="center">
@@ -372,15 +391,15 @@ if (isset($_SESSION["username"])) {
                 </tr>
                 <tr align="center">
                     <td colspan="2">
-                        <input type="submit" name="button" id="button" value="Gửi" class="btn btn-primary" onClick="checkLogin()">
+                        <input type="submit" name="button" id="button" value="Gửi" class="btn btn-primary">
                     </td>
                 </tr>
             </tbody>
         </table>
         <script>
-            // Replace the <textarea id="editor1"> with a CKEditor
-            // instance, using default configuration.
-            CKEDITOR.replace('txtdes');
+        // Replace the <textarea id="editor1"> with a CKEditor
+        // instance, using default configuration.
+        CKEDITOR.replace('txtdes');
         </script>
     </form>
     <div style="padding-top: 5%">

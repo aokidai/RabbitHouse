@@ -24,280 +24,280 @@ if (isset($_SESSION["username"])) {
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <style>
-    #mon {
-        width: 240px;
-        margin: 3px;
-        margin-top: 20px;
-        text-align: center;
-        float: left;
+#mon {
+    width: 240px;
+    margin: 3px;
+    margin-top: 20px;
+    text-align: center;
+    float: left;
+}
+
+#tenMon {
+    margin-top: 5px;
+    vertical-align: top;
+    height: 40px;
+    font-size: 25px;
+}
+
+#tenMon a {
+    text-decoration: none;
+    color: #000;
+    font-size: 25px;
+}
+
+#tenMon a:hover {
+    color: #000;
+}
+
+#hinhAnh {
+    width: 150px;
+    height: 200px;
+}
+
+#hinhAnh:hover {
+    transfrom: scale(1.1);
+}
+
+#dongia {
+    margin-top: 10px;
+    font-size: 30px;
+}
+
+#donGia span {
+    color: #000;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#nutchonmua {
+    height: 30px;
+}
+
+#info1 {
+    padding: 50px;
+}
+
+#info1 span {
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+#info1 ul {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    list-style-type: none;
+    overflow: hidden;
+    text-align: center;
+    margin-top: 30%;
+}
+
+#info1 ul li {
+    display: list-item;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    list-style-position: unset;
+    display: inline-block;
+    list-style-type: none;
+    line-height: 40px;
+    margin-left: -2px;
+    width: 120px;
+    height: 40px;
+}
+
+#info1 ul li a img {
+    width: 70px;
+    height: 70px;
+}
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    font-family: Verdana, sans-serif;
+    margin: 0
+}
+
+.mySlides {
+    display: none
+}
+
+img {
+    vertical-align: middle;
+}
+
+/* Slideshow container */
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Caption text */
+.text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active,
+.dot:hover {
+    background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+    from {
+        opacity: .4
     }
 
-    #tenMon {
-        margin-top: 5px;
-        vertical-align: top;
-        height: 40px;
-        font-size: 25px;
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
     }
 
-    #tenMon a {
-        text-decoration: none;
-        color: #000;
-        font-size: 25px;
+    to {
+        opacity: 1
     }
+}
 
-    #tenMon a:hover {
-        color: #000;
-    }
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
 
-    #hinhAnh {
-        width: 150px;
-        height: 200px;
-    }
-
-    #hinhAnh:hover {
-        transfrom: scale(1.1);
-    }
-
-    #dongia {
-        margin-top: 10px;
-        font-size: 30px;
-    }
-
-    #donGia span {
-        color: #000;
-        font-size: 30px;
-        font-weight: bold;
-    }
-
-    #nutchonmua {
-        height: 30px;
-    }
-
-    #info1 {
-        padding: 50px;
-    }
-
-    #info1 span {
-        text-align: center;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        font-family: 'Times New Roman', Times, serif;
-        font-size: 40px;
-        font-weight: bold;
-    }
-
-    #info1 ul {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        list-style-type: none;
-        overflow: hidden;
-        text-align: center;
-        margin-top: 30%;
-    }
-
-    #info1 ul li {
-        display: list-item;
-        text-rendering: optimizeLegibility;
-        -webkit-font-smoothing: antialiased;
-        list-style-position: unset;
-        display: inline-block;
-        list-style-type: none;
-        line-height: 40px;
-        margin-left: -2px;
-        width: 120px;
-        height: 40px;
-    }
-
-    #info1 ul li a img {
-        width: 70px;
-        height: 70px;
-    }
-
-    * {
-        box-sizing: border-box
-    }
-
-    body {
-        font-family: Verdana, sans-serif;
-        margin: 0
-    }
-
-    .mySlides {
-        display: none
-    }
-
-    img {
-        vertical-align: middle;
-    }
-
-    /* Slideshow container */
-    .slideshow-container {
-        max-width: 1000px;
-        position: relative;
-        margin: auto;
-    }
-
-    /* Next & previous buttons */
     .prev,
-    .next {
-        cursor: pointer;
-        position: absolute;
-        top: 50%;
-        width: auto;
-        padding: 16px;
-        margin-top: -22px;
-        color: white;
-        font-weight: bold;
-        font-size: 18px;
-        transition: 0.6s ease;
-        border-radius: 0 3px 3px 0;
-        user-select: none;
-    }
-
-    /* Position the "next button" to the right */
-    .next {
-        right: 0;
-        border-radius: 3px 0 0 3px;
-    }
-
-    /* On hover, add a black background color with a little bit see-through */
-    .prev:hover,
-    .next:hover {
-        background-color: rgba(0, 0, 0, 0.8);
-    }
-
-    /* Caption text */
+    .next,
     .text {
-        color: #f2f2f2;
-        font-size: 15px;
-        padding: 8px 12px;
-        position: absolute;
-        bottom: 8px;
-        width: 100%;
-        text-align: center;
+        font-size: 11px
     }
+}
 
-    /* Number text (1/3 etc) */
-    .numbertext {
-        color: #f2f2f2;
-        font-size: 12px;
-        padding: 8px 12px;
-        position: absolute;
-        top: 0;
-    }
+#ttLoai {
+    display: block;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 40px;
+    font-weight: bold;
+}
 
-    /* The dots/bullets/indicators */
-    .dot {
-        cursor: pointer;
-        height: 15px;
-        width: 15px;
-        margin: 0 2px;
-        background-color: #bbb;
-        border-radius: 50%;
-        display: inline-block;
-        transition: background-color 0.6s ease;
-    }
+#menu2 a {
+    text-decoration: none;
+    color: #000;
+    display: block;
+}
 
-    .active,
-    .dot:hover {
-        background-color: #717171;
-    }
+#menu2 a:hover {
+    background: #F1F1F1;
+    color: #333;
+}
 
-    /* Fading animation */
-    .fade {
-        -webkit-animation-name: fade;
-        -webkit-animation-duration: 1.5s;
-        animation-name: fade;
-        animation-duration: 1.5s;
-    }
+#menu2 ul {
 
-    @-webkit-keyframes fade {
-        from {
-            opacity: .4
-        }
+    list-style-type: none;
+    text-align: center;
 
-        to {
-            opacity: 1
-        }
-    }
+}
 
-    @keyframes fade {
-        from {
-            opacity: .4
-        }
-
-        to {
-            opacity: 1
-        }
-    }
-
-    /* On smaller screens, decrease text size */
-    @media only screen and (max-width: 300px) {
-
-        .prev,
-        .next,
-        .text {
-            font-size: 11px
-        }
-    }
-
-    #ttLoai {
-        display: block;
-        text-align: center;
-        font-family: 'Times New Roman', Times, serif;
-        font-size: 40px;
-        font-weight: bold;
-    }
-
-    #menu2 a {
-        text-decoration: none;
-        color: #000;
-        display: block;
-    }
-
-    #menu2 a:hover {
-        background: #F1F1F1;
-        color: #333;
-    }
-
-    #menu2 ul {
-
-        list-style-type: none;
-        text-align: center;
-
-    }
-
-    #menu2 li {
-        display: list-item;
-        text-rendering: optimizeLegibility;
-        -webkit-font-smoothing: antialiased;
-        list-style-position: unset;
-        display: inline-block;
-        list-style-type: none;
-        margin-left: -2px;
-    }
+#menu2 li {
+    display: list-item;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    list-style-position: unset;
+    display: inline-block;
+    list-style-type: none;
+    margin-left: -2px;
+}
 </style>
 
 <body>
     <?php $user = $username ?>
-     
+
     <header>
         <?php include "./header.php"; ?>
         <div> <br /><br /><br />
             <div align="center">
-                <form action="show_loai.php" method="GET">
+                <form action="index.php" method="GET">
                     <input id="searchbar" name="txtsearchMon" type="text" placeholder="Bạn đang tìm gì?">
                     <input type="submit" name="timKiem" value="🔍" title="Tìm kiếm">
                 </form>
             </div>
             <script type="text/javascript">
-                $(function() {
-                    $("#searchbar").autocomplete({
-                        source: 'ajax-mon-search.php',
-                    });
+            $(function() {
+                $("#searchbar").autocomplete({
+                    source: 'ajax-mon-search.php',
                 });
+            });
             </script>
             <br />
             <?php
@@ -349,27 +349,27 @@ if (isset($_SESSION["username"])) {
             </div>
 
             <script>
-                var slideIndex = 0;
-                showSlides();
+            var slideIndex = 0;
+            showSlides();
 
-                function showSlides() {
-                    var i;
-                    var slides = document.getElementsByClassName("mySlides");
-                    var dots = document.getElementsByClassName("dot");
-                    for (i = 0; i < slides.length; i++) {
-                        slides[i].style.display = "none";
-                    }
-                    slideIndex++;
-                    if (slideIndex > slides.length) {
-                        slideIndex = 1
-                    }
-                    for (i = 0; i < dots.length; i++) {
-                        dots[i].className = dots[i].className.replace(" active", "");
-                    }
-                    slides[slideIndex - 1].style.display = "block";
-                    dots[slideIndex - 1].className += " active";
-                    setTimeout(showSlides, 5000);
+            function showSlides() {
+                var i;
+                var slides = document.getElementsByClassName("mySlides");
+                var dots = document.getElementsByClassName("dot");
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
                 }
+                slideIndex++;
+                if (slideIndex > slides.length) {
+                    slideIndex = 1
+                }
+                for (i = 0; i < dots.length; i++) {
+                    dots[i].className = dots[i].className.replace(" active", "");
+                }
+                slides[slideIndex - 1].style.display = "block";
+                dots[slideIndex - 1].className += " active";
+                setTimeout(showSlides, 5000);
+            }
             </script>
         </div>
         </br>
@@ -396,19 +396,20 @@ if (isset($_SESSION["username"])) {
                 if ($count > 0)
                     while ($row = mysqli_fetch_array($rs)) {
                 ?>
-                 <div style="margin-left: 10%;">
+                <div style="margin-left: 10%;">
                     <div id="mon" style="margin-top: 20px">
                         <p id="tenMon"><a href="#"><?= $row["tenMon"] ?></a></p>
                         <img id="hinhAnh" src="../uploads/<?= $row["hinhAnh"] ?>">
                         <p id="donGia">Đơn giá: <span><?= $row["gia"] ?>VND</span></p>
-                        <a href='hauGioHang.php?id=<?= $row["idMon"] ?>' title="Thêm vào giỏ hàng"><img id="nutmuahang" src="../img/Chonmua.png"></a>
+                        <a href='hauGioHang.php?id=<?= $row["idMon"] ?>' title="Thêm vào giỏ hàng"><img id="nutmuahang"
+                                src="../img/Chonmua.png"></a>
                     </div>
-                    </div>
+                </div>
                 <?php }
                 else
                     echo "<center><span style='margin-top:30px; font-size:30px; color:red'>Hiện tại không có món nào!</span></center>";
                 ?>
-               
+
             </section>
         </article>
         <div style="padding-top: 45%;">
