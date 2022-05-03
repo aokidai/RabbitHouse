@@ -1,9 +1,9 @@
 <?php
 session_start();
 if (isset($_SESSION["username"]))
-	$username	=	$_SESSION["username"];
+    $username    =    $_SESSION["username"];
 else
-	header("location:login.php");
+    header("location:login.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,13 +85,13 @@ reloadButton.addEventListener("click", reload, false);
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="account.php">
                         <?php
-						$user00tmp = $username;
-						include "../include/connect.inc";
-						$sql0000 = "select hoTen from tblusers where username = '$user00tmp'";
-						$rs0000 = mysqli_query($conn, $sql0000);
-						$row0000 = mysqli_fetch_array($rs0000);
-						$hoTenNVtmp = $row0000["hoTen"];
-						?>
+                        $user00tmp = $username;
+                        include "../include/connect.inc";
+                        $sql0000 = "select hoTen from tblusers where username = '$user00tmp'";
+                        $rs0000 = mysqli_query($conn, $sql0000);
+                        $row0000 = mysqli_fetch_array($rs0000);
+                        $hoTenNVtmp = $row0000["hoTen"];
+                        ?>
                         <i class="fa fa-user fa-fw"></i><?= $hoTenNVtmp ?><b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
@@ -108,8 +108,8 @@ reloadButton.addEventListener("click", reload, false);
             <!-- /.navbar-top-links -->
 
             <?php
-			include "./left_admin.php";
-			?>
+            include "./left_admin.php";
+            ?>
         </nav>
         <form action="list_dathang.php" method="post">
             <div id="page-wrapper">
@@ -150,43 +150,43 @@ reloadButton.addEventListener("click", reload, false);
                                 </tr>
                             </thead>
                             <tbody> <?php
-									include("../include/connect.inc");
-									$sql		=	"select * from tblchitiethd";
-									$rs 		=	mysqli_query($conn, $sql);
-									$i			=	1;
-									while ($row = mysqli_fetch_array($rs)) {
-										$idChiTiet = $row["idChiTiet"];
-										$idMon = $row["idMon"];
-										$status = $row["daGH"];
-										$thanhTien1 = $row["tongTien"];
-										$khuyenMaiDC = $row["khuyenmai"];
-										if ($khuyenMaiDC != null) {
-											$thanhTien = $thanhTien1 - ($khuyenMaiDC * 100);
-										} else
-											$thanhTien = $thanhTien1;
-										$soLuong = $row["tongSL"];
-										if ($status == "O") {
-											$check = "none";
-										} else $check = "true";
-										$idKH = $row["idKhachhang"];
-										$idStaff = $row["idStaff"];
-										if ($idKH != null && $idStaff == 0) {
-											$sql1 = "select * from tblkhachhang where idKhachhang = $idKH";
-											$rs1 = mysqli_query($conn, $sql1);
-											while ($row1 = mysqli_fetch_array($rs1)) {
-												$tenKH = $row1["tenKH"];
-												$sdtKH = $row1["SDT"];
-											}
-										} else {
-											$tenKH = "Nhân viên";
-											$sdtKH = "";
-										}
-										$sql7 = "select * from tblmon where idMon = $idMon";
-										$rs7 = mysqli_query($conn, $sql7);
-										while ($row7 = mysqli_fetch_array($rs7)) {
-											$mon = $row7["tenMon"];
-										}
-										echo " <tr>
+                                    include("../include/connect.inc");
+                                    $sql        =    "select * from tblchitiethd";
+                                    $rs         =    mysqli_query($conn, $sql);
+                                    $i            =    1;
+                                    while ($row = mysqli_fetch_array($rs)) {
+                                        $idChiTiet = $row["idChiTiet"];
+                                        $idMon = $row["idMon"];
+                                        $status = $row["daGH"];
+                                        $thanhTien1 = $row["tongTien"];
+                                        $khuyenMaiDC = $row["khuyenmai"];
+                                        if ($khuyenMaiDC != null) {
+                                            $thanhTien = $thanhTien1 - ($khuyenMaiDC * 100);
+                                        } else
+                                            $thanhTien = $thanhTien1;
+                                        $soLuong = $row["tongSL"];
+                                        if ($status == "O") {
+                                            $check = "none";
+                                        } else $check = "true";
+                                        $idKH = $row["idKhachhang"];
+                                        $idStaff = $row["idStaff"];
+                                        if ($idKH != null && $idStaff == 0) {
+                                            $sql1 = "select * from tblkhachhang where idKhachhang = $idKH";
+                                            $rs1 = mysqli_query($conn, $sql1);
+                                            while ($row1 = mysqli_fetch_array($rs1)) {
+                                                $tenKH = $row1["tenKH"];
+                                                $sdtKH = $row1["SDT"];
+                                            }
+                                        } else {
+                                            $tenKH = "Nhân viên";
+                                            $sdtKH = "";
+                                        }
+                                        $sql7 = "select * from tblmon where idMon = $idMon";
+                                        $rs7 = mysqli_query($conn, $sql7);
+                                        while ($row7 = mysqli_fetch_array($rs7)) {
+                                            $mon = $row7["tenMon"];
+                                        }
+                                        echo " <tr>
 												<td><input type='checkbox' class='chk_box1' style=\"display: $check\" name='check_list[]' value='" . $row["idChiTiet"] . "'></td>
 												<td>$i</td>
 												<td>" . $idChiTiet . "</td>
@@ -199,42 +199,42 @@ reloadButton.addEventListener("click", reload, false);
 												<td>$thanhTien</td>
 												<td>" . $status . "</td>
 												</tr>";
-										$i++;
-									}
-									if (isset($_POST["giaohang"])) {
-										if (!empty($_POST['check_list'])) {
-											foreach ($_POST['check_list'] as $check) {
-												$sql9 = "update tblchitiethd set daGH = 'O' where idChiTiet = $check";
-												$rs9 = mysqli_query($conn, $sql9);
-												$sql10 = "update tbllichsu set daGH = 'O' where idChitiet = '$check'";
-												$rs10 = mysqli_query($conn, $sql10);
-												date_default_timezone_set('Asia/Ho_Chi_Minh');
-												$time_act = date('Y-m-d');
-												$sqlTientmp = "select * from tblchitiethd where idChiTiet = '$check'";
-												$rsTientmp = mysqli_query($conn, $sqlTientmp);
-												while ($rowTientmp = mysqli_fetch_array($rsTientmp)) {
-													$TienTmp = $rowTientmp["tongTien"];
-													$khuyenMaitmp = $rowTientmp["khuyenmai"];
-													$ThanhTienImport = $TienTmp - ($khuyenMaitmp * 100);
-													$tongSoLuong = $rowTientmp["tongSL"];
-													$sql15 = "insert into tbldoanhthu (idChiTiet, ngay, thanhTien, tongSL) values ( '$check', '$time_act', '$thanhTien', '$soLuong')";
-													$rs15 = mysqli_query($conn, $sql15);
-												}
-											}
-											echo "<script>alert('Đã cập nhật')</script>";
-											echo "<script>window.location.href='list_dathang.php'</script>";
-										}
-									} else if (isset($_POST["xoahang"])) {
-										$sql20 = "delete from tblchitiethd where daGH = 'O'";
-										$rs20 = mysqli_query($conn, $sql20);
-										foreach ($_POST['check_list'] as $check) {
-											$sql19 = "delete from tblchitiethd where idChiTiet = '$check'";
-											$rs19 = mysqli_query($conn, $sql19);
-										}
-										echo "<script>window.location.href='list_dathang.php'</script>";
-									}
+                                        $i++;
+                                    }
+                                    if (isset($_POST["giaohang"])) {
+                                        if (!empty($_POST['check_list'])) {
+                                            foreach ($_POST['check_list'] as $check) {
+                                                $sql9 = "update tblchitiethd set daGH = 'O' where idChiTiet = $check";
+                                                $rs9 = mysqli_query($conn, $sql9);
+                                                $sql10 = "update tbllichsu set daGH = 'O' where idChitiet = '$check'";
+                                                $rs10 = mysqli_query($conn, $sql10);
+                                                date_default_timezone_set('Asia/Ho_Chi_Minh');
+                                                $time_act = date('Y-m-d');
+                                                $sqlTientmp = "select * from tblchitiethd where idChiTiet = '$check'";
+                                                $rsTientmp = mysqli_query($conn, $sqlTientmp);
+                                                while ($rowTientmp = mysqli_fetch_array($rsTientmp)) {
+                                                    $TienTmp = $rowTientmp["tongTien"];
+                                                    $khuyenMaitmp = $rowTientmp["khuyenmai"];
+                                                    $ThanhTienImport = $TienTmp - ($khuyenMaitmp * 100);
+                                                    $tongSoLuong = $rowTientmp["tongSL"];
+                                                    $sql15 = "insert into tbldoanhthu (idChiTiet, ngay, thanhTien, tongSL) values ( '$check', '$time_act', '$thanhTien', '$soLuong')";
+                                                    $rs15 = mysqli_query($conn, $sql15);
+                                                }
+                                            }
+                                            echo "<script>alert('Đã cập nhật')</script>";
+                                            echo "<script>window.location.href='list_dathang.php'</script>";
+                                        }
+                                    } else if (isset($_POST["xoahang"])) {
+                                        $sql20 = "delete from tblchitiethd where daGH = 'O'";
+                                        $rs20 = mysqli_query($conn, $sql20);
+                                        foreach ($_POST['check_list'] as $check) {
+                                            $sql19 = "delete from tblchitiethd where idChiTiet = '$check'";
+                                            $rs19 = mysqli_query($conn, $sql19);
+                                        }
+                                        echo "<script>window.location.href='list_dathang.php'</script>";
+                                    }
 
-									?> </tbody>
+                                    ?> </tbody>
                         </table>
                         <div style="text-align: center;">
                             <button type="submit" class="btn btn-success" name="giaohang"

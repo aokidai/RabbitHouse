@@ -166,16 +166,25 @@ else
                             }
                             $trangThai = $_POST['trangThai'];
                             if ($trangThai == "O") {
-                                $sql1xx = "select idMon from tblMon where conHang = 'X'";
+                                $sql1xx = "select idMon from tblmon where conHang = 'X'";
                                 $rs1xx = mysqli_query($conn, $sql1xx);
-                                while ($row1xx = mysqli_fetch_array($rs1xx)) {
-                                    $idMonCheck = $row1xx['idMon'];
-                                    $sql2xx = "update tblMon set conHang='O' where idMon = '$idMonCheck'";
-                                    $rs2xx = mysqli_query($conn, $sql2xx);
-                                    if ($rs2xx) {
-                                        echo "<script>alert('Đã lưu kho')</script>";
-                                        echo "<script>window.location.href='list_kho.php?page=1'</script>";
-                                    } else echo "<script>alert('Error!')</script>";
+                                $row1xx = mysqli_fetch_array($rs1xx);
+                                $idMonTmpA1 = $row1xx["idMon"];
+                                if ($idMonTmpA1 != null) {
+                                    $sql1xx2 = "select idMon from tblmon where conHang = 'X'";
+                                    $rs1xx2 = mysqli_query($conn, $sql1xx2);
+                                    while ($row1xx2 = mysqli_fetch_array($rs1xx2)) {
+                                        $idMonCheck = $row1xx2['idMon'];
+                                        $sql2xx = "update tblmon set conHang='O' where idMon = '$idMonCheck'";
+                                        $rs2xx = mysqli_query($conn, $sql2xx);
+                                        if ($rs2xx) {
+                                            echo "<script>alert('Đã lưu kho')</script>";
+                                            echo "<script>window.location.href='list_kho.php?page=1'</script>";
+                                        } else echo "<script>alert('Error!')</script>";
+                                    }
+                                } else {
+                                    echo "<script>alert('Đã lưu kho')</script>";
+                                    echo "<script>window.location.href='list_kho.php?page=1'</script>";
                                 }
                             } else {
                                 echo "<script>alert('Đã lưu kho')</script>";
