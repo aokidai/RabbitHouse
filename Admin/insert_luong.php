@@ -95,7 +95,7 @@ else
                     <div class="col-lg-12" style="padding-bottom: 10px;">
                         <h1 class="page-header">SỬA MỨC LƯƠNG CƠ BẢN CỦA NHÂN VIÊN</h1>
                         <span>Lương cơ bản là lương góc chưa / 1 giờ<br />Để tính được lương góc của nhân viên = lương
-                            cơ bản + số giờ nhân viên làm việc<br /></span>
+                            cơ bản * số giờ nhân viên làm việc<br /></span>
                     </div>
 
                     <!-- /.col-lg-12 -->
